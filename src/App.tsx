@@ -1,7 +1,13 @@
-import React from 'react';
+import { Example } from 'pages/Example';
+import type { VFC } from 'common/utils/types';
 
-function App() {
-  return <div className='App'>실시간 좌석 확인 서비스</div>;
-}
+const App: VFC = () => {
+  return (
+    <div>
+      실시간 좌석 확인 서비스
+      <Example />
+    </div>
+  );
+};
 
 export default App;
