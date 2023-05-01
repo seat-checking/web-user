@@ -128,5 +128,12 @@ module.exports = {
         },
       },
     ],
+    // 윈도우에서 delete CR 오류뜨는 것을 막기 위함
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
 };
