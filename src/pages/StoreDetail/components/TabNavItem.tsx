@@ -1,7 +1,7 @@
-import { css, styled } from 'styled-components';
+import styled, { css } from 'styled-components';
 import type { VFC } from 'common/utils/types';
 import type { HTMLAttributes } from 'react';
-import type { RuleSet } from 'styled-components';
+import type { FlattenSimpleInterpolation } from 'styled-components';
 
 interface Props extends HTMLAttributes<HTMLLIElement> {
   text: string;
@@ -50,7 +50,7 @@ const Text = styled.span<{ active?: boolean }>`
   font-weight: 700;
   color: #a9abb6;
 
-  ${(props): RuleSet<object> | false | undefined =>
+  ${(props): FlattenSimpleInterpolation | undefined | false =>
     props.active &&
     css`
       color: ${props.theme.color.orange};

@@ -1,9 +1,10 @@
 import { TabNavItem } from 'pages/StoreDetail/components/TabNavItem';
 import { useState } from 'react';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
+
 import type { VFC } from 'common/utils/types';
 
-interface TabItem {
+export interface TabItem {
   text: string;
   content: JSX.Element;
 }

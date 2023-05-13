@@ -1,5 +1,6 @@
 import { SeatLayout } from 'pages/StoreDetail/components/SeatLayout';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
+
 import { flexSet } from 'styles/mixin';
 import type { VFC } from 'common/utils/types';
 
