@@ -68,6 +68,8 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 'off',
     // prop-type validation 끔 (typescript가 컴파일 타임에 잡아주므로)
     'react/prop-types': 'off',
+    // index랑 조합해서 key로 설정할 땐 유용하므로 디폴트를 error가 아닌 warn로 변경
+    'react/no-array-index-key': 'warn',
     // import react 강제성 끔 (react ver 17부턴 해줄 필요 없음)
     'react/react-in-jsx-scope': 'off',
     // 프롭스에 스프레드 연산자 사용 가능하게 함
