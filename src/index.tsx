@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { ThemeProvider } from 'styled-components';
+import { GlobalStyles } from 'styles/global';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import GlobalStyles from './styles/global';
+
 import { myTheme } from './theme/theme';
 
 const root = ReactDOM.createRoot(
