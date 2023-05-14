@@ -2,21 +2,28 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    node: true
+    node: true,
   },
   plugins: ['react', '@typescript-eslint', 'react-hooks'],
-  extends: ['eslint:recommended', 'airbnb', 'airbnb-typescript', 'plugin:prettier/recommended', 'plugin:react/recommended', 'plugin:@typescript-eslint/recommended', 'prettier', 'plugin:storybook/recommended'],
+  extends: [
+    'eslint:recommended',
+    'airbnb',
+    'airbnb-typescript',
+    'plugin:prettier/recommended',
+    'plugin:react/recommended',
+    // 'plugin:react/jsx-runtime',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+  ],
   overrides: [],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: ['./tsconfig.json'],
-    tsconfigRootDir: __dirname,
-    // 절대 경로로 tsconfig파일 찾도록 함
+    tsconfigRootDir: __dirname, // 절대 경로로 tsconfig파일 찾도록 함
     ecmaVersion: 'latest',
     sourceType: 'module',
-    createDefaultProgram: true // 이게 있어야 module.exports에 에러 없어짐
+    createDefaultProgram: true, // 이게 있어야 module.exports에 에러 없어짐
   },
-
   rules: {
     // "off" or 0 - turn the rule off
     // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
@@ -26,87 +33,107 @@ module.exports = {
     'no-plusplus': 'off',
     'no-shadow': 'off',
     'vars-on-top': 'off',
-    'no-underscore-dangle': 'off',
-    // var _foo;
+    'no-underscore-dangle': 'off', // var _foo;
     'comma-dangle': 'off',
-    'func-names': 'off',
-    // setTimeout(function () {}, 0);
+    'func-names': 'off', // setTimeout(function () {}, 0);
     'prefer-template': 'off',
     'no-nested-ternary': 'off',
     'max-classes-per-file': 'off',
     'consistent-return': 'off',
-    'no-restricted-syntax': ['off', 'ForOfStatement'],
-    // disallow specified syntax(ex. WithStatement)
-    'prefer-arrow-callback': 'error',
-    // Require using arrow functions for callbacks
+    'no-restricted-syntax': ['off', 'ForOfStatement'], // disallow specified syntax(ex. WithStatement)
+    'prefer-arrow-callback': 'error', // Require using arrow functions for callbacks
     'require-await': 'error',
-    'arrow-parens': ['warn', 'always'],
-    // 화살표 함수 매개변수에 괄호 넣도록 강제시킴
-    'no-param-reassign': ['error', {
-      props: false
-    }],
-    'no-unused-expressions': ['error', {
-      allowTernary: true,
-      // a || b
-      allowShortCircuit: true,
-      // a ? b : 0
-      allowTaggedTemplates: true
-    }],
-    'import/no-extraneous-dependencies': ['error', {
-      devDependencies: true
-    }],
-    'max-len': ['error', {
-      code: 120,
-      ignoreComments: true,
-      ignoreStrings: true,
-      ignoreTemplateLiterals: true
-    }],
-    // prettier의 printWidth 옵션 대신 사용
+    'arrow-parens': ['warn', 'always'], // 화살표 함수 매개변수에 괄호 넣도록 강제시킴
+    'no-param-reassign': ['error', { props: false }],
+    'no-unused-expressions': [
+      'error',
+      {
+        allowTernary: true, // a || b
+        allowShortCircuit: true, // a ? b : 0
+        allowTaggedTemplates: true,
+      },
+    ],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'max-len': [
+      'error',
+      {
+        code: 120,
+        ignoreComments: true,
+        ignoreStrings: true,
+        ignoreTemplateLiterals: true,
+      },
+    ], // prettier의 printWidth 옵션 대신 사용
     // 커스텀 셋팅 추가
     // prop-type validation 끔 (typescript가 컴파일 타임에 잡아주므로)
     'react/prop-types': 'off',
     // import react 강제성 끔 (react ver 17부턴 해줄 필요 없음)
     'react/react-in-jsx-scope': 'off',
-    'react/self-closing-comp': ['error', {
-      component: true,
-      html: true
-    }],
+    'react/self-closing-comp': [
+      'error',
+      {
+        component: true,
+        html: true,
+      },
+    ],
     // type 은 따로 import 시킴
-    '@typescript-eslint/consistent-type-imports': ['error', {
-      prefer: 'type-imports'
-    }],
-    'import/order': ['error', {
-      groups: ['builtin', 'external', 'parent', 'sibling', 'index', 'object', 'type'],
-      pathGroups: [{
-        pattern: '@/**/**',
-        group: 'parent',
-        position: 'before'
-      }],
-      alphabetize: {
-        order: 'asc'
-      }
-    }],
-    'no-restricted-imports': ['error', {
-      patterns: ['../']
-    }],
+    '@typescript-eslint/consistent-type-imports': [
+      'error',
+      {
+        prefer: 'type-imports',
+      },
+    ],
+    'import/order': [
+      'error',
+      {
+        groups: [
+          'builtin',
+          'external',
+          'parent',
+          'sibling',
+          'index',
+          'object',
+          'type',
+        ],
+        pathGroups: [
+          {
+            pattern: '@/**/**',
+            group: 'parent',
+            position: 'before',
+          },
+        ],
+        alphabetize: { order: 'asc' },
+      },
+    ],
+    'no-restricted-imports': [
+      'error',
+      {
+        patterns: ['../'],
+      },
+    ],
     // arrow function으로 컴포넌트 정의하도록 강제
-    'react/function-component-definition': [2, {
-      namedComponents: 'arrow-function'
-    }],
-    'react-hooks/exhaustive-deps': 'warn',
-    // 디펜던시 빠진 것들 모두 추가하도록 함
+    'react/function-component-definition': [
+      2,
+      { namedComponents: 'arrow-function' },
+    ],
+    'react-hooks/exhaustive-deps': 'warn', // 디펜던시 빠진 것들 모두 추가하도록 함
     '@typescript-eslint/explicit-function-return-type': 'error',
     // default export 선호 끔
     'import/prefer-default-export': 'off',
-    '@typescript-eslint/ban-types': ['error', {
-      types: {
-        // un-ban a type that's banned by default
-        '{}': false
-      }
-    }],
+    '@typescript-eslint/ban-types': [
+      'error',
+      {
+        types: {
+          // un-ban a type that's banned by default
+          '{}': false,
+        },
+      },
+    ],
     // 윈도우에서 delete CR 오류뜨는 것을 막기 위함
-    'prettier/prettier': ['error', {
-      endOfLine: 'auto'
-    }]
-  }
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
+  },
 };
