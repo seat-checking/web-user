@@ -118,7 +118,7 @@ module.exports = {
       { namedComponents: 'arrow-function' },
     ],
     'react-hooks/exhaustive-deps': 'warn', // 디펜던시 빠진 것들 모두 추가하도록 함
-    '@typescript-eslint/explicit-function-return-type': 'error',
+    // '@typescript-eslint/explicit-function-return-type': 'warn',
     // default export 선호 끔
     'import/prefer-default-export': 'off',
     '@typescript-eslint/ban-types': [
