@@ -11,7 +11,7 @@ module.exports = {
     'airbnb-typescript',
     'plugin:prettier/recommended',
     'plugin:react/recommended',
-    // 'plugin:react/jsx-runtime',
+    'plugin:react/jsx-runtime',
     'plugin:@typescript-eslint/recommended',
     'prettier',
   ],
