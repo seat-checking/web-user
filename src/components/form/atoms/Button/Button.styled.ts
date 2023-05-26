@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  max-width: 675px;
+  max-width: 67.5rem;
   width: 100%;
 `;
 
 export const Button = styled.button`
   width: 90%;
-  height: 56px;
+  height: 5.6rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.8rem;
   cursor: pointer;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 1.6rem;
   color: ${(props): string => props.theme.palette.grey[400]};
 `;
