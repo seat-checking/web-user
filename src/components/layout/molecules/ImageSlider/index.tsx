@@ -1,10 +1,10 @@
+import { SliderItem } from 'components/layout/atoms/SliderItem';
 import {
   Container,
   Dot,
   DotContainer,
   ImgContainer,
-} from 'pages/StoreDetail/components/ImageSlider.styled';
-import { SliderItem } from 'pages/StoreDetail/components/SliderItem';
+} from 'components/layout/molecules/ImageSlider/styled';
 import { useEffect, useRef, useState } from 'react';
 import type { VFC } from 'common/utils/types';
 import type { TouchEvent } from 'react';

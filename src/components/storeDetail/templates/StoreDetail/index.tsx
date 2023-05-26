@@ -1,12 +1,17 @@
 import { ReactComponent as ArrowLeft } from 'assets/svgs/arrowLeft.svg';
-import { ImageSlider } from 'pages/StoreDetail/components/ImageSlider';
-import { SeatLayoutTab } from 'pages/StoreDetail/components/SeatLayoutTab';
-import { StoreInfoTab } from 'pages/StoreDetail/components/StoreInfoTab';
-import { Tabs } from 'pages/StoreDetail/components/Tabs';
-import styled from 'styled-components';
+import { ImageSlider } from 'components/layout/molecules/ImageSlider';
+import { SeatLayoutTab } from 'components/storeDetail/organisms/SeatLayoutTab';
+import { StoreInfoTab } from 'components/storeDetail/organisms/StoreInfoTab/StoreInfoTab';
+import {
+  BackBtn,
+  HeaderWrap,
+  Introduction,
+  Name,
+} from 'components/storeDetail/templates/StoreDetail/styled';
+import { Tabs } from 'components/tabs/molecules/Tabs';
 import type { VFC } from 'common/utils/types';
-import type { SlideItem } from 'pages/StoreDetail/components/ImageSlider';
-import type { TabItem } from 'pages/StoreDetail/components/Tabs';
+import type { SlideItem } from 'components/layout/molecules/ImageSlider';
+import type { TabItem } from 'components/tabs/molecules/Tabs';
 
 /**
  * 가게 상세페이지 컴포넌트
@@ -53,24 +58,3 @@ export const StoreDetail: VFC = () => {
     </div>
   );
 };
-
-const BackBtn = styled.button`
-  position: fixed;
-  top: 4.4rem;
-  left: 1.6rem;
-`;
-const HeaderWrap = styled.div`
-  padding: 2.4rem 1.6rem;
-`;
-
-const Name = styled.h1`
-  font-size: 2.4rem;
-  font-weight: 700;
-
-  margin-bottom: 0.8rem;
-`;
-
-const Introduction = styled.h2`
-  font-size: 1.6rem;
-  font-weight: 700;
-`;

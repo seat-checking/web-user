@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-
+import { Container } from 'components/storeDetail/molecules/SeatLayout/styled';
 import type { VFC } from 'common/utils/types';
 
 /**
@@ -9,8 +8,3 @@ import type { VFC } from 'common/utils/types';
 export const SeatLayout: VFC = () => {
   return <Container />;
 };
-
-const Container = styled.div`
-  height: 38rem;
-  background-color: ${(props): string => props.theme.color.grey50};
-`;

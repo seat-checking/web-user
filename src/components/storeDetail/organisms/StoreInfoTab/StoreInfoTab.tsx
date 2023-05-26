@@ -1,4 +1,8 @@
-import styled from 'styled-components';
+import {
+  Container,
+  Label,
+  TextRow,
+} from 'components/storeDetail/organisms/StoreInfoTab/styled';
 
 import type { VFC } from 'common/utils/types';
 
@@ -24,29 +28,3 @@ export const StoreInfoTab: VFC = () => {
     </Container>
   );
 };
-
-const Container = styled.div`
-  padding: 1.6rem;
-
-  background-color: ${(props): string => props.theme.color.grey50};
-`;
-
-const Label = styled.p`
-  margin-bottom: 1.6rem;
-
-  font-size: 1.6rem;
-  font-weight: 700;
-`;
-
-const TextRow = styled.div`
-  font-size: 1.6rem;
-  font-weight: 500;
-  display: flex;
-  .label {
-    flex: 1;
-    opacity: 0.5;
-  }
-  & + & {
-    margin-top: 0.8rem;
-  }
-`;

@@ -6,7 +6,7 @@ import type { FlattenSimpleInterpolation } from 'styled-components';
 interface Props extends HTMLAttributes<HTMLLIElement> {
   text: string;
   index: number;
-  activeTab: number;
+  activeTab?: number;
 }
 
 /**
@@ -30,7 +30,7 @@ const ListItem = styled.li`
   flex: 1;
 `;
 
-const Button = styled.button<{ active?: boolean }>`
+const Button = styled.button`
   width: 100%;
   height: 100%;
 

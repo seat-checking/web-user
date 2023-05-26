@@ -1,4 +1,4 @@
-import { StoreDetail } from 'pages/StoreDetail';
+import { StoreDetail } from 'components/storeDetail/templates/StoreDetail';
 import type { VFC } from 'common/utils/types';
 
 const App: VFC = () => {

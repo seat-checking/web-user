@@ -9,7 +9,7 @@ export const Container = styled.div`
   background: linear-gradient(
     180deg,
     #ffdbc7 18.33%,
-    rgba(255, 255, 255, 0) 93.33%
+    rgba(255, 255, 255, 0s) 93.33%
   );
   opacity: 0.7;
 `;

@@ -1,6 +1,6 @@
-import { TabNavItem } from 'pages/StoreDetail/components/TabNavItem';
+import { TabNavItem } from 'components/tabs/atoms/TabNavItem';
+import { TabContainer } from 'components/tabs/atoms/TabNavItem/styled';
 import { useState } from 'react';
-import styled from 'styled-components';
 
 import type { VFC } from 'common/utils/types';
 
@@ -42,12 +42,3 @@ export const Tabs: VFC<Props> = ({ tabList }) => {
     </div>
   );
 };
-
-const TabContainer = styled.ul`
-  display: flex;
-  height: 4.8rem;
-
-  box-shadow: inset 0px -0.1rem 0px #efefef;
-
-  /* background-color: yellow; */
-`;
