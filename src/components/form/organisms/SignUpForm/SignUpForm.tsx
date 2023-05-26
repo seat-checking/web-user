@@ -14,12 +14,14 @@ import {
   Form,
 } from './SignUpForm.styled';
 import type { VFC } from 'common/utils/types';
+import type { ChangeEventHandler } from 'react';
 
 import type React from 'react';
+import type { SubmitHandler } from 'react-hook-form';
 
 interface SignUpFormInputs {
   loginId: string;
-  isLoginIdUnique: string;
+  LoginIdUnique: string;
   password: string;
   confirmPassword: string;
   isPrivateChecked: boolean;
@@ -43,7 +45,7 @@ export const SignUpForm: VFC = () => {
 
   const [isCheckedAll, setIsCheckedAll] = useState(false);
 
-  const onSubmit = (data: any) => {
+  const onSubmit: SubmitHandler<SignUpFormInputs> = (data) => {
     console.log(data);
   };
 
@@ -61,8 +63,7 @@ export const SignUpForm: VFC = () => {
     resetField('confirmPassword'); // 인풋값 초기화
   };
 
-  const loginIdError =
-    errors.loginId?.message || errors.isLoginIdUnique?.message;
+  const loginIdError = errors.loginId?.message || errors.LoginIdUnique?.message;
 
   const loginIdRegister = register('loginId', {
     required: '아이디는 필수로 입력해주세요',
@@ -72,7 +73,7 @@ export const SignUpForm: VFC = () => {
     },
   });
 
-  const handleAllCheckBoxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAllCheckBoxChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const isChecked = e.target.checked;
     setIsCheckedAll(isChecked);
     setValue('isPrivateChecked', isChecked);
@@ -120,10 +121,10 @@ export const SignUpForm: VFC = () => {
 
             if (isUnique) {
               // 아이디가 중복되지 않은경우
-              clearErrors('isLoginIdUnique');
+              clearErrors('LoginIdUnique');
             } else {
               // 아이디가 중복된경우
-              setError('isLoginIdUnique', {
+              setError('LoginIdUnique', {
                 message: '이미 사용중인 이메일입니다',
               });
             }

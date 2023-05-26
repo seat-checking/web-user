@@ -18,11 +18,12 @@ import {
 } from './MemberInfoForm.styled';
 import type { VFC } from 'common/utils/types';
 import type React from 'react';
+import type { SubmitHandler } from 'react-hook-form';
 
 interface MemberInfoFormprops {
   nickname: string;
   age: string;
-  isUniqueButtonClicked: string;
+  UniqueButtonClicked: string;
   gender: boolean;
   isfemaleChecked: boolean;
 }
@@ -41,7 +42,7 @@ export const MemberInfoForm: VFC = () => {
   const nicknameValue: string = watch('nickname', '');
   const ageValue: string = watch('age', '');
 
-  const onSubmit = (data: any): void => {
+  const onSubmit: SubmitHandler<MemberInfoFormprops> = (data) => {
     console.log(data);
   };
   const handleNicknameResetClick = (): void => {
@@ -52,10 +53,10 @@ export const MemberInfoForm: VFC = () => {
   };
 
   useEffect(() => {
-    setError('isUniqueButtonClicked', {
+    setError('UniqueButtonClicked', {
       message: '중복 확인 버튼을 눌러야합니다',
     });
-  }, []);
+  }, [setError]);
 
   const inputValue = watch('nickname');
   const isErrorsEmpty = Object.keys(errors).length === 0;
@@ -66,7 +67,7 @@ export const MemberInfoForm: VFC = () => {
   console.log(errors);
 
   const nicknameError =
-    errors.nickname?.message || errors.isUniqueButtonClicked?.message;
+    errors.nickname?.message || errors.UniqueButtonClicked?.message;
 
   return (
     <div>
@@ -101,7 +102,7 @@ export const MemberInfoForm: VFC = () => {
 
                 if (isUnique) {
                   // 닉네임이 중복되지 않은경우
-                  clearErrors('isUniqueButtonClicked');
+                  clearErrors('UniqueButtonClicked');
                 } else {
                   // 닉네임이 중복된경우
                   setError('nickname', {
