@@ -6,7 +6,7 @@ export const LoginFormWrapper = styled.div`
 `;
 
 export const Form = styled.form`
-  width: 1rem;
+  width: 100%;
 `;
 
 export const ButtonWrapper = styled.div`
