@@ -82,6 +82,7 @@ export const SignUpForm: VFC = () => {
 
   const inputValue =
     watch('loginId') && watch('password') && watch('confirmPassword');
+
   const isPrivateChecked = watch('isPrivateChecked');
   const isMarketingChecked = watch('isMarketingChecked');
 
@@ -91,7 +92,10 @@ export const SignUpForm: VFC = () => {
     }
   }, [isPrivateChecked, isMarketingChecked]);
 
-  const isFormValid = inputValue && watch('isPrivateChecked');
+  const isErrorsEmpty = Object.keys(errors).length === 0;
+
+  const isFormValid = isErrorsEmpty && watch('isPrivateChecked');
+
   console.log(watch('isPrivateChecked'));
 
   return (
@@ -102,7 +106,7 @@ export const SignUpForm: VFC = () => {
           typingrequired
           labelRequired
           placeholder='이메일 형식을 입력해 주세요.'
-          helperText='* @와 .com을 모두 포함해서 입력해 주세요.'
+          helperText='* @를 포함한 이메일 형식으로 입력해 주세요.'
           {...loginIdRegister}
           valueLength={loginIdValue.length}
           maximum={50}
@@ -138,11 +142,12 @@ export const SignUpForm: VFC = () => {
           labelRequired
           type='password'
           placeholder='사용하실 비밀번호를 입력해 주세요.'
-          helperText='* 4~12자의 영문(대소문자 포함), 숫자, 특수기호.'
+          helperText='* 영문, 숫자, 특수기호를 포함한 8자이상'
           {...register('password', {
-            required: '비밀번호는 필수로 입력해주세요',
+            required: '비밀번호는 필수로 입력해 주세요.',
             pattern: {
-              value: /^(?=.*[A-Za-z])(?=.*[\d\W]).{4,12}$/,
+              value:
+                /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?`~]).{8,}$/,
               message: '* 4~12자의 영문(대소문자 포함), 숫자, 특수기호.',
             },
           })}
@@ -162,16 +167,17 @@ export const SignUpForm: VFC = () => {
           typingrequired
           labelRequired
           type='password'
-          placeholder='영문,한글N자 이하로 입력해주세요.'
+          placeholder='비밀번호를 한 번 더 입력해 주세요.'
           helperText='* 4~12자의 영문(대소문자 포함), 숫자, 특수기호.'
           {...register('confirmPassword', {
-            required: '비밀번호 확인은 필수로 입력해주세요',
+            required: '비밀번호 확인은 필수로 입력해 주세요',
             pattern: {
-              value: /^(?=.*[A-Za-z])(?=.*[\d\W]).{4,12}$/,
+              value:
+                /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?`~]).{8,}$/,
               message: '* 4~12자의 영문(대소문자 포함), 숫자, 특수기호.',
             },
             validate: (value, formValue) =>
-              value === formValue.password || '비밀번호가 일치하지 않습니다',
+              value === formValue.password || '비밀번호가 일치하지 않습니다.',
           })}
           valueLength={confirmPasswordValue.length}
           maximum={50}
@@ -180,7 +186,7 @@ export const SignUpForm: VFC = () => {
           }
           success={
             touchedFields.confirmPassword && !errors.confirmPassword
-              ? '비빌번호가 일치합니다'
+              ? '비빌번호가 일치합니다.'
               : undefined
           }
         >

@@ -36,7 +36,7 @@ export const LoginForm: VFC = () => {
 
   const inputValue = watch('email') && watch('password');
 
-  const isFormValid = inputValue && isErrorsEmpty;
+  const isFormValid = isErrorsEmpty && inputValue;
 
   console.log(isValid);
   console.log(errors);
@@ -65,13 +65,14 @@ export const LoginForm: VFC = () => {
           onClick={handleEmailResetClick}
           labelRequired
           typingrequired
-          placeholder='사용하실 비밀번호를 입력해주세요.'
+          placeholder='비밀번호를 입력해주세요.'
           type='password'
           {...register('password', {
             required: '비밀번호는 필수로 입력해주세요.',
             pattern: {
-              value: /^(?=.*[A-Za-z])(?=.*[\d\W]).{4,12}$/,
-              message: '비밀번호는 필수로 입력해주세요',
+              value:
+                /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?`~]).{8,}$/,
+              message: '',
             },
           })}
           valueLength={passwordValue.length}
