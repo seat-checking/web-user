@@ -81,8 +81,8 @@ export const MemberInfoForm: VFC = () => {
           {...register('nickname', {
             required: '닉네임은 필수로 입력해주세요',
             pattern: {
-              value: /^[a-zA-Z0-9가-힣]{4,12}$/,
-              message: '4~12자의 영문(대소문자 포함)이나 숫자.',
+              value: /^[A-Za-z0-9ㄱ-ㅎ가-힣]{2,10}$/,
+              message: '4~12자의 한글,영문(대소문자 포함)이나 숫자.',
             },
           })}
           valueLength={nicknameValue.length}
@@ -122,10 +122,11 @@ export const MemberInfoForm: VFC = () => {
           typingrequired
           placeholder='숫자만 입력해 주세요.'
           helperText='* 숫자만 입력해 주세요.'
+          error={touchedFields.age && errors.age?.message}
           {...register('age', {
             pattern: {
               value: /^(?:[1-9]|[1-9][0-9])$/,
-              message: '숫자만 입력해 주세요',
+              message: '3자리 미만의 숫자를 입력해주세요',
             },
           })}
           valueLength={ageValue.length}
