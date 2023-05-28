@@ -80,11 +80,17 @@ export const SignUpForm: VFC = () => {
     setValue('isMarketingChecked', isChecked);
   };
 
-  const inputValue =
-    watch('loginId') && watch('password') && watch('confirmPassword');
-
   const isPrivateChecked = watch('isPrivateChecked');
   const isMarketingChecked = watch('isMarketingChecked');
+
+  useEffect(() => {
+    if (!isPrivateChecked || !isMarketingChecked) {
+      setIsCheckedAll(false);
+    }
+    if (isPrivateChecked && isMarketingChecked) {
+      setIsCheckedAll(true);
+    }
+  }, [isPrivateChecked, isMarketingChecked]);
 
   useEffect(() => {
     if (!isPrivateChecked || !isMarketingChecked) {
@@ -94,7 +100,12 @@ export const SignUpForm: VFC = () => {
 
   const isErrorsEmpty = Object.keys(errors).length === 0;
 
-  const isFormValid = isErrorsEmpty && watch('isPrivateChecked');
+  const isFormValid =
+    touchedFields.loginId &&
+    touchedFields.password &&
+    touchedFields.confirmPassword &&
+    isErrorsEmpty &&
+    watch('isPrivateChecked');
 
   console.log(watch('isPrivateChecked'));
 
@@ -223,7 +234,7 @@ export const SignUpForm: VFC = () => {
               다음
             </Button>
           ) : (
-            <Button>다음</Button>
+            <Button disabled>다음</Button>
           )}
         </ButtonWrapper>
       </Form>

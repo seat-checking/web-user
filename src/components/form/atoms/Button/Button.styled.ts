@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   width: 100%;
 `;
 
-export const Button = styled.button`
+export const ButtonBox = styled.button`
   width: 90%;
   height: 5.6rem;
   border: none;
@@ -14,4 +14,8 @@ export const Button = styled.button`
   font-weight: 500;
   font-size: 1.6rem;
   color: ${(props): string => props.theme.palette.grey[400]};
+
+  &:disabled {
+    pointer-events: none;
+  }
 `;

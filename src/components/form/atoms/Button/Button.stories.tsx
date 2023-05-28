@@ -19,5 +19,6 @@ export const Default: Story = {
     color: '',
     fontSize: '',
     border: '',
+    disabled: false,
   },
 };

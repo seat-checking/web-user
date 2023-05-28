@@ -1,5 +1,9 @@
+import {
+  Label,
+  Wrapper,
+  Required,
+} from 'components/form/atoms/InputLabel/InputLabel.styled';
 import React from 'react';
-import * as S from './InputLabel.styled';
 
 interface InputLabelProps {
   children: string;
@@ -8,9 +12,9 @@ interface InputLabelProps {
 
 export const InputLabel = ({ children, labelRequired }: InputLabelProps) => {
   return (
-    <S.Wrapper>
-      <S.Label>{children}</S.Label>
-      {labelRequired && <S.Required>*</S.Required>}
-    </S.Wrapper>
+    <Wrapper>
+      <Label>{children}</Label>
+      {labelRequired && <Required>*</Required>}
+    </Wrapper>
   );
 };

@@ -36,7 +36,7 @@ export const LoginForm: VFC = () => {
 
   const inputValue = watch('email') && watch('password');
 
-  const isFormValid = isErrorsEmpty && inputValue;
+  const isFormValid = inputValue;
 
   console.log(isValid);
   console.log(errors);
@@ -86,7 +86,7 @@ export const LoginForm: VFC = () => {
               로그인
             </Button>
           ) : (
-            <Button>로그인</Button>
+            <Button disabled>로그인</Button>
           )}
         </ButtonWrapper>
       </Form>

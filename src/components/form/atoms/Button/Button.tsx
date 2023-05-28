@@ -1,4 +1,4 @@
-import * as S from './Button.styled';
+import { ButtonBox, Wrapper } from 'components/form/atoms/Button/Button.styled';
 import type { VFC } from 'common/utils/types';
 
 interface ButtonProps {
@@ -7,6 +7,7 @@ interface ButtonProps {
   color?: string;
   fontSize?: string;
   border?: string;
+  disabled?: boolean;
 }
 
 export const Button: VFC<ButtonProps> = ({
@@ -15,12 +16,16 @@ export const Button: VFC<ButtonProps> = ({
   color,
   fontSize,
   border,
+  disabled,
 }) => {
   return (
-    <S.Wrapper>
-      <S.Button style={{ backgroundColor, color, fontSize, border }}>
+    <Wrapper>
+      <ButtonBox
+        style={{ backgroundColor, color, fontSize, border }}
+        disabled={disabled}
+      >
         {children}
-      </S.Button>
-    </S.Wrapper>
+      </ButtonBox>
+    </Wrapper>
   );
 };
