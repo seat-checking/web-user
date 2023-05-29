@@ -2,7 +2,7 @@ import { ButtonBox, Wrapper } from 'components/form/atoms/Button/Button.styled';
 import type { VFC } from 'common/utils/types';
 
 interface ButtonProps {
-  children?: string;
+  children: string;
   backgroundColor?: string;
   color?: string;
   fontSize?: string;
