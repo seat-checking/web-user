@@ -1,7 +1,13 @@
 import { Button } from 'components/form/atoms/Button';
 import { LogoBox } from 'pages/LoginPage/LoginPage.styled';
 import React from 'react';
-import { ButtonWrapper, LogoWrapper, RootPageWrapper } from './RootPage.styled';
+import {
+  ButtonContent,
+  ButtonWrapper,
+  GoogleIcon,
+  LogoWrapper,
+  RootPageWrapper,
+} from './RootPage.styled';
 import type { VFC } from 'common/utils/types';
 
 export const RootPage: VFC = () => {
@@ -17,7 +23,10 @@ export const RootPage: VFC = () => {
           backgroundColor='#FFFF'
           color='#505462'
         >
-          구글 아이디로 로그인하기
+          <ButtonContent>
+            <GoogleIcon />
+            구글 아이디로 로그인하기
+          </ButtonContent>
         </Button>
         <Button
           border='1px solid #FF8D4E'
