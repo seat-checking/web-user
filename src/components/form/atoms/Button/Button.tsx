@@ -1,8 +1,9 @@
 import { ButtonBox, Wrapper } from 'components/form/atoms/Button/Button.styled';
 import type { VFC } from 'common/utils/types';
+import type { ReactNode } from 'react';
 
 interface ButtonProps {
-  children: string;
+  children?: ReactNode;
   backgroundColor?: string;
   color?: string;
   fontSize?: string;
