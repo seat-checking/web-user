@@ -4,7 +4,7 @@ import { Wrapper } from './Tabs.styled';
 interface TabsProps {
   value: number;
   onChange: (newValue: number) => void;
-  children: React.ReactNode[];
+  children: React.ReactElement[];
 }
 
 export const Tabs = ({ children, value, onChange }: TabsProps) => {
@@ -14,7 +14,7 @@ export const Tabs = ({ children, value, onChange }: TabsProps) => {
       {children.map((child) => {
         const index = nextIndex++;
 
-        return React.cloneElement(child as React.ReactElement, {
+        return React.cloneElement(child, {
           key: index,
           active: index === value,
           onClick: () => onChange(index),
