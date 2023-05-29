@@ -11,7 +11,7 @@ module.exports = {
     'airbnb-typescript',
     'plugin:prettier/recommended',
     'plugin:react/recommended',
-    // 'plugin:react/jsx-runtime',
+    'plugin:react/jsx-runtime',
     'plugin:@typescript-eslint/recommended',
     'prettier',
   ],
@@ -68,6 +68,8 @@ module.exports = {
     'react/prop-types': 'off',
     // import react 강제성 끔 (react ver 17부턴 해줄 필요 없음)
     'react/react-in-jsx-scope': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/require-default-props': 'warn', // 옵셔널 타입 지정 가능하도록 함
     'react/self-closing-comp': [
       'error',
       {
@@ -116,7 +118,7 @@ module.exports = {
       { namedComponents: 'arrow-function' },
     ],
     'react-hooks/exhaustive-deps': 'warn', // 디펜던시 빠진 것들 모두 추가하도록 함
-    '@typescript-eslint/explicit-function-return-type': 'error',
+    // '@typescript-eslint/explicit-function-return-type': 'warn',
     // default export 선호 끔
     'import/prefer-default-export': 'off',
     '@typescript-eslint/ban-types': [
