@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   max-width: 67.5rem;
   width: 100%;
+  margin-bottom: 1.6rem;
 `;
 
 export const ButtonBox = styled.button`
