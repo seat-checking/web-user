@@ -31,6 +31,9 @@ export const LoginForm: VFC = () => {
   const handleEmailResetClick = () => {
     resetField('email'); // 인풋값 초기화
   };
+  const handlePasswordResetClick = () => {
+    resetField('password'); // 인풋값 초기화
+  };
 
   const isErrorsEmpty = Object.keys(errors).length === 0;
 
@@ -62,7 +65,7 @@ export const LoginForm: VFC = () => {
           이메일
         </Inputs>
         <Inputs
-          onClick={handleEmailResetClick}
+          onClick={handlePasswordResetClick}
           labelRequired
           typingrequired
           placeholder='비밀번호를 입력해주세요.'
