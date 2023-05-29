@@ -23,10 +23,7 @@ export const RootPage: VFC = () => {
           backgroundColor='#FFFF'
           color='#505462'
         >
-          <ButtonContent>
-            <GoogleIcon />
-            구글 아이디로 로그인하기
-          </ButtonContent>
+          구글 아이디로 로그인하기
         </Button>
         <Button
           border='1px solid #FF8D4E'
