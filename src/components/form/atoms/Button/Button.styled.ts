@@ -13,6 +13,7 @@ export const ButtonBox = styled.button`
   cursor: pointer;
   font-weight: 500;
   font-size: 1.6rem;
+  margin-bottom: 1.6rem;
   color: ${(props): string => props.theme.palette.grey[400]};
 
   &:disabled {
