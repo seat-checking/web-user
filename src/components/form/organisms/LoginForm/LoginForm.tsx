@@ -1,9 +1,18 @@
+import { login } from 'api/user';
 import { Button } from 'components/form/atoms/Button';
 import { Inputs } from 'components/form/molecules/Inputs';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { ButtonWrapper, Form, LoginFormWrapper } from './LoginForm.styled';
+import { useNavigate } from 'react-router-dom';
+import {
+  ButtonWrapper,
+  ErrorIcon,
+  ErrorMessage,
+  ErrorMessageWrapper,
+  Form,
+  LoginFormWrapper,
+} from './LoginForm.styled';
 import type { VFC } from 'common/utils/types';
 import type { SubmitHandler } from 'react-hook-form';
 
@@ -21,8 +30,21 @@ export const LoginForm: VFC = () => {
     formState: { errors, isValid },
   } = useForm<LoginFormProps>({ mode: 'onChange' });
 
-  const onSubmit: SubmitHandler<LoginFormProps> = (data) => {
-    console.log(data);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  const navigtate = useNavigate();
+
+  const onSubmit: SubmitHandler<LoginFormProps> = async (data) => {
+    try {
+      const requestData = await login(data);
+
+      if (requestData.isSuccess) {
+        alert('welcome SeatSense');
+        navigtate('./storeList');
+      }
+    } catch (error) {
+      setErrorMsg('아이디 또는 비밀번호를 다시 입력해주세요.');
+    }
   };
 
   const emailValue: string = watch('email', '');
@@ -31,8 +53,9 @@ export const LoginForm: VFC = () => {
   const handleEmailResetClick = () => {
     resetField('email'); // 인풋값 초기화
   };
-
-  const isErrorsEmpty = Object.keys(errors).length === 0;
+  const handlePasswordResetClick = () => {
+    resetField('password'); // 인풋값 초기화
+  };
 
   const inputValue = watch('email') && watch('password');
 
@@ -62,7 +85,7 @@ export const LoginForm: VFC = () => {
           이메일
         </Inputs>
         <Inputs
-          onClick={handleEmailResetClick}
+          onClick={handlePasswordResetClick}
           labelRequired
           typingrequired
           placeholder='비밀번호를 입력해주세요.'
@@ -80,6 +103,14 @@ export const LoginForm: VFC = () => {
         >
           비밀번호
         </Inputs>
+        <ErrorMessageWrapper>
+          {errorMsg && (
+            <>
+              <ErrorIcon />
+              <ErrorMessage>{errorMsg}</ErrorMessage>
+            </>
+          )}
+        </ErrorMessageWrapper>
         <ButtonWrapper>
           {isFormValid ? (
             <Button backgroundColor='#FF8D4E' color='#FFFFFF'>
