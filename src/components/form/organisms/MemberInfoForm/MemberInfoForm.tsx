@@ -1,3 +1,4 @@
+import { signUp, validateNickname } from 'api/user';
 import { Button } from 'components/form/atoms/Button';
 import { InputLabel } from 'components/form/atoms/InputLabel';
 import { InputRadio } from 'components/form/atoms/InputRadio';
@@ -9,6 +10,7 @@ import {
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { useNavigate } from 'react-router-dom';
 import {
   ButtonWrapper,
   InfoText,
@@ -16,6 +18,7 @@ import {
   InputRadioLabel,
   InputRadiowrapper,
 } from './MemberInfoForm.styled';
+import type { SignUpParams } from 'api/user';
 import type { VFC } from 'common/utils/types';
 import type React from 'react';
 import type { SubmitHandler } from 'react-hook-form';
@@ -24,8 +27,7 @@ interface MemberInfoFormprops {
   nickname: string;
   age: string;
   UniqueButtonClicked: string;
-  gender: boolean;
-  isfemaleChecked: boolean;
+  sex: boolean;
 }
 
 export const MemberInfoForm: VFC = () => {
@@ -42,8 +44,29 @@ export const MemberInfoForm: VFC = () => {
   const nicknameValue: string = watch('nickname', '');
   const ageValue: string = watch('age', '');
 
-  const onSubmit: SubmitHandler<MemberInfoFormprops> = (data) => {
-    console.log(data);
+  const navigate = useNavigate();
+
+  const onSubmit: SubmitHandler<MemberInfoFormprops> = async (data) => {
+    // localStorage에서 첫번째 페이지 데이터 가져오기
+    const firstData = localStorage.getItem('signup_first_data');
+
+    if (firstData !== null) {
+      const requestData: SignUpParams = {
+        nickname: data.nickname,
+        age: data.age,
+        sex: data.sex,
+        ...JSON.parse(firstData),
+      };
+
+      try {
+        await signUp(requestData);
+        alert('회원가입이 완료되었습니다!');
+        navigate('/login');
+      } catch (e) {
+        // 서버 응답이 400번대가 온 경우
+        alert('회원가입에 실패했습니다. 다시 시도해주세요');
+      }
+    }
   };
   const handleNicknameResetClick = (): void => {
     resetField('nickname'); // 인풋값 초기화
@@ -58,10 +81,9 @@ export const MemberInfoForm: VFC = () => {
     });
   }, [setError]);
 
-  const inputValue = watch('nickname');
   const isErrorsEmpty = Object.keys(errors).length === 0;
 
-  const isFormValid = inputValue && isErrorsEmpty;
+  const isFormValid = nicknameValue && isErrorsEmpty;
 
   console.log(isValid);
   console.log(errors);
@@ -96,16 +118,19 @@ export const MemberInfoForm: VFC = () => {
           confirmButton={
             <IdCheckButton
               type='button'
-              onClick={(): void => {
+              onClick={async () => {
                 // TODO: API 요청
-                const isUnique = true; // API 응답
+                const responseData = await validateNickname({
+                  nickname: nicknameValue,
+                });
+                const isUnique = responseData.result.isValid;
 
                 if (isUnique) {
                   // 닉네임이 중복되지 않은경우
                   clearErrors('UniqueButtonClicked');
                 } else {
                   // 닉네임이 중복된경우
-                  setError('nickname', {
+                  setError('UniqueButtonClicked', {
                     message: '이미 사용중인 닉네임입니다',
                   });
                 }
@@ -140,15 +165,15 @@ export const MemberInfoForm: VFC = () => {
             <InputRadioLabel>
               <InputRadio
                 checked
-                value='female'
-                {...register('gender', { required: '성별을 선택해주세요' })}
+                value='여성'
+                {...register('sex', { required: '성별을 선택해주세요' })}
               />
               여성
             </InputRadioLabel>
             <InputRadioLabel>
               <InputRadio
-                value='male'
-                {...register('gender', { required: '성별을 선택해주세요' })}
+                value='남성'
+                {...register('sex', { required: '성별을 선택해주세요' })}
               />
               남성
             </InputRadioLabel>
