@@ -1,7 +1,3 @@
-import { AllListItem } from 'components/item/AllListItem';
-import { CafeListItem } from 'components/item/CafeListItem';
-import { FoodListItem } from 'components/item/FoodListItem';
-import { MeetingListItem } from 'components/item/MeetingListItem';
 import { Tab } from 'components/layout/tab/Tab';
 import { TabPanel } from 'components/layout/tab/TabPanel';
 import { Tabs } from 'components/layout/tab/Tabs';
@@ -21,19 +17,15 @@ export const ListTab = () => {
         <Tab label='전체' />
         <Tab label='음식점' />
         <Tab label='카페' />
-        <Tab label='모임' />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <AllListItem />
+        전체
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <FoodListItem />
+        음식점
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <CafeListItem />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <MeetingListItem />
+        카페
       </TabPanel>
     </Wrapper>
   );
