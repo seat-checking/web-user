@@ -1,5 +1,5 @@
-import { ListTab } from 'components/ListTab';
 import { Navigation } from 'components/Navigation';
+import { ListTab } from 'components/store/ListTab';
 import type { VFC } from 'common/utils/types';
 
 const App: VFC = () => {
