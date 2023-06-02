@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  position: relative;
+`;
 export const BackBtn = styled.button`
-  position: fixed;
+  position: absolute;
   top: 4.4rem;
   left: 1.6rem;
 `;

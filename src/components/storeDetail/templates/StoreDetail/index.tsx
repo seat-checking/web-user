@@ -4,6 +4,7 @@ import { SeatLayoutTab } from 'components/storeDetail/organisms/SeatLayoutTab';
 import { StoreInfoTab } from 'components/storeDetail/organisms/StoreInfoTab/StoreInfoTab';
 import {
   BackBtn,
+  Container,
   HeaderWrap,
   Introduction,
   Name,
@@ -45,7 +46,7 @@ export const StoreDetail: VFC = () => {
   };
 
   return (
-    <div>
+    <Container>
       <ImageSlider dataList={imgList} />
       <BackBtn onClick={handleBack}>
         <ArrowLeft />
@@ -55,6 +56,6 @@ export const StoreDetail: VFC = () => {
         <Introduction>한 줄 소개</Introduction>
       </HeaderWrap>
       <Tabs tabList={tabList} />
-    </div>
+    </Container>
   );
 };
