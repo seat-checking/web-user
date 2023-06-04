@@ -1,4 +1,5 @@
 import { LoginForm } from 'components/form/organisms/LoginForm';
+import GoogleLoginButton from 'components/socialLogin/GoogleLoginButton/GoogleLoginButton';
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { RootPage } from 'pages/RootPage';
@@ -14,6 +15,7 @@ const App: VFC = () => {
         <Route path='/signup/second' element={<MemberInfoPage />} />
         <Route path='/login' element={<LoginPage />} />
       </Routes>
+      <RootPage />
     </div>
   );
 };
