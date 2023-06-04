@@ -24,7 +24,7 @@ export const ProgressBar = styled.div`
 export const ProgressBarInner = styled.div`
   width: 50%;
   height: 0.4rem;
-  background: ${(porps): string => porps.theme.palette.primary.main};
+  background: ${(porps): string => porps.theme.palette.primary.orange};
 
   &:nth-child(2) {
     background: ${(porps): string => porps.theme.palette.grey[50]};

@@ -16,10 +16,10 @@ export const TextWrapper = styled.div<{ active?: boolean }>`
 
   height: 100%;
   color: ${({ theme, active }) =>
-    active ? theme.palette.primary.main : theme.palette.grey[300]};
+    active ? theme.palette.primary.orange : theme.palette.grey[300]};
   border-bottom: 3px solid;
   border-color: ${({ theme, active }) =>
-    active ? theme.palette.primary.main : 'transparent'};
+    active ? theme.palette.primary.orange : 'transparent'};
 
   font-weight: 700;
   font-size: 1.6rem;
