@@ -4,7 +4,7 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     palette: {
       primary: {
-        main: string;
+        orange: string;
       };
       error: {
         main: string;
