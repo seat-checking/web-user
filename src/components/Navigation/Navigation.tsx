@@ -1,6 +1,8 @@
 import React from 'react';
 import {
   NavigationIconWrapper,
+  NavigationMyicon,
+  NavigationNotificationIcon,
   NavigationSearchIcon,
   NavigationStoreIcon,
   NavigationWrapper,
@@ -13,6 +15,8 @@ export const Navigation: VFC = () => {
       <NavigationIconWrapper>
         <NavigationStoreIcon />
         <NavigationSearchIcon />
+        <NavigationNotificationIcon />
+        <NavigationMyicon />
       </NavigationIconWrapper>
     </NavigationWrapper>
   );

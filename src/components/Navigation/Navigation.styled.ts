@@ -1,3 +1,5 @@
+import myicon from 'assets/icons/myicon.svg';
+import notificationIcon from 'assets/icons/notification.svg';
 import searchIcon from 'assets/icons/searchicon.svg';
 import storeIcon from 'assets/icons/storelisticon.svg';
 import styled from 'styled-components';
@@ -14,11 +16,10 @@ export const NavigationWrapper = styled.div`
 `;
 
 export const NavigationIconWrapper = styled.div`
-  width: 80%;
-  margin: 0 auto;
+  width: 100%;
   display: flex;
   justify-content: center;
-  gap: 12.9rem;
+  gap: 4.1rem;
 `;
 
 export const NavigationStoreIcon = styled.div`
@@ -28,7 +29,6 @@ export const NavigationStoreIcon = styled.div`
   background-image: url(${storeIcon});
   background-repeat: no-repeat;
   background-size: cover;
-  border: none;
 `;
 
 export const NavigationSearchIcon = styled.div`
@@ -37,6 +37,25 @@ export const NavigationSearchIcon = styled.div`
   cursor: pointer;
   filter: #1a1c2d;
   background-image: url(${searchIcon});
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+
+export const NavigationNotificationIcon = styled.div`
+  width: 5.6rem;
+  height: 5.6rem;
+  cursor: pointer;
+  filter: #1a1c2d;
+  background-image: url(${notificationIcon});
+  background-repeat: no-repeat;
+  background-size: cover;
+`;
+export const NavigationMyicon = styled.div`
+  width: 5.6rem;
+  height: 5.6rem;
+  cursor: pointer;
+  filter: #1a1c2d;
+  background-image: url(${myicon});
   background-repeat: no-repeat;
   background-size: cover;
 `;
