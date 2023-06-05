@@ -1,12 +1,12 @@
 import { useGoogleLogin } from '@react-oauth/google';
-
 import {
   GoogleButton,
   GoogleButtonWrapper,
   GoogleIcon,
 } from 'components/socialLogin/GoogleLoginButton/GoogleLoginButton.styled';
+import type { VFC } from 'common/utils/types';
 
-const GoogleLoginButton = () => {
+export const GoogleLoginButton: VFC = () => {
   const googleSocialLogin = useGoogleLogin({
     scope: 'email profile',
     onSuccess: ({ code }) => {
@@ -32,4 +32,4 @@ const GoogleLoginButton = () => {
     </GoogleButtonWrapper>
   );
 };
-export default GoogleLoginButton;
+// export default GoogleLoginButton;
