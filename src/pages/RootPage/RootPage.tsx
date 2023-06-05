@@ -1,5 +1,5 @@
 import { Button } from 'components/form/atoms/Button';
-import GoogleLoginButton from 'components/socialLogin/GoogleLoginButton/GoogleLoginButton';
+import { GoogleLoginButton } from 'components/socialLogin/GoogleLoginButton/GoogleLoginButton';
 import { LogoBox } from 'pages/LoginPage/LoginPage.styled';
 import React from 'react';
 import { ButtonWrapper, LogoWrapper, RootPageWrapper } from './RootPage.styled';
