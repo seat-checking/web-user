@@ -1,34 +1,22 @@
 import { ReactComponent as ArrowLeft } from 'assets/svgs/arrowLeft.svg';
-import { ImageSlider } from 'components/layout/molecules/ImageSlider';
-import { SeatLayoutTab } from 'components/storeDetail/organisms/SeatLayoutTab';
-import { StoreInfoTab } from 'components/storeDetail/organisms/StoreInfoTab/StoreInfoTab';
+import { StoreDetailTab } from 'components/StoreDetailTab';
+import { ImageSlider } from 'components/layout/molecules/ImageSlider/ImageSlider';
+
 import {
   BackBtn,
   Container,
   HeaderWrap,
   Introduction,
   Name,
-} from 'components/storeDetail/templates/StoreDetail/styled';
-import { Tabs } from 'components/tabs/molecules/Tabs';
+} from 'components/storeDetail/templates/StoreDetail/StoreDetail.styled';
+
 import type { VFC } from 'common/utils/types';
-import type { SlideItem } from 'components/layout/molecules/ImageSlider';
-import type { TabItem } from 'components/tabs/molecules/Tabs';
+import type { SlideItem } from 'components/layout/molecules/ImageSlider/ImageSlider';
 
 /**
  * 가게 상세페이지 컴포넌트
  */
 export const StoreDetail: VFC = () => {
-  const tabList: TabItem[] = [
-    {
-      text: '좌석 정보',
-      content: <SeatLayoutTab />,
-    },
-    {
-      text: '가게 정보',
-      content: <StoreInfoTab />,
-    },
-  ];
-
   const imgList: SlideItem[] = [
     {
       url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDdwDEYRPat47IaYdO719kyxDBPCxMEfgIZGEEfreNVg&s',
@@ -55,7 +43,7 @@ export const StoreDetail: VFC = () => {
         <Name>가게 이름</Name>
         <Introduction>한 줄 소개</Introduction>
       </HeaderWrap>
-      <Tabs tabList={tabList} />
+      <StoreDetailTab />
     </Container>
   );
 };

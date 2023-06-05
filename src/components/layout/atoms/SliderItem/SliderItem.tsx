@@ -1,4 +1,7 @@
-import { Container, Img } from 'components/layout/atoms/SliderItem/styled';
+import {
+  Container,
+  Img,
+} from 'components/layout/atoms/SliderItem/SliderItem.styled';
 import type { VFC } from 'common/utils/types';
 import type { HTMLAttributes } from 'react';
 

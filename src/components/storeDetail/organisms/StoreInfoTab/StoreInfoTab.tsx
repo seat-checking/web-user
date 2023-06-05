@@ -1,9 +1,6 @@
-import {
-  Container,
-  Label,
-  TextRow,
-} from 'components/storeDetail/organisms/StoreInfoTab/styled';
-
+import { Container } from 'components/storeDetail/molecules/SeatLayout/SeatLayout.styled';
+import { Label } from 'components/storeDetail/organisms/SeatLayoutTab/SeatLayoutTab.styled';
+import { TextRow } from 'components/storeDetail/organisms/StoreInfoTab/StoreInfoTab.styled';
 import type { VFC } from 'common/utils/types';
 
 /**

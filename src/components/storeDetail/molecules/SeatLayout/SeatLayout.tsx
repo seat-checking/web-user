@@ -1,4 +1,4 @@
-import { Container } from 'components/storeDetail/molecules/SeatLayout/styled';
+import { Container } from 'components/storeDetail/molecules/SeatLayout/SeatLayout.styled';
 import type { VFC } from 'common/utils/types';
 
 /**
