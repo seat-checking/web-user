@@ -20,19 +20,20 @@ export const SearchInput = styled.input`
   width: 100%;
   height: 4.1rem;
   border-radius: 0.4rem;
-  background-color: ${(porps): string => porps.theme.palette.grey[100]};
+  background-color: ${(props): string => props.theme.palette.grey[100]};
   font-weight: 500;
   font-size: 1.6rem;
-  color: ${(porps): string => porps.theme.palette.grey[500]};
+  color: ${(props): string => props.theme.palette.grey[500]};
   background-image: url(${searchIcom});
-  background-position: 1rem; 50%;
+  background-position: 1rem 48%;
   background-repeat: no-repeat;
-  padding-left: 3rem;
+  padding-left: 3.4rem;
 
   &::placeholder {
     color: ${(props): string => props.theme.palette.grey[300]};
     font-weight: 500;
     font-size: 1.6rem;
+  }
 `;
 
 export const ResetbtnWrapper = styled.div`
