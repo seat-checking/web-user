@@ -19,6 +19,7 @@ export const NavigationIconWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  flex: 1;
   gap: 4.1rem;
 `;
 
