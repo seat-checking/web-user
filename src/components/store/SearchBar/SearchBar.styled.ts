@@ -29,7 +29,10 @@ export const SearchInput = styled.input`
   background-repeat: no-repeat;
   padding-left: 3rem;
 
-
+  &::placeholder {
+    color: ${(props): string => props.theme.palette.grey[300]};
+    font-weight: 500;
+    font-size: 1.6rem;
 `;
 
 export const ResetbtnWrapper = styled.div`
