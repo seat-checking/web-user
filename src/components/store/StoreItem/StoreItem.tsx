@@ -6,7 +6,6 @@ import {
   StoreItemIntroduction,
   StoreItemName,
 } from 'components/store/StoreItem/StoreItem.styled';
-import React from 'react';
 import type { VFC } from 'common/utils/types';
 
 interface StoreItemProps {

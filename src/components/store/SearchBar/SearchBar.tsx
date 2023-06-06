@@ -6,7 +6,7 @@ import {
   SearchInputWrapper,
 } from 'components/store/SearchBar/SearchBar.styled';
 import { BackButtonIcon } from 'pages/LoginPage/LoginPage.styled';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { VFC } from 'common/utils/types';
 import type { ChangeEvent } from 'react';
 

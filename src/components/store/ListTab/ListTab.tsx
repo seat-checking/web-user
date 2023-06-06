@@ -5,7 +5,7 @@ import { AllList } from 'components/store/storeList/AllList';
 import { CafeList } from 'components/store/storeList/CafeList';
 import { FoodList } from 'components/store/storeList/FoodList';
 import { MeetingList } from 'components/store/storeList/MeetingList';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { Wrapper } from './ListTab.styled';
 import type { VFC } from 'common/utils/types';
