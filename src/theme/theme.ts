@@ -3,7 +3,7 @@ import type { DefaultTheme } from 'styled-components';
 export const myTheme: DefaultTheme = {
   palette: {
     primary: {
-      main: '#FF8D4E',
+      orange: '#FF8D4E',
     },
     error: {
       main: '#FF334B',

@@ -19,5 +19,5 @@ export const MemberInfoPageTitle = styled.div`
 export const ProgressBarInner = styled.div`
   width: 100%;
   height: 0.4rem;
-  background: ${(porps): string => porps.theme.palette.primary.main};
+  background: ${(porps): string => porps.theme.palette.primary.orange};
 `;
