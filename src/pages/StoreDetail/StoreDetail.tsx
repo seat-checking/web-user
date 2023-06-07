@@ -1,6 +1,6 @@
 import { ReactComponent as ArrowLeft } from 'assets/svgs/arrowLeft.svg';
-import { StoreDetailTab } from 'components/StoreDetailTab';
 import { ImageSlider } from 'components/layout/molecules/ImageSlider/ImageSlider';
+import { StoreDetailTab } from 'components/store/StoreDetailTab';
 
 import {
   BackBtn,
@@ -8,7 +8,7 @@ import {
   HeaderWrap,
   Introduction,
   Name,
-} from 'components/storeDetail/templates/StoreDetail/StoreDetail.styled';
+} from 'pages/StoreDetail/StoreDetail.styled';
 
 import type { VFC } from 'common/utils/types';
 import type { SlideItem } from 'components/layout/molecules/ImageSlider/ImageSlider';

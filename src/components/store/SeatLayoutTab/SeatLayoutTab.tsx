@@ -1,12 +1,12 @@
-import { SeatLayout } from 'components/storeDetail/molecules/SeatLayout/SeatLayout';
-
+import { SeatLayout } from 'components/store/SeatLayout/SeatLayout';
 import {
   AverageText,
   Label,
   SeatCount,
   SeatCountWrap,
   UpperWrap,
-} from 'components/storeDetail/organisms/SeatLayoutTab/SeatLayoutTab.styled';
+} from 'components/store/SeatLayoutTab/SeatLayoutTab.styled';
+
 import type { VFC } from 'common/utils/types';
 
 /**

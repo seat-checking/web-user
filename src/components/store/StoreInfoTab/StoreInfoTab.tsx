@@ -2,7 +2,7 @@ import {
   Container,
   Label,
   TextRow,
-} from 'components/storeDetail/organisms/StoreInfoTab/StoreInfoTab.styled';
+} from 'components/store/StoreInfoTab/StoreInfoTab.styled';
 import type { VFC } from 'common/utils/types';
 
 /**

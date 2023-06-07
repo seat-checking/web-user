@@ -2,8 +2,8 @@ import { Tab } from 'components/layout/tab/Tab';
 import { TabPanel } from 'components/layout/tab/TabPanel';
 import { Tabs } from 'components/layout/tab/Tabs';
 import { Wrapper } from 'components/store/ListTab/ListTab.styled';
-import { SeatLayoutTab } from 'components/storeDetail/organisms/SeatLayoutTab/SeatLayoutTab';
-import { StoreInfoTab } from 'components/storeDetail/organisms/StoreInfoTab/StoreInfoTab';
+import { SeatLayoutTab } from 'components/store/SeatLayoutTab/SeatLayoutTab';
+import { StoreInfoTab } from 'components/store/StoreInfoTab/StoreInfoTab';
 import { useState } from 'react';
 
 export const StoreDetailTab = () => {
