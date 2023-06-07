@@ -1,12 +1,12 @@
-import { Navigation } from 'components/Navigation';
-import { ListTab } from 'components/store/ListTab';
+import { StoreDetail } from 'pages/StoreDetail/StoreDetail';
 import type { VFC } from 'common/utils/types';
 
 const App: VFC = () => {
   return (
-    <div>
-      <ListTab />
-      <Navigation />
+    <div style={{ fontSize: 23 }}>
+      {/* 실시간 좌석 확인 */}
+      {/* <Example /> */}
+      <StoreDetail />
     </div>
   );
 };
