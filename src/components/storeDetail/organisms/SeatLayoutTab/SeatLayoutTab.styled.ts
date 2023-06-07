@@ -26,11 +26,11 @@ export const SeatCount = styled.div`
 
   height: 5.6rem;
   flex: 1;
-  background-color: ${(props): string => props.theme.color.grey50};
+  background-color: ${(props): string => props.theme.palette.grey[50]};
 
   font-size: 1.6rem;
   font-weight: 500;
-  color: ${(props): string => props.theme.color.grey500};
+  color: ${(props): string => props.theme.palette.grey[500]};
 `;
 
 export const AverageText = styled.div`
@@ -38,10 +38,10 @@ export const AverageText = styled.div`
   height: 5.6rem;
   margin-top: 1.6rem;
 
-  border: 0.1rem solid ${(props): string => props.theme.color.orange};
+  border: 0.1rem solid ${(props): string => props.theme.palette.primary.orange};
   border-radius: 0.8rem;
 
   font-size: 1.6rem;
   font-weight: 500;
-  color: ${(props): string => props.theme.color.orange};
+  color: ${(props): string => props.theme.palette.primary.orange};
 `;

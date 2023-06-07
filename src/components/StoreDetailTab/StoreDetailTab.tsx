@@ -1,7 +1,7 @@
-import { Wrapper } from 'components/ListTab/ListTab.styled';
 import { Tab } from 'components/layout/tab/Tab';
 import { TabPanel } from 'components/layout/tab/TabPanel';
 import { Tabs } from 'components/layout/tab/Tabs';
+import { Wrapper } from 'components/store/ListTab/ListTab.styled';
 import { SeatLayoutTab } from 'components/storeDetail/organisms/SeatLayoutTab/SeatLayoutTab';
 import { StoreInfoTab } from 'components/storeDetail/organisms/StoreInfoTab/StoreInfoTab';
 import { useState } from 'react';

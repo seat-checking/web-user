@@ -1,9 +1,9 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 export const Container = styled.div`
   padding: 1.6rem;
 
-  background-color: ${(props): string => props.theme.color.grey50};
+  background-color: ${(props): string => props.theme.palette.grey[50]};
 `;
 
 export const Label = styled.p`
