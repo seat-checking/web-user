@@ -1,5 +1,6 @@
 import { PATH } from 'common/utils/constants';
 import { LoginPage } from 'pages/LoginPage';
+import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
 import { RootPage } from 'pages/RootPage';
 import { SignUpPage } from 'pages/SignUpPage';
@@ -11,27 +12,29 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <RootPage />,
-    children: [
-      {
-        path: PATH.login,
-        element: <LoginPage />,
-      },
-      {
-        path: PATH.signup,
-        element: <SignUpPage />,
-      },
-      {
-        path: PATH.storeList,
-        element: <StoreListPage />,
-      },
-      {
-        path: PATH.storeDetail,
-        element: <StoreDetailPage />,
-      },
-      {
-        path: PATH.myPage,
-        element: <MyPage />,
-      },
-    ],
+  },
+  {
+    path: `/${PATH.login}`,
+    element: <LoginPage />,
+  },
+  {
+    path: `/${PATH.signUp}`,
+    element: <SignUpPage />,
+  },
+  {
+    path: `/${PATH.memberInfo}`,
+    element: <MemberInfoPage />,
+  },
+  {
+    path: `/${PATH.storeList}`,
+    element: <StoreListPage />,
+  },
+  {
+    path: `/${PATH.storeDetail}`,
+    element: <StoreDetailPage />,
+  },
+  {
+    path: `/${PATH.myPage}`,
+    element: <MyPage />,
   },
 ]);

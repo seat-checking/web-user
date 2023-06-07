@@ -1,3 +1,4 @@
+import { PATH } from 'common/utils/constants';
 import { router } from 'pages/Router';
 import { RouterProvider } from 'react-router-dom';
 import type { VFC } from 'common/utils/types';

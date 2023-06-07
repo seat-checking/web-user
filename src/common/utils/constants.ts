@@ -1,6 +1,7 @@
 export const PATH = {
   login: 'login',
-  signup: 'signup',
+  signUp: 'signup',
+  memberInfo: 'memberinfo',
   myPage: 'mypage',
   storeList: 'storelist',
   storeDetail: 'storedetail',

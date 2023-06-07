@@ -8,7 +8,7 @@ import {
   HeaderWrap,
   Introduction,
   Name,
-} from 'pages/StoreDetail/StoreDetail.styled';
+} from './StoreDetailPage.styled';
 
 import type { VFC } from 'common/utils/types';
 import type { SlideItem } from 'components/layout/molecules/ImageSlider/ImageSlider';
@@ -16,7 +16,7 @@ import type { SlideItem } from 'components/layout/molecules/ImageSlider/ImageSli
 /**
  * 가게 상세페이지 컴포넌트
  */
-export const StoreDetail: VFC = () => {
+export const StoreDetailPage: VFC = () => {
   const imgList: SlideItem[] = [
     {
       url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDdwDEYRPat47IaYdO719kyxDBPCxMEfgIZGEEfreNVg&s',
