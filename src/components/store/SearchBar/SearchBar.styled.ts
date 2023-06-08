@@ -1,6 +1,11 @@
 import searchIcom from 'assets/icons/searchbaricon.svg';
 import styled from 'styled-components/macro';
 
+export const SearchBarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const SearchBarWrapper = styled.div`
   max-width: 67.5rem;
   width: 100%;
