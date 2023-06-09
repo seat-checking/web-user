@@ -33,11 +33,8 @@ export const ListTab: VFC = () => {
       <TabPanel value={value} index={2}>
         <CafeList />
       </TabPanel>
-      <TabPanel value={value} index={3}>
+      <TabPanel value={value} index={4}>
         <MeetingList />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        모임
       </TabPanel>
     </Wrapper>
   );
