@@ -7,6 +7,7 @@ export const BackBtn = styled.button`
   position: absolute;
   top: 4.4rem;
   left: 1.6rem;
+  z-index: 999999999;
 `;
 export const HeaderWrap = styled.div`
   padding: 2.4rem 1.6rem;
