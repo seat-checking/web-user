@@ -9,14 +9,14 @@ import {
   HeaderWrap,
   Introduction,
   Name,
-} from 'pages/StoreDetail/StoreDetail.styled';
+} from './StoreDetailPage.styled';
 
 import type { VFC } from 'common/utils/types';
 
 /**
  * 가게 상세페이지 컴포넌트
  */
-export const StoreDetail: VFC = () => {
+export const StoreDetailPage: VFC = () => {
   const handleBack = (): void => {
     console.log('handle back 라우팅 설정 아직 안돼서 임시 코드 넣음');
   };
