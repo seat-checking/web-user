@@ -1,6 +1,6 @@
 import { ReactComponent as ArrowLeft } from 'assets/svgs/arrowLeft.svg';
 
-import { StoreCarousel } from 'components/store/StoreCarousel/StoreCarousel';
+import { Carousel } from 'components/store/Carousel';
 import { StoreDetailTab } from 'components/store/StoreDetailTab';
 
 import {
@@ -23,7 +23,7 @@ export const StoreDetailPage: VFC = () => {
 
   return (
     <Container>
-      <StoreCarousel />
+      <Carousel />
       <BackBtn onClick={handleBack}>
         <ArrowLeft />
       </BackBtn>
