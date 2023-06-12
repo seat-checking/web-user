@@ -1,5 +1,4 @@
 import { SignUpForm } from 'components/form/organisms/SignUpForm';
-import React from 'react';
 import {
   ProgressBar,
   ProgressBarInner,
