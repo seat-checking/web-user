@@ -41,14 +41,14 @@ export const UserInfoWrapper = styled.div`
 `;
 
 export const UserInfoImg = styled.img`
-  width: 48px;
-  height: 48px;
+  width: 4.8rem;
+  height: 4.8rem;
   border-radius: 50%;
 `;
 
 export const UserinfoNickname = styled.div`
   font-weight: 700;
-  font-size: 16px;
+  font-size: 1.6rem;
   color: ${(props): string => props.theme.palette.black.main};
   margin-left: 1.2rem;
 `;
@@ -56,7 +56,7 @@ export const UserinfoNickname = styled.div`
 export const UserSeatInfoWrapper = styled.div`
   width: 80%;
   background-color: ${(props): string => props.theme.palette.primary.orange};
-  border-radius: 8px;
+  border-radius: 0.8rem;
   margin: 0 auto;
   margin-top: 1.6rem;
   display: flex;
@@ -66,7 +66,7 @@ export const UserSeatInfoWrapper = styled.div`
 export const UserSeatinfoTitle = styled.div`
   width: 90%;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 1.2rem;
   color: ${(props): string => props.theme.palette.grey[100]};
   margin: 0 auto;
   margin-top: 1.6rem;
@@ -75,7 +75,7 @@ export const UserSeatinfoTitle = styled.div`
 export const UserSeatinfoPlace = styled.div`
   width: 90%;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 2.4rem;
   color: #ffffff;
   margin: 0 auto;
 `;
@@ -86,13 +86,13 @@ export const CheckOutButtonWrapper = styled.div`
 `;
 
 export const CheckOutButton = styled.div`
-  width: 60px;
-  height: 31px;
+  width: 6rem;
+  height: 3.1rem;
   background: #ffffff;
   border-radius: 104px;
   cursor: pointer;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 1.6rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,7 +101,7 @@ export const CheckOutButton = styled.div`
 export const SeatPlaceInfo = styled.div`
   width: 90%;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 1.4rem;
   color: #ffffff;
   margin: 0 auto;
   margin-bottom: 1.6rem;
@@ -128,7 +128,7 @@ export const MyPageMenuListWrapper = styled.div`
 
 export const MyPageMenuList = styled.div`
   font-weight: 400;
-  font-size: 16px;
+  font-size: 1.6rem;
   color: ${(props): string => props.theme.palette.black.main};
   margin-left: 1.6rem;
 `;
