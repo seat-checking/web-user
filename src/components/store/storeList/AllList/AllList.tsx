@@ -12,7 +12,7 @@ export const AllList: VFC = () => {
     const resData = await getStoreList({
       category: 'NONE',
       page: pageParam,
-      size: 8,
+      size: 15,
     });
     return resData.result;
   };
