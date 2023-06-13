@@ -1,43 +1,42 @@
+import { useQuery } from '@tanstack/react-query';
 import { getStoreList } from 'api/store/storeApi';
+import { Spinner } from 'components/layout/Spinner';
 import { StoreItem } from 'components/store/StoreItem';
-import { useEffect, useState } from 'react';
+import type { ErrorResponse } from 'api/store/common';
 import type { StoreUser } from 'api/store/storeApi';
 
 import type { VFC } from 'common/utils/types';
 
 export const CafeList: VFC = () => {
-  const [stores, setStores] = useState<StoreUser[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<null | string>(null);
+  const getStoreData = async () => {
+    const resData = await getStoreList({ category: 'CAFE', page: 1, size: 10 });
+    return resData.result.storeList;
+  };
 
-  useEffect(() => {
-    const getStoreData = async () => {
-      try {
-        setLoading(true);
-        const resData = await getStoreList({ category: 'CAFE' });
-        setStores(resData.result.storeList);
-        setLoading(false);
-      } catch (e) {
-        setError('서버에서 데이터를 받아오지 못했습니다');
-        setLoading(false);
-      }
-    };
-    getStoreData();
-  }, []);
+  const {
+    isLoading,
+    isError,
+    data: stores,
+    error,
+  } = useQuery<StoreUser[], ErrorResponse>({
+    queryKey: ['CafeList'],
+    queryFn: getStoreData,
+    staleTime: 5000,
+  });
 
-  if (loading) {
-    return <div>Loading...</div>;
+  if (isLoading) {
+    return <Spinner />;
   }
 
-  if (error) {
-    return <div>Error: {error}</div>;
+  if (isError) {
+    return <div>Error: {error.message}</div>;
   }
 
   return (
     <>
       {stores.map((store) => (
         <StoreItem
-          key={store.name} // FIXME: use pk
+          key={store.id}
           src={store.mainImage}
           storeName={store.name}
           introduction={store.introduction}
