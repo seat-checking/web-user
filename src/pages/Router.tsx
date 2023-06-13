@@ -1,4 +1,5 @@
 import { PATH } from 'common/utils/constants';
+import { SearchBar } from 'components/store/SearchBar';
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
@@ -36,5 +37,9 @@ export const router = createBrowserRouter([
   {
     path: `/${PATH.myPage}`,
     element: <MyPage />,
+  },
+  {
+    path: `/${PATH.search}`,
+    element: <SearchBar />,
   },
 ]);
