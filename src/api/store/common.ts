@@ -1,6 +1,6 @@
 // TODO: extract tp .env
 
-const DOMAIN = 'https://9875-211-38-162-27.ngrok-free.app/api';
+const DOMAIN = 'https://1fd0-61-99-44-166.ngrok-free.app/api';
 
 /**
  * api path를 이용해서 full url로만듬
@@ -21,4 +21,12 @@ export interface SuccessOkWithoutResultResponse {
 
 export interface SuccessOkResponse<T> extends SuccessOkWithoutResultResponse {
   result: T;
+}
+
+export interface ErrorResponse {
+  success: false;
+  code: string;
+  message: string;
+  status: number;
+  timestamp: string;
 }

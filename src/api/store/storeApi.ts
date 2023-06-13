@@ -4,19 +4,25 @@ import type { SuccessOkResponse } from 'api/store/common';
 
 interface StoreListParams {
   category: 'NONE' | 'RESTAURANT' | 'CAFE' | 'SPACE';
+  page?: number;
+  size?: number;
 }
 interface StoreSearchParams {
   name: string;
 }
 
 export interface StoreUser {
+  id: number;
   name: string;
   introduction: string;
   location: string;
   mainImage: string;
 }
-interface StoreListResponse {
-  count: number;
+export interface StoreListResponse {
+  curCount: number;
+  curPage: number;
+  totalCount: number;
+  totalPage: number;
   storeList: StoreUser[];
 }
 
