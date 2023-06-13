@@ -5,4 +5,5 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   border-bottom: 1px solid ${({ theme }) => theme.palette.grey[50]};
+  border-top: 1px solid ${({ theme }) => theme.palette.grey[50]};
 `;
