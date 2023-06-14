@@ -1,3 +1,4 @@
+import { PATH } from 'common/utils/constants';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -19,7 +20,7 @@ export const Navigation: VFC = () => {
   return (
     <NavigationWrapper>
       <NavigationIconWrapper>
-        <Link to='/storelist'>
+        <Link to={`/${PATH.storeList}`}>
           <NavigationStoreIcon
             onClick={() => handleClick('store')}
             active={activeIcon === 'store'}
