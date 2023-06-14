@@ -6,7 +6,7 @@ export const StoreListTitle = styled.div`
   height: 10.8rem;
   font-weight: 500;
   font-size: 2rem;
-  color: ${(porps): string => porps.theme.palette.black.main};
+  color: ${(props): string => props.theme.palette.black.main};
   display: flex;
   justify-content: center;
   align-items: center;

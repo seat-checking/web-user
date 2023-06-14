@@ -15,7 +15,7 @@ export const NavigationWrapper = styled.div`
   left: 0;
   right: 0;
   height: 8.4rem;
-  border-top: 1px solid #e8e8e8;
+  border-top: 0.1rem solid #e8e8e8;
   background-color: #ffffff;
 `;
 
