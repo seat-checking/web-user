@@ -1,6 +1,6 @@
 // TODO: extract tp .env
 
-const DOMAIN = 'https://1fd0-61-99-44-166.ngrok-free.app/api';
+const DOMAIN = '';
 
 /**
  * api path를 이용해서 full url로만듬
