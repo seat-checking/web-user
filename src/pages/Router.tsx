@@ -3,6 +3,7 @@ import { SearchBar } from 'components/store/SearchBar';
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
+import { NotificationPage } from 'pages/NotificationPage';
 import { RootPage } from 'pages/RootPage';
 import { SignUpPage } from 'pages/SignUpPage';
 import { StoreDetailPage } from 'pages/StoreDetailPage';
@@ -41,5 +42,9 @@ export const router = createBrowserRouter([
   {
     path: `/${PATH.search}`,
     element: <SearchBar />,
+  },
+  {
+    path: `/${PATH.notification}`,
+    element: <NotificationPage />,
   },
 ]);
