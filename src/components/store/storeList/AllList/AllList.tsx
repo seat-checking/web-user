@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getStoreList } from 'api/store/storeApi';
+import { Spinner } from 'components/layout/Spinner';
 import { StoreItem } from 'components/store/StoreItem';
 import InfiniteScroll from 'react-infinite-scroller';
 import type { ErrorResponse } from 'api/store/common';
@@ -36,7 +37,7 @@ export const AllList: VFC = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   if (isError) {

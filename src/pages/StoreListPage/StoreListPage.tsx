@@ -1,6 +1,6 @@
 import { Navigation } from 'components/Navigation';
+
 import { ListTab } from 'components/store/ListTab';
-import { StoreListTitle } from 'pages/StoreListPage/StoreListPage.styled';
 import type { VFC } from 'common/utils/types';
 
 /**
@@ -9,9 +9,8 @@ import type { VFC } from 'common/utils/types';
 export const StoreListPage: VFC = () => {
   return (
     <>
-      <StoreListTitle>가게목록</StoreListTitle>
       <ListTab />
-      <Navigation />
+      <Navigation />;
     </>
   );
 };
