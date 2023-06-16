@@ -19,11 +19,16 @@ export const StoreItem: VFC<StoreItemProps> = ({
   storeName,
   introduction,
 }) => {
+  const renderImage = () => {
+    if (!src || src.includes('image-error')) {
+      return <StoreItemImg style={{ backgroundColor: '#FF8D4E' }} />;
+    }
+    return <StoreItemImg src={src} />;
+  };
+
   return (
     <StoreItemDiv>
-      <StoreItemImgDiv>
-        <StoreItemImg src={src} />
-      </StoreItemImgDiv>
+      <StoreItemImgDiv>{renderImage()}</StoreItemImgDiv>
       <StoreItemDescription>
         <StoreItemName>{storeName}</StoreItemName>
         <StoreItemIntroduction>{introduction}</StoreItemIntroduction>
