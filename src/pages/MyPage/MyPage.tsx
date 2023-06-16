@@ -75,6 +75,7 @@ export const MyPage: VFC = () => {
           <MyPageMenuList>정보 동의 설정</MyPageMenuList>
         </MyPageMenuListWrapper>
       </MyPageMenuSecondWrapper>
+      <Navigation />
     </MyPageWrapper>
   );
 };
