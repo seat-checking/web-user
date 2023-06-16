@@ -40,7 +40,7 @@ export const SearchBar: VFC = () => {
   };
 
   const handleKeyDown = async (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && value.length > 0) {
       try {
         setLoading(true);
         const resData = await getSeachList({ name: value });
