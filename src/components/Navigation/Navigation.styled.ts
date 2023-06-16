@@ -27,10 +27,11 @@ export const NavigationIconWrapper = styled.div`
   gap: 4.1rem;
 `;
 
-export const NavigationStoreIcon = styled.div<{ active?: boolean }>`
+export const NavigationStoreIcon = styled.div<{ active: boolean }>`
   width: 5.6rem;
   height: 5.6rem;
   cursor: pointer;
+  // background-image: url(${storeIcon});
   background-image: url(${({ active }) =>
     active ? storeListIconActive : storeIcon});
   background-repeat: no-repeat;
@@ -46,7 +47,7 @@ export const NavigationSearchIcon = styled.div`
   background-size: cover;
 `;
 
-export const NavigationNotificationIcon = styled.div<{ active?: boolean }>`
+export const NavigationNotificationIcon = styled.div<{ active: boolean }>`
   width: 5.6rem;
   height: 5.6rem;
   cursor: pointer;
@@ -55,11 +56,14 @@ export const NavigationNotificationIcon = styled.div<{ active?: boolean }>`
   background-repeat: no-repeat;
   background-size: cover;
 `;
-export const NavigationMyicon = styled.div<{ active?: boolean }>`
+export const NavigationMyicon = styled.div<{ active: boolean }>`
   width: 5.6rem;
   height: 5.6rem;
   cursor: pointer;
   background-image: url(${({ active }) => (active ? myIconActive : myicon)});
   background-repeat: no-repeat;
   background-size: cover;
+`;
+export const TabContentWrapper = styled.div`
+  /* 스타일을 추가해주세요 */
 `;
