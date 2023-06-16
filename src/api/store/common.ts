@@ -1,6 +1,6 @@
 // TODO: extract tp .env
 
-const DOMAIN = '';
+const DOMAIN = process.env.REACT_APP_API_URL;
 
 /**
  * api path를 이용해서 full url로만듬
