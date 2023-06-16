@@ -30,7 +30,7 @@ export class StoreUserApi {
   static async getList(
     params: StoreListParams,
   ): Promise<SuccessOkResponse<StoreListResponse>> {
-    const url = getApiUrl('/v1/users/stores/list');
+    const url = getApiUrl('/users/stores/list');
     const response = await axios.get(url, {
       params,
     });
@@ -42,7 +42,7 @@ export class StoreUserApi {
 export const getStoreList = async (
   params: StoreListParams,
 ): Promise<SuccessOkResponse<StoreListResponse>> => {
-  const url = getApiUrl('/v1/users/stores/list');
+  const url = getApiUrl('/users/stores/list');
   const response = await axios.get(url, {
     params,
   });
@@ -52,7 +52,7 @@ export const getStoreList = async (
 export const getSeachList = async (
   params: StoreSearchParams,
 ): Promise<SuccessOkResponse<StoreListResponse>> => {
-  const url = getApiUrl('/v1/users/stores/list/name');
+  const url = getApiUrl('/users/stores/list/name');
   const response = await axios.get(url, {
     params,
   });
