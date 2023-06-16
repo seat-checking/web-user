@@ -11,9 +11,10 @@ export const NavigationWrapper = styled.div`
   max-width: 67.5rem;
   width: 100%;
   position: fixed;
+  left: 50%;
+  right: auto;
   bottom: 0;
-  left: 0;
-  right: 0;
+  transform: translateX(-50%);
   height: 8.4rem;
   border-top: 0.1rem solid #e8e8e8;
   background-color: #ffffff;
@@ -22,9 +23,7 @@ export const NavigationWrapper = styled.div`
 export const NavigationIconWrapper = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
-  flex: 1;
-  gap: 4.1rem;
+  justify-content: space-around;
 `;
 
 export const NavigationStoreIcon = styled.div<{ active: boolean }>`
