@@ -1,10 +1,11 @@
 import { PATH } from 'common/utils/constants';
-import { SearchBar } from 'components/store/SearchBar';
+
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
 import { NotificationPage } from 'pages/NotificationPage';
 import { RootPage } from 'pages/RootPage';
+import { SearchPage } from 'pages/SearchPage';
 import { SignUpPage } from 'pages/SignUpPage';
 import { StoreDetailPage } from 'pages/StoreDetailPage';
 import { StoreListPage } from 'pages/StoreListPage';
@@ -41,7 +42,7 @@ export const router = createBrowserRouter([
   },
   {
     path: `/${PATH.search}`,
-    element: <SearchBar />,
+    element: <SearchPage />,
   },
   {
     path: `/${PATH.notification}`,
