@@ -1,6 +1,10 @@
 import { SearchBar } from 'components/store/SearchBar';
-import React from 'react';
+import { SeachBarWrapper } from 'pages/SearchPage/SearchPage.styled';
 
 export const SearchPage = () => {
-  return <SearchBar />;
+  return (
+    <SeachBarWrapper>
+      <SearchBar />
+    </SeachBarWrapper>
+  );
 };
