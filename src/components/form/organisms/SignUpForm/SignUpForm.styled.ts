@@ -8,7 +8,7 @@ export const Form = styled.form`
 export const IdCheckButton = styled.button`
   width: 9.1rem;
   height: 4rem;
-  color: ${(porps): string => porps.theme.palette.primary.main};
+  color: ${(porps): string => porps.theme.palette.primary.orange};
   background-color: white;
   border: 1px solid #ff8d4e;
   border-radius: 0.5rem;

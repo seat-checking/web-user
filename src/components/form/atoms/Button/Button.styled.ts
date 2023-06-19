@@ -15,6 +15,7 @@ export const ButtonBox = styled.button`
   font-size: 1.6rem;
   margin-bottom: 1.6rem;
   color: ${(props): string => props.theme.palette.grey[400]};
+  background-color: ${(props): string => props.theme.palette.grey[100]};
 
   &:disabled {
     pointer-events: none;
