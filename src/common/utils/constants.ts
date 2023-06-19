@@ -5,4 +5,6 @@ export const PATH = {
   myPage: 'mypage',
   storeList: 'storelist',
   storeDetail: 'storedetail',
+  search: 'search',
+  notification: 'notification',
 } as const;

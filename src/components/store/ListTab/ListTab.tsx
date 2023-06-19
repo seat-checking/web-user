@@ -7,7 +7,7 @@ import { FoodList } from 'components/store/storeList/FoodList';
 import { MeetingList } from 'components/store/storeList/MeetingList';
 import { useState } from 'react';
 
-import { Wrapper } from './ListTab.styled';
+import { StoreListTitle, Wrapper } from './ListTab.styled';
 import type { VFC } from 'common/utils/types';
 
 export const ListTab: VFC = () => {
@@ -18,6 +18,7 @@ export const ListTab: VFC = () => {
   };
   return (
     <Wrapper>
+      <StoreListTitle>가게목록</StoreListTitle>
       <Tabs value={value} onChange={handleValueChange}>
         <Tab label='전체' />
         <Tab label='음식점' />
@@ -33,7 +34,7 @@ export const ListTab: VFC = () => {
       <TabPanel value={value} index={2}>
         <CafeList />
       </TabPanel>
-      <TabPanel value={value} index={4}>
+      <TabPanel value={value} index={3}>
         <MeetingList />
       </TabPanel>
     </Wrapper>

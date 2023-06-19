@@ -1,77 +1,68 @@
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { getStoreList } from 'api/store/storeApi';
+import { Spinner } from 'components/layout/Spinner';
 import { StoreItem } from 'components/store/StoreItem';
+import { ErrorMessage } from 'components/store/storeList/AllList/AllList.styled';
+import InfiniteScroll from 'react-infinite-scroller';
+import type { ErrorResponse } from 'api/store/common';
+import type { StoreUser, StoreListResponse } from 'api/store/storeApi';
+
 import type { VFC } from 'common/utils/types';
 
-interface ItemsProps {
-  id: number;
-  image: string;
-  storeName: string;
-  introduction: string;
-}
-
 export const AllList: VFC = () => {
-  /*
-  const [stores, setStores] = useState<ItemsProps[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<null | string>(null);
+  const getStoreData = async ({ pageParam = 1 }) => {
+    const resData = await getStoreList({
+      category: 'NONE',
+      page: pageParam,
+      size: 15,
+    });
+    return resData.result;
+  };
 
-  useEffect(() => {
-    const getStoreData = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get('/api/');
-        setStores(response.data);
-      } catch (e) {
-        // 문제 발생시 처리 로직
-        setError('서버에서 데이터를 받아오지 못했습니다');
-      }
-      setLoading(false);
-    };
-    getStoreData();
-  }, []);
+  const { isLoading, isError, error, data, fetchNextPage, hasNextPage } =
+    useInfiniteQuery<StoreListResponse, ErrorResponse>({
+      queryKey: ['AllList'],
+      queryFn: getStoreData,
+      // undefined (or false) 리턴 -> 다음 데이터가 없다!(hasNextPage=false),
+      // 다른 값을 리턴 -> 다음 데이터가 있고 이 리턴값을 pageParam으로 써!(hasNextPage=true)
+      getNextPageParam: (lastPage, pages) => {
+        if (lastPage.totalPage > lastPage.curPage) {
+          return lastPage.curPage + 1;
+        }
+        return undefined;
+      },
+    });
 
-  if (loading) {
-    return; // 로딩시 로직
+  const handleLoadMore = (page: number): void => {
+    fetchNextPage();
+  };
+
+  if (isLoading) {
+    return <Spinner />;
   }
-  if (error) {
-    return; // 에러 발생 로직
+
+  if (isError) {
+    return <ErrorMessage>요청한 페이지를 찾을 수 없습니다.</ErrorMessage>;
   }
 
-  if (stores === null) {
-    return null;
+  // pages 안에 있는 모든 store 데이터 하나의 배열로 만들기
+  // data 안에는 pages와 pageParams 두개가 들어있다
+  let stores: StoreUser[] = [];
+  for (let i = 0; i < data.pages.length; i++) {
+    const page = data.pages[i];
+    stores = [...stores, ...page.storeList]; // 배열
   }
-  */
-
-  const items: ItemsProps[] = [
-    {
-      id: 1,
-      image: 'assets/images/storeimage.png',
-      storeName: '가게이름',
-      introduction: '한줄소개',
-    },
-    {
-      id: 2,
-      image: 'assets/images/storeimage.svg',
-      storeName: '가게이름',
-      introduction: '한줄소개',
-    },
-    {
-      id: 3,
-      image: 'assets/images/storeimage.svg',
-      storeName: '가게이름',
-      introduction: '한줄소개',
-    },
-  ];
 
   return (
-    <>
-      {items.map((store) => (
+    <InfiniteScroll loadMore={handleLoadMore} hasMore={hasNextPage}>
+      {stores.map((store) => (
         <StoreItem
           key={store.id}
-          src={store.image}
-          storeName={store.storeName}
+          src={store.mainImage}
+          storeName={store.name}
           introduction={store.introduction}
         />
       ))}
-    </>
+    </InfiniteScroll>
   );
 };
