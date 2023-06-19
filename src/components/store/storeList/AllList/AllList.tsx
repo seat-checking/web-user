@@ -2,6 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { getStoreList } from 'api/store/storeApi';
 import { Spinner } from 'components/layout/Spinner';
 import { StoreItem } from 'components/store/StoreItem';
+import { ErrorMessage } from 'components/store/storeList/AllList/AllList.styled';
 import InfiniteScroll from 'react-infinite-scroller';
 import type { ErrorResponse } from 'api/store/common';
 import type { StoreUser, StoreListResponse } from 'api/store/storeApi';
@@ -41,7 +42,7 @@ export const AllList: VFC = () => {
   }
 
   if (isError) {
-    return <div>Error: {error.message}</div>;
+    return <ErrorMessage>요청한 페이지를 찾을 수 없습니다.</ErrorMessage>;
   }
 
   // pages 안에 있는 모든 store 데이터 하나의 배열로 만들기

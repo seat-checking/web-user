@@ -9,6 +9,7 @@ import {
   SearchInputWrapper,
 } from 'components/store/SearchBar/SearchBar.styled';
 import { StoreItem } from 'components/store/StoreItem';
+import { ErrorMessage } from 'components/store/storeList/AllList/AllList.styled';
 import { BackButtonIcon } from 'pages/LoginPage/LoginPage.styled';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -71,7 +72,7 @@ export const SearchBar: VFC = () => {
           )}
         </SearchInputWrapper>
       </SearchBarWrapper>
-      {error && <div>Error: {error}</div>}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
       {loading ? (
         <Spinner />
       ) : (
