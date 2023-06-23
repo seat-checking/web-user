@@ -1,5 +1,4 @@
 import { PATH } from 'common/utils/constants';
-
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
