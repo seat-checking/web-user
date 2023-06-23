@@ -1,11 +1,10 @@
-import { validateEmail } from 'api/user';
+import { validateEmail } from 'api/user/user';
+import { useFormState } from 'components/context/FormProvider';
 import { Button } from 'components/form/atoms/Button';
 import { InputCheckBox } from 'components/form/atoms/InputCheckBox';
-
 import Inputs from 'components/form/molecules/Inputs/Inputs';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-
 import { useNavigate } from 'react-router-dom';
 import {
   ButtonWrapper,
@@ -31,6 +30,7 @@ interface SignUpFormInputs {
 }
 
 export const SignUpForm: VFC = () => {
+  const { setFormState } = useFormState();
   const {
     register,
     handleSubmit,
@@ -53,11 +53,12 @@ export const SignUpForm: VFC = () => {
     // data에서 confirmPassword 제거
     delete data.confirmPassword;
 
-    // 사용자가 입력한 데이터를 localStorage에 저장
-    localStorage.setItem('signup_first_data', JSON.stringify(data));
+    // 사용자가 입력한 데이터를 setFormState 저장
+    setFormState(data);
+    console.log(data);
 
     // 회원가입 두번째 페이지로 routing을 한다
-    navigate('/signup/second');
+    navigate('/memberInfo');
   };
 
   const handleEmailBlur = async (e: React.FocusEvent<HTMLInputElement>) => {

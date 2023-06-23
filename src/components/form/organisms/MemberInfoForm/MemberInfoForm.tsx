@@ -1,4 +1,5 @@
-import { signUp, validateNickname } from 'api/user';
+import { signUp, validateNickname } from 'api/user/user';
+import { useFormState } from 'components/context/FormProvider';
 import { Button } from 'components/form/atoms/Button';
 import { InputLabel } from 'components/form/atoms/InputLabel';
 import { InputRadio } from 'components/form/atoms/InputRadio';
@@ -18,16 +19,15 @@ import {
   InputRadioLabel,
   InputRadiowrapper,
 } from './MemberInfoForm.styled';
-import type { SignUpParams } from 'api/user';
+import type { SignUpParams } from 'api/user/user';
 import type { VFC } from 'common/utils/types';
-import type React from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 
 interface MemberInfoFormprops {
   nickname: string;
-  age: string;
+  age: number;
   UniqueButtonClicked: string;
-  sex: boolean;
+  sex: string;
 }
 
 export const MemberInfoForm: VFC = () => {
@@ -42,21 +42,25 @@ export const MemberInfoForm: VFC = () => {
   } = useForm<MemberInfoFormprops>({ mode: 'onTouched' });
 
   const nicknameValue: string = watch('nickname', '');
-  const ageValue: string = watch('age', '');
+  const ageValue: number = watch('age', 0);
 
   const navigate = useNavigate();
 
+  const { formState } = useFormState();
+
   const onSubmit: SubmitHandler<MemberInfoFormprops> = async (data) => {
     // localStorage에서 첫번째 페이지 데이터 가져오기
-    const firstData = localStorage.getItem('signup_first_data');
+    const firstData = formState;
 
     if (firstData !== null) {
       const requestData: SignUpParams = {
         nickname: data.nickname,
         age: data.age,
         sex: data.sex,
-        ...JSON.parse(firstData),
+        ...firstData,
       };
+
+      console.log(requestData);
 
       try {
         await signUp(requestData);
@@ -84,9 +88,6 @@ export const MemberInfoForm: VFC = () => {
   const isErrorsEmpty = Object.keys(errors).length === 0;
 
   const isFormValid = nicknameValue && isErrorsEmpty;
-
-  console.log(isValid);
-  console.log(errors);
 
   const nicknameError =
     errors.nickname?.message || errors.UniqueButtonClicked?.message;
@@ -154,8 +155,8 @@ export const MemberInfoForm: VFC = () => {
               message: '3자리 미만의 숫자를 입력해주세요',
             },
           })}
-          valueLength={ageValue.length}
-          maximum={12}
+          valueLength={ageValue.toString().length}
+          maximum={2}
         >
           나이
         </Inputs>
