@@ -1,7 +1,7 @@
-import { login } from 'api/user';
+import { login } from 'api/user/user';
 import { Button } from 'components/form/atoms/Button';
 import { Inputs } from 'components/form/molecules/Inputs';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useNavigate } from 'react-router-dom';
@@ -60,9 +60,6 @@ export const LoginForm: VFC = () => {
   const inputValue = watch('email') && watch('password');
 
   const isFormValid = inputValue;
-
-  console.log(isValid);
-  console.log(errors);
 
   return (
     <LoginFormWrapper>
