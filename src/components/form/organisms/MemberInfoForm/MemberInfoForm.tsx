@@ -42,15 +42,23 @@ export const MemberInfoForm: VFC = () => {
   } = useForm<MemberInfoFormprops>({ mode: 'onTouched' });
 
   const nicknameValue: string = watch('nickname', '');
-  const ageValue: number = watch('age', 0);
 
-  const navigate = useNavigate();
+  const ageValue: number = watch('age', 0);
 
   const { formState } = useFormState();
 
+  const navigate = useNavigate();
+
+  const firstData = formState;
+
+  useEffect(() => {
+    if (!firstData) {
+      navigate('/signup');
+    }
+  }, [navigate]);
+
   const onSubmit: SubmitHandler<MemberInfoFormprops> = async (data) => {
-    // localStorage에서 첫번째 페이지 데이터 가져오기
-    const firstData = formState;
+    // formState 첫번째 페이지 데이터 가져오기
 
     if (firstData !== null) {
       const requestData: SignUpParams = {
