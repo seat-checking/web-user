@@ -55,7 +55,6 @@ export const SignUpForm: VFC = () => {
 
     // 사용자가 입력한 데이터를 setFormState 저장
     setFormState(data);
-    console.log(data);
 
     // 회원가입 두번째 페이지로 routing을 한다
     navigate('/memberInfo');
@@ -80,8 +79,6 @@ export const SignUpForm: VFC = () => {
     }
   };
 
-  console.log(errors);
-
   const handleResetClick = () => {
     resetField('email'); // 인풋값 초기화
   };
@@ -97,7 +94,7 @@ export const SignUpForm: VFC = () => {
   const emailError = errors.email?.message || errors.LoginIdUnique?.message;
 
   const emailRegister = register('email', {
-    required: '아이디는 필수로 입력해주세요',
+    required: '이메일은 필수로 입력해주세요',
     pattern: {
       value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       message: '이메일 포맷에 맞게 입력해야 합니다',
@@ -200,8 +197,8 @@ export const SignUpForm: VFC = () => {
                 /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?`~]).{8,}$/,
               message: '* 4~12자의 영문(대소문자 포함), 숫자, 특수기호.',
             },
-            validate: (value, formValue) =>
-              value === formValue.password || '비밀번호가 일치하지 않습니다.',
+            validate: (value) =>
+              value === passwordValue || '비밀번호가 일치하지 않습니다.',
           })}
           valueLength={confirmPasswordValue.length}
           maximum={50}
@@ -209,8 +206,10 @@ export const SignUpForm: VFC = () => {
             touchedFields.confirmPassword && errors.confirmPassword?.message
           }
           success={
-            touchedFields.confirmPassword && !errors.confirmPassword
-              ? '비빌번호가 일치합니다.'
+            touchedFields.confirmPassword &&
+            !errors.confirmPassword &&
+            passwordValue === confirmPasswordValue
+              ? '비밀번호가 일치합니다.'
               : undefined
           }
         >
