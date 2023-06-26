@@ -113,7 +113,8 @@ export const MemberInfoForm: VFC = () => {
             required: '닉네임은 필수로 입력해주세요',
             pattern: {
               value: /^[A-Za-z0-9ㄱ-ㅎ가-힣]{2,10}$/,
-              message: '4~12자의 한글,영문(대소문자 포함)이나 숫자.',
+              message:
+                '2~10자의 한글, 영문(대소문자 포함), 숫자만 입력가능합니다.',
             },
           })}
           valueLength={nicknameValue.length}
@@ -160,7 +161,7 @@ export const MemberInfoForm: VFC = () => {
           {...register('age', {
             pattern: {
               value: /^(?:[1-9]|[1-9][0-9])$/,
-              message: '3자리 미만의 숫자를 입력해주세요',
+              message: '숫자만 입력해주세요.',
             },
           })}
           valueLength={ageValue.toString().length}
