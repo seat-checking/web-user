@@ -2,6 +2,7 @@ import { signUp, validateNickname } from 'api/user/user';
 import { useFormState } from 'components/context/FormProvider';
 import { Button } from 'components/form/atoms/Button';
 import { InputLabel } from 'components/form/atoms/InputLabel';
+
 import { InputRadio } from 'components/form/atoms/InputRadio';
 import Inputs from 'components/form/molecules/Inputs/Inputs';
 import {
@@ -172,21 +173,18 @@ export const MemberInfoForm: VFC = () => {
         <InputRadiowrapper>
           <InputLabel>성별</InputLabel>
           <InputRadioGroup>
-            <InputRadioLabel>
-              <InputRadio
-                checked
-                value='여성'
-                {...register('sex', { required: '성별을 선택해주세요' })}
-              />
-              여성
-            </InputRadioLabel>
-            <InputRadioLabel>
-              <InputRadio
-                value='남성'
-                {...register('sex', { required: '성별을 선택해주세요' })}
-              />
-              남성
-            </InputRadioLabel>
+            <InputRadio
+              id='1'
+              value='여성'
+              label='여성'
+              {...register('sex', { required: '성별을 선택해주세요' })}
+            />
+            <InputRadio
+              id='2'
+              value='남성'
+              label='남성'
+              {...register('sex', { required: '성별을 선택해주세요' })}
+            />
           </InputRadioGroup>
         </InputRadiowrapper>
         <InfoText>입력한 정보를 바탕으로 가게를 추천해 드려요.</InfoText>
