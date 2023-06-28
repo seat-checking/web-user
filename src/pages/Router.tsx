@@ -1,5 +1,4 @@
 import { PATH } from 'common/utils/constants';
-
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
@@ -33,7 +32,7 @@ export const router = createBrowserRouter([
     element: <StoreListPage />,
   },
   {
-    path: `/${PATH.storeDetail}`,
+    path: `/${PATH.storeDetail}/:storeId`,
     element: <StoreDetailPage />,
   },
   {

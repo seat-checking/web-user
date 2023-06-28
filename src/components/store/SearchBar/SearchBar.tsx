@@ -54,6 +54,10 @@ export const SearchBar: VFC = () => {
     }
   };
 
+  if (loading) {
+    return <Spinner />;
+  }
+
   return (
     <SearchBarContainer>
       <SearchBarWrapper>

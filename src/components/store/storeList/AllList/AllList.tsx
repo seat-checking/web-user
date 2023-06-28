@@ -4,6 +4,7 @@ import { Spinner } from 'components/layout/Spinner';
 import { StoreItem } from 'components/store/StoreItem';
 import { ErrorMessage } from 'components/store/storeList/AllList/AllList.styled';
 import InfiniteScroll from 'react-infinite-scroller';
+import { Link } from 'react-router-dom';
 import type { ErrorResponse } from 'api/store/common';
 import type { StoreUser, StoreListResponse } from 'api/store/storeApi';
 
@@ -56,12 +57,14 @@ export const AllList: VFC = () => {
   return (
     <InfiniteScroll loadMore={handleLoadMore} hasMore={hasNextPage}>
       {stores.map((store) => (
-        <StoreItem
-          key={store.id}
-          src={store.mainImage}
-          storeName={store.name}
-          introduction={store.introduction}
-        />
+        <Link key={store.id} to={`/storeDetail/${store.id}`}>
+          <StoreItem
+            key={store.id}
+            src={store.mainImage}
+            storeName={store.name}
+            introduction={store.introduction}
+          />
+        </Link>
       ))}
     </InfiniteScroll>
   );
