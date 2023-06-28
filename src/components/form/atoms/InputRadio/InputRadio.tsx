@@ -11,6 +11,7 @@ interface RadioProps extends React.HtmlHTMLAttributes<HTMLInputElement> {
   name: string; // radio group 내에서 동일한 이름 사용해야함
   value: string;
   label: string;
+  checked?: boolean;
 }
 
 /**
@@ -19,12 +20,13 @@ interface RadioProps extends React.HtmlHTMLAttributes<HTMLInputElement> {
 // eslint-disable-next-line react/display-name
 export const InputRadio = forwardRef(
   (
-    { id, name, value, label, ...rest }: RadioProps,
+    { id, name, value, label, checked = true, ...rest }: RadioProps,
     ref: Ref<HTMLInputElement>,
   ) => {
     return (
       <Label htmlFor={id}>
         <RadioInput
+          checked={checked}
           type='radio'
           id={id}
           name={name}
