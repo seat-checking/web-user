@@ -17,7 +17,6 @@ import {
   ButtonWrapper,
   InfoText,
   InputRadioGroup,
-  InputRadioLabel,
   InputRadiowrapper,
 } from './MemberInfoForm.styled';
 import type { SignUpParams } from 'api/user/user';
@@ -174,6 +173,7 @@ export const MemberInfoForm: VFC = () => {
           <InputLabel>성별</InputLabel>
           <InputRadioGroup>
             <InputRadio
+              checked
               id='1'
               value='여성'
               label='여성'
