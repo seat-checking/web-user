@@ -31,6 +31,7 @@ export const ReservationItemName = styled.div`
   font-weight: 700;
   display: flex;
   flex-direction: column;
+  color: ${(props): string => props.theme.palette.black.main};
 `;
 
 export const ReservationIteminfo = styled.div`
