@@ -6,7 +6,7 @@ export const StoreItemDiv = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 0.1rem solid ${(props): string => props.theme.palette.grey[50]};
 `;
 
 export const StoreItemImgDiv = styled.div`
@@ -25,8 +25,10 @@ export const StoreItemName = styled.p`
   font-weight: 700;
   font-size: 1.6rem;
   margin-bottom: 0.5rem;
+  color: ${(props): string => props.theme.palette.black.main};
 `;
 export const StoreItemIntroduction = styled.span`
   font-weight: 0.5rem;
   font-size: 1.4rem;
+  color: ${(props): string => props.theme.palette.black.main};
 `;
