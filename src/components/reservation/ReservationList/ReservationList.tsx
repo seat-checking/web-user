@@ -1,4 +1,6 @@
+import { PATH } from 'common/utils/constants';
 import { ReservationItem } from 'components/reservation/ReservationItem';
+import { Link } from 'react-router-dom';
 
 export const ReservationList = () => {
   const Reservation = {
@@ -10,13 +12,15 @@ export const ReservationList = () => {
     ReservationTime: '15:00-18:00',
   };
   return (
-    <ReservationItem
-      src={Reservation.src}
-      ReservationName={Reservation.ReservationName}
-      seatNumber={Reservation.seatNumber}
-      ReservationInfo={Reservation.ReservationInfo}
-      ReservationDate={Reservation.ReservationDate}
-      ReservationTime={Reservation.ReservationTime}
-    />
+    <Link to={`/${PATH.ReservationDetail}`}>
+      <ReservationItem
+        src={Reservation.src}
+        ReservationName={Reservation.ReservationName}
+        seatNumber={Reservation.seatNumber}
+        ReservationInfo={Reservation.ReservationInfo}
+        ReservationDate={Reservation.ReservationDate}
+        ReservationTime={Reservation.ReservationTime}
+      />
+    </Link>
   );
 };
