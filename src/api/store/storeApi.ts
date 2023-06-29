@@ -3,9 +3,10 @@ import axios from 'axios';
 import type { SuccessOkResponse } from 'api/store/common';
 
 interface StoreListParams {
-  category: 'NONE' | 'RESTAURANT' | 'CAFE' | 'SPACE';
+  category?: '음식점' | '카페' | '모임';
   page?: number;
   size?: number;
+  sort?: string;
 }
 interface StoreSearchParams {
   name: string;
@@ -24,7 +25,7 @@ export interface StoreListResponse {
   curPage: number;
   totalCount: number;
   totalPage: number;
-  storeList: StoreUser[];
+  storeResponseList: StoreUser[];
 }
 
 interface StoreDetaillParams {
@@ -81,8 +82,8 @@ export const getStoreList = async (
 
 export const getSeachList = async (
   params: StoreSearchParams,
-): Promise<SuccessOkResponse<StoreListResponse>> => {
-  const url = getApiUrl('/users/stores/list/name');
+): Promise<SuccessOkResponse<StoreUser[]>> => {
+  const url = getApiUrl('/users/stores/search/name');
   const response = await axios.get(url, {
     params,
   });

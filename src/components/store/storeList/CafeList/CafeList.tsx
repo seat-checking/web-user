@@ -13,7 +13,7 @@ import type { VFC } from 'common/utils/types';
 export const CafeList: VFC = () => {
   const getStoreData = async ({ pageParam = 1 }) => {
     const resData = await getStoreList({
-      category: 'CAFE',
+      category: '카페',
       page: pageParam,
       size: 15,
     });
@@ -47,7 +47,7 @@ export const CafeList: VFC = () => {
   let stores: StoreUser[] = [];
   for (let i = 0; i < data.pages.length; i++) {
     const page = data.pages[i];
-    stores = [...stores, ...page.storeList];
+    stores = [...stores, ...page.storeResponseList];
   }
 
   return (
