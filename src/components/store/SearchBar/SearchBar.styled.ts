@@ -48,3 +48,12 @@ export const ResetbtnWrapper = styled.div`
   transform: translateY(-50%);
   padding: 1.25rem;
 `;
+
+export const ResponseMessage = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 2rem;
+`;
