@@ -3,7 +3,6 @@ import { InputResetIcon } from 'components/form/atoms/InputResetIcon';
 import { Spinner } from 'components/layout/Spinner';
 import {
   ResetbtnWrapper,
-  ResponseMessage,
   SearchBarContainer,
   SearchBarWrapper,
   SearchInput,
@@ -24,16 +23,13 @@ export const SearchBar: VFC = () => {
   const [stores, setStores] = useState<StoreUser[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<null | string>(null);
-  const [searched, setSearched] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
-    setSearched(false);
   };
 
   const handleValueResetClick = () => {
     setValue('');
-    setSearched(false);
   };
 
   const showResetIcon = value.length > 0; // 인풋값이 있는 경우에만 리셋 아이콘을 보여줌
@@ -51,7 +47,6 @@ export const SearchBar: VFC = () => {
         const resData = await getSeachList({ name: value });
         setStores(resData.result);
         setLoading(false);
-        setSearched(true);
       } catch (err) {
         setError('서버에서 데이터를 받아오지 못했습니다');
         setLoading(false);
@@ -85,20 +80,15 @@ export const SearchBar: VFC = () => {
       {loading ? (
         <Spinner />
       ) : (
-        searched &&
-        (stores.length > 0 ? (
-          stores.map((store) => (
-            <Link key={store.id} to={`/storeDetail/${store.id}`}>
-              <StoreItem
-                key={store.id}
-                src={store.mainImage}
-                storeName={store.name}
-                introduction={store.introduction}
-              />
-            </Link>
-          ))
-        ) : (
-          <ResponseMessage>검색 결과가 없습니다</ResponseMessage>
+        stores.map((store) => (
+          <Link key={store.id} to={`/storeDetail/${store.id}`}>
+            <StoreItem
+              key={store.id}
+              src={store.mainImage}
+              storeName={store.name}
+              introduction={store.introduction}
+            />
+          </Link>
         ))
       )}
     </SearchBarContainer>
