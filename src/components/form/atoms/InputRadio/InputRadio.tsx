@@ -20,7 +20,7 @@ interface RadioProps extends React.HtmlHTMLAttributes<HTMLInputElement> {
 // eslint-disable-next-line react/display-name
 export const InputRadio = forwardRef(
   (
-    { id, name, value, label, checked = true, ...rest }: RadioProps,
+    { id, name, value, label, checked, ...rest }: RadioProps,
     ref: Ref<HTMLInputElement>,
   ) => {
     return (
