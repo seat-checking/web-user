@@ -61,7 +61,6 @@ export const SignUpForm: VFC = () => {
   };
 
   const handleEmailBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     emailRegister.onBlur(e);
 
     // API 요청
