@@ -45,11 +45,11 @@ export const router = createBrowserRouter([
     element: <SearchPage />,
   },
   {
-    path: `/${PATH.Reservation}`,
+    path: `/${PATH.reservation}`,
     element: <ReservationPage />,
   },
   {
-    path: `/${PATH.ReservationDetail}`,
+    path: `/${PATH.reservationDetail}`,
     element: <ReservationDetailPage />,
   },
 ]);
