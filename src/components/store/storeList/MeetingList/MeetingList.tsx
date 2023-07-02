@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { getStoreList } from 'api/store/storeApi';
 import { Spinner } from 'components/layout/Spinner';
 import { StoreItem } from 'components/store/StoreItem';

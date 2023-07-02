@@ -1,3 +1,4 @@
+import BellIcon from 'assets/icons/bell.svg';
 import checkCircleIcon from 'assets/icons/checkCircleIcon.svg';
 import externalLinkIcon from 'assets/icons/externalLinkIcon.svg';
 import infoIcon from 'assets/icons/infoIcon.svg';
@@ -17,6 +18,8 @@ import {
   MyPageTitle,
   MyPageWrapper,
   MypageHeader,
+  NotificationBox,
+  NotificationBoxIcon,
   SeatPlaceInfo,
   UserInfoIcon,
   UserInfoImg,
@@ -38,6 +41,10 @@ export const MyPage: VFC = () => {
       <UserInfoWrapper>
         <UserInfoImg src={UserImg} />
         <UserinfoNickname>닉네임</UserinfoNickname>
+        <NotificationBox>
+          <NotificationBoxIcon src={BellIcon} />
+          알림함
+        </NotificationBox>
       </UserInfoWrapper>
       <UserSeatInfoWrapper>
         <UserSeatinfoTitle>현재 이용중인 좌석</UserSeatinfoTitle>
