@@ -1,4 +1,5 @@
 import { signUp, validateNickname } from 'api/user/user';
+import { PATH } from 'common/utils/constants';
 import { useFormState } from 'components/context/FormProvider';
 import { Button } from 'components/form/atoms/Button';
 import { InputLabel } from 'components/form/atoms/InputLabel';
@@ -53,7 +54,7 @@ export const MemberInfoForm: VFC = () => {
 
   useEffect(() => {
     if (!firstData) {
-      navigate('/signup');
+      navigate(`/${PATH.signUp}`);
     }
   }, [navigate]);
 
@@ -73,7 +74,7 @@ export const MemberInfoForm: VFC = () => {
       try {
         await signUp(requestData);
         alert('회원가입이 완료되었습니다!');
-        navigate('/login');
+        navigate(`/${PATH.login}`);
       } catch (e) {
         // 서버 응답이 400번대가 온 경우
         alert('회원가입에 실패했습니다. 다시 시도해주세요');
@@ -92,6 +93,24 @@ export const MemberInfoForm: VFC = () => {
       message: '중복 확인 버튼을 눌러야합니다',
     });
   }, [setError]);
+
+  const handleUniqueButtonClick = async () => {
+    // TODO: API 요청
+    const responseData = await validateNickname({
+      nickname: nicknameValue,
+    });
+    const isUnique = responseData.result.isValid;
+
+    if (isUnique) {
+      // 닉네임이 중복되지 않은경우
+      clearErrors('UniqueButtonClicked');
+    } else {
+      // 닉네임이 중복된경우
+      setError('UniqueButtonClicked', {
+        message: '이미 사용중인 닉네임입니다',
+      });
+    }
+  };
 
   const isErrorsEmpty = Object.keys(errors).length === 0;
 
@@ -126,26 +145,7 @@ export const MemberInfoForm: VFC = () => {
               : undefined
           }
           confirmButton={
-            <IdCheckButton
-              type='button'
-              onClick={async () => {
-                // TODO: API 요청
-                const responseData = await validateNickname({
-                  nickname: nicknameValue,
-                });
-                const isUnique = responseData.result.isValid;
-
-                if (isUnique) {
-                  // 닉네임이 중복되지 않은경우
-                  clearErrors('UniqueButtonClicked');
-                } else {
-                  // 닉네임이 중복된경우
-                  setError('UniqueButtonClicked', {
-                    message: '이미 사용중인 닉네임입니다',
-                  });
-                }
-              }}
-            >
+            <IdCheckButton type='button' onClick={handleUniqueButtonClick}>
               중복 확인
             </IdCheckButton>
           }
