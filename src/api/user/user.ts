@@ -40,30 +40,27 @@ interface ValidateEmailResult {
 export const validateNickname = async (
   params: ValidateNicknameParams,
 ): Promise<SuccessOkResponse<ValidateNicknameResult>> => {
-  const response = await axios.post(
-    `${HOST}/v1/users/validate/nickname`,
-    params,
-  );
+  const response = await axios.post(`${HOST}/users/validate/nickname`, params);
   return response.data;
 };
 
 export const validateEmail = async (
   params: ValidateEmailParams,
 ): Promise<SuccessOkResponse<ValidateEmailResult>> => {
-  const response = await axios.post(`${HOST}/v1/users/validate/email`, params);
+  const response = await axios.post(`${HOST}/users/validate/email`, params);
   return response.data;
 };
 
 export const signUp = async (
   params: SignUpParams,
 ): Promise<SuccessOkWithoutResultResponse> => {
-  const response = await axios.post(`${HOST}/v1/users/sign-up`, params); // TODO: 요청 데이터를 담아야 함
+  const response = await axios.post(`${HOST}/users/sign-up`, params); // TODO: 요청 데이터를 담아야 함
   return response.data;
 };
 
 export const login = async (
   params: LoginParams,
 ): Promise<SuccessOkWithoutResultResponse> => {
-  const response = await axios.post(`${HOST}/v1/users/sign-in`, params);
+  const response = await axios.post(`${HOST}/users/sign-in`, params);
   return response.data;
 };
