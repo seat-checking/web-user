@@ -1,7 +1,7 @@
 import { login } from 'api/user/user';
 import { Button } from 'components/form/atoms/Button';
 import { Inputs } from 'components/form/molecules/Inputs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useNavigate } from 'react-router-dom';
@@ -28,27 +28,39 @@ export const LoginForm: VFC = () => {
     watch,
     resetField,
     formState: { errors, isValid },
-  } = useForm<LoginFormProps>({ mode: 'onChange' });
+  } = useForm<LoginFormProps>({ mode: 'onSubmit' });
 
   const [errorMsg, setErrorMsg] = useState('');
 
-  const navigtate = useNavigate();
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<LoginFormProps> = async (data) => {
     try {
-      const requestData = await login(data);
-
-      if (requestData.isSuccess) {
-        alert('welcome SeatSense');
-        navigtate('./storeList');
+      if (errors.email || errors.password) {
+        setErrorMsg('아이디 또는 비밀번호를 다시 입력해주세요.');
+      } else {
+        const requestData = await login(data);
+        if (requestData.isSuccess) {
+          alert('Welcome to SeatSense');
+          navigate('./storeList');
+        }
       }
     } catch (error) {
       setErrorMsg('아이디 또는 비밀번호를 다시 입력해주세요.');
     }
   };
 
+  useEffect(() => {
+    if (errors.email || errors.password) {
+      setErrorMsg('아이디 또는 비밀번호를 다시 입력해주세요.');
+    } else {
+      setErrorMsg('');
+    }
+  }, [errors]);
+
   const emailValue: string = watch('email', '');
   const passwordValue: string = watch('password', '');
+  const inputValue = watch('email') && watch('password');
 
   const handleEmailResetClick = () => {
     resetField('email'); // 인풋값 초기화
@@ -57,9 +69,13 @@ export const LoginForm: VFC = () => {
     resetField('password'); // 인풋값 초기화
   };
 
-  const inputValue = watch('email') && watch('password');
-
   const isFormValid = inputValue;
+
+  const getErrorMessage = () => {
+    if (errors.email) return errors.email.message;
+    if (errors.password) return errors.password.message;
+    return errorMsg;
+  };
 
   return (
     <LoginFormWrapper>
@@ -73,7 +89,7 @@ export const LoginForm: VFC = () => {
             required: '이메일은 필수로 입력해주세요.',
             pattern: {
               value: /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/,
-              message: '이메일 형식을 입력해주세요.',
+              message: '아이디 또는 비밀번호를 다시 입력해주세요.',
             },
           })}
           valueLength={emailValue.length}
@@ -92,7 +108,7 @@ export const LoginForm: VFC = () => {
             pattern: {
               value:
                 /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?`~]).{8,}$/,
-              message: '',
+              message: '아이디 또는 비밀번호를 다시 입력해주세요.',
             },
           })}
           valueLength={passwordValue.length}
@@ -101,10 +117,10 @@ export const LoginForm: VFC = () => {
           비밀번호
         </Inputs>
         <ErrorMessageWrapper>
-          {errorMsg && (
+          {(errors.email || errors.password || errorMsg) && (
             <>
               <ErrorIcon />
-              <ErrorMessage>{errorMsg}</ErrorMessage>
+              <ErrorMessage>{getErrorMessage()}</ErrorMessage>
             </>
           )}
         </ErrorMessageWrapper>
