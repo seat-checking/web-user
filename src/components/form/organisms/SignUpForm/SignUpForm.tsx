@@ -79,15 +79,15 @@ export const SignUpForm: VFC = () => {
     }
   };
 
-  const handleResetClick = () => {
+  const handleResetClick = (): void => {
     resetField('email'); // 인풋값 초기화
   };
 
-  const handleResetPasswordClick = () => {
+  const handleResetPasswordClick = (): void => {
     resetField('password'); // 인풋값 초기화
   };
 
-  const handleResetConfirmPasswordClick = () => {
+  const handleResetConfirmPasswordClick = (): void => {
     resetField('confirmPassword'); // 인풋값 초기화
   };
 
@@ -169,7 +169,7 @@ export const SignUpForm: VFC = () => {
             pattern: {
               value:
                 /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?`~]).{8,}$/,
-              message: '* 4~12자의 영문(대소문자 포함), 숫자, 특수기호.',
+              message: '* 영문, 숫자, 특수기호를 포함한 8자이상.',
             },
           })}
           valueLength={passwordValue.length}
@@ -189,14 +189,9 @@ export const SignUpForm: VFC = () => {
           labelRequired
           type='password'
           placeholder='비밀번호를 한 번 더 입력해 주세요.'
-          helperText='* 4~12자의 영문(대소문자 포함), 숫자, 특수기호.'
+          helperText='* 영문, 숫자, 특수기호를 포함한 8자이상'
           {...register('confirmPassword', {
             required: '비밀번호 확인은 필수로 입력해 주세요',
-            pattern: {
-              value:
-                /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?`~]).{8,}$/,
-              message: '* 4~12자의 영문(대소문자 포함), 숫자, 특수기호.',
-            },
             validate: (value) =>
               value === passwordValue || '비밀번호가 일치하지 않습니다.',
           })}
