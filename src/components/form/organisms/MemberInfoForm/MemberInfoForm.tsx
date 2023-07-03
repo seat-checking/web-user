@@ -87,12 +87,13 @@ export const MemberInfoForm: VFC = () => {
   const handleAgeeResetClick = (): void => {
     resetField('age'); // 인풋값 초기화
   };
-
   useEffect(() => {
     setError('UniqueButtonClicked', {
       message: '중복 확인 버튼을 눌러야합니다',
     });
-  }, [setError]);
+
+    return () => clearErrors('UniqueButtonClicked');
+  }, [nicknameValue, setError, clearErrors]);
 
   const handleUniqueButtonClick = async () => {
     // TODO: API 요청
