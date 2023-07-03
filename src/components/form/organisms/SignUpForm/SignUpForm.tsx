@@ -1,4 +1,5 @@
 import { validateEmail } from 'api/user/user';
+import { PATH } from 'common/utils/constants';
 import { useFormState } from 'components/context/FormProvider';
 import { Button } from 'components/form/atoms/Button';
 import { InputCheckBox } from 'components/form/atoms/InputCheckBox';
@@ -57,7 +58,7 @@ export const SignUpForm: VFC = () => {
     setFormState(data);
 
     // 회원가입 두번째 페이지로 routing을 한다
-    navigate('/memberInfo');
+    navigate(`/${PATH.memberInfo}`);
   };
 
   const handleEmailBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
