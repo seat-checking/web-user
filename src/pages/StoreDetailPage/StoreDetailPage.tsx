@@ -53,7 +53,7 @@ export const StoreDetailPage: VFC = () => {
         <Name>{storeInfo?.name}</Name>
         <Introduction>{storeInfo?.introduction}</Introduction>
       </HeaderWrap>
-      <StoreDetailTab />
+      <StoreDetailTab storeInfo={storeInfo} />
     </Container>
   );
 };
