@@ -75,11 +75,10 @@ export const MemberInfoForm: VFC = () => {
 
       try {
         await signUp(requestData);
-        alert('회원가입이 완료되었습니다!');
         navigate(`/${PATH.login}`);
       } catch (e) {
         // 서버 응답이 400번대가 온 경우
-        alert('회원가입에 실패했습니다. 다시 시도해주세요');
+        console.log(e, '에러발생');
       }
     }
   };
