@@ -1,6 +1,5 @@
 import { Button } from 'components/form/atoms/Button';
 import { Inputs } from 'components/form/molecules/Inputs';
-import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { ButtonWrapper, Form, LoginFormWrapper } from './LoginForm.styled';
