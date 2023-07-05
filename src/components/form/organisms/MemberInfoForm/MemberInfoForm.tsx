@@ -46,6 +46,8 @@ export const MemberInfoForm: VFC = () => {
 
   const ageValue: number = watch('age', 0);
 
+  const sexValue: string = watch('sex', '');
+
   const { formState } = useFormState();
 
   const navigate = useNavigate();
@@ -115,7 +117,7 @@ export const MemberInfoForm: VFC = () => {
 
   const isErrorsEmpty = Object.keys(errors).length === 0;
 
-  const isFormValid = nicknameValue && isErrorsEmpty;
+  const isFormValid = nicknameValue && isErrorsEmpty && sexValue;
 
   const nicknameError =
     errors.nickname?.message || errors.UniqueButtonClicked?.message;
@@ -174,7 +176,6 @@ export const MemberInfoForm: VFC = () => {
           <InputLabel>성별</InputLabel>
           <InputRadioGroup>
             <InputRadio
-              checked
               id='1'
               value='여성'
               label='여성'
