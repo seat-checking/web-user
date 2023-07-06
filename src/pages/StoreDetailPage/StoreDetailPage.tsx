@@ -1,8 +1,11 @@
+import { getStoreDetaill, type StoreDetaillResponse } from 'api/store/storeApi';
 import { ReactComponent as ArrowLeft } from 'assets/svgs/arrowLeft.svg';
 
 import { Carousel } from 'components/store/Carousel';
 import { StoreDetailTab } from 'components/store/StoreDetailTab';
 
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   BackBtn,
   Container,
@@ -17,8 +20,27 @@ import type { VFC } from 'common/utils/types';
  * 가게 상세페이지 컴포넌트
  */
 export const StoreDetailPage: VFC = () => {
+  const { storeId } = useParams<{ storeId: string }>();
+  const [storeInfo, setStoreInfo] = useState<StoreDetaillResponse | null>(null);
+
+  useEffect(() => {
+    const getStoreInfo = async () => {
+      try {
+        if (storeId) {
+          const response = await getStoreDetaill({ id: +storeId });
+          setStoreInfo(response.result);
+        }
+      } catch (error) {
+        console.error('Error fetching store info:', error);
+      }
+    };
+
+    getStoreInfo();
+  }, [storeId]);
+
+  const navigate = useNavigate();
   const handleBack = (): void => {
-    console.log('handle back 라우팅 설정 아직 안돼서 임시 코드 넣음');
+    navigate(-1);
   };
 
   return (
@@ -28,10 +50,10 @@ export const StoreDetailPage: VFC = () => {
         <ArrowLeft />
       </BackBtn>
       <HeaderWrap>
-        <Name>가게 이름</Name>
-        <Introduction>한 줄 소개</Introduction>
+        <Name>{storeInfo?.name}</Name>
+        <Introduction>{storeInfo?.introduction}</Introduction>
       </HeaderWrap>
-      <StoreDetailTab />
+      <StoreDetailTab storeInfo={storeInfo} />
     </Container>
   );
 };

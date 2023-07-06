@@ -3,9 +3,10 @@ import axios from 'axios';
 import type { SuccessOkResponse } from 'api/store/common';
 
 interface StoreListParams {
-  category: 'NONE' | 'RESTAURANT' | 'CAFE' | 'SPACE';
+  category?: '음식점' | '카페' | '모임';
   page?: number;
   size?: number;
+  sort?: string;
 }
 interface StoreSearchParams {
   name: string;
@@ -18,12 +19,42 @@ export interface StoreUser {
   location: string;
   mainImage: string;
 }
+
 export interface StoreListResponse {
   curCount: number;
   curPage: number;
   totalCount: number;
   totalPage: number;
-  storeList: StoreUser[];
+  storeResponseList: StoreUser[];
+}
+
+interface StoreDetaillParams {
+  id: number;
+}
+
+export interface StoreDetaillResponse {
+  id: number;
+  name: string;
+  location: string;
+  introduction: string;
+  category: string;
+  telNum: string;
+  mainImage: string | null;
+  monOpenTime: string;
+  monCloseTime: string;
+  tueOpenTime: string;
+  tueCloseTime: string;
+  wedOpenTime: string;
+  webCloseTime: string | null;
+  thuOpenTime: string;
+  thuCloseTime: string;
+  friOpenTime: string;
+  friCloseTime: string;
+  satOpenTime: string | null;
+  satCloseTime: string | null;
+  sunOpenTime: string | null;
+  sunCloseTime: string | null;
+  dayOff: string[];
 }
 
 export class StoreUserApi {
@@ -51,8 +82,18 @@ export const getStoreList = async (
 
 export const getSeachList = async (
   params: StoreSearchParams,
-): Promise<SuccessOkResponse<StoreListResponse>> => {
-  const url = getApiUrl('/users/stores/list/name');
+): Promise<SuccessOkResponse<StoreUser[]>> => {
+  const url = getApiUrl('/users/stores/search/name');
+  const response = await axios.get(url, {
+    params,
+  });
+  return response.data;
+};
+
+export const getStoreDetaill = async (
+  params: StoreDetaillParams,
+): Promise<SuccessOkResponse<StoreDetaillResponse>> => {
+  const url = getApiUrl(`/users/stores/${params.id}`);
   const response = await axios.get(url, {
     params,
   });

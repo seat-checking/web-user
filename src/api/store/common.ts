@@ -15,7 +15,6 @@ export interface SuccessOkWithoutResultResponse {
   isSuccess: boolean;
   code: string;
   message: string;
-  timestamp: string;
   status: number;
 }
 
@@ -28,5 +27,4 @@ export interface ErrorResponse {
   code: string;
   message: string;
   status: number;
-  timestamp: string;
 }
