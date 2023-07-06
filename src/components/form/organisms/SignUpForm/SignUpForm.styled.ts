@@ -17,7 +17,7 @@ export const IdCheckButton = styled.button`
 `;
 
 export const InputCheckBoxBorderWrapper = styled.div`
-  width: 80%;
+  width: 90%;
   height: 3.2rem;
   margin: 0 auto;
   border-bottom: 1px solid #d8d9e1;

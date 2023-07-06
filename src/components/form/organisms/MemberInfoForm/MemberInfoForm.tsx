@@ -1,31 +1,34 @@
+import { signUp, validateNickname } from 'api/user/user';
+import { PATH } from 'common/utils/constants';
 import { Button } from 'components/form/atoms/Button';
 import { InputLabel } from 'components/form/atoms/InputLabel';
+
 import { InputRadio } from 'components/form/atoms/InputRadio';
 import Inputs from 'components/form/molecules/Inputs/Inputs';
 import {
   Form,
   IdCheckButton,
 } from 'components/form/organisms/SignUpForm/SignUpForm.styled';
+import { useFormState } from 'context/FormProvider';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { useNavigate } from 'react-router-dom';
 import {
   ButtonWrapper,
   InfoText,
   InputRadioGroup,
-  InputRadioLabel,
   InputRadiowrapper,
 } from './MemberInfoForm.styled';
+import type { SignUpParams } from 'api/user/user';
 import type { VFC } from 'common/utils/types';
-import type React from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 
 interface MemberInfoFormprops {
   nickname: string;
-  age: string;
+  age: number;
   UniqueButtonClicked: string;
-  gender: boolean;
-  isfemaleChecked: boolean;
+  sex: string;
 }
 
 export const MemberInfoForm: VFC = () => {
@@ -40,10 +43,44 @@ export const MemberInfoForm: VFC = () => {
   } = useForm<MemberInfoFormprops>({ mode: 'onTouched' });
 
   const nicknameValue: string = watch('nickname', '');
-  const ageValue: string = watch('age', '');
 
-  const onSubmit: SubmitHandler<MemberInfoFormprops> = (data) => {
-    console.log(data);
+  const ageValue: number = watch('age', 0);
+
+  const sexValue: string = watch('sex', '');
+
+  const { formState } = useFormState();
+
+  const navigate = useNavigate();
+
+  const firstData = formState;
+
+  useEffect(() => {
+    if (!firstData) {
+      navigate(`/${PATH.signUp}`);
+    }
+  }, [navigate]);
+
+  const onSubmit: SubmitHandler<MemberInfoFormprops> = async (data) => {
+    // formState 첫번째 페이지 데이터 가져오기
+
+    if (firstData !== null) {
+      const requestData: SignUpParams = {
+        nickname: data.nickname,
+        age: data.age,
+        sex: data.sex,
+        ...firstData,
+      };
+
+      console.log(requestData);
+
+      try {
+        await signUp(requestData);
+        navigate(`/${PATH.login}`);
+      } catch (e) {
+        // 서버 응답이 400번대가 온 경우
+        console.log(e, '에러발생');
+      }
+    }
   };
   const handleNicknameResetClick = (): void => {
     resetField('nickname'); // 인풋값 초기화
@@ -51,20 +88,35 @@ export const MemberInfoForm: VFC = () => {
   const handleAgeeResetClick = (): void => {
     resetField('age'); // 인풋값 초기화
   };
-
   useEffect(() => {
     setError('UniqueButtonClicked', {
       message: '중복 확인 버튼을 눌러야합니다',
     });
-  }, [setError]);
 
-  const inputValue = watch('nickname');
+    return () => clearErrors('UniqueButtonClicked');
+  }, [nicknameValue, setError, clearErrors]);
+
+  const handleUniqueButtonClick = async () => {
+    // TODO: API 요청
+    const responseData = await validateNickname({
+      nickname: nicknameValue,
+    });
+    const isUnique = responseData.result.isValid;
+
+    if (isUnique) {
+      // 닉네임이 중복되지 않은경우
+      clearErrors('UniqueButtonClicked');
+    } else {
+      // 닉네임이 중복된경우
+      setError('UniqueButtonClicked', {
+        message: '이미 사용중인 닉네임입니다',
+      });
+    }
+  };
+
   const isErrorsEmpty = Object.keys(errors).length === 0;
 
-  const isFormValid = inputValue && isErrorsEmpty;
-
-  console.log(isValid);
-  console.log(errors);
+  const isFormValid = nicknameValue && isErrorsEmpty && sexValue;
 
   const nicknameError =
     errors.nickname?.message || errors.UniqueButtonClicked?.message;
@@ -82,7 +134,8 @@ export const MemberInfoForm: VFC = () => {
             required: '닉네임은 필수로 입력해주세요',
             pattern: {
               value: /^[A-Za-z0-9ㄱ-ㅎ가-힣]{2,10}$/,
-              message: '4~12자의 한글,영문(대소문자 포함)이나 숫자.',
+              message:
+                '2~10자의 한글, 영문(대소문자 포함), 숫자만 입력가능합니다.',
             },
           })}
           valueLength={nicknameValue.length}
@@ -94,23 +147,7 @@ export const MemberInfoForm: VFC = () => {
               : undefined
           }
           confirmButton={
-            <IdCheckButton
-              type='button'
-              onClick={(): void => {
-                // TODO: API 요청
-                const isUnique = true; // API 응답
-
-                if (isUnique) {
-                  // 닉네임이 중복되지 않은경우
-                  clearErrors('UniqueButtonClicked');
-                } else {
-                  // 닉네임이 중복된경우
-                  setError('nickname', {
-                    message: '이미 사용중인 닉네임입니다',
-                  });
-                }
-              }}
-            >
+            <IdCheckButton type='button' onClick={handleUniqueButtonClick}>
               중복 확인
             </IdCheckButton>
           }
@@ -126,32 +163,29 @@ export const MemberInfoForm: VFC = () => {
           {...register('age', {
             pattern: {
               value: /^(?:[1-9]|[1-9][0-9])$/,
-              message: '3자리 미만의 숫자를 입력해주세요',
+              message: '숫자만 입력해주세요.',
             },
           })}
-          valueLength={ageValue.length}
-          maximum={12}
+          valueLength={ageValue.toString().length}
+          maximum={2}
         >
           나이
         </Inputs>
         <InputRadiowrapper>
           <InputLabel>성별</InputLabel>
           <InputRadioGroup>
-            <InputRadioLabel>
-              <InputRadio
-                checked
-                value='female'
-                {...register('gender', { required: '성별을 선택해주세요' })}
-              />
-              여성
-            </InputRadioLabel>
-            <InputRadioLabel>
-              <InputRadio
-                value='male'
-                {...register('gender', { required: '성별을 선택해주세요' })}
-              />
-              남성
-            </InputRadioLabel>
+            <InputRadio
+              id='1'
+              value='여성'
+              label='여성'
+              {...register('sex', { required: '성별을 선택해주세요' })}
+            />
+            <InputRadio
+              id='2'
+              value='남성'
+              label='남성'
+              {...register('sex', { required: '성별을 선택해주세요' })}
+            />
           </InputRadioGroup>
         </InputRadiowrapper>
         <InfoText>입력한 정보를 바탕으로 가게를 추천해 드려요.</InfoText>

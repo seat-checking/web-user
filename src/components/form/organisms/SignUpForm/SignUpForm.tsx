@@ -1,10 +1,12 @@
+import { validateEmail } from 'api/user/user';
+import { PATH } from 'common/utils/constants';
 import { Button } from 'components/form/atoms/Button';
 import { InputCheckBox } from 'components/form/atoms/InputCheckBox';
-
 import Inputs from 'components/form/molecules/Inputs/Inputs';
+import { useFormState } from 'context/FormProvider';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { useNavigate } from 'react-router-dom';
 import {
   ButtonWrapper,
   InputAllCheckBoxLabel,
@@ -20,15 +22,16 @@ import type React from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 
 interface SignUpFormInputs {
-  loginId: string;
+  email: string;
   LoginIdUnique: string;
   password: string;
   confirmPassword: string;
-  isPrivateChecked: boolean;
-  isMarketingChecked: boolean;
+  consentToTermsOfUser: boolean;
+  consentToMarketing: boolean;
 }
 
 export const SignUpForm: VFC = () => {
+  const { setFormState } = useFormState();
   const {
     register,
     handleSubmit,
@@ -39,34 +42,59 @@ export const SignUpForm: VFC = () => {
     clearErrors,
     formState: { errors, touchedFields },
   } = useForm<SignUpFormInputs>({ mode: 'onTouched' });
-  const loginIdValue: string = watch('loginId', '');
+  const emailValue: string = watch('email', '');
   const passwordValue: string = watch('password', '');
   const confirmPasswordValue: string = watch('confirmPassword', '');
 
   const [isCheckedAll, setIsCheckedAll] = useState(false);
 
-  const onSubmit: SubmitHandler<SignUpFormInputs> = (data) => {
-    console.log(data);
+  const navigate = useNavigate();
+
+  const onSubmit: SubmitHandler<SignUpFormInputs> = (data: any) => {
+    // data에서 confirmPassword 제거
+    delete data.confirmPassword;
+
+    // 사용자가 입력한 데이터를 setFormState 저장
+    setFormState(data);
+
+    // 회원가입 두번째 페이지로 routing을 한다
+    navigate(`/${PATH.memberInfo}`);
   };
 
-  console.log(errors);
+  const handleEmailBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
+    emailRegister.onBlur(e);
 
-  const handleResetClick = () => {
-    resetField('loginId'); // 인풋값 초기화
+    // API 요청
+    const responseData = await validateEmail({ email: emailValue });
+    const isUnique = responseData.result.isValid; // API 응답
+
+    if (isUnique) {
+      // 아이디가 중복되지 않은경우
+      clearErrors('LoginIdUnique');
+    } else {
+      // 아이디가 중복된경우
+      setError('LoginIdUnique', {
+        message: '이미 사용중인 이메일입니다',
+      });
+    }
   };
 
-  const handleResetPasswordClick = () => {
+  const handleResetClick = (): void => {
+    resetField('email'); // 인풋값 초기화
+  };
+
+  const handleResetPasswordClick = (): void => {
     resetField('password'); // 인풋값 초기화
   };
 
-  const handleResetConfirmPasswordClick = () => {
+  const handleResetConfirmPasswordClick = (): void => {
     resetField('confirmPassword'); // 인풋값 초기화
   };
 
-  const loginIdError = errors.loginId?.message || errors.LoginIdUnique?.message;
+  const emailError = errors.email?.message || errors.LoginIdUnique?.message;
 
-  const loginIdRegister = register('loginId', {
-    required: '아이디는 필수로 입력해주세요',
+  const emailRegister = register('email', {
+    required: '이메일은 필수로 입력해주세요',
     pattern: {
       value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       message: '이메일 포맷에 맞게 입력해야 합니다',
@@ -76,38 +104,36 @@ export const SignUpForm: VFC = () => {
   const handleAllCheckBoxChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const isChecked = e.target.checked;
     setIsCheckedAll(isChecked);
-    setValue('isPrivateChecked', isChecked);
-    setValue('isMarketingChecked', isChecked);
+    setValue('consentToTermsOfUser', isChecked);
+    setValue('consentToMarketing', isChecked);
   };
 
-  const isPrivateChecked = watch('isPrivateChecked');
-  const isMarketingChecked = watch('isMarketingChecked');
+  const consentToTermsOfUser = watch('consentToTermsOfUser');
+  const consentToMarketing = watch('consentToMarketing');
 
   useEffect(() => {
-    if (!isPrivateChecked || !isMarketingChecked) {
+    if (!consentToTermsOfUser || !consentToMarketing) {
       setIsCheckedAll(false);
     }
-    if (isPrivateChecked && isMarketingChecked) {
+    if (consentToTermsOfUser && consentToMarketing) {
       setIsCheckedAll(true);
     }
-  }, [isPrivateChecked, isMarketingChecked]);
+  }, [consentToTermsOfUser, consentToMarketing]);
 
   useEffect(() => {
-    if (!isPrivateChecked || !isMarketingChecked) {
+    if (!consentToTermsOfUser || !consentToMarketing) {
       setIsCheckedAll(false);
     }
-  }, [isPrivateChecked, isMarketingChecked]);
+  }, [consentToTermsOfUser, consentToMarketing]);
 
   const isErrorsEmpty = Object.keys(errors).length === 0;
 
   const isFormValid =
-    touchedFields.loginId &&
+    touchedFields.email &&
     touchedFields.password &&
     touchedFields.confirmPassword &&
     isErrorsEmpty &&
-    watch('isPrivateChecked');
-
-  console.log(watch('isPrivateChecked'));
+    watch('consentToTermsOfUser');
 
   return (
     <div>
@@ -118,32 +144,16 @@ export const SignUpForm: VFC = () => {
           labelRequired
           placeholder='이메일 형식을 입력해 주세요.'
           helperText='* @를 포함한 이메일 형식으로 입력해 주세요.'
-          {...loginIdRegister}
-          valueLength={loginIdValue.length}
+          {...emailRegister}
+          valueLength={emailValue.length}
           maximum={50}
-          error={touchedFields.loginId && loginIdError}
+          error={touchedFields.email && emailError}
           success={
-            touchedFields.loginId && !loginIdError
+            touchedFields.email && !emailError
               ? '사용 가능한 아이디 입니다'
               : undefined
           }
-          onBlur={(e: any) => {
-            // react hook form onBlur call
-            loginIdRegister.onBlur(e);
-
-            // TODO: API 요청
-            const isUnique = true; // API 응답
-
-            if (isUnique) {
-              // 아이디가 중복되지 않은경우
-              clearErrors('LoginIdUnique');
-            } else {
-              // 아이디가 중복된경우
-              setError('LoginIdUnique', {
-                message: '이미 사용중인 이메일입니다',
-              });
-            }
-          }}
+          onBlur={handleEmailBlur}
         >
           이메일
         </Inputs>
@@ -159,7 +169,7 @@ export const SignUpForm: VFC = () => {
             pattern: {
               value:
                 /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?`~]).{8,}$/,
-              message: '* 4~12자의 영문(대소문자 포함), 숫자, 특수기호.',
+              message: '* 영문, 숫자, 특수기호를 포함한 8자이상.',
             },
           })}
           valueLength={passwordValue.length}
@@ -179,16 +189,11 @@ export const SignUpForm: VFC = () => {
           labelRequired
           type='password'
           placeholder='비밀번호를 한 번 더 입력해 주세요.'
-          helperText='* 4~12자의 영문(대소문자 포함), 숫자, 특수기호.'
+          helperText='* 영문, 숫자, 특수기호를 포함한 8자이상'
           {...register('confirmPassword', {
             required: '비밀번호 확인은 필수로 입력해 주세요',
-            pattern: {
-              value:
-                /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?`~]).{8,}$/,
-              message: '* 4~12자의 영문(대소문자 포함), 숫자, 특수기호.',
-            },
-            validate: (value, formValue) =>
-              value === formValue.password || '비밀번호가 일치하지 않습니다.',
+            validate: (value) =>
+              value === passwordValue || '비밀번호가 일치하지 않습니다.',
           })}
           valueLength={confirmPasswordValue.length}
           maximum={50}
@@ -196,8 +201,10 @@ export const SignUpForm: VFC = () => {
             touchedFields.confirmPassword && errors.confirmPassword?.message
           }
           success={
-            touchedFields.confirmPassword && !errors.confirmPassword
-              ? '비빌번호가 일치합니다.'
+            touchedFields.confirmPassword &&
+            !errors.confirmPassword &&
+            passwordValue === confirmPasswordValue
+              ? '비밀번호가 일치합니다.'
               : undefined
           }
         >
@@ -214,7 +221,7 @@ export const SignUpForm: VFC = () => {
         </InputCheckBoxBorderWrapper>
         <InputSubCheckBoxWrapper>
           <InputCheckBox
-            {...register('isPrivateChecked', {
+            {...register('consentToTermsOfUser', {
               required: '체크박스는 기본 입력사항입니다.',
             })}
           />
@@ -223,7 +230,7 @@ export const SignUpForm: VFC = () => {
           </InputSubCheckBoxLabel>
         </InputSubCheckBoxWrapper>
         <InputSubCheckBoxWrapper>
-          <InputCheckBox {...register('isMarketingChecked')} />
+          <InputCheckBox {...register('consentToMarketing')} />
           <InputSubCheckBoxLabel>
             (선택) <u>마케팅 정보 수신</u> 동의
           </InputSubCheckBoxLabel>

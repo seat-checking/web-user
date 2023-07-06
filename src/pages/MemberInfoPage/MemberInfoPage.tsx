@@ -1,6 +1,6 @@
 import { MemberInfoForm } from 'components/form/organisms/MemberInfoForm';
 import { ProgressBar } from 'pages/SignUpPage/SignUpPage.styled';
-import React from 'react';
+
 import {
   MemberInfoPageTitle,
   MemberInfoPageWrapper,

@@ -7,7 +7,7 @@ export const LoginPageWrapper = styled.div`
 `;
 
 export const LoginPageHeader = styled.div`
-  width: 80%;
+  width: 90%;
   height: 5rem;
   margin: 0 auto;
   display: flex;
