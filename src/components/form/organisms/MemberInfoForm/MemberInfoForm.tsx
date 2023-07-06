@@ -1,6 +1,5 @@
 import { signUp, validateNickname } from 'api/user/user';
 import { PATH } from 'common/utils/constants';
-import { useFormState } from 'components/context/FormProvider';
 import { Button } from 'components/form/atoms/Button';
 import { InputLabel } from 'components/form/atoms/InputLabel';
 
@@ -10,6 +9,7 @@ import {
   Form,
   IdCheckButton,
 } from 'components/form/organisms/SignUpForm/SignUpForm.styled';
+import { useFormState } from 'context/FormProvider';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
