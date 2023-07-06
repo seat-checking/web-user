@@ -10,29 +10,35 @@ import {
 } from 'components/store/SearchBar/SearchBar.styled';
 import { StoreItem } from 'components/store/StoreItem';
 import { ErrorMessage } from 'components/store/storeList/AllList/AllList.styled';
+import { SearchContext } from 'context/SearchContext';
 import { BackButtonIcon } from 'pages/LoginPage/LoginPage.styled';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import type { StoreUser } from 'api/store/storeApi';
 import type { VFC } from 'common/utils/types';
 
 import type { ChangeEvent, KeyboardEvent } from 'react';
 
 export const SearchBar: VFC = () => {
-  const [value, setValue] = useState<string>('');
-  const [Stores, setStores] = useState<StoreUser[]>([]);
+  const searchContext = useContext(SearchContext);
+
+  if (!searchContext) {
+    throw new Error('SearchBar must be used within a SearchProvider');
+  }
+
+  const { searchValue, setSearchValue, searchResults, setSearchResults } =
+    searchContext;
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<null | string>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    setSearchValue(e.target.value);
   };
 
   const handleValueResetClick = () => {
-    setValue('');
+    setSearchValue('');
   };
-
-  const showResetIcon = value.length > 0; // 인풋값이 있는 경우에만 리셋 아이콘을 보여줌
 
   const navigate = useNavigate();
 
@@ -41,11 +47,11 @@ export const SearchBar: VFC = () => {
   };
 
   const handleKeyDown = async (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && value.length > 0) {
+    if (e.key === 'Enter' && searchValue.length > 0) {
       try {
         setLoading(true);
-        const resData = await getSeachList({ name: value });
-        setStores(resData.result.storeList);
+        const resData = await getSeachList({ name: searchValue });
+        setSearchResults(resData.result);
         setLoading(false);
       } catch (err) {
         setError('서버에서 데이터를 받아오지 못했습니다');
@@ -53,6 +59,10 @@ export const SearchBar: VFC = () => {
       }
     }
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <SearchBarContainer>
@@ -62,10 +72,10 @@ export const SearchBar: VFC = () => {
           <SearchInput
             placeholder='검색어를 입력하세요'
             onChange={handleChange}
-            value={value}
-            onKeyDown={handleKeyDown} // 엔터 키 이벤트 처리
+            value={searchValue}
+            onKeyDown={handleKeyDown}
           />
-          {showResetIcon && (
+          {searchValue.length > 0 && (
             <ResetbtnWrapper>
               <InputResetIcon onClick={handleValueResetClick} />
             </ResetbtnWrapper>
@@ -76,13 +86,15 @@ export const SearchBar: VFC = () => {
       {loading ? (
         <Spinner />
       ) : (
-        Stores.map((store) => (
-          <StoreItem
-            key={store.id}
-            src={store.mainImage}
-            storeName={store.name}
-            introduction={store.introduction}
-          />
+        searchResults.map((store: StoreUser) => (
+          <Link key={store.id} to={`/storeDetail/${store.id}`}>
+            <StoreItem
+              key={store.id}
+              src={store.mainImage}
+              storeName={store.name}
+              introduction={store.introduction}
+            />
+          </Link>
         ))
       )}
     </SearchBarContainer>
