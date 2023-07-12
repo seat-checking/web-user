@@ -1,51 +1,30 @@
-// import { PATH } from 'common/utils/constants';
-// import { Outlet, useNavigate } from 'react-router-dom';
+import { PATH } from 'common/utils/constants';
+import { useEffect } from 'react';
 
-// // 사용자의 인증 상태를 체크하는 함수
+import { Outlet, useNavigate } from 'react-router-dom';
 
-// const isAuthenticated = async () => {
-//   const token = localStorage.getItem('accessToken');
+// 사용자의 인증 상태를 체크하는 함수
 
-//   if (!token) {
-//     return false;
-//   }
+const isAuthenticated = () => {
+  const token = localStorage.getItem('accessToken');
 
-//   const response = await
-// };
-
-// // 보호된 라우트를 위한 컴포넌트
-// export const ProtectedRoute = () => {
-//   const navigate = useNavigate();
-//   const auth = isAuthenticated();
-
-//   if (!auth) {
-//     // 인증되지 않은 사용자는 로그인 페이지로 리다이렉트
-//     navigate(`/${PATH.login}`);
-//     return null;
-//   }
-
-//   // 인증된 사용자는 해당 페이지를 보게 됩니다.
-//   return <Outlet />;
-// };
-
-// // export const router = createBrowserRouter([
-// //   // ...생략...
-// //   {
-// //     path: `/${PATH.memberInfo}`,
-// //     element: <ProtectedRoute />,
-// //     children: [{ index: true, element: <MemberInfoPage /> }],
-// //   },
-// //   {
-// //     path: `/${PATH.myPage}`,
-// //     element: <ProtectedRoute />,
-// //     children: [{ index: true, element: <MyPage /> }],
-// //   },
-// //   // ...생략...
-// // ]);
-import React from 'react';
-
-const ProtectedRoute = () => {
-  return <div>ProtectedRoute</div>;
+  if (!token) {
+    return false;
+  }
+  return true;
 };
 
-export default ProtectedRoute;
+// 보호된 라우트를 위한 컴포넌트
+export const ProtectedRoute = () => {
+  const navigate = useNavigate();
+  const auth = isAuthenticated();
+
+  useEffect(() => {
+    if (!auth) {
+      navigate('/');
+    }
+  }, [auth, navigate]);
+
+  // 인증된 사용자는 해당 페이지를 보게 됩니다.
+  return auth ? <Outlet /> : null;
+};

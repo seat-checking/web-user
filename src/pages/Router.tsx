@@ -2,6 +2,7 @@ import { PATH } from 'common/utils/constants';
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
+import { ProtectedRoute } from 'pages/ProtectedRoute';
 import { ReservationDetailPage } from 'pages/ReservationDetailPage';
 import { ReservationPage } from 'pages/ReservationPage';
 import { RootPage } from 'pages/RootPage';
@@ -30,26 +31,32 @@ export const router = createBrowserRouter([
   },
   {
     path: `/${PATH.storeList}`,
-    element: <StoreListPage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <StoreListPage /> }],
   },
   {
     path: `/${PATH.storeDetail}/:storeId`,
-    element: <StoreDetailPage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <StoreDetailPage /> }],
   },
   {
     path: `/${PATH.myPage}`,
-    element: <MyPage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <MyPage /> }],
   },
   {
     path: `/${PATH.search}`,
-    element: <SearchPage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <SearchPage /> }],
   },
   {
     path: `/${PATH.reservation}`,
-    element: <ReservationPage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <ReservationPage /> }],
   },
   {
     path: `/${PATH.reservationDetail}`,
-    element: <ReservationDetailPage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <ReservationDetailPage /> }],
   },
 ]);
