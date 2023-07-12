@@ -7,5 +7,5 @@ export const PATH = {
   storeDetail: 'storedetail',
   search: 'search',
   reservation: 'reservation',
-  reservationDetail: 'reservationDetail',
+  reservationDetail: 'reservationdetail',
 } as const;
