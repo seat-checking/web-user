@@ -2,8 +2,11 @@ import { PATH } from 'common/utils/constants';
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
-import { ReservationDetailPage } from 'pages/ReservationDetailPage';
 import { ReservationPage } from 'pages/ReservationPage';
+import { ReservationStatusDetailPage } from 'pages/ReservationStatusDetailPage';
+
+import { ReservationStatusPage } from 'pages/ReservationStatusPage';
+
 import { RootPage } from 'pages/RootPage';
 import { SearchPage } from 'pages/SearchPage';
 import { SignUpPage } from 'pages/SignUpPage';
@@ -37,6 +40,10 @@ export const router = createBrowserRouter([
     element: <StoreDetailPage />,
   },
   {
+    path: `/${PATH.Reservation}`,
+    element: <ReservationPage />,
+  },
+  {
     path: `/${PATH.myPage}`,
     element: <MyPage />,
   },
@@ -45,11 +52,11 @@ export const router = createBrowserRouter([
     element: <SearchPage />,
   },
   {
-    path: `/${PATH.reservation}`,
-    element: <ReservationPage />,
+    path: `/${PATH.reservationStatus}`,
+    element: <ReservationStatusPage />,
   },
   {
-    path: `/${PATH.reservationDetail}`,
-    element: <ReservationDetailPage />,
+    path: `/${PATH.reservationStatusDetail}`,
+    element: <ReservationStatusDetailPage />,
   },
 ]);
