@@ -1,8 +1,9 @@
 import { PATH } from 'common/utils/constants';
-import { ReservationItem } from 'components/reservation/ReservationItem';
+import { ReservationStatusItem } from 'components/reservationStatus/ReservationStatusItem';
+
 import { Link } from 'react-router-dom';
 
-export const ReservationList = () => {
+export const ReservationStatusList = () => {
   const Reservation = {
     src: '',
     ReservationName: 'Hspace',
@@ -12,8 +13,8 @@ export const ReservationList = () => {
     ReservationTime: '15:00-18:00',
   };
   return (
-    <Link to={`/${PATH.ReservationDetail}`}>
-      <ReservationItem
+    <Link to={`/${PATH.reservationStatusDetail}`}>
+      <ReservationStatusItem
         src={Reservation.src}
         ReservationName={Reservation.ReservationName}
         seatNumber={Reservation.seatNumber}

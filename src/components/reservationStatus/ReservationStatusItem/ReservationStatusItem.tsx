@@ -10,7 +10,7 @@ import {
   ReservationItemTime,
   ReservationItemWrapper,
   ReservationIteminfo,
-} from 'components/reservation/ReservationItem/ReservationItem.styled';
+} from 'components/reservationStatus/ReservationStatusItem/ReservationStatusItem.styled';
 
 import type { VFC } from 'common/utils/types';
 
@@ -23,7 +23,7 @@ interface ReservationItemProps {
   ReservationTime: string;
 }
 
-export const ReservationItem: VFC<ReservationItemProps> = ({
+export const ReservationStatusItem: VFC<ReservationItemProps> = ({
   src,
   ReservationName,
   seatNumber,

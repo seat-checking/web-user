@@ -2,17 +2,17 @@ import { Tab } from 'components/layout/tab/Tab';
 import { TabPanel } from 'components/layout/tab/TabPanel';
 import { Tabs } from 'components/layout/tab/Tabs';
 
-import { ReservationList } from 'components/reservation/ReservationList';
+import { ReservationStatusList } from 'components/reservationStatus/ReservationStatusList';
 import {
   ListTitle,
   Wrapper,
-} from 'components/reservation/ReservationTab/ReservationTab.styled';
+} from 'components/reservationStatus/ReservationStatusTab/ReservationStatusTab.styled';
 
 import { useState } from 'react';
 
 import type { VFC } from 'common/utils/types';
 
-export const ReservationTab: VFC = () => {
+export const ReservationStatusTab: VFC = () => {
   const [value, setValue] = useState(0);
 
   const handleValueChange = (newValue: number) => {
@@ -26,7 +26,7 @@ export const ReservationTab: VFC = () => {
         <Tab label='예약 완료' />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <ReservationList />
+        <ReservationStatusList />
       </TabPanel>
       <TabPanel value={value} index={1}>
         2
