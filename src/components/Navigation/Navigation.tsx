@@ -20,7 +20,7 @@ export const Navigation: VFC = () => {
         <NavLink to={`/${PATH.search}`}>
           <NavigationSearchIcon />
         </NavLink>
-        <NavLink to={`/${PATH.Reservation}`}>
+        <NavLink to={`/${PATH.reservation}`}>
           {({ isActive }) => <NavigationNotificationIcon active={isActive} />}
         </NavLink>
         <NavLink to={`/${PATH.myPage}`}>
