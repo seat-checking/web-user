@@ -5,21 +5,21 @@ import { Link } from 'react-router-dom';
 export const ReservationList = () => {
   const Reservation = {
     src: '',
-    ReservationName: 'Hspace',
+    reservationName: 'Hspace',
     seatNumber: 152,
-    ReservationInfo: '1층 레드룸',
-    ReservationDate: '2월 27일',
-    ReservationTime: '15:00-18:00',
+    reservationInfo: '1층 레드룸',
+    reservationDate: '2월 27일',
+    reservationTime: '15:00-18:00',
   };
   return (
-    <Link to={`/${PATH.ReservationDetail}`}>
+    <Link to={`/${PATH.reservationDetail}`}>
       <ReservationItem
         src={Reservation.src}
-        ReservationName={Reservation.ReservationName}
+        ReservationName={Reservation.reservationName}
         seatNumber={Reservation.seatNumber}
-        ReservationInfo={Reservation.ReservationInfo}
-        ReservationDate={Reservation.ReservationDate}
-        ReservationTime={Reservation.ReservationTime}
+        ReservationInfo={Reservation.reservationInfo}
+        ReservationDate={Reservation.reservationDate}
+        ReservationTime={Reservation.reservationTime}
       />
     </Link>
   );
