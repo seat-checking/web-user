@@ -2,6 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { getSeachList } from 'api/store/storeApi';
 import { InputResetIcon } from 'components/form/atoms/InputResetIcon';
 import { Spinner } from 'components/layout/Spinner';
+
 import {
   ResetbtnWrapper,
   ResponseMessage,
@@ -13,7 +14,7 @@ import {
 import { StoreItem } from 'components/store/StoreItem';
 import { SearchContext } from 'context/SearchContext';
 import { BackButtonIcon } from 'pages/LoginPage/LoginPage.styled';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Link, useNavigate } from 'react-router-dom';
 import type { ErrorResponse } from 'api/store/common';
@@ -29,7 +30,8 @@ export const SearchBar: VFC = () => {
   if (!searchContext) {
     throw new Error('SearchBar must be used within a SearchProvider');
   }
-  const { searchValue, setSearchValue } = searchContext;
+  const { searchValue, setSearchValue, searchResults, setSearchResults } =
+    searchContext;
 
   const getSeachData = async ({ pageParam = 1 }) => {
     const resData = await getSeachList({
@@ -43,12 +45,21 @@ export const SearchBar: VFC = () => {
   const { isLoading, isError, data, fetchNextPage, hasNextPage } =
     useInfiniteQuery<StoreListResponse, ErrorResponse>({
       queryKey: ['SearchData', query],
-      queryFn: ({ pageParam = 1 }) => getSeachData({ pageParam }),
+      queryFn: getSeachData,
+      staleTime: 500000,
       getNextPageParam: (lastPage) => {
         if (lastPage.totalPage > lastPage.curPage) {
           return lastPage.curPage + 1;
         }
         return undefined;
+      },
+      onSuccess: (resData) => {
+        let stores: StoreUser[] = [];
+        for (let i = 0; i < resData.pages.length; i++) {
+          const page = resData.pages[i];
+          stores = [...stores, ...page.storeResponseList];
+        }
+        setSearchResults(stores);
       },
     });
 
@@ -76,17 +87,6 @@ export const SearchBar: VFC = () => {
     navigate(-1);
   };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-  let stores: StoreUser[] = [];
-  if (data) {
-    for (let i = 0; i < data.pages.length; i++) {
-      const page = data.pages[i];
-      stores = [...stores, ...page.storeResponseList];
-    }
-  }
-
   return (
     <SearchBarContainer>
       <SearchBarWrapper>
@@ -106,14 +106,18 @@ export const SearchBar: VFC = () => {
         </SearchInputWrapper>
       </SearchBarWrapper>
       <InfiniteScroll loadMore={handleLoadMore} hasMore={hasNextPage}>
-        {isError ? (
+        {query.length === 0 ? null : isError ? (
           <ResponseMessage>
             요청 중 오류가 발생했습니다. 다시 시도해주세요.
           </ResponseMessage>
-        ) : stores.length === 0 ? (
-          <ResponseMessage>검색 결과가 없습니다.</ResponseMessage>
+        ) : searchResults.length === 0 ? (
+          isLoading ? (
+            <Spinner />
+          ) : (
+            <ResponseMessage>검색 결과가 없습니다.</ResponseMessage>
+          )
         ) : (
-          stores.map((store) => (
+          searchResults.map((store) => (
             <Link key={store.id} to={`/storeDetail/${store.id}`}>
               <StoreItem
                 key={store.id}
