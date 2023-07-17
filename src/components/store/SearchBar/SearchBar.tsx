@@ -14,7 +14,7 @@ import {
 import { StoreItem } from 'components/store/StoreItem';
 import { SearchContext } from 'context/SearchContext';
 import { BackButtonIcon } from 'pages/LoginPage/LoginPage.styled';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Link, useNavigate } from 'react-router-dom';
 import type { ErrorResponse } from 'api/store/common';
@@ -25,13 +25,18 @@ import type { ChangeEvent, KeyboardEvent } from 'react';
 
 export const SearchBar: VFC = () => {
   const searchContext = useContext(SearchContext);
-  const [query, setQuery] = useState('');
 
   if (!searchContext) {
     throw new Error('SearchBar must be used within a SearchProvider');
   }
-  const { searchValue, setSearchValue, searchResults, setSearchResults } =
-    searchContext;
+  const {
+    searchValue,
+    setSearchValue,
+    searchResults,
+    setSearchResults,
+    query,
+    setQuery,
+  } = searchContext;
 
   const getSeachData = async ({ pageParam = 1 }) => {
     const resData = await getSeachList({
