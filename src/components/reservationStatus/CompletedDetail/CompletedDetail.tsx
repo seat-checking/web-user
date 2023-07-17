@@ -1,4 +1,6 @@
 import { Button } from 'components/form/atoms/Button';
+import { ReservationStatus } from 'components/reservationStatus/CompletedDetail/CompletedDetail.styled';
+
 import {
   ButtonWrapper,
   Circle,
@@ -14,13 +16,11 @@ import {
   ReservationDetailWrapper,
   ReservationName,
   ReservationSeatNumber,
-  ReservationStatus,
-} from 'components/reservationStatus/ReservationStatusDetail/ReservationStatusDetail.styled';
-
+} from 'components/reservationStatus/WaitingDetail/WaitingDetail.styled';
 import { BackButton } from 'pages/MyPage/MyPage.styled';
 import { useNavigate } from 'react-router-dom';
 
-export const ReservationStatusDetail = () => {
+export const CompletedDetail = () => {
   const navigate = useNavigate();
 
   const handleBack = (): void => {
@@ -34,10 +34,10 @@ export const ReservationStatusDetail = () => {
         <ListTitle>Hspace</ListTitle>
       </ReservationDetailHeader>
       <ReservationContent>
-        <ReservationStatus>예약 대기 중</ReservationStatus>
+        <ReservationStatus>예약 완료</ReservationStatus>
         <ContentHeader>
           <ReservationName>최우영님</ReservationName>
-          <Circle />
+          <Circle isActive={false} />
           <ReservationSeatNumber>152번</ReservationSeatNumber>
         </ContentHeader>
         <ContentMain>
@@ -72,8 +72,8 @@ export const ReservationStatusDetail = () => {
         </ContentMain>
       </ReservationContent>
       <ButtonWrapper>
-        <Button backgroundColor='#FF8D4E' color='#FFFFFF'>
-          예약취소
+        <Button disabled backgroundColor='#EFF0F5' color='#727582'>
+          이미 예약이 완료된 고객 입니다.
         </Button>
       </ButtonWrapper>
     </ReservationDetailWrapper>

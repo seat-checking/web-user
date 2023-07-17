@@ -2,11 +2,10 @@ import { PATH } from 'common/utils/constants';
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
+import { ReservationCompletedDetailPage } from 'pages/ReservationCompletedDetailPage';
 import { ReservationPage } from 'pages/ReservationPage';
-import { ReservationStatusDetailPage } from 'pages/ReservationStatusDetailPage';
-
 import { ReservationStatusPage } from 'pages/ReservationStatusPage';
-
+import { ReservationWaitingDetailPage } from 'pages/ReservationWaitingDetailPage';
 import { RootPage } from 'pages/RootPage';
 import { SearchPage } from 'pages/SearchPage';
 import { SignUpPage } from 'pages/SignUpPage';
@@ -40,7 +39,7 @@ export const router = createBrowserRouter([
     element: <StoreDetailPage />,
   },
   {
-    path: `/${PATH.Reservation}`,
+    path: `/${PATH.reservation}`,
     element: <ReservationPage />,
   },
   {
@@ -56,7 +55,11 @@ export const router = createBrowserRouter([
     element: <ReservationStatusPage />,
   },
   {
-    path: `/${PATH.reservationStatusDetail}`,
-    element: <ReservationStatusDetailPage />,
+    path: `/${PATH.reservationWaitingDetail}`,
+    element: <ReservationWaitingDetailPage />,
+  },
+  {
+    path: `/${PATH.reservationCompletedDetail}`,
+    element: <ReservationCompletedDetailPage />,
   },
 ]);

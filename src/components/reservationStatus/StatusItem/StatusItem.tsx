@@ -10,7 +10,7 @@ import {
   ReservationItemTime,
   ReservationItemWrapper,
   ReservationIteminfo,
-} from 'components/reservationStatus/ReservationStatusItem/ReservationStatusItem.styled';
+} from 'components/reservationStatus/StatusItem/StatusItem.styled';
 
 import type { VFC } from 'common/utils/types';
 
@@ -21,15 +21,17 @@ interface ReservationItemProps {
   ReservationInfo: string;
   ReservationDate: string;
   ReservationTime: string;
+  isActive: boolean;
 }
 
-export const ReservationStatusItem: VFC<ReservationItemProps> = ({
+export const StatusItem: VFC<ReservationItemProps> = ({
   src,
   ReservationName,
   seatNumber,
   ReservationInfo,
   ReservationDate,
   ReservationTime,
+  isActive,
 }) => {
   const renderImage = () => {
     if (!src || src.includes('image-error')) {
@@ -44,7 +46,7 @@ export const ReservationStatusItem: VFC<ReservationItemProps> = ({
         <ReservationItemName>
           {ReservationName}
           <ReservationItemSeatInfo>
-            <Circle />
+            <Circle isActive={isActive} />
             {seatNumber}번 좌석
           </ReservationItemSeatInfo>
         </ReservationItemName>

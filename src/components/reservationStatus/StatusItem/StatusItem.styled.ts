@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface CircleProps {
+  isActive: boolean;
+}
+
 export const ReservationItemWrapper = styled.div`
   max-width: 67.5rem;
   height: 9.6rem;
@@ -70,9 +74,10 @@ export const ReservationItemTime = styled.div`
   color: ${(props): string => props.theme.palette.grey[300]};
 `;
 
-export const Circle = styled.div`
+export const Circle = styled.div<CircleProps>`
   width: 0.6rem;
   height: 0.6rem;
   border-radius: 0.6rem;
-  background-color: ${(props): string => props.theme.palette.grey[300]};
+  background-color: ${(props): string =>
+    props.isActive ? props.theme.palette.primary.orange : 'gray'};
 `;

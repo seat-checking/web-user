@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface CircleProps {
+  isActive: boolean;
+}
+
 export const ReservationDetailWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
@@ -54,11 +58,12 @@ export const ReservationName = styled.div`
   font-weight: 700;
 `;
 
-export const Circle = styled.div`
+export const Circle = styled.div<CircleProps>`
   width: 0.6rem;
   height: 0.6rem;
   border-radius: 0.6rem;
-  background-color: ${(props): string => props.theme.palette.primary.orange};
+  background-color: background-color: ${(props): string =>
+    props.isActive ? props.theme.palette.primary.orange : 'gray'};
   margin-left: 0.8rem;
   margin-right: 0.4rem;
 `;
@@ -116,5 +121,5 @@ export const ContentMainTextCircle = styled.div`
 
 export const ButtonWrapper = styled.div`
   text-align: center;
-  margin-top: 5.6rem;
+  margin-top: 4rem;
 `;
