@@ -15,12 +15,12 @@ import {
   ReservationName,
   ReservationSeatNumber,
   ReservationStatus,
-} from 'components/reservation/ReservationDetail/ReservationDetail.styled';
+} from 'components/reservationStatus/ReservationStatusDetail/ReservationStatusDetail.styled';
 
 import { BackButton } from 'pages/MyPage/MyPage.styled';
 import { useNavigate } from 'react-router-dom';
 
-export const ReservationDetail = () => {
+export const ReservationStatusDetail = () => {
   const navigate = useNavigate();
 
   const handleBack = (): void => {
