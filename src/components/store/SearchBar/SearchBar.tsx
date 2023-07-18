@@ -19,7 +19,7 @@ import type { ErrorResponse } from 'api/store/common';
 import type { StoreListResponse, StoreUser } from 'api/store/storeApi';
 import type { VFC } from 'common/utils/types';
 
-import type { ChangeEvent, KeyboardEvent } from 'react';
+import type { ChangeEvent } from 'react';
 
 export const SearchBar: VFC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -47,14 +47,9 @@ export const SearchBar: VFC = () => {
       enabled: query.length > 0,
     });
 
-  const handleSearch = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      setSearchParams({ query });
-    }
-  };
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
+    setSearchParams({ query: e.target.value });
   };
 
   const handleLoadMore = (): void => {
@@ -89,7 +84,6 @@ export const SearchBar: VFC = () => {
             placeholder='검색어를 입력하세요'
             onChange={handleChange}
             value={query}
-            onKeyDown={handleSearch}
           />
           {query.length > 0 && (
             <ResetbtnWrapper>
