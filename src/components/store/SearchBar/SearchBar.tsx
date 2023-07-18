@@ -19,10 +19,11 @@ import type { ErrorResponse } from 'api/store/common';
 import type { StoreListResponse, StoreUser } from 'api/store/storeApi';
 import type { VFC } from 'common/utils/types';
 
-import type { ChangeEvent } from 'react';
+import type { ChangeEvent, KeyboardEvent } from 'react';
 
 export const SearchBar: VFC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [inputValue, setInputValue] = useState(searchParams.get('query') || '');
   const [query, setQuery] = useState(searchParams.get('query') || '');
 
   const getSeachData = async ({ pageParam = 1 }) => {
@@ -47,9 +48,17 @@ export const SearchBar: VFC = () => {
       enabled: query.length > 0,
     });
 
+  const navigate = useNavigate();
+
+  const handleSearch = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setQuery(inputValue);
+      navigate(`?query=${inputValue}`, { replace: true });
+    }
+  };
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
-    setSearchParams({ query: e.target.value });
+    setInputValue(e.target.value);
   };
 
   const handleLoadMore = (): void => {
@@ -61,12 +70,6 @@ export const SearchBar: VFC = () => {
     setSearchParams({});
   };
 
-  const navigate = useNavigate();
-
-  const handleButtonClick = () => {
-    navigate(-1);
-  };
-
   let stores: StoreUser[] = [];
   if (data) {
     for (let i = 0; i < data.pages.length; i++) {
@@ -74,6 +77,10 @@ export const SearchBar: VFC = () => {
       stores = [...stores, ...page.storeResponseList];
     }
   }
+
+  const handleButtonClick = () => {
+    navigate(-1);
+  };
 
   return (
     <SearchBarContainer>
@@ -83,7 +90,8 @@ export const SearchBar: VFC = () => {
           <SearchInput
             placeholder='검색어를 입력하세요'
             onChange={handleChange}
-            value={query}
+            value={inputValue}
+            onKeyDown={handleSearch}
           />
           {query.length > 0 && (
             <ResetbtnWrapper>
