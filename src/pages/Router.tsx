@@ -1,8 +1,10 @@
 import { PATH } from 'common/utils/constants';
+import { ApprovedListDetail } from 'components/reservationStatus/listDetail/ApprovedListDetail';
+import { CancelledDetail } from 'components/reservationStatus/listDetail/CancelledDetail';
+import { RejectedDetail } from 'components/reservationStatus/listDetail/RejectedDetail';
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
-import { ReservationCompletedDetailPage } from 'pages/ReservationCompletedDetailPage';
 import { ReservationPage } from 'pages/ReservationPage';
 import { ReservationStatusPage } from 'pages/ReservationStatusPage';
 import { RootPage } from 'pages/RootPage';
@@ -54,7 +56,15 @@ export const router = createBrowserRouter([
     element: <ReservationStatusPage />,
   },
   {
-    path: `/${PATH.reservationCompletedDetail}`,
-    element: <ReservationCompletedDetailPage />,
+    path: `/${PATH.reservationStatus}/approvedListDetail`,
+    element: <ApprovedListDetail />,
+  },
+  {
+    path: `/${PATH.reservationStatus}/cancelledDetail`,
+    element: <CancelledDetail />,
+  },
+  {
+    path: `/${PATH.reservationStatus}/rejectedDetail`,
+    element: <RejectedDetail />,
   },
 ]);
