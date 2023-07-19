@@ -29,6 +29,7 @@ interface MemberInfoFormprops {
   age: number;
   UniqueButtonClicked: string;
   sex: string;
+  name: string;
 }
 
 export const MemberInfoForm: VFC = () => {
@@ -43,6 +44,8 @@ export const MemberInfoForm: VFC = () => {
   } = useForm<MemberInfoFormprops>({ mode: 'onTouched' });
 
   const nicknameValue: string = watch('nickname', '');
+
+  const nameValue: string = watch('name', '');
 
   const ageValue: number = watch('age', 0);
 
@@ -68,6 +71,7 @@ export const MemberInfoForm: VFC = () => {
         nickname: data.nickname,
         age: data.age,
         sex: data.sex,
+        name: data.name,
         ...firstData,
       };
 
@@ -85,8 +89,11 @@ export const MemberInfoForm: VFC = () => {
   const handleNicknameResetClick = (): void => {
     resetField('nickname'); // 인풋값 초기화
   };
-  const handleAgeeResetClick = (): void => {
+  const handleAgeResetClick = (): void => {
     resetField('age'); // 인풋값 초기화
+  };
+  const handleNameResetClick = (): void => {
+    resetField('name'); // 인풋값 초기화
   };
   useEffect(() => {
     setError('UniqueButtonClicked', {
@@ -116,7 +123,7 @@ export const MemberInfoForm: VFC = () => {
 
   const isErrorsEmpty = Object.keys(errors).length === 0;
 
-  const isFormValid = nicknameValue && isErrorsEmpty && sexValue;
+  const isFormValid = nicknameValue && isErrorsEmpty && sexValue && nameValue;
 
   const nicknameError =
     errors.nickname?.message || errors.UniqueButtonClicked?.message;
@@ -155,7 +162,26 @@ export const MemberInfoForm: VFC = () => {
           닉네임
         </Inputs>
         <Inputs
-          onClick={handleAgeeResetClick}
+          onClick={handleNameResetClick}
+          typingrequired
+          labelRequired
+          placeholder='이름을 입력해 주세요.'
+          helperText='* 예약 기능을 위해 반드시 실명을 입력해 주세요!'
+          error={touchedFields.name && errors.name?.message}
+          {...register('name', {
+            required: '이름은 필수로 입력해주세요.',
+            pattern: {
+              value: /^[a-zA-Z가-힣]*$/,
+              message: '한글 또는 영어로만 작성해 주세요.',
+            },
+          })}
+          valueLength={nameValue.length}
+          maximum={50}
+        >
+          이름
+        </Inputs>
+        <Inputs
+          onClick={handleAgeResetClick}
           typingrequired
           placeholder='숫자만 입력해 주세요.'
           helperText='* 숫자만 입력해 주세요.'
