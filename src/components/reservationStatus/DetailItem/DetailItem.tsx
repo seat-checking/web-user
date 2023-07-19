@@ -1,7 +1,4 @@
-import { Button } from 'components/form/atoms/Button';
 import {
-  ButtonWrapper,
-  Circle,
   ContentHeader,
   ContentMain,
   ContentMainText,
@@ -15,6 +12,7 @@ import {
   ReservationName,
   ReservationSeatNumber,
 } from 'components/reservationStatus/DetailItem/DetailItem.styled';
+import { Circle } from 'components/reservationStatus/ListItem/ListItem.styled';
 import { ReservationStatus } from 'components/reservationStatus/listDetail/ApprovedListDetail/ApprovedListDetail.styled';
 
 import { BackButton } from 'pages/MyPage/MyPage.styled';
@@ -57,7 +55,7 @@ export const DetailItem: VFC<DetailItemProps> = ({
         <ContentHeader>
           <ReservationName>{name}</ReservationName>
           <Circle isActive={isActive} />
-          <ReservationSeatNumber>{seatNumber}</ReservationSeatNumber>
+          <ReservationSeatNumber>{seatNumber}번</ReservationSeatNumber>
         </ContentHeader>
         <ContentMain>
           <ContentMainTextWrapper>
@@ -72,7 +70,7 @@ export const DetailItem: VFC<DetailItemProps> = ({
               <ContentMainTextCircle />
               신청한 좌석
             </ContentMainText>
-            <ContentSubText>{seatNumber}</ContentSubText>
+            <ContentSubText>{seatNumber}번</ContentSubText>
           </ContentMainTextWrapper>
           <ContentMainTextWrapper gap={1.2}>
             <ContentMainText>
@@ -90,11 +88,6 @@ export const DetailItem: VFC<DetailItemProps> = ({
           </ContentMainTextWrapper>
         </ContentMain>
       </ReservationContent>
-      <ButtonWrapper>
-        <Button backgroundColor='#FF8D4E' color='#FFFFFF'>
-          예약취소
-        </Button>
-      </ButtonWrapper>
     </ReservationDetailWrapper>
   );
 };

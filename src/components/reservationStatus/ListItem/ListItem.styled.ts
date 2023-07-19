@@ -80,4 +80,7 @@ export const Circle = styled.div<CircleProps>`
   border-radius: 0.6rem;
   background-color: ${(props): string =>
     props.isActive ? props.theme.palette.primary.orange : 'gray'};
+
+  margin-left: 0.8rem;
+  margin-right: 0.4rem;
 `;
