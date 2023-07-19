@@ -12,7 +12,7 @@ export const ReservationList = () => {
     ReservationTime: '15:00-18:00',
   };
   return (
-    <Link to={`/${PATH.ReservationDetail}`}>
+    <Link to={`/${PATH.reservationDetail}`}>
       <ReservationItem
         src={Reservation.src}
         ReservationName={Reservation.ReservationName}
