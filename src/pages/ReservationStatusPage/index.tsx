@@ -1,12 +1,11 @@
 import { Navigation } from 'components/Navigation';
-
-import { StatusTab } from 'components/reservationStatus/StatusTab';
+import { ListTab } from 'components/reservationStatus/ListTab';
 import type { VFC } from 'common/utils/types';
 
 export const ReservationStatusPage: VFC = () => {
   return (
     <>
-      <StatusTab />
+      <ListTab />
       <Navigation />
     </>
   );

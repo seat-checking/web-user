@@ -1,6 +1,4 @@
 import { Button } from 'components/form/atoms/Button';
-import { ReservationStatus } from 'components/reservationStatus/CompletedDetail/CompletedDetail.styled';
-
 import {
   ButtonWrapper,
   Circle,
@@ -16,11 +14,32 @@ import {
   ReservationDetailWrapper,
   ReservationName,
   ReservationSeatNumber,
-} from 'components/reservationStatus/WaitingDetail/WaitingDetail.styled';
+} from 'components/reservationStatus/DetailItem/DetailItem.styled';
+import { ReservationStatus } from 'components/reservationStatus/listDetail/ApprovedListDetail/ApprovedListDetail.styled';
+
 import { BackButton } from 'pages/MyPage/MyPage.styled';
 import { useNavigate } from 'react-router-dom';
+import type { VFC } from 'common/utils/types';
 
-export const CompletedDetail = () => {
+interface DetailItemProps {
+  storeName: string;
+  name: string;
+  seatNumber: number;
+  storePlace: string;
+  reservationDate: string;
+  reservationTime: string;
+  isActive: boolean;
+}
+
+export const DetailItem: VFC<DetailItemProps> = ({
+  storeName,
+  name,
+  seatNumber,
+  storePlace,
+  reservationDate,
+  reservationTime,
+  isActive,
+}) => {
   const navigate = useNavigate();
 
   const handleBack = (): void => {
@@ -31,14 +50,14 @@ export const CompletedDetail = () => {
     <ReservationDetailWrapper>
       <ReservationDetailHeader>
         <BackButton onClick={handleBack} />
-        <ListTitle>Hspace</ListTitle>
+        <ListTitle>{storeName}</ListTitle>
       </ReservationDetailHeader>
       <ReservationContent>
-        <ReservationStatus>예약 완료</ReservationStatus>
+        <ReservationStatus>예약 대기 중</ReservationStatus>
         <ContentHeader>
-          <ReservationName>최우영님</ReservationName>
-          <Circle isActive={false} />
-          <ReservationSeatNumber>152번</ReservationSeatNumber>
+          <ReservationName>{name}</ReservationName>
+          <Circle isActive={isActive} />
+          <ReservationSeatNumber>{seatNumber}</ReservationSeatNumber>
         </ContentHeader>
         <ContentMain>
           <ContentMainTextWrapper>
@@ -46,34 +65,34 @@ export const CompletedDetail = () => {
               <ContentMainTextCircle />
               신청한 공간
             </ContentMainText>
-            <ContentSubText>1층 레드룸</ContentSubText>
+            <ContentSubText>{storePlace}</ContentSubText>
           </ContentMainTextWrapper>
           <ContentMainTextWrapper>
             <ContentMainText>
               <ContentMainTextCircle />
               신청한 좌석
             </ContentMainText>
-            <ContentSubText>152번</ContentSubText>
+            <ContentSubText>{seatNumber}</ContentSubText>
           </ContentMainTextWrapper>
           <ContentMainTextWrapper gap={1.2}>
             <ContentMainText>
               <ContentMainTextCircle />
               희망 이용 날짜
             </ContentMainText>
-            <ContentSubText>23년 2월 23일</ContentSubText>
+            <ContentSubText>{reservationDate}</ContentSubText>
           </ContentMainTextWrapper>
           <ContentMainTextWrapper gap={1.2}>
             <ContentMainText>
               <ContentMainTextCircle />
               희망 이용 시간
             </ContentMainText>
-            <ContentSubText>15:00 ~ 18:00</ContentSubText>
+            <ContentSubText>{reservationTime}</ContentSubText>
           </ContentMainTextWrapper>
         </ContentMain>
       </ReservationContent>
       <ButtonWrapper>
-        <Button disabled backgroundColor='#EFF0F5' color='#727582'>
-          이미 예약이 완료된 고객 입니다.
+        <Button backgroundColor='#FF8D4E' color='#FFFFFF'>
+          예약취소
         </Button>
       </ButtonWrapper>
     </ReservationDetailWrapper>

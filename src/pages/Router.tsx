@@ -5,7 +5,6 @@ import { MyPage } from 'pages/MyPage';
 import { ReservationCompletedDetailPage } from 'pages/ReservationCompletedDetailPage';
 import { ReservationPage } from 'pages/ReservationPage';
 import { ReservationStatusPage } from 'pages/ReservationStatusPage';
-import { ReservationWaitingDetailPage } from 'pages/ReservationWaitingDetailPage';
 import { RootPage } from 'pages/RootPage';
 import { SearchPage } from 'pages/SearchPage';
 import { SignUpPage } from 'pages/SignUpPage';
@@ -53,10 +52,6 @@ export const router = createBrowserRouter([
   {
     path: `/${PATH.reservationStatus}`,
     element: <ReservationStatusPage />,
-  },
-  {
-    path: `/${PATH.reservationWaitingDetail}`,
-    element: <ReservationWaitingDetailPage />,
   },
   {
     path: `/${PATH.reservationCompletedDetail}`,

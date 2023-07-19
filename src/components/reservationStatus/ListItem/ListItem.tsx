@@ -1,4 +1,5 @@
 import {
+  ReservationIteminfo,
   Circle,
   ReservationItemDate,
   ReservationItemDateWrapper,
@@ -9,8 +10,7 @@ import {
   ReservationItemSeatInfo,
   ReservationItemTime,
   ReservationItemWrapper,
-  ReservationIteminfo,
-} from 'components/reservationStatus/StatusItem/StatusItem.styled';
+} from 'components/reservationStatus/ListItem/ListItem.styled';
 
 import type { VFC } from 'common/utils/types';
 
@@ -24,7 +24,7 @@ interface ReservationItemProps {
   isActive: boolean;
 }
 
-export const StatusItem: VFC<ReservationItemProps> = ({
+export const ListItem: VFC<ReservationItemProps> = ({
   src,
   ReservationName,
   seatNumber,

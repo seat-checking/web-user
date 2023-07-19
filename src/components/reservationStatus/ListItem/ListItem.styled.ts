@@ -10,8 +10,8 @@ export const ReservationItemWrapper = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-
   border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 `;
 
 export const ReservationItemImgWrapper = styled.div`
