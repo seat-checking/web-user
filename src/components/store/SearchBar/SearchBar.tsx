@@ -66,8 +66,7 @@ export const SearchBar: VFC = () => {
   };
 
   const handleValueResetClick = () => {
-    setQuery('');
-    setSearchParams({});
+    setInputValue('');
   };
 
   let stores: StoreUser[] = [];
