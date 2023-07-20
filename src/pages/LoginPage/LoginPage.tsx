@@ -1,5 +1,4 @@
 import { LoginForm } from 'components/form/organisms/LoginForm';
-
 import { useNavigate } from 'react-router-dom';
 import {
   BackButtonIcon,
@@ -15,6 +14,7 @@ export const LoginPage: VFC = () => {
   const handleback = (): void => {
     navigate(-1);
   };
+
   return (
     <LoginPageWrapper>
       <LoginPageHeader>
