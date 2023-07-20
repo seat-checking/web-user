@@ -1,4 +1,5 @@
 import { PATH } from 'common/utils/constants';
+import TestReservation from 'components/store/reservation/Text';
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
@@ -41,7 +42,7 @@ export const router = createBrowserRouter([
   },
   {
     path: `/${PATH.Reservation}`,
-    element: <ReservationPage />,
+    element: <TestReservation />,
   },
   {
     path: `/${PATH.myPage}`,
