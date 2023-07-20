@@ -6,7 +6,7 @@ import {
   CustomHeaderWrapper,
   GlobalStyles,
   Wrapper,
-} from 'components/store/Reservation/Reservation.styled';
+} from 'components/store/reservation/Reservation.styled';
 import { format, getYear } from 'date-fns';
 import ko from 'date-fns/locale/ko';
 import { useState } from 'react';
