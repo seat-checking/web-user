@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 
 export const ModalWrapper = styled.div`
-  width: 29.4rem;
-  height: 21.4rem;
+  width: 35.4rem;
+  height: 21.7rem;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  padding: 2rem;
   border-radius: 1.2rem;
   box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.3);
 `;
