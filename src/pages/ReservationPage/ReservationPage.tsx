@@ -1,4 +1,4 @@
-import { Reservation } from 'components/store/Reservation';
+import { Reservation } from 'components/store/reservation';
 import { BackButton } from 'pages/MyPage/MyPage.styled';
 import {
   HeaderWrapper,
