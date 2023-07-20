@@ -1,6 +1,6 @@
 import { LoginForm } from 'components/form/organisms/LoginForm';
-import React from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import {
   BackButtonIcon,
   LoginPageHeader,
@@ -10,10 +10,15 @@ import {
 import type { VFC } from 'common/utils/types';
 
 export const LoginPage: VFC = () => {
+  const navigate = useNavigate();
+
+  const handleback = (): void => {
+    navigate(-1);
+  };
   return (
     <LoginPageWrapper>
       <LoginPageHeader>
-        <BackButtonIcon />
+        <BackButtonIcon onClick={handleback} />
       </LoginPageHeader>
       <LogoBox>로고 썸네일 등 </LogoBox>
       <LoginForm />

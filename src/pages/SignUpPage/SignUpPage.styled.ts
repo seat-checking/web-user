@@ -16,13 +16,14 @@ export const SignUpPageTitle = styled.div`
 `;
 
 export const ProgressBar = styled.div`
-  width: 100%
+  width: 90%;
   height: 0.4rem;
   display: flex;
-  margin-bottom:4.0rem;
+  margin: 0 auto;
+  margin-bottom: 4rem;
 `;
 export const ProgressBarInner = styled.div`
-  width: 50%;
+  flex: 1;
   height: 0.4rem;
   background: ${(porps): string => porps.theme.palette.primary.orange};
 

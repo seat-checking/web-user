@@ -8,7 +8,7 @@ export const InputsWrapper = styled.div`
 `;
 
 export const InputLabelWrapper = styled.div`
-  width: 80%;
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,9 +16,8 @@ export const InputLabelWrapper = styled.div`
 `;
 
 export const InputGroupWrapper = styled.div`
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
-
   display: flex;
   flex-direction: row;
   gap: 1.4rem;
@@ -37,7 +36,7 @@ export const ResetIconWrapper = styled.div`
 `;
 
 export const ErrorMessageWrapper = styled.div`
-  width: 80%;
+  width: 90%;
   height: 2rem;
   margin: 0 auto;
   padding-top: 1rem;
@@ -46,7 +45,7 @@ export const ErrorMessageWrapper = styled.div`
   color: ${(porps): string => porps.theme.palette.error.main};
 `;
 export const SuccessMessageWrapper = styled.div`
-  width: 80%;
+  width: 90%;
   height: 2rem;
   margin: 0 auto;
   margin-top: 1rem;
@@ -56,7 +55,7 @@ export const SuccessMessageWrapper = styled.div`
 `;
 
 export const HelperTextWrapper = styled.div`
-  width: 80%;
+  width: 90%;
   height: 2rem;
   margin: 0 auto;
   margin-top: 1rem;

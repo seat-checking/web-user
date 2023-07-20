@@ -4,6 +4,7 @@ import { Spinner } from 'components/layout/Spinner';
 import { StoreItem } from 'components/store/StoreItem';
 import { ErrorMessage } from 'components/store/storeList/AllList/AllList.styled';
 import InfiniteScroll from 'react-infinite-scroller';
+import { Link } from 'react-router-dom';
 import type { ErrorResponse } from 'api/store/common';
 import type { StoreUser, StoreListResponse } from 'api/store/storeApi';
 
@@ -12,14 +13,13 @@ import type { VFC } from 'common/utils/types';
 export const AllList: VFC = () => {
   const getStoreData = async ({ pageParam = 1 }) => {
     const resData = await getStoreList({
-      category: 'NONE',
       page: pageParam,
       size: 15,
     });
     return resData.result;
   };
 
-  const { isLoading, isError, error, data, fetchNextPage, hasNextPage } =
+  const { isLoading, isError, data, fetchNextPage, hasNextPage } =
     useInfiniteQuery<StoreListResponse, ErrorResponse>({
       queryKey: ['AllList'],
       queryFn: getStoreData,
@@ -50,18 +50,20 @@ export const AllList: VFC = () => {
   let stores: StoreUser[] = [];
   for (let i = 0; i < data.pages.length; i++) {
     const page = data.pages[i];
-    stores = [...stores, ...page.storeList]; // 배열
+    stores = [...stores, ...page.storeResponseList]; // 배열
   }
 
   return (
     <InfiniteScroll loadMore={handleLoadMore} hasMore={hasNextPage}>
       {stores.map((store) => (
-        <StoreItem
-          key={store.id}
-          src={store.mainImage}
-          storeName={store.name}
-          introduction={store.introduction}
-        />
+        <Link key={store.id} to={`/storeDetail/${store.id}`}>
+          <StoreItem
+            key={store.id}
+            src={store.mainImage}
+            storeName={store.name}
+            introduction={store.introduction}
+          />
+        </Link>
       ))}
     </InfiniteScroll>
   );

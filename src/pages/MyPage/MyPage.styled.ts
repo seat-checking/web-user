@@ -80,7 +80,7 @@ export const UserSeatinfoPlace = styled.div`
   margin: 0 auto;
 `;
 export const CheckOutButtonWrapper = styled.div`
-  width: 90%;
+  width: 95%;
   display: flex;
   justify-content: end;
 `;
@@ -140,4 +140,23 @@ export const UserInfoIcon = styled.img`
   height: 1.6rem;
   margin-left: 2rem;
   margin-right: 2rem;
+`;
+
+export const NotificationBox = styled.div`
+  width: 8rem;
+  height: 3.4rem;
+  border-radius: 0.6rem;
+  background-color: ${(props): string => props.theme.palette.grey[50]};
+  font-size: 1.4rem;
+  color: ${(props): string => props.theme.palette.grey[500]};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-left: auto;
+  cursor: pointer;
+`;
+export const NotificationBoxIcon = styled.img`
+  width: 1.4rem;
+  height: 1.4rem;
 `;

@@ -6,13 +6,18 @@ import {
   SeatCountWrap,
   UpperWrap,
 } from 'components/store/SeatLayoutTab/SeatLayoutTab.styled';
+import type { StoreDetaillResponse } from 'api/store/storeApi';
 
 import type { VFC } from 'common/utils/types';
+
+interface SeatLayoutTabProps {
+  storeInfo: StoreDetaillResponse;
+}
 
 /**
  * 좌석정보 탭을 클릭했을 때 하단에 보여줄 컴포넌트
  */
-export const SeatLayoutTab: VFC = () => {
+export const SeatLayoutTab: VFC<SeatLayoutTabProps> = ({ storeInfo }) => {
   return (
     <div>
       <UpperWrap>

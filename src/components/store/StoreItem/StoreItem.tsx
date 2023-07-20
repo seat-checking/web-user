@@ -21,7 +21,7 @@ export const StoreItem: VFC<StoreItemProps> = ({
 }) => {
   const renderImage = () => {
     if (!src || src.includes('image-error')) {
-      return <StoreItemImg style={{ backgroundColor: '#FF8D4E' }} />;
+      return <StoreItemImg style={{ backgroundColor: '#AABDFF' }} />;
     }
     return <StoreItemImg src={src} />;
   };
