@@ -20,15 +20,15 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={myTheme}>
       <FormProvider>
-        <QueryClientProvider client={queryclient}>
-          <GoogleOAuthProvider clientId='169343984623-lq9lvl7ir9nusto7qalvdv4i667t7cdo.apps.googleusercontent.com'>
-            <SearchProvider>
+        <SearchProvider>
+          <QueryClientProvider client={queryclient}>
+            <GoogleOAuthProvider clientId='169343984623-lq9lvl7ir9nusto7qalvdv4i667t7cdo.apps.googleusercontent.com'>
               <App />
               <GlobalStyles />
-            </SearchProvider>
-          </GoogleOAuthProvider>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
+            </GoogleOAuthProvider>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </SearchProvider>
       </FormProvider>
     </ThemeProvider>
   </React.StrictMode>,

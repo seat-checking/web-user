@@ -12,6 +12,8 @@ interface SearchContextProps {
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
   searchResults: StoreUser[];
   setSearchResults: React.Dispatch<React.SetStateAction<StoreUser[]>>;
+  query: string;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 export const SearchContext = createContext<SearchContextProps | undefined>(
   undefined,
@@ -28,14 +30,26 @@ export const SearchProvider: VFC<SearchProviderProps> = ({ children }) => {
     return sessionData ? JSON.parse(sessionData) : [];
   });
 
+  const [query, setQuery] = useState<string>(() => {
+    const sessionData = sessionStorage.getItem('query');
+    return sessionData ? JSON.parse(sessionData) : '';
+  });
+
   useEffect(() => {
     sessionStorage.setItem('searchValue', JSON.stringify(searchValue));
     sessionStorage.setItem('searchResults', JSON.stringify(searchResults));
   }, [searchValue, searchResults]);
 
   const value = useMemo(
-    () => ({ searchValue, setSearchValue, searchResults, setSearchResults }),
-    [searchValue, searchResults],
+    () => ({
+      searchValue,
+      setSearchValue,
+      searchResults,
+      setSearchResults,
+      query,
+      setQuery,
+    }),
+    [searchValue, searchResults, query],
   );
 
   return (
