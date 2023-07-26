@@ -56,6 +56,7 @@ export const ReservationName = styled.div`
   color: #505462;
   font-size: 2.4rem;
   font-weight: 700;
+  margin-right: 0.8rem;
 `;
 
 export const Circle = styled.div<CircleProps>`
@@ -72,6 +73,7 @@ export const ReservationSeatNumber = styled.div`
   color: #505462;
   font-size: 1.6rem;
   font-weight: 400;
+  margin-left: 0.4rem;
 `;
 export const ContentMainTextWrapper = styled.div<{ gap?: number }>`
   display: flex;

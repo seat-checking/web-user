@@ -11,7 +11,6 @@ export const ReservationItemWrapper = styled.div`
   display: flex;
   align-items: center;
   border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
-  cursor: pointer;
 `;
 
 export const ReservationItemImgWrapper = styled.div`
@@ -34,7 +33,7 @@ export const ReservationItemName = styled.div`
   font-size: 1.6rem;
   font-weight: 700;
   display: flex;
-  flex-direction: column;
+  gap: 0.4rem;
   color: ${(props): string => props.theme.palette.black.main};
 `;
 
@@ -53,6 +52,7 @@ export const ReservationItemSeatInfo = styled.span`
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  color: ${(props): string => props.theme.palette.black.main};
 `;
 
 export const ReservationItemDateWrapper = styled.div`
@@ -80,7 +80,4 @@ export const Circle = styled.div<CircleProps>`
   border-radius: 0.6rem;
   background-color: ${(props): string =>
     props.isActive ? props.theme.palette.primary.orange : 'gray'};
-
-  margin-left: 0.8rem;
-  margin-right: 0.4rem;
 `;

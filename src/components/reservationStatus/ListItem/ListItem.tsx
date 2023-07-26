@@ -42,16 +42,18 @@ export const ListItem: VFC<ReservationItemProps> = ({
   return (
     <ReservationItemWrapper>
       <ReservationItemImgWrapper>{renderImage()}</ReservationItemImgWrapper>
-      <ReservationItemNameWrapper>
-        <ReservationItemName>
-          {ReservationName}
-          <ReservationItemSeatInfo>
-            <Circle isActive={isActive} />
-            {seatNumber}번 좌석
-          </ReservationItemSeatInfo>
-        </ReservationItemName>
-        <ReservationIteminfo>{ReservationInfo}</ReservationIteminfo>
-      </ReservationItemNameWrapper>
+      <div>
+        <ReservationItemNameWrapper>
+          <ReservationItemName>
+            {ReservationName}
+            <ReservationIteminfo>{ReservationInfo}</ReservationIteminfo>
+          </ReservationItemName>
+        </ReservationItemNameWrapper>
+        <ReservationItemSeatInfo>
+          <Circle isActive={isActive} />
+          {seatNumber}번 좌석
+        </ReservationItemSeatInfo>
+      </div>
       <ReservationItemDateWrapper>
         <ReservationItemDate>{ReservationDate}</ReservationItemDate>
         <ReservationItemTime>{ReservationTime}</ReservationItemTime>
