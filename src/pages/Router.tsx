@@ -1,15 +1,14 @@
 import { PATH } from 'common/utils/constants';
-import TestReservation from 'components/store/reservation/Text';
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
-import { ReservationPage } from 'pages/ReservationPage';
 import { ReservationStatusDetailPage } from 'pages/ReservationStatusDetailPage';
 
 import { ReservationStatusPage } from 'pages/ReservationStatusPage';
 
 import { RootPage } from 'pages/RootPage';
 import { SearchPage } from 'pages/SearchPage';
+import { SeatUsePage } from 'pages/SeatUsePage';
 import { SignUpPage } from 'pages/SignUpPage';
 import { StoreDetailPage } from 'pages/StoreDetailPage';
 import { StoreListPage } from 'pages/StoreListPage';
@@ -41,8 +40,8 @@ export const router = createBrowserRouter([
     element: <StoreDetailPage />,
   },
   {
-    path: `/${PATH.Reservation}`,
-    element: <TestReservation />,
+    path: `/${PATH.seatuse}`,
+    element: <SeatUsePage />,
   },
   {
     path: `/${PATH.myPage}`,

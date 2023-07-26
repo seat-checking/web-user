@@ -8,5 +8,5 @@ export const PATH = {
   search: 'search',
   reservationStatus: 'reservationstatus',
   reservationStatusDetail: 'reservationStatusDetail',
-  Reservation: 'Reservation',
+  seatuse: 'seatuse',
 } as const;
