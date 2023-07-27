@@ -10,6 +10,9 @@ interface StoreListParams {
 }
 interface StoreSearchParams {
   name: string;
+  page?: number;
+  size?: number;
+  sort?: string;
 }
 
 export interface StoreUser {
@@ -82,7 +85,7 @@ export const getStoreList = async (
 
 export const getSeachList = async (
   params: StoreSearchParams,
-): Promise<SuccessOkResponse<StoreUser[]>> => {
+): Promise<SuccessOkResponse<StoreListResponse>> => {
   const url = getApiUrl('/users/stores/search/name');
   const response = await axios.get(url, {
     params,
