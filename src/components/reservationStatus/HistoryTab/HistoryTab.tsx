@@ -16,16 +16,20 @@ export const HistoryTab = () => {
     if (activeTab === 2) return <CancelledList />;
   };
 
+  const handleTabChange = (index: number) => () => {
+    setActiveTab(index);
+  };
+
   return (
     <>
       <TabBox>
-        <TabItem active={activeTab === 0} onClick={() => setActiveTab(0)}>
+        <TabItem active={activeTab === 0} onClick={handleTabChange(0)}>
           승인된 예약
         </TabItem>
-        <TabItem active={activeTab === 1} onClick={() => setActiveTab(1)}>
+        <TabItem active={activeTab === 1} onClick={handleTabChange(1)}>
           거절된 예약
         </TabItem>
-        <TabItem active={activeTab === 2} onClick={() => setActiveTab(2)}>
+        <TabItem active={activeTab === 2} onClick={handleTabChange(2)}>
           취소한 예약
         </TabItem>
       </TabBox>
