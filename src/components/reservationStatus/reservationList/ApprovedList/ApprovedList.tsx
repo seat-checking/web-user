@@ -14,7 +14,7 @@ export const ApprovedList = () => {
     reservationTime: '15:00-18:00',
   };
   return (
-    <Link to={`/${PATH.reservationStatus}/ApprovedListDetail`}>
+    <Link to={`/${PATH.reservationStatus}/approvedList`}>
       <ListItem
         src={reservation.src}
         ReservationName={reservation.reservationName}
