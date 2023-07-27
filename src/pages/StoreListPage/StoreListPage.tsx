@@ -10,7 +10,7 @@ export const StoreListPage: VFC = () => {
   return (
     <>
       <ListTab />
-      <Navigation />;
+      <Navigation />
     </>
   );
 };

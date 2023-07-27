@@ -6,7 +6,7 @@ import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
 import { ReservationPage } from 'pages/ReservationPage';
-import { ReservationStatusPage } from 'pages/ReservationStatusPage';
+import { ReservationWaitingPage } from 'pages/ReservationStatusPage';
 import { RootPage } from 'pages/RootPage';
 import { SearchPage } from 'pages/SearchPage';
 import { SignUpPage } from 'pages/SignUpPage';
@@ -56,19 +56,29 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <ReservationStatusPage />,
+        element: <ReservationWaitingPage />,
       },
       {
-        path: 'approvedList',
-        element: <ApprovedListDetail />,
+        path: 'Waiting',
+        element: <ReservationWaitingPage />,
       },
       {
-        path: 'cancelled',
-        element: <CancelledDetail />,
-      },
-      {
-        path: 'rejected',
-        element: <RejectedDetail />,
+        path: 'history',
+        element: <ReservationWaitingPage />,
+        // children: [
+        //   {
+        //     path: 'approvedList',
+        //     element: <ApprovedListDetail />,
+        //   },
+        //   {
+        //     path: 'cancelled',
+        //     element: <CancelledDetail />,
+        //   },
+        //   {
+        //     path: 'rejected',
+        //     element: <RejectedDetail />,
+        //   },
+        // ],
       },
     ],
   },
