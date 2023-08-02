@@ -9,38 +9,31 @@ import {
   Wrapper,
 } from 'components/reservationStatus/ListTab/ListTab.styled';
 import { WaitingTab } from 'components/reservationStatus/WaitingTab';
-
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useTabStore } from 'store/statusStore';
 
 import type { VFC } from 'common/utils/types';
 
 export const ListTab: VFC = () => {
-  const [value, setValue] = useState(0);
-  const navigate = useNavigate();
+  const { tab, setTab } = useTabStore((state) => ({
+    tab: state.tab,
+    setTab: state.setTab,
+  }));
 
   const handleValueChange = (newValue: number) => {
-    setValue(newValue);
-    if (newValue === 0) {
-      navigate('/reservationstatus/waiting');
-      return;
-    }
-    if (newValue === 1) {
-      navigate('/reservationstatus/history');
-    }
+    setTab(newValue);
   };
 
   return (
     <Wrapper>
       <ListTitle>예약 현황</ListTitle>
-      <Tabs value={value} onChange={handleValueChange}>
+      <Tabs value={tab} onChange={handleValueChange}>
         <Tab label='예약 대기 중' />
         <Tab label='예약 내역' />
       </Tabs>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={tab} index={0}>
         <WaitingTab />
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={tab} index={1}>
         <HistoryTab />
       </TabPanel>
     </Wrapper>
