@@ -59,26 +59,16 @@ export const router = createBrowserRouter([
         element: <ReservationWaitingPage />,
       },
       {
-        path: 'Waiting',
-        element: <ReservationWaitingPage />,
+        path: 'approved',
+        element: <ApprovedListDetail />,
       },
       {
-        path: 'history',
-        element: <ReservationWaitingPage />,
-        // children: [
-        //   {
-        //     path: 'approvedList',
-        //     element: <ApprovedListDetail />,
-        //   },
-        //   {
-        //     path: 'cancelled',
-        //     element: <CancelledDetail />,
-        //   },
-        //   {
-        //     path: 'rejected',
-        //     element: <RejectedDetail />,
-        //   },
-        // ],
+        path: 'cancelled',
+        element: <CancelledDetail />,
+      },
+      {
+        path: 'rejected',
+        element: <RejectedDetail />,
       },
     ],
   },
