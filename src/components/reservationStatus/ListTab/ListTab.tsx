@@ -9,7 +9,7 @@ import {
   Wrapper,
 } from 'components/reservationStatus/ListTab/ListTab.styled';
 import { WaitingTab } from 'components/reservationStatus/WaitingTab';
-import { useTabStore } from 'store/statusStore';
+import { useTabStore } from 'store/reservationStatusStore';
 
 import type { VFC } from 'common/utils/types';
 

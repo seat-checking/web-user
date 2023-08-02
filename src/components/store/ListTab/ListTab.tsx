@@ -6,7 +6,7 @@ import { CafeList } from 'components/store/storeList/CafeList';
 import { FoodList } from 'components/store/storeList/FoodList';
 import { MeetingList } from 'components/store/storeList/MeetingList';
 
-import { useListTabStore } from 'store/listStore';
+import { useListTabStore } from 'store/StoreListStore';
 import { StoreListTitle, Wrapper } from './ListTab.styled';
 import type { VFC } from 'common/utils/types';
 
