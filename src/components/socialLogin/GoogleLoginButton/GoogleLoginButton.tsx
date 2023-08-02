@@ -32,4 +32,3 @@ export const GoogleLoginButton: VFC = () => {
     </GoogleButtonWrapper>
   );
 };
-// export default GoogleLoginButton;
