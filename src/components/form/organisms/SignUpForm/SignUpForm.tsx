@@ -7,6 +7,7 @@ import { useFormState } from 'context/FormProvider';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useFromStore } from 'store/formStore';
 import {
   ButtonWrapper,
   InputAllCheckBoxLabel,
@@ -31,7 +32,7 @@ interface SignUpFormInputs {
 }
 
 export const SignUpForm: VFC = () => {
-  const { setFormState } = useFormState();
+  const setFormState = useFromStore((state) => state.setFormState);
   const {
     register,
     handleSubmit,
