@@ -9,11 +9,11 @@ import {
   Form,
   IdCheckButton,
 } from 'components/form/organisms/SignUpForm/SignUpForm.styled';
-import { useFormState } from 'context/FormProvider';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useNavigate } from 'react-router-dom';
+import { useFromStore } from 'store/formStore';
 import {
   ButtonWrapper,
   InfoText,
@@ -51,7 +51,7 @@ export const MemberInfoForm: VFC = () => {
 
   const sexValue: string = watch('sex', '');
 
-  const { formState } = useFormState();
+  const formState = useFromStore((state) => state.formState);
 
   const navigate = useNavigate();
 
