@@ -7,5 +7,5 @@ interface TabProps {
 
 export const useListTabStore = create<TabProps>((set) => ({
   tab: 0,
-  setTab: (newTab: number) => set({ tab: newTab }),
+  setTab: (newTab) => set({ tab: newTab }),
 }));
