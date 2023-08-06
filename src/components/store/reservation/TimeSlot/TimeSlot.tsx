@@ -5,27 +5,36 @@ import {
   SubBox,
   TimeLabel,
 } from 'components/store/reservation/TimeSlot/TimeSlot.styled';
-import type { VFC } from 'common/utils/types';
+import type { FC } from 'react';
+import type React from 'react';
 
 interface TimeSlotProps {
   time: string;
   isSelected: boolean;
+  isActivated: boolean;
   onClick: (time: string) => void;
 }
 
-export const TimeSlot: VFC<TimeSlotProps> = ({ time, isSelected, onClick }) => {
+export const TimeSlot: FC<TimeSlotProps> = ({
+  time,
+  isSelected,
+  isActivated,
+  onClick,
+}) => {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       onClick(time);
     }
   };
+
   return (
     <Slot>
       <Line />
       <Box
         isSelected={isSelected}
-        onClick={() => onClick(time)}
+        isActivated={isActivated}
+        onClick={() => (isActivated ? onClick(time) : null)}
         onKeyDown={handleKeyDown}
         tabIndex={0}
         role='button'

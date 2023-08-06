@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface BoxProps {
   isSelected: boolean;
+  isActivated: boolean;
 }
 
 export const Slot = styled.div``;
@@ -22,11 +23,13 @@ export const Box = styled.div<BoxProps>`
   height: 3rem;
   margin: 0.05rem;
   padding: 0.1rem;
-  background-color: ${(props): string =>
-    props.isSelected ? '#FF8D4E' : '#FFDDCA'};
   position: relative;
   tabindex: 0;
   role: 'button';
+
+  cursor: ${({ isActivated }) => (isActivated ? 'pointer' : 'not-allowed')};
+  background-color: ${({ isActivated, isSelected }) =>
+    isActivated ? (isSelected ? '#FF8D4E' : '#FFDDCA') : '#D8D9E1'};
 `;
 
 export const SubBox = styled.div`
