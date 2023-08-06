@@ -4,7 +4,7 @@ import { Tabs } from 'components/layout/tab/Tabs';
 
 import { Booking } from 'components/store/reservation/Booking';
 
-import { UseNow } from 'components/store/reservation/UseNowTab';
+import { UseNow } from 'components/store/reservation/UseNow';
 import { useState } from 'react';
 import type { VFC } from 'common/utils/types';
 import type React from 'react';

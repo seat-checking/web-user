@@ -11,7 +11,7 @@ import {
 import {
   CalendarDate,
   CalendarInfo,
-} from 'components/store/reservation/UseNowTab/UseNow.styled';
+} from 'components/store/reservation/UseNow/UseNow.styled';
 import { format, getYear } from 'date-fns';
 import ko from 'date-fns/locale/ko';
 import { useEffect, useState } from 'react';

@@ -8,7 +8,7 @@ import {
   NotAvailable,
   TimesWrapper,
   UseColorWrapper,
-} from 'components/store/reservation/UseNowTab/UseNow.styled';
+} from 'components/store/reservation/UseNow/UseNow.styled';
 import { useEffect, useState } from 'react';
 
 const generateAllTimeSlots = () => {
@@ -60,6 +60,7 @@ export const Booking: React.FC = () => {
             key={time}
             time={time}
             isSelected={isSelected(time)}
+            isActivated
             onClick={handleTimeClick}
           />
         ))}
