@@ -1,22 +1,12 @@
 import { validateEmail } from 'api/user/user';
 import { PATH } from 'common/utils/constants';
 import { Button } from 'components/form/atoms/Button';
-import { InputCheckBox } from 'components/form/atoms/InputCheckBox';
 import Inputs from 'components/form/molecules/Inputs/Inputs';
-import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useFromStore } from 'store/formStore';
-import {
-  ButtonWrapper,
-  InputAllCheckBoxLabel,
-  InputCheckBoxBorderWrapper,
-  InputSubCheckBoxLabel,
-  InputSubCheckBoxWrapper,
-  Form,
-} from './SignUpForm.styled';
+import { ButtonWrapper, Form } from './SignUpForm.styled';
 import type { VFC } from 'common/utils/types';
-import type { ChangeEventHandler } from 'react';
 
 import type React from 'react';
 import type { SubmitHandler } from 'react-hook-form';
@@ -26,8 +16,6 @@ interface SignUpFormInputs {
   LoginIdUnique: string;
   password: string;
   confirmPassword: string;
-  consentToTermsOfUser: boolean;
-  consentToMarketing: boolean;
 }
 
 export const SignUpForm: VFC = () => {
@@ -38,15 +26,12 @@ export const SignUpForm: VFC = () => {
     watch,
     resetField,
     setError,
-    setValue,
     clearErrors,
     formState: { errors, touchedFields },
   } = useForm<SignUpFormInputs>({ mode: 'onTouched' });
   const emailValue: string = watch('email', '');
   const passwordValue: string = watch('password', '');
   const confirmPasswordValue: string = watch('confirmPassword', '');
-
-  const [isCheckedAll, setIsCheckedAll] = useState(false);
 
   const navigate = useNavigate();
 
@@ -101,39 +86,13 @@ export const SignUpForm: VFC = () => {
     },
   });
 
-  const handleAllCheckBoxChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const isChecked = e.target.checked;
-    setIsCheckedAll(isChecked);
-    setValue('consentToTermsOfUser', isChecked);
-    setValue('consentToMarketing', isChecked);
-  };
-
-  const consentToTermsOfUser = watch('consentToTermsOfUser');
-  const consentToMarketing = watch('consentToMarketing');
-
-  useEffect(() => {
-    if (!consentToTermsOfUser || !consentToMarketing) {
-      setIsCheckedAll(false);
-    }
-    if (consentToTermsOfUser && consentToMarketing) {
-      setIsCheckedAll(true);
-    }
-  }, [consentToTermsOfUser, consentToMarketing]);
-
-  useEffect(() => {
-    if (!consentToTermsOfUser || !consentToMarketing) {
-      setIsCheckedAll(false);
-    }
-  }, [consentToTermsOfUser, consentToMarketing]);
-
   const isErrorsEmpty = Object.keys(errors).length === 0;
 
   const isFormValid =
     touchedFields.email &&
     touchedFields.password &&
     touchedFields.confirmPassword &&
-    isErrorsEmpty &&
-    watch('consentToTermsOfUser');
+    isErrorsEmpty;
 
   return (
     <div>
@@ -210,31 +169,6 @@ export const SignUpForm: VFC = () => {
         >
           비밀번호 확인
         </Inputs>
-        <InputCheckBoxBorderWrapper>
-          <InputCheckBox
-            checked={isCheckedAll}
-            onChange={handleAllCheckBoxChange}
-          />
-          <InputAllCheckBoxLabel>
-            SeatSence 가입 약관 전체동의
-          </InputAllCheckBoxLabel>
-        </InputCheckBoxBorderWrapper>
-        <InputSubCheckBoxWrapper>
-          <InputCheckBox
-            {...register('consentToTermsOfUser', {
-              required: '체크박스는 기본 입력사항입니다.',
-            })}
-          />
-          <InputSubCheckBoxLabel>
-            (필수) <u>서비스 이용약관</u> 및 <u>개인정보 취급 방침</u> 동의
-          </InputSubCheckBoxLabel>
-        </InputSubCheckBoxWrapper>
-        <InputSubCheckBoxWrapper>
-          <InputCheckBox {...register('consentToMarketing')} />
-          <InputSubCheckBoxLabel>
-            (선택) <u>마케팅 정보 수신</u> 동의
-          </InputSubCheckBoxLabel>
-        </InputSubCheckBoxWrapper>
         <ButtonWrapper>
           {isFormValid ? (
             <Button backgroundColor='#FF8D4E' color=' #FFFFFF'>
