@@ -15,8 +15,11 @@ const generateAllTimeSlots = () => {
   const timeSlots = [];
 
   for (let i = 0; i < 24; i++) {
-    const formattedHour = ('0' + i).slice(-2);
-    timeSlots.push(`${formattedHour}:00`);
+    for (let j = 0; j < 60; j += 30) {
+      const formattedHour = ('0' + i).slice(-2);
+      const formattedMinutes = ('0' + j).slice(-2);
+      timeSlots.push(`${formattedHour}:${formattedMinutes}`);
+    }
   }
 
   return timeSlots;
@@ -52,15 +55,17 @@ export const Booking: React.FC = () => {
     return selectedTime.includes(time);
   };
 
+  console.log(selectedTime);
+
   return (
     <div>
       <TimesWrapper>
-        {timeSlots.map((time) => (
+        {timeSlots.map((time, index) => (
           <TimeSlot
             key={time}
             time={time}
             isSelected={isSelected(time)}
-            isActivated
+            isActivated={!(index === 0)}
             onClick={handleTimeClick}
           />
         ))}
