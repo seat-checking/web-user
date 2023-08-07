@@ -21,7 +21,7 @@ export const InputRadioLabel = styled.label`
 export const InfoText = styled.div`
   width: 80%;
   margin: 0 auto;
-  margin-top: 21.7rem;
+  margin-top: 7.9rem;
   text-align: center;
   font-weight: 400;
   font-size: 1.6rem;

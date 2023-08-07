@@ -9,11 +9,11 @@ import {
   Form,
   IdCheckButton,
 } from 'components/form/organisms/SignUpForm/SignUpForm.styled';
-import { useFormState } from 'context/FormProvider';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useNavigate } from 'react-router-dom';
+import { useFromStore } from 'store/formStore';
 import {
   ButtonWrapper,
   InfoText,
@@ -51,7 +51,7 @@ export const MemberInfoForm: VFC = () => {
 
   const sexValue: string = watch('sex', '');
 
-  const { formState } = useFormState();
+  const formState = useFromStore((state) => state.formState);
 
   const navigate = useNavigate();
 
@@ -136,17 +136,18 @@ export const MemberInfoForm: VFC = () => {
           typingrequired
           labelRequired
           placeholder='사용할 닉네임을 입력해주세요.'
-          helperText='* 4~12자의 영문(대소문자 포함)이나 숫자.'
+          helperText='* 2~12자의 영문(대소문자 포함)이나 숫자.'
           {...register('nickname', {
             required: '닉네임은 필수로 입력해주세요',
             pattern: {
-              value: /^[A-Za-z0-9ㄱ-ㅎ가-힣]{2,10}$/,
+              value: /^[A-Za-z0-9ㄱ-ㅎ가-힣]{2,12}$/,
               message:
-                '2~10자의 한글, 영문(대소문자 포함), 숫자만 입력가능합니다.',
+                '2~12자의 한글, 영문(대소문자 포함), 숫자만 입력가능합니다.',
             },
           })}
           valueLength={nicknameValue.length}
           maximum={12}
+          maxLength={12}
           error={touchedFields.nickname && nicknameError}
           success={
             touchedFields.nickname && !nicknameError
@@ -163,7 +164,6 @@ export const MemberInfoForm: VFC = () => {
         </Inputs>
         <Inputs
           onClick={handleNameResetClick}
-          typingrequired
           labelRequired
           placeholder='이름을 입력해 주세요.'
           helperText='* 예약 기능을 위해 반드시 실명을 입력해 주세요!'
@@ -182,20 +182,20 @@ export const MemberInfoForm: VFC = () => {
         </Inputs>
         <Inputs
           onClick={handleAgeResetClick}
-          typingrequired
-          placeholder='숫자만 입력해 주세요.'
-          helperText='* 숫자만 입력해 주세요.'
+          placeholder='생년월일을 입력해 주세요.'
+          helperText='* YYMMDD 6자리'
           error={touchedFields.age && errors.age?.message}
           {...register('age', {
             pattern: {
-              value: /^(?:[1-9]|[1-9][0-9])$/,
-              message: '숫자만 입력해주세요.',
+              value: /^[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/,
+              message: '* YYMMDD 6자리를 입력해 주새요.',
             },
           })}
           valueLength={ageValue.toString().length}
           maximum={2}
+          maxLength={6}
         >
-          나이
+          생년월일
         </Inputs>
         <InputRadiowrapper>
           <InputLabel>성별</InputLabel>
