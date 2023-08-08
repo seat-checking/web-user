@@ -1,10 +1,13 @@
 import { PATH } from 'common/utils/constants';
+import { ApprovedListDetail } from 'components/reservationStatus/listDetail/ApprovedListDetail';
+import { CancelledDetail } from 'components/reservationStatus/listDetail/CancelledDetail';
+import { RejectedDetail } from 'components/reservationStatus/listDetail/RejectedDetail';
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
 import { ProtectedRoute } from 'pages/ProtectedRoute';
-import { ReservationDetailPage } from 'pages/ReservationDetailPage';
 import { ReservationPage } from 'pages/ReservationPage';
+import { ReservationWaitingPage } from 'pages/ReservationStatusPage';
 import { RootPage } from 'pages/RootPage';
 import { SearchPage } from 'pages/SearchPage';
 import { SignUpPage } from 'pages/SignUpPage';
@@ -40,6 +43,10 @@ export const router = createBrowserRouter([
     children: [{ index: true, element: <StoreDetailPage /> }],
   },
   {
+    path: `/${PATH.reservation}`,
+    element: <ReservationPage />,
+  },
+  {
     path: `/${PATH.myPage}`,
     element: <ProtectedRoute />,
     children: [{ index: true, element: <MyPage /> }],
@@ -50,13 +57,24 @@ export const router = createBrowserRouter([
     children: [{ index: true, element: <SearchPage /> }],
   },
   {
-    path: `/${PATH.reservation}`,
-    element: <ProtectedRoute />,
-    children: [{ index: true, element: <ReservationPage /> }],
-  },
-  {
-    path: `/${PATH.reservationDetail}`,
-    element: <ProtectedRoute />,
-    children: [{ index: true, element: <ReservationDetailPage /> }],
+    path: `/${PATH.reservationStatus}`,
+    children: [
+      {
+        index: true,
+        element: <ReservationWaitingPage />,
+      },
+      {
+        path: 'approved',
+        element: <ApprovedListDetail />,
+      },
+      {
+        path: 'cancelled',
+        element: <CancelledDetail />,
+      },
+      {
+        path: 'rejected',
+        element: <RejectedDetail />,
+      },
+    ],
   },
 ]);
