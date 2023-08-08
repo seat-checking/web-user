@@ -38,6 +38,10 @@ interface ValidateEmailResult {
   isValid: boolean;
 }
 
+interface ValidateLoginResult {
+  accessToken: string;
+}
+
 export const validateNickname = async (
   params: ValidateNicknameParams,
 ): Promise<SuccessOkResponse<ValidateNicknameResult>> => {
@@ -61,7 +65,7 @@ export const signUp = async (
 
 export const login = async (
   params: LoginParams,
-): Promise<SuccessOkWithoutResultResponse> => {
+): Promise<SuccessOkResponse<ValidateLoginResult>> => {
   const response = await axios.post(`${HOST}/users/sign-in`, params);
   return response.data;
 };
