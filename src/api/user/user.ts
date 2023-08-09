@@ -64,6 +64,8 @@ export const signUp = async (
 export const login = async (
   params: LoginParams,
 ): Promise<SuccessOkResponse<ValidateLoginResult>> => {
-  const response = await axios.post(`${HOST}/users/sign-in`, params);
+  const response = await axios.post(`${HOST}/users/sign-in`, params, {
+    withCredentials: true,
+  });
   return response.data;
 };
