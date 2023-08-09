@@ -89,7 +89,7 @@ export const getSeachList = async (
   params: StoreSearchParams,
 ): Promise<SuccessOkResponse<StoreListResponse>> => {
   const url = getApiUrl('/users/stores/search/name');
-  const response = await axios.get(url, {
+  const response = await axiosWithAuth.get(url, {
     params,
   });
   return response.data;
@@ -99,7 +99,7 @@ export const getStoreDetaill = async (
   params: StoreDetaillParams,
 ): Promise<SuccessOkResponse<StoreDetaillResponse>> => {
   const url = getApiUrl(`/users/stores/${params.id}`);
-  const response = await axios.get(url, {
+  const response = await axiosWithAuth.get(url, {
     params,
   });
   return response.data;
