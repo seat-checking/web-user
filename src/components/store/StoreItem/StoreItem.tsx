@@ -1,4 +1,6 @@
 import {
+  Ready,
+  Start,
   StoreItemDescription,
   StoreItemDiv,
   StoreItemImg,
@@ -12,12 +14,14 @@ interface StoreItemProps {
   src: string;
   storeName: string;
   introduction: string;
+  open: boolean;
 }
 
 export const StoreItem: VFC<StoreItemProps> = ({
   src,
   storeName,
   introduction,
+  open,
 }) => {
   const renderImage = () => {
     if (!src || src.includes('image-error')) {
@@ -30,7 +34,10 @@ export const StoreItem: VFC<StoreItemProps> = ({
     <StoreItemDiv>
       <StoreItemImgDiv>{renderImage()}</StoreItemImgDiv>
       <StoreItemDescription>
-        <StoreItemName>{storeName}</StoreItemName>
+        <StoreItemName>
+          {storeName}
+          {open ? <Start>영업중</Start> : <Ready>영업준비중</Ready>}
+        </StoreItemName>
         <StoreItemIntroduction>{introduction}</StoreItemIntroduction>
       </StoreItemDescription>
     </StoreItemDiv>
