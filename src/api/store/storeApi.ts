@@ -1,3 +1,4 @@
+import { axiosWithAuth } from 'api/common';
 import { getApiUrl } from 'api/store/common';
 import axios from 'axios';
 import type { SuccessOkResponse } from 'api/store/common';
@@ -21,6 +22,7 @@ export interface StoreUser {
   introduction: string;
   location: string;
   mainImage: string;
+  open: boolean;
 }
 
 export interface StoreListResponse {
@@ -77,7 +79,7 @@ export const getStoreList = async (
   params: StoreListParams,
 ): Promise<SuccessOkResponse<StoreListResponse>> => {
   const url = getApiUrl('/users/stores/list');
-  const response = await axios.get(url, {
+  const response = await axiosWithAuth.get(url, {
     params,
   });
   return response.data;
@@ -87,7 +89,7 @@ export const getSeachList = async (
   params: StoreSearchParams,
 ): Promise<SuccessOkResponse<StoreListResponse>> => {
   const url = getApiUrl('/users/stores/search/name');
-  const response = await axios.get(url, {
+  const response = await axiosWithAuth.get(url, {
     params,
   });
   return response.data;
@@ -97,7 +99,7 @@ export const getStoreDetaill = async (
   params: StoreDetaillParams,
 ): Promise<SuccessOkResponse<StoreDetaillResponse>> => {
   const url = getApiUrl(`/users/stores/${params.id}`);
-  const response = await axios.get(url, {
+  const response = await axiosWithAuth.get(url, {
     params,
   });
   return response.data;

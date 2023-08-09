@@ -5,6 +5,7 @@ import { RejectedDetail } from 'components/reservationStatus/listDetail/Rejected
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
+import { ProtectedRoute } from 'pages/ProtectedRoute';
 import { ReservationPage } from 'pages/ReservationPage';
 import { ReservationWaitingPage } from 'pages/ReservationStatusPage';
 import { RootPage } from 'pages/RootPage';
@@ -33,11 +34,13 @@ export const router = createBrowserRouter([
   },
   {
     path: `/${PATH.storeList}`,
-    element: <StoreListPage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <StoreListPage /> }],
   },
   {
     path: `/${PATH.storeDetail}/:storeId`,
-    element: <StoreDetailPage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <StoreDetailPage /> }],
   },
   {
     path: `/${PATH.reservation}`,
@@ -45,11 +48,13 @@ export const router = createBrowserRouter([
   },
   {
     path: `/${PATH.myPage}`,
-    element: <MyPage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <MyPage /> }],
   },
   {
     path: `/${PATH.search}`,
-    element: <SearchPage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <SearchPage /> }],
   },
   {
     path: `/${PATH.reservationStatus}`,
