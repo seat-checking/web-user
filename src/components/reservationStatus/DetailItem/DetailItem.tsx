@@ -22,7 +22,7 @@ import type { VFC } from 'common/utils/types';
 interface DetailItemProps {
   storeName: string;
   name: string;
-  seatNumber: number;
+  seatNumber: string;
   storePlace: string;
   reservationDate: string;
   reservationTime: string;
@@ -55,7 +55,7 @@ export const DetailItem: VFC<DetailItemProps> = ({
         <ContentHeader>
           <ReservationName>{name}</ReservationName>
           <Circle isActive={isActive} />
-          <ReservationSeatNumber>{seatNumber}번</ReservationSeatNumber>
+          <ReservationSeatNumber>{seatNumber}</ReservationSeatNumber>
         </ContentHeader>
         <ContentMain>
           <ContentMainTextWrapper>
@@ -70,7 +70,7 @@ export const DetailItem: VFC<DetailItemProps> = ({
               <ContentMainTextCircle />
               신청한 좌석
             </ContentMainText>
-            <ContentSubText>{seatNumber}번</ContentSubText>
+            <ContentSubText>{seatNumber}</ContentSubText>
           </ContentMainTextWrapper>
           <ContentMainTextWrapper gap={1.2}>
             <ContentMainText>
