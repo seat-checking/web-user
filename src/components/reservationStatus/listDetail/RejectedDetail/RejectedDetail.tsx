@@ -1,26 +1,51 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { Button } from 'components/form/atoms/Button';
 import { DetailItem } from 'components/reservationStatus/DetailItem';
 import { ButtonWrapper } from 'components/reservationStatus/DetailItem/DetailItem.styled';
+import {
+  getFormattedMonthAndDay,
+  getFormattedTime,
+} from 'components/reservationStatus/reservationList/ApprovedList';
+import { REJECTED_LIST_QUERY_KEY } from 'components/reservationStatus/reservationList/RejectedList';
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import type { ReservationListResponse } from 'api/reservation/reservation';
 
 export const RejectedDetail = () => {
-  const detail = {
-    storeName: 'Hplace',
-    name: '최우영',
-    seatNumber: 152,
-    storePlace: '1층 레드룸',
-    reservationDate: '23년 2월 23일',
-    reservationTime: '15:00 ~ 18:00',
-  };
+  const queryClient = useQueryClient();
+  const { reservationId } = useParams<{ reservationId: string }>();
+
+  const cachedData = queryClient.getQueryData<{
+    pages: ReservationListResponse[];
+  }>(REJECTED_LIST_QUERY_KEY);
+
+  console.log(cachedData);
+
+  // 숫자로 변환
+  const reservationIdAsNumber = Number(reservationId);
+
+  const reservationDetail = cachedData?.pages
+    .flatMap((page) => page.content)
+    .find((res) => res.reservationId === reservationIdAsNumber);
+
+  if (!reservationDetail) {
+    console.log('데이터 없음!!');
+
+    return null;
+  }
   return (
     <>
       <DetailItem
-        storeName={detail.storeName}
-        name={detail.name}
-        seatNumber={detail.seatNumber}
-        storePlace={detail.storePlace}
-        reservationDate={detail.reservationDate}
-        reservationTime={detail.reservationTime}
+        storeName={reservationDetail.storeName}
+        name={reservationDetail.userNickname}
+        seatNumber={reservationDetail.reservationUnitReservedByUser}
+        storePlace={reservationDetail.storeSpaceName}
+        reservationDate={getFormattedMonthAndDay(
+          reservationDetail.startSchedule,
+        )}
+        reservationTime={`${getFormattedTime(
+          reservationDetail.startSchedule,
+        )}-${getFormattedTime(reservationDetail.endSchedule)}`}
         isActive
       />
       <ButtonWrapper>
