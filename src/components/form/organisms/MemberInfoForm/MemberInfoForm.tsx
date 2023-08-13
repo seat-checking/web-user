@@ -69,7 +69,7 @@ export const MemberInfoForm: VFC = () => {
     if (firstData !== null) {
       const requestData: SignUpParams = {
         nickname: data.nickname,
-        age: data.age,
+        birthDate: data.age,
         sex: data.sex,
         name: data.name,
         ...firstData,
