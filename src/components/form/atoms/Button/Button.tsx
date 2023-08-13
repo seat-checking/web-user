@@ -8,6 +8,7 @@ interface ButtonProps {
   fontSize?: string;
   border?: string;
   disabled?: boolean;
+  onClick?: () => void;
 }
 
 export const Button: VFC<ButtonProps> = ({
@@ -17,12 +18,14 @@ export const Button: VFC<ButtonProps> = ({
   fontSize,
   border,
   disabled,
+  onClick,
 }) => {
   return (
     <Wrapper>
       <ButtonBox
         style={{ backgroundColor, color, fontSize, border }}
         disabled={disabled}
+        onClick={onClick}
       >
         {children}
       </ButtonBox>
