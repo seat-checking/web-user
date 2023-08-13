@@ -24,7 +24,7 @@ export interface SignUpParams {
   password: string;
   nickname: string;
   name: string;
-  age: number;
+  birthDate: number;
   sex: string;
 }
 
