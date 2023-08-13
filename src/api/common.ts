@@ -30,7 +30,6 @@ axiosWithAuth.interceptors.request.use(
 // 응답 인터셉터 추가하기
 axiosWithAuth.interceptors.response.use(
   (response) => {
-    console.log('response.headers2 :>> ', response.headers.authorization);
     if (response.headers.authorization) {
       console.log('토큰 만료!!!!!!!!!');
       setAuth(response.headers.authorization);
