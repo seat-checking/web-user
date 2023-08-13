@@ -1,4 +1,4 @@
-import { getStoreDetaill, type StoreDetaillResponse } from 'api/store/storeApi';
+import { getStoreDetaill, type StoreDetaillResponse } from 'api/store/store';
 import { ReactComponent as ArrowLeft } from 'assets/svgs/arrowLeft.svg';
 
 import { Carousel } from 'components/store/Carousel';
