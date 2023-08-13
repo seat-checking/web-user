@@ -78,7 +78,7 @@ export class StoreUserApi {
 export const getStoreList = async (
   params: StoreListParams,
 ): Promise<SuccessOkResponse<StoreListResponse>> => {
-  const url = getApiUrl('/users/stores/list');
+  const url = getApiUrl('/stores/users/list');
   const response = await axiosWithAuth.get(url, {
     params,
   });
@@ -88,7 +88,7 @@ export const getStoreList = async (
 export const getSeachList = async (
   params: StoreSearchParams,
 ): Promise<SuccessOkResponse<StoreListResponse>> => {
-  const url = getApiUrl('/users/stores/search/name');
+  const url = getApiUrl('/stores/users/search/name');
   const response = await axiosWithAuth.get(url, {
     params,
   });
@@ -98,7 +98,7 @@ export const getSeachList = async (
 export const getStoreDetaill = async (
   params: StoreDetaillParams,
 ): Promise<SuccessOkResponse<StoreDetaillResponse>> => {
-  const url = getApiUrl(`/users/stores/${params.id}`);
+  const url = getApiUrl(`/stores/users/${params.id}`);
   const response = await axiosWithAuth.get(url, {
     params,
   });
