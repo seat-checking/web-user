@@ -2,6 +2,10 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { getReservationList } from 'api/reservation/reservation';
 import { Spinner } from 'components/layout/Spinner';
 import { ListItem } from 'components/reservationStatus/ListItem';
+import {
+  getFormattedMonthAndDay,
+  getFormattedTime,
+} from 'components/reservationStatus/reservationList/ApprovedList';
 import { ErrorMessage } from 'components/store/storeList/AllList/AllList.styled';
 import InfiniteScroll from 'react-infinite-scroller';
 import type {
@@ -47,19 +51,6 @@ export const WaitingTab = () => {
     const page = data.pages[i];
     reservations = [...reservations, ...page.content];
   }
-
-  const getFormattedTime = (isoString: string) => {
-    const date = new Date(isoString);
-    const hours = String(date.getUTCHours()).padStart(2, '0');
-    const minutes = String(date.getUTCMinutes()).padStart(2, '0');
-    return `${hours}:${minutes}`;
-  };
-  const getFormattedMonthAndDay = (isoString: string) => {
-    const date = new Date(isoString);
-    const month = String(date.getUTCHours()).padStart(2, '0');
-    const day = String(date.getUTCDate()).padStart(2, '0');
-    return `${month}월 ${day}일`;
-  };
 
   return (
     <InfiniteScroll loadMore={handleLoadMore} hasMore={hasNextPage}>
