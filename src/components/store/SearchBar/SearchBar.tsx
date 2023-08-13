@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { getSeachList } from 'api/store/storeApi';
+import { getSeachList } from 'api/store/store';
 import { InputResetIcon } from 'components/form/atoms/InputResetIcon';
 import { Spinner } from 'components/layout/Spinner';
 import {
@@ -16,7 +16,7 @@ import { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import type { ErrorResponse } from 'api/store/common';
-import type { StoreListResponse, StoreUser } from 'api/store/storeApi';
+import type { StoreListResponse, StoreUser } from 'api/store/store';
 import type { VFC } from 'common/utils/types';
 
 import type { ChangeEvent, KeyboardEvent } from 'react';

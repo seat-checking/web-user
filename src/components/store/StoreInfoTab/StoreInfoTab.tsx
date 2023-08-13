@@ -3,7 +3,7 @@ import {
   Label,
   TextRow,
 } from 'components/store/StoreInfoTab/StoreInfoTab.styled';
-import type { StoreDetaillResponse } from 'api/store/storeApi';
+import type { StoreDetaillResponse } from 'api/store/store';
 import type { VFC } from 'common/utils/types';
 
 interface StoreInfoTabProps {
