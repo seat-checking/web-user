@@ -58,21 +58,19 @@ export const router = createBrowserRouter([
   },
   {
     path: `/${PATH.reservationStatus}`,
+    element: <ProtectedRoute />,
     children: [
+      { index: true, element: <ReservationWaitingPage /> },
       {
-        index: true,
-        element: <ReservationWaitingPage />,
-      },
-      {
-        path: 'approved',
+        path: `${PATH.approvedListDetail}/:reservationId`,
         element: <ApprovedListDetail />,
       },
       {
-        path: 'cancelled',
+        path: `${PATH.cancelledDetail}/:reservationId`,
         element: <CancelledDetail />,
       },
       {
-        path: 'rejected',
+        path: `${PATH.rejectedDetail}/:reservationId`,
         element: <RejectedDetail />,
       },
     ],
