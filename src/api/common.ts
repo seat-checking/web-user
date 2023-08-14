@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAuth, setAuth } from 'utils/auth';
+import { getAuth, removeAuth, setAuth } from 'utils/auth';
 import type { Token } from 'models/auth';
 
 export const axiosWithAuth = axios.create({
@@ -33,13 +33,14 @@ axiosWithAuth.interceptors.response.use(
     console.log('response.headers2 :>> ', response.headers.authorization);
     if (response.headers.authorization) {
       console.log('토큰 만료!!!!!!!!!');
-      setAuth(response.headers.authorization);
-      axios.defaults.headers.common.Authorization =
-        response.headers.authorization;
+      setAuth({ accessToken: response.headers.authorization });
     }
     return response;
   },
   (error) => {
+    if (error.status === 403) {
+      removeAuth();
+    }
     return Promise.reject(error);
   },
 );
