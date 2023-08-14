@@ -1,7 +1,8 @@
 import { PATH } from 'common/utils/constants';
-import { ApprovedListDetail } from 'components/reservationStatus/listDetail/ApprovedListDetail';
+import { ApprovedListDetail } from 'components/reservationStatus/listDetail/ApprovedDetail';
 import { CancelledDetail } from 'components/reservationStatus/listDetail/CancelledDetail';
 import { RejectedDetail } from 'components/reservationStatus/listDetail/RejectedDetail';
+import { WaitingTabDetail } from 'components/reservationStatus/listDetail/WaitingTabDetail';
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
@@ -62,15 +63,19 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <ReservationWaitingPage /> },
       {
-        path: `${PATH.approvedListDetail}/:reservationId`,
+        path: `${PATH.waitingtabdetail}/:reservationId`,
+        element: <WaitingTabDetail />,
+      },
+      {
+        path: `${PATH.approveddetail}/:reservationId`,
         element: <ApprovedListDetail />,
       },
       {
-        path: `${PATH.cancelledDetail}/:reservationId`,
+        path: `${PATH.cancelleddetail}/:reservationId`,
         element: <CancelledDetail />,
       },
       {
-        path: `${PATH.rejectedDetail}/:reservationId`,
+        path: `${PATH.rejecteddetail}/:reservationId`,
         element: <RejectedDetail />,
       },
     ],
