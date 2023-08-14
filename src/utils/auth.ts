@@ -9,3 +9,7 @@ export const getAuth = (): Partial<Token> => {
 export const setAuth = (newAuth: Token) => {
   localStorage.setItem('accessToken', newAuth.accessToken);
 };
+
+export const removeAuth = () => {
+  localStorage.removeItem('accessToken');
+};
