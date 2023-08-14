@@ -2,6 +2,7 @@ import { PATH } from 'common/utils/constants';
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
+import { ReservationIntentPage } from 'pages/ReservationIntentPage';
 import { ReservationStatusDetailPage } from 'pages/ReservationStatusDetailPage';
 
 import { ReservationStatusPage } from 'pages/ReservationStatusPage';
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
   {
     path: `/${PATH.seatuse}`,
     element: <SeatUsePage />,
+  },
+  {
+    path: `/${PATH.intent}`,
+    element: <ReservationIntentPage />,
   },
   {
     path: `/${PATH.myPage}`,

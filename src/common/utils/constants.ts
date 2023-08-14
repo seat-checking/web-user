@@ -9,4 +9,5 @@ export const PATH = {
   reservationStatus: 'reservationstatus',
   reservationStatusDetail: 'reservationStatusDetail',
   seatuse: 'seatuse',
+  intent: 'intent',
 } as const;
