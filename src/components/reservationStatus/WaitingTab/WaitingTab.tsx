@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getReservationList } from 'api/reservation/reservation';
+import { PATH } from 'common/utils/constants';
 import { Spinner } from 'components/layout/Spinner';
 import { ListItem } from 'components/reservationStatus/ListItem';
 import {
@@ -8,10 +9,13 @@ import {
 } from 'components/reservationStatus/reservationList/ApprovedList';
 import { ErrorMessage } from 'components/store/storeList/AllList/AllList.styled';
 import InfiniteScroll from 'react-infinite-scroller';
+import { Link } from 'react-router-dom';
 import type {
   ReservationListResponse,
   ReservationUser,
 } from 'api/reservation/reservation';
+
+export const WAITINGTAB_LIST_QUERY_KEY = ['waitingList'];
 
 export const WaitingTab = () => {
   const getReservationData = async ({ pageParam = 1 }) => {
@@ -55,18 +59,22 @@ export const WaitingTab = () => {
   return (
     <InfiniteScroll loadMore={handleLoadMore} hasMore={hasNextPage}>
       {reservations.map((reservation) => (
-        <ListItem
+        <Link
           key={reservation.reservationId}
-          src={reservation.storeMainImage}
-          ReservationName={reservation.storeName}
-          seatNumber={reservation.reservationUnitReservedByUser}
-          ReservationInfo={reservation.storeSpaceName}
-          ReservationDate={getFormattedMonthAndDay(reservation.startSchedule)}
-          ReservationTime={`${getFormattedTime(
-            reservation.startSchedule,
-          )}-${getFormattedTime(reservation.endSchedule)}`}
-          isActive
-        />
+          to={`/${PATH.reservationStatus}/${PATH.waitingtabdetail}/${reservation.reservationId}`}
+        >
+          <ListItem
+            src={reservation.storeMainImage}
+            ReservationName={reservation.storeName}
+            seatNumber={reservation.reservationUnitReservedByUser}
+            ReservationInfo={reservation.storeSpaceName}
+            ReservationDate={getFormattedMonthAndDay(reservation.startSchedule)}
+            ReservationTime={`${getFormattedTime(
+              reservation.startSchedule,
+            )}-${getFormattedTime(reservation.endSchedule)}`}
+            isActive
+          />
+        </Link>
       ))}
     </InfiniteScroll>
   );
