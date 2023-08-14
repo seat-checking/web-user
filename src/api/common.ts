@@ -38,7 +38,7 @@ axiosWithAuth.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.status === 403) {
+    if (error.response && error.response.status === 403) {
       removeAuth();
     }
     return Promise.reject(error);
