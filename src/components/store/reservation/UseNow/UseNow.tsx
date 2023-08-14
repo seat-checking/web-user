@@ -53,10 +53,7 @@ const generateTimeSlotsFromNow = () => {
 export const UseNow = () => {
   const timeSlotsInitial = generateTimeSlotsFromNow();
   const defaultSelectedTime = timeSlotsInitial[0];
-  const [selectedTimes, setSelectedTimes] = useState<string[]>([
-    defaultSelectedTime,
-    defaultSelectedTime,
-  ]);
+  const [selectedTimes, setSelectedTimes] = useState<string[]>([]);
 
   const handleTimeClick = (time: string) => {
     if (time !== defaultSelectedTime) {
@@ -70,6 +67,8 @@ export const UseNow = () => {
   };
 
   console.log(selectedTimes);
+
+  const isTimeSelected = selectedTimes.length >= 2;
 
   return (
     <div>
@@ -96,7 +95,13 @@ export const UseNow = () => {
         </ColorText>
       </UseColorWrapper>
       <ButtonWrapper>
-        <Button>사용 신청</Button>
+        {isTimeSelected ? (
+          <Button backgroundColor='#FF8D4E' color='#FFFFFF'>
+            다음
+          </Button>
+        ) : (
+          <Button disabled>다음</Button>
+        )}
       </ButtonWrapper>
     </div>
   );
