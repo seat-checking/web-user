@@ -70,7 +70,7 @@ export const ApprovedList = () => {
       {reservations.map((reservation) => (
         <Link
           key={reservation.reservationId}
-          to={`/${PATH.reservationStatus}/${PATH.approvedListDetail}/${reservation.reservationId}`}
+          to={`/${PATH.reservationStatus}/${PATH.approveddetail}/${reservation.reservationId}`}
         >
           <ListItem
             src={reservation.storeMainImage}

@@ -61,7 +61,7 @@ export const CancelledList = () => {
       {reservations.map((reservation) => (
         <Link
           key={reservation.reservationId}
-          to={`/${PATH.reservationStatus}/${PATH.cancelledDetail}/${reservation.reservationId}`}
+          to={`/${PATH.reservationStatus}/${PATH.cancelleddetail}/${reservation.reservationId}`}
         >
           <ListItem
             src={reservation.storeMainImage}
