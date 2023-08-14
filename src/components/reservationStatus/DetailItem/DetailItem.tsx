@@ -11,9 +11,9 @@ import {
   ReservationDetailWrapper,
   ReservationName,
   ReservationSeatNumber,
+  ReservationStatus,
 } from 'components/reservationStatus/DetailItem/DetailItem.styled';
 import { Circle } from 'components/reservationStatus/ListItem/ListItem.styled';
-import { ReservationStatus } from 'components/reservationStatus/listDetail/ApprovedListDetail/ApprovedListDetail.styled';
 
 import { BackButton } from 'pages/MyPage/MyPage.styled';
 import { useNavigate } from 'react-router-dom';
