@@ -10,6 +10,6 @@ export const setAuth = (newAuth: Token) => {
   localStorage.setItem('accessToken', newAuth.accessToken);
 };
 
-export const removeAuth = () => {
+export const removeAuth = (): void => {
   localStorage.removeItem('accessToken');
 };
