@@ -22,5 +22,8 @@ export const myTheme: DefaultTheme = {
     black: {
       main: '#1A1C2D',
     },
+    white: {
+      main: '#FFF',
+    },
   },
 };
