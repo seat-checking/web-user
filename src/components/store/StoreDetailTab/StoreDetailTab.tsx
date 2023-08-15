@@ -6,7 +6,8 @@ import { Wrapper } from 'components/store/ListTab/ListTab.styled';
 import { SeatLayoutTab } from 'components/store/SeatLayoutTab/SeatLayoutTab';
 import { StoreInfoTab } from 'components/store/StoreInfoTab/StoreInfoTab';
 import { useState } from 'react';
-import type { StoreDetaillResponse } from 'api/store/store';
+import type { StoreDetaillResponse } from 'api/store/common';
+
 import type { VFC } from 'common/utils/types';
 
 interface StoreDetailTabProps {
