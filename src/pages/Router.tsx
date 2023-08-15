@@ -63,19 +63,19 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <ReservationWaitingPage /> },
       {
-        path: `${PATH.waitingtabdetail}/:reservationId`,
+        path: `${PATH.waitingtab}/:reservationId`,
         element: <WaitingTabDetail />,
       },
       {
-        path: `${PATH.approveddetail}/:reservationId`,
+        path: `${PATH.approved}/:reservationId`,
         element: <ApprovedListDetail />,
       },
       {
-        path: `${PATH.cancelleddetail}/:reservationId`,
+        path: `${PATH.cancelled}/:reservationId`,
         element: <CancelledDetail />,
       },
       {
-        path: `${PATH.rejecteddetail}/:reservationId`,
+        path: `${PATH.rejected}/:reservationId`,
         element: <RejectedDetail />,
       },
     ],
