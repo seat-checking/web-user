@@ -5,12 +5,18 @@ interface TabsProps {
   value: number;
   onChange: (newValue: number) => void;
   children: React.ReactElement[];
+  withOutBorderTop?: boolean;
 }
 
-export const Tabs = ({ children, value, onChange }: TabsProps) => {
+export const Tabs = ({
+  children,
+  value,
+  onChange,
+  withOutBorderTop,
+}: TabsProps) => {
   let nextIndex = 0;
   return (
-    <Wrapper>
+    <Wrapper withOutBorderTop={withOutBorderTop}>
       {children.map((child) => {
         const index = nextIndex++;
 

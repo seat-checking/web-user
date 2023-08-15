@@ -21,7 +21,7 @@ export const StoreDetailTab: VFC<StoreDetailTabProps> = ({ storeInfo }) => {
   };
   return (
     <Wrapper>
-      <Tabs value={value} onChange={handleValueChange}>
+      <Tabs value={value} onChange={handleValueChange} withOutBorderTop>
         <Tab label='죄석정보' />
         <Tab label='가게정보' />
       </Tabs>
