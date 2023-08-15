@@ -1,4 +1,4 @@
-import { getStoreDetaill, type StoreDetaillResponse } from 'api/store/store';
+import { getStoreDetaill } from 'api/store/store';
 import { ReactComponent as ArrowLeft } from 'assets/svgs/arrowLeft.svg';
 
 import { Carousel } from 'components/store/Carousel';
@@ -13,6 +13,7 @@ import {
   Introduction,
   Name,
 } from './StoreDetailPage.styled';
+import type { StoreDetaillResponse } from 'api/store/common';
 
 import type { VFC } from 'common/utils/types';
 
