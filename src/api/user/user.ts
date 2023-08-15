@@ -24,8 +24,10 @@ export interface SignUpParams {
   password: string;
   nickname: string;
   name: string;
-  age: number;
+  birthDate: string;
   sex: string;
+  consentToTermsOfUser: boolean;
+  consentToMarketing: boolean;
 }
 
 interface ValidateNicknameResult {
