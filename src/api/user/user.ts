@@ -1,10 +1,10 @@
+import {
+  getApiUrl,
+  type SuccessOkResponse,
+  type SuccessOkWithoutResultResponse,
+} from 'api/common';
 import axios from 'axios';
-
-import { HOST } from './common';
-import type {
-  SuccessOkResponse,
-  SuccessOkWithoutResultResponse,
-} from './common';
+import type { SignUpParams } from 'api/user/common';
 
 interface ValidateNicknameParams {
   nickname: string;
@@ -17,15 +17,6 @@ interface ValidateEmailParams {
 interface LoginParams {
   email: string;
   password: string;
-}
-
-export interface SignUpParams {
-  email: string;
-  password: string;
-  nickname: string;
-  name: string;
-  birthDate: number;
-  sex: string;
 }
 
 interface ValidateNicknameResult {
@@ -43,28 +34,32 @@ interface ValidateLoginResult {
 export const validateNickname = async (
   params: ValidateNicknameParams,
 ): Promise<SuccessOkResponse<ValidateNicknameResult>> => {
-  const response = await axios.post(`${HOST}/users/validate/nickname`, params);
+  const url = getApiUrl('/users/validate/nickname');
+  const response = await axios.post(url, { params });
   return response.data;
 };
 
 export const validateEmail = async (
   params: ValidateEmailParams,
 ): Promise<SuccessOkResponse<ValidateEmailResult>> => {
-  const response = await axios.post(`${HOST}/users/validate/email`, params);
+  const url = getApiUrl('/users/validate/email');
+  const response = await axios.post(url, { params });
   return response.data;
 };
 
 export const signUp = async (
   params: SignUpParams,
 ): Promise<SuccessOkWithoutResultResponse> => {
-  const response = await axios.post(`${HOST}/users/sign-up`, params); // TODO: 요청 데이터를 담아야 함
+  const url = getApiUrl('/users/sign-up');
+  const response = await axios.post(url, { params });
   return response.data;
 };
 
 export const login = async (
   params: LoginParams,
 ): Promise<SuccessOkResponse<ValidateLoginResult>> => {
-  const response = await axios.post(`${HOST}/users/sign-in`, params, {
+  const url = getApiUrl('/users/sign-in');
+  const response = await axios.post(url, params, {
     withCredentials: true,
   });
   return response.data;
