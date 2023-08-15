@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import type {
   ReservationListResponse,
   ReservationUser,
-} from 'api/reservation/reservation';
+} from 'api/reservation/common';
 
 export const CANCELLED_LIST_QUERY_KEY = ['cancelledList'];
 
@@ -30,7 +30,7 @@ export const CancelledList = () => {
     useInfiniteQuery<ReservationListResponse>({
       queryKey: ['cancelledList'],
       queryFn: getReservationData,
-      getNextPageParam: (lastPage, page) => {
+      getNextPageParam: (lastPage) => {
         if (lastPage.hasNext) {
           return lastPage.page + 1;
         }
@@ -38,7 +38,7 @@ export const CancelledList = () => {
       },
     });
 
-  const handleLoadMore = (page: number): void => {
+  const handleLoadMore = (): void => {
     fetchNextPage();
   };
 
@@ -61,7 +61,7 @@ export const CancelledList = () => {
       {reservations.map((reservation) => (
         <Link
           key={reservation.reservationId}
-          to={`/${PATH.reservationStatus}/${PATH.cancelleddetail}/${reservation.reservationId}`}
+          to={`/${PATH.reservationStatus}/${PATH.cancelled}/${reservation.reservationId}`}
         >
           <ListItem
             src={reservation.storeMainImage}

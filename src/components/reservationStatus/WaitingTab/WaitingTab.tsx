@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import type {
   ReservationListResponse,
   ReservationUser,
-} from 'api/reservation/reservation';
+} from 'api/reservation/common';
 
 export const WAITINGTAB_LIST_QUERY_KEY = ['waitingList'];
 
@@ -30,7 +30,7 @@ export const WaitingTab = () => {
     useInfiniteQuery<ReservationListResponse>({
       queryKey: ['waitingList'],
       queryFn: getReservationData,
-      getNextPageParam: (lastPage, page) => {
+      getNextPageParam: (lastPage) => {
         if (lastPage.hasNext) {
           return lastPage.page + 1;
         }
@@ -38,7 +38,7 @@ export const WaitingTab = () => {
       },
     });
 
-  const handleLoadMore = (page: number): void => {
+  const handleLoadMore = (): void => {
     fetchNextPage();
   };
 
@@ -61,7 +61,7 @@ export const WaitingTab = () => {
       {reservations.map((reservation) => (
         <Link
           key={reservation.reservationId}
-          to={`/${PATH.reservationStatus}/${PATH.waitingtabdetail}/${reservation.reservationId}`}
+          to={`/${PATH.reservationStatus}/${PATH.waitingtab}/${reservation.reservationId}`}
         >
           <ListItem
             src={reservation.storeMainImage}

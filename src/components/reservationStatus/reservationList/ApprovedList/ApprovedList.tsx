@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import type {
   ReservationListResponse,
   ReservationUser,
-} from 'api/reservation/reservation';
+} from 'api/reservation/common';
 
 export const getFormattedTime = (isoString: string) => {
   const date = new Date(isoString);
@@ -39,7 +39,7 @@ export const ApprovedList = () => {
     useInfiniteQuery<ReservationListResponse>({
       queryKey: ['approvedList'],
       queryFn: getReservationData,
-      getNextPageParam: (lastPage, page) => {
+      getNextPageParam: (lastPage) => {
         if (lastPage.hasNext) {
           return lastPage.page + 1;
         }
@@ -47,7 +47,7 @@ export const ApprovedList = () => {
       },
     });
 
-  const handleLoadMore = (page: number): void => {
+  const handleLoadMore = (): void => {
     fetchNextPage();
   };
 
@@ -70,7 +70,7 @@ export const ApprovedList = () => {
       {reservations.map((reservation) => (
         <Link
           key={reservation.reservationId}
-          to={`/${PATH.reservationStatus}/${PATH.approveddetail}/${reservation.reservationId}`}
+          to={`/${PATH.reservationStatus}/${PATH.approved}/${reservation.reservationId}`}
         >
           <ListItem
             src={reservation.storeMainImage}

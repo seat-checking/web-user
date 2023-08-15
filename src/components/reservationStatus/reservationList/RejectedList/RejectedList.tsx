@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 import type {
   ReservationListResponse,
   ReservationUser,
-} from 'api/reservation/reservation';
+} from 'api/reservation/common';
 
 export const REJECTED_LIST_QUERY_KEY = ['rejectedList'];
 
@@ -30,7 +30,7 @@ export const RejectedList = () => {
     useInfiniteQuery<ReservationListResponse>({
       queryKey: ['rejectedList'],
       queryFn: getReservationData,
-      getNextPageParam: (lastPage, page) => {
+      getNextPageParam: (lastPage) => {
         if (lastPage.hasNext) {
           return lastPage.page + 1;
         }
@@ -38,7 +38,7 @@ export const RejectedList = () => {
       },
     });
 
-  const handleLoadMore = (page: number): void => {
+  const handleLoadMore = (): void => {
     fetchNextPage();
   };
 
@@ -61,7 +61,7 @@ export const RejectedList = () => {
       {reservations.map((reservation) => (
         <Link
           key={reservation.reservationId}
-          to={`/${PATH.reservationStatus}/${PATH.rejecteddetail}/${reservation.reservationId}`}
+          to={`/${PATH.reservationStatus}/${PATH.rejected}/${reservation.reservationId}`}
         >
           <ListItem
             src={reservation.storeMainImage}
