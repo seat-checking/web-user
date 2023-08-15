@@ -1,8 +1,5 @@
 import { useQueryClient } from '@tanstack/react-query';
-import {
-  reservationCancel,
-  type ReservationListResponse,
-} from 'api/reservation/reservation';
+import { reservationCancel } from 'api/reservation/reservation';
 import { PATH } from 'common/utils/constants';
 import { Button } from 'components/form/atoms/Button';
 import { DetailItem } from 'components/reservationStatus/DetailItem';
@@ -13,11 +10,14 @@ import {
   getFormattedTime,
 } from 'components/reservationStatus/reservationList/ApprovedList';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useTheme } from 'styled-components';
+import type { ReservationListResponse } from 'api/reservation/common';
 
 export const ApprovedListDetail = () => {
   const queryClient = useQueryClient();
   const { reservationId } = useParams<{ reservationId: string }>();
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const cachedData = queryClient.getQueryData<{
     pages: ReservationListResponse[];
@@ -74,11 +74,18 @@ export const ApprovedListDetail = () => {
       />
       <ButtonWrapper>
         {isPastReservation ? (
-          <Button backgroundColor='#EFF0F5' color='#727582'>
+          <Button
+            backgroundColor={theme.palette.grey[100]}
+            color={theme.palette.grey[400]}
+          >
             이미 만료된 예약입니다.
           </Button>
         ) : (
-          <Button backgroundColor='#FF8D4E' color='#FFF' onClick={handleCancel}>
+          <Button
+            backgroundColor={theme.palette.primary.orange}
+            color={theme.palette.white.main}
+            onClick={handleCancel}
+          >
             예약 취소
           </Button>
         )}
