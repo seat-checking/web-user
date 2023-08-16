@@ -1,7 +1,8 @@
-import { axiosWithAuth } from 'api/common';
-import { getApiUrl } from 'api/store/common';
+import { axiosWithAuth, getApiUrl } from 'api/common';
+
 import axios from 'axios';
-import type { SuccessOkResponse } from 'api/store/common';
+import type { SuccessOkResponse } from 'api/common';
+import type { StoreDetaillResponse, StoreListResponse } from 'api/store/common';
 
 interface StoreListParams {
   category?: '음식점' | '카페' | '모임';
@@ -16,50 +17,8 @@ interface StoreSearchParams {
   sort?: string;
 }
 
-export interface StoreUser {
-  id: number;
-  name: string;
-  introduction: string;
-  location: string;
-  mainImage: string;
-  open: boolean;
-}
-
-export interface StoreListResponse {
-  curCount: number;
-  curPage: number;
-  totalCount: number;
-  totalPage: number;
-  storeResponseList: StoreUser[];
-}
-
 interface StoreDetaillParams {
   id: number;
-}
-
-export interface StoreDetaillResponse {
-  id: number;
-  name: string;
-  location: string;
-  introduction: string;
-  category: string;
-  telNum: string;
-  mainImage: string | null;
-  monOpenTime: string;
-  monCloseTime: string;
-  tueOpenTime: string;
-  tueCloseTime: string;
-  wedOpenTime: string;
-  webCloseTime: string | null;
-  thuOpenTime: string;
-  thuCloseTime: string;
-  friOpenTime: string;
-  friCloseTime: string;
-  satOpenTime: string | null;
-  satCloseTime: string | null;
-  sunOpenTime: string | null;
-  sunCloseTime: string | null;
-  dayOff: string[];
 }
 
 export class StoreUserApi {
@@ -78,7 +37,7 @@ export class StoreUserApi {
 export const getStoreList = async (
   params: StoreListParams,
 ): Promise<SuccessOkResponse<StoreListResponse>> => {
-  const url = getApiUrl('/users/stores/list');
+  const url = getApiUrl('/stores/users/list');
   const response = await axiosWithAuth.get(url, {
     params,
   });
@@ -88,7 +47,7 @@ export const getStoreList = async (
 export const getSeachList = async (
   params: StoreSearchParams,
 ): Promise<SuccessOkResponse<StoreListResponse>> => {
-  const url = getApiUrl('/users/stores/search/name');
+  const url = getApiUrl('/stores/users/search/name');
   const response = await axiosWithAuth.get(url, {
     params,
   });
@@ -98,7 +57,7 @@ export const getSeachList = async (
 export const getStoreDetaill = async (
   params: StoreDetaillParams,
 ): Promise<SuccessOkResponse<StoreDetaillResponse>> => {
-  const url = getApiUrl(`/users/stores/${params.id}`);
+  const url = getApiUrl(`/stores/users/${params.id}`);
   const response = await axiosWithAuth.get(url, {
     params,
   });

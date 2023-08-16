@@ -4,6 +4,12 @@ interface CircleProps {
   isActive: boolean;
 }
 
+interface ReservationStatusProps {
+  backgroundColor?: string;
+  textColor?: string;
+  borderColor: string;
+}
+
 export const ReservationDetailWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
@@ -33,18 +39,18 @@ export const ReservationContent = styled.div`
   margin: 0 auto;
 `;
 
-export const ReservationStatus = styled.div`
+export const ReservationStatus = styled.div<ReservationStatusProps>`
   width: 7.9rem;
   height: 2.9rem;
   border-radius: 0.4rem;
-  border: 0.1rem solid #ff8d4e;
-  background-color: rgba(255, 141, 78, 0.15);
+  border: 0.1rem solid ${({ borderColor }) => borderColor || '#fff'};
   font-size: 1.4rem;
   font-weight: 400;
-  color: ${(props): string => props.theme.palette.primary.orange};
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${({ backgroundColor }) => backgroundColor || '#fff'};
+  color: ${({ textColor }) => textColor || '#fff'};
 `;
 
 export const ContentHeader = styled.div`

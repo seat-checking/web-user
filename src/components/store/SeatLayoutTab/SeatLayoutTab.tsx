@@ -6,7 +6,7 @@ import {
   SeatCountWrap,
   UpperWrap,
 } from 'components/store/SeatLayoutTab/SeatLayoutTab.styled';
-import type { StoreDetaillResponse } from 'api/store/storeApi';
+import type { StoreDetaillResponse } from 'api/store/common';
 
 import type { VFC } from 'common/utils/types';
 

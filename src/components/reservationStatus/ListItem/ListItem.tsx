@@ -17,7 +17,7 @@ import type { VFC } from 'common/utils/types';
 interface ReservationItemProps {
   src: string;
   ReservationName: string;
-  seatNumber: number;
+  seatNumber: string;
   ReservationInfo: string;
   ReservationDate: string;
   ReservationTime: string;
@@ -51,7 +51,7 @@ export const ListItem: VFC<ReservationItemProps> = ({
         </ReservationItemNameWrapper>
         <ReservationItemSeatInfo>
           <Circle isActive={isActive} />
-          {seatNumber}번 좌석
+          {seatNumber}
         </ReservationItemSeatInfo>
       </div>
       <ReservationItemDateWrapper>

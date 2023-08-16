@@ -20,7 +20,8 @@ import {
   InputRadioGroup,
   InputRadiowrapper,
 } from './MemberInfoForm.styled';
-import type { SignUpParams } from 'api/user/user';
+import type { SignUpParams } from 'api/user/common';
+
 import type { VFC } from 'common/utils/types';
 import type { SubmitHandler } from 'react-hook-form';
 
@@ -69,7 +70,7 @@ export const MemberInfoForm: VFC = () => {
     if (firstData !== null) {
       const requestData: SignUpParams = {
         nickname: data.nickname,
-        age: data.age,
+        birthDate: data.age,
         sex: data.sex,
         name: data.name,
         ...firstData,

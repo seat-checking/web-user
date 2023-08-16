@@ -9,4 +9,8 @@ export const PATH = {
   reservationStatus: 'reservationstatus',
   reservationWaitingDetail: 'reservationwaitingdetail',
   reservation: 'reservation',
+  approved: 'approved',
+  cancelled: 'cancelled',
+  rejected: 'rejected',
+  waitingtab: 'waitingtab',
 } as const;
