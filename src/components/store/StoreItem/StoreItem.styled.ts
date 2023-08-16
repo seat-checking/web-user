@@ -21,7 +21,7 @@ export const StoreItemDescription = styled.div`
   padding-left: 0.6rem;
   line-height: 1.8rem;
 `;
-export const StoreItemName = styled.p`
+export const StoreItemName = styled.div`
   font-weight: 700;
   font-size: 1.6rem;
   margin-bottom: 0.5rem;
