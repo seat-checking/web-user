@@ -51,7 +51,7 @@ export const StoreDetailPage: VFC = () => {
         <ArrowLeft />
       </BackBtn>
       <HeaderWrap>
-        <Name>{storeInfo?.name}</Name>
+        <Name>{storeInfo?.storeName}</Name>
         <Introduction>{storeInfo?.introduction}</Introduction>
       </HeaderWrap>
       <StoreDetailTab storeInfo={storeInfo} />
