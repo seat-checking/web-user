@@ -3,6 +3,8 @@ export interface SignUpParams {
   password: string;
   nickname: string;
   name: string;
-  birthDate: number;
+  birthDate: string;
   sex: string;
+  consentToTermsOfUser: boolean;
+  consentToMarketing: boolean;
 }
