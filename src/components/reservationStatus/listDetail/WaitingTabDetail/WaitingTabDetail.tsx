@@ -71,12 +71,17 @@ export const WaitingTabDetail = () => {
           reservationDetail.startSchedule,
         )}-${getFormattedTime(reservationDetail.endSchedule)}`}
         isActive
+        statusText='예약 대기 중'
+        backgroundColor={theme.palette.grey[100]}
+        statusTextColor={theme.palette.grey[500]}
+        borderColor={theme.palette.grey[300]}
       />
       <ButtonWrapper>
         {isPastReservation ? (
           <Button
             backgroundColor={theme.palette.grey[100]}
             color={theme.palette.grey[400]}
+            disabled
           >
             이미 만료된 예약입니다.
           </Button>

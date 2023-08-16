@@ -27,6 +27,10 @@ interface DetailItemProps {
   reservationDate: string;
   reservationTime: string;
   isActive: boolean;
+  statusText: string;
+  backgroundColor: string;
+  statusTextColor: string;
+  borderColor: string;
 }
 
 export const DetailItem: VFC<DetailItemProps> = ({
@@ -37,6 +41,10 @@ export const DetailItem: VFC<DetailItemProps> = ({
   reservationDate,
   reservationTime,
   isActive,
+  statusTextColor,
+  backgroundColor,
+  statusText,
+  borderColor,
 }) => {
   const navigate = useNavigate();
 
@@ -51,7 +59,13 @@ export const DetailItem: VFC<DetailItemProps> = ({
         <ListTitle>{storeName}</ListTitle>
       </ReservationDetailHeader>
       <ReservationContent>
-        <ReservationStatus>예약 대기 중</ReservationStatus>
+        <ReservationStatus
+          backgroundColor={backgroundColor}
+          textColor={statusTextColor}
+          borderColor={borderColor}
+        >
+          {statusText}
+        </ReservationStatus>
         <ContentHeader>
           <ReservationName>{name}</ReservationName>
           <Circle isActive={isActive} />

@@ -71,12 +71,17 @@ export const ApprovedListDetail = () => {
           reservationDetail.startSchedule,
         )}-${getFormattedTime(reservationDetail.endSchedule)}`}
         isActive
+        statusText='예약 완료'
+        backgroundColor='#FF8D4E26'
+        statusTextColor={theme.palette.primary.orange}
+        borderColor={theme.palette.primary.orange}
       />
       <ButtonWrapper>
         {isPastReservation ? (
           <Button
             backgroundColor={theme.palette.grey[100]}
             color={theme.palette.grey[400]}
+            disabled
           >
             이미 만료된 예약입니다.
           </Button>

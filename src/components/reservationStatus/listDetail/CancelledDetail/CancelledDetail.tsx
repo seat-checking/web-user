@@ -48,11 +48,16 @@ export const CancelledDetail = () => {
           reservationDetail.startSchedule,
         )}-${getFormattedTime(reservationDetail.endSchedule)}`}
         isActive
+        statusText='예약 취소'
+        backgroundColor={theme.palette.grey[100]}
+        statusTextColor={theme.palette.grey[500]}
+        borderColor={theme.palette.grey[300]}
       />
       <ButtonWrapper>
         <Button
           backgroundColor={theme.palette.grey[100]}
           color={theme.palette.grey[400]}
+          disabled
         >
           이미 취소된 예약입니다.
         </Button>
