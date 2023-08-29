@@ -41,7 +41,7 @@ export const MemberInfoForm: VFC = () => {
     resetField,
     setError,
     clearErrors,
-    formState: { errors, touchedFields, isValid },
+    formState: { errors, touchedFields },
   } = useForm<MemberInfoFormprops>({ mode: 'onTouched' });
 
   const nicknameValue: string = watch('nickname', '');
@@ -62,7 +62,7 @@ export const MemberInfoForm: VFC = () => {
     if (!firstData) {
       navigate(`/${PATH.signUp}`);
     }
-  }, [navigate]);
+  }, [navigate, firstData]);
 
   const onSubmit: SubmitHandler<MemberInfoFormprops> = async (data) => {
     // formState 첫번째 페이지 데이터 가져오기
@@ -76,14 +76,12 @@ export const MemberInfoForm: VFC = () => {
         ...firstData,
       };
 
-      console.log(requestData);
-
       try {
         await signUp(requestData);
         navigate(`/${PATH.login}`);
       } catch (e) {
         // 서버 응답이 400번대가 온 경우
-        console.log(e, '에러발생');
+        return null;
       }
     }
   };
