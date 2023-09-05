@@ -7,7 +7,6 @@ import {
   getFormattedTime,
 } from 'components/reservationStatus/reservationList/ApprovedList';
 import { REJECTED_LIST_QUERY_KEY } from 'components/reservationStatus/reservationList/RejectedList';
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import type { ReservationListResponse } from 'api/reservation/common';
@@ -21,8 +20,6 @@ export const RejectedDetail = () => {
     pages: ReservationListResponse[];
   }>(REJECTED_LIST_QUERY_KEY);
 
-  console.log(cachedData);
-
   // 숫자로 변환
   const reservationIdAsNumber = Number(reservationId);
 
@@ -31,8 +28,6 @@ export const RejectedDetail = () => {
     .find((res) => res.reservationId === reservationIdAsNumber);
 
   if (!reservationDetail) {
-    console.log('데이터 없음!!');
-
     return null;
   }
   return (

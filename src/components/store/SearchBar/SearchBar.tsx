@@ -23,7 +23,7 @@ import type { VFC } from 'common/utils/types';
 import type { ChangeEvent, KeyboardEvent } from 'react';
 
 export const SearchBar: VFC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [inputValue, setInputValue] = useState(searchParams.get('query') || '');
   const [query, setQuery] = useState(searchParams.get('query') || '');
 

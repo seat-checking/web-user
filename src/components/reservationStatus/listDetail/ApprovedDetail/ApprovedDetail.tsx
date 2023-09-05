@@ -23,8 +23,6 @@ export const ApprovedListDetail = () => {
     pages: ReservationListResponse[];
   }>(APPROVED_LIST_QUERY_KEY);
 
-  console.log(cachedData);
-
   // 숫자로 변환
   const reservationIdAsNumber = Number(reservationId);
 
@@ -33,8 +31,6 @@ export const ApprovedListDetail = () => {
     .find((res) => res.reservationId === reservationIdAsNumber);
 
   if (!reservationDetail) {
-    console.log('데이터 없음!!');
-
     return null;
   }
 
@@ -44,7 +40,7 @@ export const ApprovedListDetail = () => {
       queryClient.invalidateQueries(APPROVED_LIST_QUERY_KEY);
       navigate(`/${PATH.reservationStatus}`);
     } catch (error) {
-      console.log('예약 취소 중 오류가 발생했습니다. 다시 시도해주세요.');
+      return null;
     }
   };
 

@@ -20,8 +20,6 @@ export const CancelledDetail = () => {
     pages: ReservationListResponse[];
   }>(CANCELLED_LIST_QUERY_KEY);
 
-  console.log(cachedData);
-
   // 숫자로 변환
   const reservationIdAsNumber = Number(reservationId);
 
@@ -30,8 +28,6 @@ export const CancelledDetail = () => {
     .find((res) => res.reservationId === reservationIdAsNumber);
 
   if (!reservationDetail) {
-    console.log('데이터 없음!!');
-
     return null;
   }
   return (

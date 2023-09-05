@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { getAuth, setAuth } from 'utils/auth';
-import type { Token } from 'models/auth';
+import { getAuth, removeAuth, setAuth } from 'utils/auth';
 
 // TODO: extract tp .env
 
@@ -62,16 +61,17 @@ axiosWithAuth.interceptors.request.use(
 // 응답 인터셉터 추가하기
 axiosWithAuth.interceptors.response.use(
   (response) => {
-    console.log('response.headers2 :>> ', response.headers.authorization);
     if (response.headers.authorization) {
       console.log('토큰 만료!!!!!!!!!');
-      setAuth(response.headers.authorization);
-      axios.defaults.headers.common.Authorization =
-        response.headers.authorization;
+      setAuth({ accessToken: response.headers.authorization });
     }
     return response;
   },
   (error) => {
+    if (error.response && error.response.status === 403) {
+      removeAuth();
+      window.location.reload();
+    }
     return Promise.reject(error);
   },
 );

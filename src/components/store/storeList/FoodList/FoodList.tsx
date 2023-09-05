@@ -20,7 +20,7 @@ export const FoodList: VFC = () => {
     return resData.result;
   };
 
-  const { isLoading, isError, error, data, fetchNextPage, hasNextPage } =
+  const { isLoading, isError, data, fetchNextPage, hasNextPage } =
     useInfiniteQuery<StoreListResponse, ErrorResponse>({
       queryKey: ['RestaurantList'],
       queryFn: getStoreData,
