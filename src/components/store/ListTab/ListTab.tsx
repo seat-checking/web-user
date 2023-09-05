@@ -21,7 +21,7 @@ export const ListTab: VFC = () => {
   };
   return (
     <Wrapper>
-      <StoreListTitle>가게목록</StoreListTitle>
+      <StoreListTitle>플레이스</StoreListTitle>
       <Tabs value={tab} onChange={handleValueChange}>
         <Tab label='전체' />
         <Tab label='음식점' />

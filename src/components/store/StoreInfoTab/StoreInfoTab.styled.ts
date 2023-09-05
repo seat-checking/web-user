@@ -25,3 +25,6 @@ export const TextRow = styled.div`
     margin-top: 0.8rem;
   }
 `;
+export const DayBox = styled.div`
+  margin-bottom: 0.8rem;
+`;

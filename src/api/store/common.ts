@@ -17,25 +17,25 @@ export interface StoreListResponse {
 
 export interface StoreDetaillResponse {
   id: number;
-  name: string;
-  location: string;
+  storeName: string;
+  address: string;
+  detailAddress: string;
   introduction: string;
   category: string;
-  telNum: string;
-  mainImage: string | null;
+  mainImage: string;
   monOpenTime: string;
   monCloseTime: string;
   tueOpenTime: string;
   tueCloseTime: string;
   wedOpenTime: string;
-  webCloseTime: string | null;
+  wedCloseTime: string;
   thuOpenTime: string;
   thuCloseTime: string;
   friOpenTime: string;
   friCloseTime: string;
-  satOpenTime: string | null;
-  satCloseTime: string | null;
-  sunOpenTime: string | null;
-  sunCloseTime: string | null;
+  satOpenTime: string;
+  satCloseTime: string;
+  sunOpenTime: string;
+  sunCloseTime: string;
   dayOff: string[];
 }

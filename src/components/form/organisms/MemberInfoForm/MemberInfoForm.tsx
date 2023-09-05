@@ -27,7 +27,7 @@ import type { SubmitHandler } from 'react-hook-form';
 
 interface MemberInfoFormprops {
   nickname: string;
-  age: number;
+  birthDate: string;
   UniqueButtonClicked: string;
   sex: string;
   name: string;
@@ -48,7 +48,7 @@ export const MemberInfoForm: VFC = () => {
 
   const nameValue: string = watch('name', '');
 
-  const ageValue: number = watch('age', 0);
+  const ageValue: string = watch('birthDate', '');
 
   const sexValue: string = watch('sex', '');
 
@@ -70,7 +70,7 @@ export const MemberInfoForm: VFC = () => {
     if (firstData !== null) {
       const requestData: SignUpParams = {
         nickname: data.nickname,
-        birthDate: data.age,
+        birthDate: data.birthDate,
         sex: data.sex,
         name: data.name,
         ...firstData,
@@ -89,7 +89,7 @@ export const MemberInfoForm: VFC = () => {
     resetField('nickname'); // 인풋값 초기화
   };
   const handleAgeResetClick = (): void => {
-    resetField('age'); // 인풋값 초기화
+    resetField('birthDate'); // 인풋값 초기화
   };
   const handleNameResetClick = (): void => {
     resetField('name'); // 인풋값 초기화
@@ -182,17 +182,18 @@ export const MemberInfoForm: VFC = () => {
         <Inputs
           onClick={handleAgeResetClick}
           placeholder='생년월일을 입력해 주세요.'
-          helperText='* YYMMDD 6자리'
-          error={touchedFields.age && errors.age?.message}
-          {...register('age', {
+          helperText='* YYYY-MM-DD의 형식으로 입력해주세요. '
+          error={touchedFields.birthDate && errors.birthDate?.message}
+          {...register('birthDate', {
             pattern: {
-              value: /^[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/,
-              message: '* YYMMDD 6자리를 입력해 주새요.',
+              value:
+                /^(?:(?:19|20)\d\d)-(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2[0-9]|3[01])$/,
+              message: '* YYYY-MM-DD의 형식으로 입력해주세요.',
             },
           })}
           valueLength={ageValue.toString().length}
           maximum={2}
-          maxLength={6}
+          maxLength={10}
         >
           생년월일
         </Inputs>

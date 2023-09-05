@@ -62,6 +62,7 @@ export const AllList: VFC = () => {
             src={store.mainImage}
             storeName={store.name}
             introduction={store.introduction}
+            open={store.open}
           />
         </Link>
       ))}
