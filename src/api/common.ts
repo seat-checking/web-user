@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getAuth, setAuth } from 'utils/auth';
+import { getAuth, removeAuth, setAuth } from 'utils/auth';
 
 // TODO: extract tp .env
 
@@ -62,13 +62,16 @@ axiosWithAuth.interceptors.request.use(
 axiosWithAuth.interceptors.response.use(
   (response) => {
     if (response.headers.authorization) {
-      setAuth(response.headers.authorization);
-      axios.defaults.headers.common.Authorization =
-        response.headers.authorization;
+      console.log('토큰 만료!!!!!!!!!');
+      setAuth({ accessToken: response.headers.authorization });
     }
     return response;
   },
   (error) => {
+    if (error.response && error.response.status === 403) {
+      removeAuth();
+      window.location.reload();
+    }
     return Promise.reject(error);
   },
 );
