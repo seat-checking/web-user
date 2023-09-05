@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { getSeachList } from 'api/store/storeApi';
+import { getSeachList } from 'api/store/store';
 import { InputResetIcon } from 'components/form/atoms/InputResetIcon';
 import { Spinner } from 'components/layout/Spinner';
 import {
@@ -15,14 +15,15 @@ import { BackButtonIcon } from 'pages/LoginPage/LoginPage.styled';
 import { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import type { ErrorResponse } from 'api/store/common';
-import type { StoreListResponse, StoreUser } from 'api/store/storeApi';
+
+import type { ErrorResponse } from 'api/common';
+import type { StoreListResponse, StoreUser } from 'api/store/common';
 import type { VFC } from 'common/utils/types';
 
 import type { ChangeEvent, KeyboardEvent } from 'react';
 
 export const SearchBar: VFC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [inputValue, setInputValue] = useState(searchParams.get('query') || '');
   const [query, setQuery] = useState(searchParams.get('query') || '');
 

@@ -1,6 +1,7 @@
-import { getStoreDetaill, type StoreDetaillResponse } from 'api/store/storeApi';
-import { ReactComponent as ArrowLeft } from 'assets/svgs/arrowLeft.svg';
+/* eslint-disable no-console */
 
+import { getStoreDetaill } from 'api/store/store';
+import { ReactComponent as ArrowLeft } from 'assets/svgs/arrowLeft.svg';
 import { Carousel } from 'components/store/Carousel';
 import { StoreDetailTab } from 'components/store/StoreDetailTab';
 
@@ -13,6 +14,7 @@ import {
   Introduction,
   Name,
 } from './StoreDetailPage.styled';
+import type { StoreDetaillResponse } from 'api/store/common';
 
 import type { VFC } from 'common/utils/types';
 
@@ -31,7 +33,7 @@ export const StoreDetailPage: VFC = () => {
           setStoreInfo(response.result);
         }
       } catch (error) {
-        console.error('Error fetching store info:', error);
+        console.error(error);
       }
     };
 
