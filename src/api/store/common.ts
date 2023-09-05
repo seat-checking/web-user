@@ -16,7 +16,7 @@ export interface StoreListResponse {
 }
 
 export interface StoreDetaillResponse {
-  id: 0;
+  id: number;
   storeName: string;
   address: string;
   detailAddress: string;
