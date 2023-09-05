@@ -44,9 +44,13 @@ export const StoreDetailPage: VFC = () => {
     navigate(-1);
   };
 
+  const defaultImage =
+    'https://cdn.pixabay.com/photo/2016/10/18/17/25/stadium-1750794_1280.jpg'; // 임의의 대체 이미지 URL
+  const imageArray = storeInfo ? [storeInfo.mainImage || defaultImage] : null;
+
   return (
     <Container>
-      <Carousel />
+      <Carousel images={imageArray} />
       <BackBtn onClick={handleBack}>
         <ArrowLeft />
       </BackBtn>
