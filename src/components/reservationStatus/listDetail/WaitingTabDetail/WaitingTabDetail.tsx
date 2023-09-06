@@ -4,11 +4,11 @@ import { PATH } from 'common/utils/constants';
 import { Button } from 'components/form/atoms/Button';
 import { DetailItem } from 'components/reservationStatus/DetailItem';
 import { ButtonWrapper } from 'components/reservationStatus/DetailItem/DetailItem.styled';
-import { WAITINGTAB_LIST_QUERY_KEY } from 'components/reservationStatus/WaitingTab';
 import {
   getFormattedMonthAndDay,
   getFormattedTime,
 } from 'components/reservationStatus/reservationList/ApprovedList';
+import { WAITINGLIST_QUERY_KEY } from 'components/reservationStatus/reservationList/WaitingList';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import type { ReservationListResponse } from 'api/reservation/common';
@@ -21,7 +21,7 @@ export const WaitingTabDetail = () => {
 
   const cachedData = queryClient.getQueryData<{
     pages: ReservationListResponse[];
-  }>(WAITINGTAB_LIST_QUERY_KEY);
+  }>(WAITINGLIST_QUERY_KEY);
 
   // 숫자로 변환
   const reservationIdAsNumber = Number(reservationId);
@@ -37,7 +37,7 @@ export const WaitingTabDetail = () => {
   const handleCancel = async () => {
     try {
       await reservationCancel(reservationIdAsNumber);
-      queryClient.invalidateQueries(WAITINGTAB_LIST_QUERY_KEY);
+      queryClient.invalidateQueries(WAITINGLIST_QUERY_KEY);
       navigate(`/${PATH.reservationStatus}`);
     } catch (error) {
       return null;
