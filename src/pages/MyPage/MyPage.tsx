@@ -8,7 +8,6 @@ import UserIcon from 'assets/icons/userIcon.svg';
 import UserImg from 'assets/images/avatar.png';
 import { Navigation } from 'components/Navigation';
 import {
-  BackButton,
   CheckOutButton,
   CheckOutButtonWrapper,
   MyPageMenuFristWrapper,
@@ -35,7 +34,6 @@ export const MyPage: VFC = () => {
   return (
     <MyPageWrapper>
       <MypageHeader>
-        <BackButton />
         <MyPageTitle>마이페이지</MyPageTitle>
       </MypageHeader>
       <UserInfoWrapper>
