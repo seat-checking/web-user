@@ -8,7 +8,8 @@ import {
   ListTitle,
   Wrapper,
 } from 'components/reservationStatus/ListTab/ListTab.styled';
-import { WaitingTab } from 'components/reservationStatus/WaitingTab';
+
+import { UseNowTab } from 'components/reservationStatus/UseNow';
 import { useTabStore } from 'store/reservationStatusStore';
 
 import type { VFC } from 'common/utils/types';
@@ -25,16 +26,16 @@ export const ListTab: VFC = () => {
 
   return (
     <Wrapper>
-      <ListTitle>예약 현황</ListTitle>
+      <ListTitle>이용 현황</ListTitle>
       <Tabs value={tab} onChange={handleValueChange}>
-        <Tab label='예약 대기 중' />
-        <Tab label='예약 내역' />
+        <Tab label='예약' />
+        <Tab label='바로 사용' />
       </Tabs>
       <TabPanel value={tab} index={0}>
-        <WaitingTab />
+        <HistoryTab />
       </TabPanel>
       <TabPanel value={tab} index={1}>
-        <HistoryTab />
+        <UseNowTab />
       </TabPanel>
     </Wrapper>
   );
