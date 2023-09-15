@@ -59,7 +59,7 @@ export const CafeList: VFC = () => {
             src={store.mainImage}
             storeName={store.name}
             introduction={store.introduction}
-            open={store.open}
+            open={store.isOpen}
           />
         </Link>
       ))}
