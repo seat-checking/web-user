@@ -15,3 +15,23 @@ export interface ReservationUser {
   storeMainImage: string;
   userNickname: string;
 }
+
+export interface UseReservationListResponse {
+  content: UseReservationUser[];
+  page: number;
+  size: number;
+  hasNext: boolean;
+}
+
+export interface UseReservationUser {
+  id: 0;
+  storeName: string;
+  storeSpaceName: string;
+  walkInUnitWalkedInByUser: string;
+  walkedInPlace: string;
+  startSchedule: string;
+  endSchedule: string;
+  createdAt: string;
+  storeMainImage: string;
+  userNickname: string;
+}
