@@ -13,4 +13,5 @@ export const PATH = {
   cancelled: 'cancelled',
   rejected: 'rejected',
   waitingtab: 'waitingtab',
+  nowUse: 'nowuse',
 } as const;
