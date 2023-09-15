@@ -1,6 +1,7 @@
 import { PATH } from 'common/utils/constants';
 import { ApprovedListDetail } from 'components/reservationStatus/listDetail/ApprovedDetail';
 import { CancelledDetail } from 'components/reservationStatus/listDetail/CancelledDetail';
+import { NowUseDetail } from 'components/reservationStatus/listDetail/NowUseDetail';
 import { RejectedDetail } from 'components/reservationStatus/listDetail/RejectedDetail';
 import { WaitingTabDetail } from 'components/reservationStatus/listDetail/WaitingTabDetail';
 import { LoginPage } from 'pages/LoginPage';
@@ -77,6 +78,10 @@ export const router = createBrowserRouter([
       {
         path: `${PATH.rejected}/:reservationId`,
         element: <RejectedDetail />,
+      },
+      {
+        path: `${PATH.nowUse}/:reservationId`,
+        element: <NowUseDetail />,
       },
     ],
   },
