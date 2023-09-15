@@ -4,7 +4,7 @@ export interface StoreUser {
   introduction: string;
   location: string;
   mainImage: string;
-  open: boolean;
+  isOpen: boolean;
 }
 
 export interface StoreListResponse {
