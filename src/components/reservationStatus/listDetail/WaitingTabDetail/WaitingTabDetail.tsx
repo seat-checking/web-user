@@ -46,8 +46,6 @@ export const WaitingTabDetail = () => {
 
   const now = new Date();
 
-  // reservationEndDateAndTime은 문자열 형태라고 가정하고 Date 객체로 변환합니다.
-  // 이 부분은 실제 데이터의 형태에 따라 조정이 필요할 수 있습니다.
   const reservationEndTime = new Date(reservationDetail.endSchedule);
 
   // 예약 종료 시간이 현재 시간보다 앞선 경우 예약 취소 비활성화
