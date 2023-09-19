@@ -1,10 +1,12 @@
 import { login } from 'api/user/user';
+import { PATH } from 'common/utils/constants';
 import { Button } from 'components/form/atoms/Button';
 import { Inputs } from 'components/form/molecules/Inputs';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useNavigate } from 'react-router-dom';
+import { setAuth } from 'utils/auth';
 import {
   ButtonWrapper,
   ErrorIcon,
@@ -39,10 +41,10 @@ export const LoginForm: VFC = () => {
       if (errors.email || errors.password) {
         setErrorMsg('아이디 또는 비밀번호를 다시 입력해주세요.');
       } else {
-        const requestData = await login(data);
-        if (requestData.isSuccess) {
-          alert('Welcome to SeatSense');
-          navigate('./storeList');
+        const { result, isSuccess } = await login(data);
+        setAuth(result);
+        if (isSuccess) {
+          navigate(`/${PATH.storeList}`);
         }
       }
     } catch (error) {

@@ -1,12 +1,14 @@
 import { PATH } from 'common/utils/constants';
+import { ApprovedListDetail } from 'components/reservationStatus/listDetail/ApprovedDetail';
+import { CancelledDetail } from 'components/reservationStatus/listDetail/CancelledDetail';
+import { RejectedDetail } from 'components/reservationStatus/listDetail/RejectedDetail';
+import { WaitingTabDetail } from 'components/reservationStatus/listDetail/WaitingTabDetail';
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
-import { ReservationIntentPage } from 'pages/ReservationIntentPage';
-import { ReservationStatusDetailPage } from 'pages/ReservationStatusDetailPage';
-
-import { ReservationStatusPage } from 'pages/ReservationStatusPage';
-
+import { ProtectedRoute } from 'pages/ProtectedRoute';
+import { ReservationPage } from 'pages/ReservationPage';
+import { ReservationWaitingPage } from 'pages/ReservationStatusPage';
 import { RootPage } from 'pages/RootPage';
 import { SearchPage } from 'pages/SearchPage';
 import { SeatUsePage } from 'pages/SeatUsePage';
@@ -34,34 +36,49 @@ export const router = createBrowserRouter([
   },
   {
     path: `/${PATH.storeList}`,
-    element: <StoreListPage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <StoreListPage /> }],
   },
   {
     path: `/${PATH.storeDetail}/:storeId`,
-    element: <StoreDetailPage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <StoreDetailPage /> }],
   },
   {
-    path: `/${PATH.seatuse}`,
-    element: <SeatUsePage />,
-  },
-  {
-    path: `/${PATH.intent}`,
-    element: <ReservationIntentPage />,
+    path: `/${PATH.reservation}`,
+    element: <ReservationPage />,
   },
   {
     path: `/${PATH.myPage}`,
-    element: <MyPage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <MyPage /> }],
   },
   {
     path: `/${PATH.search}`,
-    element: <SearchPage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <SearchPage /> }],
   },
   {
     path: `/${PATH.reservationStatus}`,
-    element: <ReservationStatusPage />,
-  },
-  {
-    path: `/${PATH.reservationStatusDetail}`,
-    element: <ReservationStatusDetailPage />,
+    element: <ProtectedRoute />,
+    children: [
+      { index: true, element: <ReservationWaitingPage /> },
+      {
+        path: `${PATH.waitingtab}/:reservationId`,
+        element: <WaitingTabDetail />,
+      },
+      {
+        path: `${PATH.approved}/:reservationId`,
+        element: <ApprovedListDetail />,
+      },
+      {
+        path: `${PATH.cancelled}/:reservationId`,
+        element: <CancelledDetail />,
+      },
+      {
+        path: `${PATH.rejected}/:reservationId`,
+        element: <RejectedDetail />,
+      },
+    ],
   },
 ]);

@@ -7,7 +7,10 @@ export const PATH = {
   storeDetail: 'storedetail',
   search: 'search',
   reservationStatus: 'reservationstatus',
-  reservationStatusDetail: 'reservationStatusDetail',
-  seatuse: 'seatuse',
-  intent: 'intent',
+  reservationWaitingDetail: 'reservationwaitingdetail',
+  reservation: 'reservation',
+  approved: 'approved',
+  cancelled: 'cancelled',
+  rejected: 'rejected',
+  waitingtab: 'waitingtab',
 } as const;

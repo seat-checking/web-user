@@ -1,12 +1,12 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { getStoreList } from 'api/store/storeApi';
+import { getStoreList } from 'api/store/store';
 import { Spinner } from 'components/layout/Spinner';
 import { StoreItem } from 'components/store/StoreItem';
 import { ErrorMessage } from 'components/store/storeList/AllList/AllList.styled';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Link } from 'react-router-dom';
-import type { ErrorResponse } from 'api/store/common';
-import type { StoreListResponse, StoreUser } from 'api/store/storeApi';
+import type { ErrorResponse } from 'api/common';
+import type { StoreListResponse, StoreUser } from 'api/store/common';
 
 import type { VFC } from 'common/utils/types';
 
@@ -20,11 +20,11 @@ export const MeetingList: VFC = () => {
     return resData.result;
   };
 
-  const { isLoading, isError, error, data, fetchNextPage, hasNextPage } =
+  const { isLoading, isError, data, fetchNextPage, hasNextPage } =
     useInfiniteQuery<StoreListResponse, ErrorResponse>({
       queryKey: ['CafeList'],
       queryFn: getStoreData,
-      getNextPageParam: (lastPage, pages) => {
+      getNextPageParam: (lastPage) => {
         if (lastPage.totalPage > lastPage.curPage) {
           return lastPage.curPage + 1;
         }
@@ -32,7 +32,7 @@ export const MeetingList: VFC = () => {
       },
     });
 
-  const handleLoadMore = (page: number): void => {
+  const handleLoadMore = (): void => {
     fetchNextPage();
   };
 
@@ -59,6 +59,7 @@ export const MeetingList: VFC = () => {
             src={store.mainImage}
             storeName={store.name}
             introduction={store.introduction}
+            open={store.open}
           />
         </Link>
       ))}

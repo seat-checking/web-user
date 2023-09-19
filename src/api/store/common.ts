@@ -1,30 +1,41 @@
-// TODO: extract tp .env
-
-const DOMAIN = process.env.REACT_APP_API_URL;
-
-/**
- * api path를 이용해서 full url로만듬
- * @param path '/v1'로 시작하는 url경로
- * @returns domain이 포함된 full url
- */
-export const getApiUrl = (path: string) => {
-  return DOMAIN + path;
-};
-
-export interface SuccessOkWithoutResultResponse {
-  isSuccess: boolean;
-  code: string;
-  message: string;
-  status: number;
+export interface StoreUser {
+  id: number;
+  name: string;
+  introduction: string;
+  location: string;
+  mainImage: string;
+  open: boolean;
 }
 
-export interface SuccessOkResponse<T> extends SuccessOkWithoutResultResponse {
-  result: T;
+export interface StoreListResponse {
+  curCount: number;
+  curPage: number;
+  totalCount: number;
+  totalPage: number;
+  storeResponseList: StoreUser[];
 }
 
-export interface ErrorResponse {
-  success: false;
-  code: string;
-  message: string;
-  status: number;
+export interface StoreDetaillResponse {
+  id: number;
+  storeName: string;
+  address: string;
+  detailAddress: string;
+  introduction: string;
+  category: string;
+  mainImage: string;
+  monOpenTime: string;
+  monCloseTime: string;
+  tueOpenTime: string;
+  tueCloseTime: string;
+  wedOpenTime: string;
+  wedCloseTime: string;
+  thuOpenTime: string;
+  thuCloseTime: string;
+  friOpenTime: string;
+  friCloseTime: string;
+  satOpenTime: string;
+  satCloseTime: string;
+  sunOpenTime: string;
+  sunCloseTime: string;
+  dayOff: string[];
 }

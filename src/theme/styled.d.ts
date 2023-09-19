@@ -23,6 +23,9 @@ declare module 'styled-components' {
       black: {
         main: string;
       };
+      white: {
+        main: string;
+      };
     };
   }
 }

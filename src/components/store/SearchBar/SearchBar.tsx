@@ -1,68 +1,86 @@
-import { getSeachList } from 'api/store/storeApi';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { getSeachList } from 'api/store/store';
 import { InputResetIcon } from 'components/form/atoms/InputResetIcon';
 import { Spinner } from 'components/layout/Spinner';
 import {
   ResetbtnWrapper,
+  ResponseMessage,
   SearchBarContainer,
   SearchBarWrapper,
   SearchInput,
   SearchInputWrapper,
 } from 'components/store/SearchBar/SearchBar.styled';
 import { StoreItem } from 'components/store/StoreItem';
-import { ErrorMessage } from 'components/store/storeList/AllList/AllList.styled';
-import { SearchContext } from 'context/SearchContext';
 import { BackButtonIcon } from 'pages/LoginPage/LoginPage.styled';
-import { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import type { StoreUser } from 'api/store/storeApi';
+import { useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+
+import type { ErrorResponse } from 'api/common';
+import type { StoreListResponse, StoreUser } from 'api/store/common';
 import type { VFC } from 'common/utils/types';
 
 import type { ChangeEvent, KeyboardEvent } from 'react';
 
 export const SearchBar: VFC = () => {
-  const searchContext = useContext(SearchContext);
+  const [searchParams] = useSearchParams();
+  const [inputValue, setInputValue] = useState(searchParams.get('query') || '');
+  const [query, setQuery] = useState(searchParams.get('query') || '');
 
-  if (!searchContext) {
-    throw new Error('SearchBar must be used within a SearchProvider');
-  }
+  const getSeachData = async ({ pageParam = 1 }) => {
+    const resData = await getSeachList({
+      page: pageParam,
+      size: 15,
+      name: query,
+    });
+    return resData.result;
+  };
 
-  const { searchValue, setSearchValue, searchResults, setSearchResults } =
-    searchContext;
+  const { isLoading, isError, data, fetchNextPage, hasNextPage } =
+    useInfiniteQuery<StoreListResponse, ErrorResponse>({
+      queryKey: ['SearchData', query],
+      queryFn: ({ pageParam = 1 }) => getSeachData({ pageParam }),
+      getNextPageParam: (lastPage) => {
+        if (lastPage.totalPage > lastPage.curPage) {
+          return lastPage.curPage + 1;
+        }
+        return undefined;
+      },
+      enabled: query.length > 0,
+    });
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<null | string>(null);
+  const navigate = useNavigate();
+
+  const handleSearch = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setQuery(inputValue);
+      navigate(`?query=${inputValue}`, { replace: true });
+    }
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
+    setInputValue(e.target.value);
+  };
+
+  const handleLoadMore = (): void => {
+    fetchNextPage();
   };
 
   const handleValueResetClick = () => {
-    setSearchValue('');
+    setInputValue('');
   };
 
-  const navigate = useNavigate();
+  let stores: StoreUser[] = [];
+  if (data) {
+    for (let i = 0; i < data.pages.length; i++) {
+      const page = data.pages[i];
+      stores = [...stores, ...page.storeResponseList];
+    }
+  }
 
   const handleButtonClick = () => {
     navigate(-1);
   };
-
-  const handleKeyDown = async (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && searchValue.length > 0) {
-      try {
-        setLoading(true);
-        const resData = await getSeachList({ name: searchValue });
-        setSearchResults(resData.result);
-        setLoading(false);
-      } catch (err) {
-        setError('서버에서 데이터를 받아오지 못했습니다');
-        setLoading(false);
-      }
-    }
-  };
-
-  if (loading) {
-    return <Spinner />;
-  }
 
   return (
     <SearchBarContainer>
@@ -72,31 +90,39 @@ export const SearchBar: VFC = () => {
           <SearchInput
             placeholder='검색어를 입력하세요'
             onChange={handleChange}
-            value={searchValue}
-            onKeyDown={handleKeyDown}
+            value={inputValue}
+            onKeyDown={handleSearch}
           />
-          {searchValue.length > 0 && (
+          {query.length > 0 && (
             <ResetbtnWrapper>
               <InputResetIcon onClick={handleValueResetClick} />
             </ResetbtnWrapper>
           )}
         </SearchInputWrapper>
       </SearchBarWrapper>
-      {error && <ErrorMessage>{error}</ErrorMessage>}
-      {loading ? (
-        <Spinner />
-      ) : (
-        searchResults.map((store: StoreUser) => (
-          <Link key={store.id} to={`/storeDetail/${store.id}`}>
-            <StoreItem
-              key={store.id}
-              src={store.mainImage}
-              storeName={store.name}
-              introduction={store.introduction}
-            />
-          </Link>
-        ))
-      )}
+      <InfiniteScroll loadMore={handleLoadMore} hasMore={hasNextPage}>
+        {query.length === 0 ? null : isError ? (
+          <ResponseMessage>
+            요청 중 오류가 발생했습니다. 다시 시도해주세요.
+          </ResponseMessage>
+        ) : isLoading ? (
+          <Spinner />
+        ) : stores.length === 0 ? (
+          <ResponseMessage>검색 결과가 없습니다.</ResponseMessage>
+        ) : (
+          stores.map((store) => (
+            <Link key={store.id} to={`/storeDetail/${store.id}`}>
+              <StoreItem
+                key={store.id}
+                src={store.mainImage}
+                storeName={store.name}
+                introduction={store.introduction}
+                open={store.open}
+              />
+            </Link>
+          ))
+        )}
+      </InfiniteScroll>
     </SearchBarContainer>
   );
 };
