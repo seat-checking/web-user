@@ -107,6 +107,7 @@ export const MemberInfoForm: VFC = () => {
     const responseData = await validateNickname({
       nickname: nicknameValue,
     });
+    console.log(nicknameValue);
     const isUnique = responseData.result.isValid;
 
     if (isUnique) {
