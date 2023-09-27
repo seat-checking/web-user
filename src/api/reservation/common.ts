@@ -15,3 +15,18 @@ export interface ReservationUser {
   storeMainImage: string;
   userNickname: string;
 }
+export interface StoreCustomReservationResponse {
+  storeCustomUtilizationFieldList: StoreCustomReservationField[];
+}
+export interface StoreCustomReservationField {
+  id: number;
+  title: string;
+  type: string;
+  contentGuide: string;
+}
+export interface ReservationResponse {
+  allReservationsForSeatAndDate: {
+    startSchedule: string;
+    endSchedule: string;
+  }[];
+}
