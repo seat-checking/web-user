@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getReservationList } from 'api/reservation/reservation';
 import { PATH } from 'common/utils/constants';
-import { Spinner } from 'components/layout/Spinner';
+import { Spinner } from 'components/common/Spinner';
 import { ListItem } from 'components/reservationStatus/ListItem';
 import { ErrorMessage } from 'components/store/storeList/AllList/AllList.styled';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -28,7 +28,7 @@ export const APPROVED_LIST_QUERY_KEY = ['approvedList'];
 export const ApprovedList = () => {
   const getReservationData = async ({ pageParam = 1 }) => {
     const resData = await getReservationList({
-      reservationStatus: '승인',
+      'reservation-status': '승인',
       page: pageParam,
       size: 15,
     });

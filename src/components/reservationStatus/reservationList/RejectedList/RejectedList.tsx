@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getReservationList } from 'api/reservation/reservation';
 import { PATH } from 'common/utils/constants';
-import { Spinner } from 'components/layout/Spinner';
+import { Spinner } from 'components/common/Spinner';
 import { ListItem } from 'components/reservationStatus/ListItem';
 import {
   getFormattedMonthAndDay,
@@ -20,7 +20,7 @@ export const REJECTED_LIST_QUERY_KEY = ['rejectedList'];
 export const RejectedList = () => {
   const getReservationData = async ({ pageParam = 1 }) => {
     const resData = await getReservationList({
-      reservationStatus: '거절',
+      'reservation-status': '거절',
       page: pageParam,
       size: 15,
     });
