@@ -1,71 +1,271 @@
+import {
+  SpaceNowUse,
+  SpaceReservation,
+  chairNowUse,
+  chairReservation,
+  getRequestInformation,
+} from 'api/reservation/reservation';
+import { PATH } from 'common/utils/constants';
+import { Modal } from 'components/common/Modal';
 import { Button } from 'components/form/atoms/Button';
 import { InputLabel } from 'components/form/atoms/InputLabel';
 import { InputRadio } from 'components/form/atoms/InputRadio';
 import { Inputs } from 'components/form/molecules/Inputs';
 import {
+  ButtonWrapper,
   InputRadioGroup,
   IntentWrapper,
+  ModaMainText,
+  ModaSubText,
+  ModalButton,
+  ModalButtonWrapper,
+  ModalCancel,
+  ModalColorText,
+  ModalContent,
+  ModalHelperText,
+  ModalSeatNumberText,
 } from 'components/store/reservation/Intent/Intent.styled';
-import { ButtonWrapper } from 'pages/RootPage/RootPage.styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useReservationStore } from 'store/reservationStore';
 import { useTheme } from 'styled-components';
+import type { StoreCustomReservationResponse } from 'api/reservation/common';
+import type {
+  GetRequestInformationParams,
+  SeatScheduleParams,
+  SpaceScheduleParams,
+} from 'api/reservation/reservation';
 
+const formatTimeFromISO = (isoString: string) => {
+  const date = new Date(isoString);
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  return `${hours}:${minutes}`;
+};
+
+const formatDate = (dateStr: string) => {
+  const date = new Date(dateStr);
+
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  return `${month}월 ${day}일`;
+};
 export const Intent = () => {
   const [checkedStatus, setCheckedStatus] = useState<Record<string, boolean>>(
     {},
   );
+  const [requestData, setRequestData] =
+    useState<StoreCustomReservationResponse | null>(null);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+  const setCustomContent = useReservationStore(
+    (state) => state.setCustomContent,
+  );
+  const startSchedule = useReservationStore((state) => state.startSchedule);
+  const endSchedule = useReservationStore((state) => state.endSchedule);
+  const storeChairId = useReservationStore((state) => state.storeChairId);
+  const customUtilizationContents = useReservationStore(
+    (state) => state.customUtilizationContents,
+  );
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from;
   const theme = useTheme();
+  const dateDisplay = formatDate(startSchedule);
 
-  const handleRadioClick = (name: string) => {
+  const firstData = startSchedule && endSchedule;
+
+  const apiFunction =
+    from === 'SeatBooking'
+      ? chairReservation
+      : from === 'SeatUseNow'
+      ? chairNowUse
+      : from === 'SpaceBooking'
+      ? SpaceReservation
+      : from === 'SpaceUseNow'
+      ? SpaceNowUse
+      : null;
+
+  const openModal = () => {
+    const params: SeatScheduleParams = {
+      storeChairId,
+      startSchedule,
+      endSchedule,
+      customUtilizationContents,
+    };
+
+    console.log('Data for reservation:', params); // <-- 데이터 출력
+
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleRadioClick = (name: string, fieldId: number) => {
     setCheckedStatus({
       ...checkedStatus,
       [name]: !checkedStatus[name],
     });
+
+    let updatedValues;
+    if (checkedStatus[name]) {
+      updatedValues = selectedValues.filter((val) => val !== name);
+    } else {
+      updatedValues = [...selectedValues, name];
+    }
+    setSelectedValues(updatedValues);
+
+    setCustomContent(fieldId, updatedValues);
   };
+
+  const handleFreeInputChange = (value: string, fieldId: number) => {
+    setCustomContent(fieldId, [value]);
+  };
+
+  const renderFields = () => {
+    if (!requestData || !requestData.storeCustomUtilizationFieldList) {
+      return null;
+    }
+
+    return requestData.storeCustomUtilizationFieldList.map((field, index) => {
+      if (field.type === '자유 입력') {
+        return (
+          <Inputs
+            key={field.id}
+            labelRequired
+            placeholder={JSON.parse(field.contentGuide)[0]}
+            valueLength={0}
+            onChange={(e) => handleFreeInputChange(e.target.value, field.id)}
+          >
+            {field.title}
+          </Inputs>
+        );
+      }
+
+      if (field.type === '선택지 제공') {
+        const options = JSON.parse(field.contentGuide);
+
+        return (
+          <InputRadioGroup key={index}>
+            <InputLabel labelRequired>{field.title}</InputLabel>
+            {options.map((option: string, idx: number) => (
+              <InputRadio
+                key={idx}
+                id={`${field.title}-${idx}`}
+                value={option}
+                label={option}
+                name={`${field.title}-${option}`}
+                size='small'
+                checked={checkedStatus[option]}
+                onClick={() => handleRadioClick(`${option}`, field.id)}
+              />
+            ))}
+          </InputRadioGroup>
+        );
+      }
+
+      return null;
+    });
+  };
+
+  useEffect(() => {
+    if (!firstData) {
+      navigate(`/${PATH.storeList}`);
+    }
+  }, [navigate, firstData]);
+
+  useEffect(() => {
+    const fetchRequestData = async () => {
+      try {
+        const params: GetRequestInformationParams = {
+          storeId: '55',
+        };
+        const data = await getRequestInformation(params);
+        setRequestData(data.result);
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
+    };
+
+    fetchRequestData();
+  }, []);
+
+  const handleReservationSubmit = async () => {
+    try {
+      if (apiFunction === null) {
+        throw new Error('API function is not defined');
+      }
+
+      if (from === 'SeatBooking' || from === 'SeatUseNow') {
+        const params: SeatScheduleParams = {
+          storeChairId: 58,
+          startSchedule,
+          endSchedule,
+          customUtilizationContents,
+        };
+        await (apiFunction as (params: SeatScheduleParams) => Promise<any>)(
+          params,
+        );
+      } else if (from === 'SpaceBooking' || from === 'SpaceUseNow') {
+        const params: SpaceScheduleParams = {
+          storeSpaceId: 58,
+          startSchedule,
+          endSchedule,
+          customUtilizationContents,
+        };
+        await (apiFunction as (params: SpaceScheduleParams) => Promise<any>)(
+          params,
+        );
+      } else {
+        throw new Error('Invalid "from" type');
+      }
+
+      navigate(PATH.storeDetail);
+    } catch (error) {
+      console.error('Failed to make the request:', error);
+      return null;
+    }
+  };
+
+  const startScheduleFormatted = formatTimeFromISO(startSchedule);
+  const endScheduleFormatted = formatTimeFromISO(endSchedule);
+
   return (
     <IntentWrapper>
-      <Inputs
-        labelRequired
-        placeholder='사용 목적을 입력해주세요'
-        valueLength={0}
-      >
-        사용목적
-      </Inputs>
-      <InputRadioGroup>
-        <InputLabel labelRequired>대여장비</InputLabel>
-        <InputRadio
-          id='1'
-          value='모니터'
-          label='모니터'
-          name='모니터'
-          size='small'
-          checked={checkedStatus['모니터']}
-          onClick={() => handleRadioClick('모니터')}
-        />
-        <InputRadio
-          id='2'
-          value='마우스'
-          label='마우스'
-          name='마우스'
-          size='small'
-          checked={checkedStatus['마우스']}
-          onClick={() => handleRadioClick('마우스')}
-        />
-        <InputRadio
-          id='3'
-          value='노트북'
-          label='노트북'
-          name='노트북'
-          size='small'
-          checked={checkedStatus['노트북']}
-          onClick={() => handleRadioClick('노트북')}
-        />
-      </InputRadioGroup>
+      {renderFields()}
       <ButtonWrapper>
-        <Button backgroundColor={theme.palette.primary.orange} color='white'>
+        <Button
+          backgroundColor={theme.palette.primary.orange}
+          color='white'
+          onClick={openModal}
+        >
           사용신청
         </Button>
       </ButtonWrapper>
+      {modalOpen && (
+        <Modal>
+          <ModalContent>
+            <ModaMainText>사용신청</ModaMainText>
+            <ModaSubText>{`${dateDisplay} ${startScheduleFormatted} - ${endScheduleFormatted}`}</ModaSubText>
+            <ModalSeatNumberText>
+              {storeChairId}번 좌석을 예약할까요?
+            </ModalSeatNumberText>
+            <ModalHelperText>
+              사용 승인 후, <ModalColorText>10분 안에</ModalColorText> 착석하지
+              않으면, 예약이 취소될 수 있습니다
+            </ModalHelperText>
+          </ModalContent>
+          <ModalButtonWrapper>
+            <ModalCancel onClick={closeModal}>취소</ModalCancel>
+            <ModalButton onClick={handleReservationSubmit}>
+              예약신청
+            </ModalButton>
+          </ModalButtonWrapper>
+        </Modal>
+      )}
     </IntentWrapper>
   );
 };
