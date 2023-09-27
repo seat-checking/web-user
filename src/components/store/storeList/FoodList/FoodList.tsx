@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getStoreList } from 'api/store/store';
-import { Spinner } from 'components/layout/Spinner';
+import { Spinner } from 'components/common/Spinner';
 import { StoreItem } from 'components/store/StoreItem';
 import { ErrorMessage } from 'components/store/storeList/AllList/AllList.styled';
 import InfiniteScroll from 'react-infinite-scroller';

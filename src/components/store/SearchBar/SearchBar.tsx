@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getSeachList } from 'api/store/store';
+import { Spinner } from 'components/common/Spinner';
 import { InputResetIcon } from 'components/form/atoms/InputResetIcon';
-import { Spinner } from 'components/layout/Spinner';
 import {
   ResetbtnWrapper,
   ResponseMessage,
