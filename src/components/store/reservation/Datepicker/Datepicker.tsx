@@ -11,7 +11,7 @@ import {
 import {
   CalendarDate,
   CalendarInfo,
-} from 'components/store/reservation/UseNow/UseNow.styled';
+} from 'components/store/reservation/seatReservation/SeatUseNow/SeatUseNowstyled';
 import { format, getYear } from 'date-fns';
 import ko from 'date-fns/locale/ko';
 import { useEffect, useState } from 'react';
@@ -20,6 +20,11 @@ import type { VFC } from 'common/utils/types';
 import 'react-datepicker/dist/react-datepicker.css';
 
 registerLocale('ko', ko);
+
+interface DatepickerProps {
+  tabValue: number;
+  onDateChange?: (date: Date) => void;
+}
 
 interface CustomHeaderProps {
   date: Date;
@@ -59,7 +64,10 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
   </CustomHeaderWrapper>
 );
 
-export const Datepicker: VFC<DatepickerProps> = ({ tabValue }) => {
+export const Datepicker: VFC<DatepickerProps> = ({
+  tabValue,
+  onDateChange,
+}) => {
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [formattedDate, setFormattedDate] = useState<string>(
     format(startDate, 'MMMM d일, eeee', { locale: ko }),
@@ -67,10 +75,12 @@ export const Datepicker: VFC<DatepickerProps> = ({ tabValue }) => {
 
   const handleDateChange = (date: Date) => {
     setStartDate(date);
-
     const newFormattedDate = format(date, 'MMMM d일, eeee', { locale: ko });
     setFormattedDate(newFormattedDate);
     console.log('클릭한 날짜:', newFormattedDate);
+    if (onDateChange) {
+      onDateChange(date);
+    }
   };
 
   useEffect(() => {
@@ -92,7 +102,13 @@ export const Datepicker: VFC<DatepickerProps> = ({ tabValue }) => {
           inline
           locale='ko'
           disabledKeyboardNavigation
-          minDate={tabValue === 0 ? new Date() : undefined}
+          minDate={
+            tabValue === 0
+              ? new Date()
+              : tabValue === 1
+              ? new Date()
+              : undefined
+          }
           maxDate={tabValue === 0 ? new Date() : undefined}
           renderCustomHeader={(props) => (
             <CustomHeader
