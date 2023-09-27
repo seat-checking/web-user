@@ -35,7 +35,7 @@ export const validateNickname = async (
   params: ValidateNicknameParams,
 ): Promise<SuccessOkResponse<ValidateNicknameResult>> => {
   const url = getApiUrl('/users/validate/nickname');
-  const response = await axios.post(url, { params });
+  const response = await axios.post(url, params);
   return response.data;
 };
 
@@ -43,7 +43,7 @@ export const validateEmail = async (
   params: ValidateEmailParams,
 ): Promise<SuccessOkResponse<ValidateEmailResult>> => {
   const url = getApiUrl('/users/validate/email');
-  const response = await axios.post(url, { params });
+  const response = await axios.post(url, params);
   return response.data;
 };
 
@@ -51,7 +51,7 @@ export const signUp = async (
   params: SignUpParams,
 ): Promise<SuccessOkWithoutResultResponse> => {
   const url = getApiUrl('/users/sign-up');
-  const response = await axios.post(url, { params });
+  const response = await axios.post(url, params);
   return response.data;
 };
 
