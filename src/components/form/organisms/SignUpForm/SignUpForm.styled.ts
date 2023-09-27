@@ -33,7 +33,7 @@ export const InputSubCheckBoxWrapper = styled.div`
 `;
 export const ButtonWrapper = styled.div`
   margin-top: 4.4rem;
-  margin-bottom: 4.8rem;
+  margin-bottom: 3.5rem;
   text-align: center;
 `;
 
