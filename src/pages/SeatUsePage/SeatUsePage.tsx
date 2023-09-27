@@ -1,5 +1,5 @@
-import { SeatUse } from 'components/store/reservation/SeatUse';
-import { BackButton } from 'pages/MyPage/MyPage.styled';
+import { BackButton } from 'components/common/BackButton';
+import { SeatUse } from 'components/store/reservation/seatReservation/SeatUse';
 import {
   HeaderWrapper,
   ReservationPageHeader,
