@@ -3,7 +3,7 @@ import { Tab } from 'components/layout/tab/Tab';
 import { TabPanel } from 'components/layout/tab/TabPanel';
 import { Tabs } from 'components/layout/tab/Tabs';
 import { Wrapper } from 'components/store/ListTab/ListTab.styled';
-import { SeatLayoutTab } from 'components/store/SeatLayoutTab/SeatLayoutTab';
+import { SeatInfoTab } from 'components/store/SeatInfoTab/SeatInfoTab';
 import { StoreInfoTab } from 'components/store/StoreInfoTab/StoreInfoTab';
 import { useState } from 'react';
 import type { StoreDetaillResponse } from 'api/store/common';
@@ -31,7 +31,7 @@ export const StoreDetailTab: VFC<StoreDetailTabProps> = ({ storeInfo }) => {
       ) : (
         <>
           <TabPanel value={value} index={0}>
-            <SeatLayoutTab storeInfo={storeInfo} />
+            <SeatInfoTab storeInfo={storeInfo} />
           </TabPanel>
           <TabPanel value={value} index={1}>
             <StoreInfoTab storeInfo={storeInfo} />

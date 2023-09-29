@@ -1,23 +1,23 @@
-import { SeatLayout } from 'components/store/SeatLayout/SeatLayout';
 import {
   AverageText,
   Label,
   SeatCount,
   SeatCountWrap,
   UpperWrap,
-} from 'components/store/SeatLayoutTab/SeatLayoutTab.styled';
+} from 'components/store/SeatInfoTab/SeatInfoTab.styled';
+import { SeatLayout } from 'components/store/SeatLayout/SeatLayout';
 import type { StoreDetaillResponse } from 'api/store/common';
 
 import type { VFC } from 'common/utils/types';
 
-interface SeatLayoutTabProps {
+interface SeatInfoTabProps {
   storeInfo: StoreDetaillResponse;
 }
 
 /**
  * 좌석정보 탭을 클릭했을 때 하단에 보여줄 컴포넌트
  */
-export const SeatLayoutTab: VFC<SeatLayoutTabProps> = () => {
+export const SeatInfoTab: VFC<SeatInfoTabProps> = ({ storeInfo }) => {
   return (
     <div>
       <UpperWrap>
