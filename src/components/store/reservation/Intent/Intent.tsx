@@ -177,19 +177,23 @@ export const Intent = () => {
   }, [navigate, firstData]);
 
   useEffect(() => {
-    const fetchRequestData = async () => {
+    const getRequestData = async () => {
       try {
         const params: GetRequestInformationParams = {
           storeId: '55',
         };
         const data = await getRequestInformation(params);
-        setRequestData(data.result);
+        if (!data.result) {
+          setModalOpen(true);
+        } else {
+          setRequestData(data.result);
+        }
       } catch (error) {
-        return null;
+        setModalOpen(true);
       }
     };
 
-    fetchRequestData();
+    getRequestData();
   }, []);
 
   const handleReservationSubmit = async () => {
