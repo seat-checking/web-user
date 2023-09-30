@@ -8,14 +8,6 @@ export const Form = styled.form`
   width: 100%;
 `;
 
-export const InputRadioGroup = styled.div`
-  width: 90%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1.8rem;
-  margin-bottom: 6rem;
-`;
 export const ModalHeader = styled.div`
   color: ${({ theme }) => theme.palette.grey[500]};
   font-size: 1.6rem;

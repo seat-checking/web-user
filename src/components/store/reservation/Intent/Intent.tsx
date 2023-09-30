@@ -8,12 +8,9 @@ import {
 import { PATH } from 'common/utils/constants';
 import { Modal } from 'components/common/Modal';
 import { Button } from 'components/form/atoms/Button';
-import { InputLabel } from 'components/form/atoms/InputLabel';
-import { InputRadio } from 'components/form/atoms/InputRadio';
-import { Inputs } from 'components/form/molecules/Inputs';
+import { Fields } from 'components/store/reservation/Fields';
 import {
   ButtonWrapper,
-  InputRadioGroup,
   IntentWrapper,
   ModaMainText,
   ModaSubText,
@@ -138,52 +135,6 @@ export const Intent = () => {
     setCustomContent(fieldId, [value]);
   };
 
-  const renderFields = () => {
-    if (!requestData || !requestData.storeCustomUtilizationFieldList) {
-      return null;
-    }
-
-    return requestData.storeCustomUtilizationFieldList.map((field) => {
-      if (field.type === '자유 입력') {
-        return (
-          <Inputs
-            key={field.id}
-            labelRequired
-            placeholder={JSON.parse(field.contentGuide)[0]}
-            valueLength={0}
-            onChange={(e) => handleFreeInputChange(e.target.value, field.id)}
-          >
-            {field.title}
-          </Inputs>
-        );
-      }
-
-      if (field.type === '선택지 제공') {
-        const options = JSON.parse(field.contentGuide);
-
-        return (
-          <InputRadioGroup key={field.id}>
-            <InputLabel labelRequired>{field.title}</InputLabel>
-            {options.map((option: string, idx: number) => (
-              <InputRadio
-                key={field.id}
-                id={`${field.title}-${idx}`}
-                value={option}
-                label={option}
-                name={`${field.title}-${option}`}
-                size='small'
-                checked={checkedStatus[option]}
-                onClick={() => handleRadioClick(`${option}`, field.id)}
-              />
-            ))}
-          </InputRadioGroup>
-        );
-      }
-
-      return null;
-    });
-  };
-
   useEffect(() => {
     if (!firstData) {
       navigate(`/${PATH.storeList}`);
@@ -275,7 +226,12 @@ export const Intent = () => {
 
   return (
     <IntentWrapper>
-      {renderFields()}
+      <Fields
+        requestData={requestData}
+        checkedStatus={checkedStatus}
+        handleRadioClick={handleRadioClick}
+        handleFreeInputChange={handleFreeInputChange}
+      />
       <ButtonWrapper>
         {areAllFieldsFilled ? (
           <Button
