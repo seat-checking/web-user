@@ -26,12 +26,12 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useReservationStore } from 'store/reservationStore';
 import { useTheme } from 'styled-components';
-import type { StoreCustomReservationResponse } from 'api/reservation/common';
 import type {
   GetRequestInformationParams,
   SeatScheduleParams,
   SpaceScheduleParams,
-} from 'api/reservation/reservation';
+  StoreCustomReservationResponse,
+} from 'api/reservation/common';
 
 type ApiResponse = {
   isSuccess: boolean;

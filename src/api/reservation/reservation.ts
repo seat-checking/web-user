@@ -5,43 +5,15 @@ import type {
   SuccessOkWithoutResultResponse,
 } from 'api/common';
 import type {
+  GetRequestInformationParams,
+  ReservationListParams,
   ReservationListResponse,
+  ReservationParams,
   ReservationResponse,
+  SeatScheduleParams,
+  SpaceScheduleParams,
   StoreCustomReservationResponse,
 } from 'api/reservation/common';
-
-interface ReservationListParams {
-  'reservation-status'?: '대기' | '취소' | '승인' | '거절';
-  page?: number;
-  size?: number;
-  sort?: string;
-}
-export interface GetRequestInformationParams {
-  storeId: string;
-}
-
-export interface SeatScheduleParams {
-  storeChairId: number;
-  startSchedule: string;
-  endSchedule: string;
-  customUtilizationContents: {
-    fieldId: number;
-    content: string[];
-  }[];
-}
-export interface SpaceScheduleParams {
-  storeSpaceId: number;
-  startSchedule: string;
-  endSchedule: string;
-  customUtilizationContents: {
-    fieldId: number;
-    content: string[];
-  }[];
-}
-
-export interface ReservationParams {
-  'reservation-date-and-time': string;
-}
 
 export const getReservationList = async (
   params: ReservationListParams,
