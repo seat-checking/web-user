@@ -67,6 +67,11 @@ export const Intent = () => {
     useState<StoreCustomReservationResponse | null>(null);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
+  const [fieldValues, setFieldValues] = useState<
+    Record<string, string | string[]>
+  >({});
+  const [areAllFieldsFilled, setAreAllFieldsFilled] = useState(false);
+
   const setCustomContent = useReservationStore(
     (state) => state.setCustomContent,
   );
@@ -115,12 +120,21 @@ export const Intent = () => {
     } else {
       updatedValues = [...selectedValues, name];
     }
-    setSelectedValues(updatedValues);
 
+    setFieldValues({
+      ...fieldValues,
+      [fieldId]: updatedValues,
+    });
+
+    setSelectedValues(updatedValues);
     setCustomContent(fieldId, updatedValues);
   };
 
   const handleFreeInputChange = (value: string, fieldId: number) => {
+    setFieldValues({
+      ...fieldValues,
+      [fieldId]: value,
+    });
     setCustomContent(fieldId, [value]);
   };
 
@@ -196,6 +210,30 @@ export const Intent = () => {
     getRequestData();
   }, []);
 
+  useEffect(() => {
+    if (!requestData || !requestData.storeCustomUtilizationFieldList) {
+      setAreAllFieldsFilled(false);
+      return;
+    }
+
+    const totalFields = requestData.storeCustomUtilizationFieldList.length;
+    const filledFields = Object.values(fieldValues).length;
+
+    if (filledFields !== totalFields) {
+      setAreAllFieldsFilled(false);
+      return;
+    }
+
+    const allFilled = Object.values(fieldValues).every((value) => {
+      if (Array.isArray(value)) {
+        return value.length > 0;
+      }
+      return value !== '';
+    });
+
+    setAreAllFieldsFilled(allFilled);
+  }, [fieldValues, requestData]);
+
   const handleReservationSubmit = async () => {
     try {
       if (apiFunction === null) {
@@ -239,13 +277,23 @@ export const Intent = () => {
     <IntentWrapper>
       {renderFields()}
       <ButtonWrapper>
-        <Button
-          backgroundColor={theme.palette.primary.orange}
-          color='white'
-          onClick={openModal}
-        >
-          사용신청
-        </Button>
+        {areAllFieldsFilled ? (
+          <Button
+            backgroundColor={theme.palette.primary.orange}
+            color={theme.palette.white.main}
+            onClick={openModal}
+          >
+            사용신청
+          </Button>
+        ) : (
+          <Button
+            backgroundColor={theme.palette.grey[100]}
+            color={theme.palette.grey[400]}
+            disabled
+          >
+            사용신청
+          </Button>
+        )}
       </ButtonWrapper>
       {modalOpen && (
         <Modal>
