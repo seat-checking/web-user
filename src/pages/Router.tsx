@@ -47,11 +47,11 @@ export const router = createBrowserRouter([
     children: [{ index: true, element: <StoreDetailPage /> }],
   },
   {
-    path: `/${PATH.seatreservation}`,
+    path: `/${PATH.seatReservation}`,
     element: <SeatUsePage />,
   },
   {
-    path: `/${PATH.spacereservation}`,
+    path: `/${PATH.spaceReservation}`,
     element: <SpaceUsePage />,
   },
   {
