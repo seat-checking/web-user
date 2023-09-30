@@ -36,6 +36,14 @@ import type {
   SpaceScheduleParams,
 } from 'api/reservation/reservation';
 
+type ApiResponse = {
+  isSuccess: boolean;
+  status: number;
+  code: string;
+  message: string;
+  result: null;
+};
+
 const formatTimeFromISO = (isoString: string) => {
   const date = new Date(isoString);
   const hours = String(date.getHours()).padStart(2, '0');
@@ -88,15 +96,6 @@ export const Intent = () => {
       : null;
 
   const openModal = () => {
-    const params: SeatScheduleParams = {
-      storeChairId,
-      startSchedule,
-      endSchedule,
-      customUtilizationContents,
-    };
-
-    console.log('Data for reservation:', params); // <-- 데이터 출력
-
     setModalOpen(true);
   };
 
@@ -130,7 +129,7 @@ export const Intent = () => {
       return null;
     }
 
-    return requestData.storeCustomUtilizationFieldList.map((field, index) => {
+    return requestData.storeCustomUtilizationFieldList.map((field) => {
       if (field.type === '자유 입력') {
         return (
           <Inputs
@@ -149,11 +148,11 @@ export const Intent = () => {
         const options = JSON.parse(field.contentGuide);
 
         return (
-          <InputRadioGroup key={index}>
+          <InputRadioGroup key={field.id}>
             <InputLabel labelRequired>{field.title}</InputLabel>
             {options.map((option: string, idx: number) => (
               <InputRadio
-                key={idx}
+                key={field.id}
                 id={`${field.title}-${idx}`}
                 value={option}
                 label={option}
@@ -186,7 +185,7 @@ export const Intent = () => {
         const data = await getRequestInformation(params);
         setRequestData(data.result);
       } catch (error) {
-        console.error('Failed to fetch data:', error);
+        return null;
       }
     };
 
@@ -206,9 +205,9 @@ export const Intent = () => {
           endSchedule,
           customUtilizationContents,
         };
-        await (apiFunction as (params: SeatScheduleParams) => Promise<any>)(
-          params,
-        );
+        await (
+          apiFunction as (params: SeatScheduleParams) => Promise<ApiResponse>
+        )(params);
       } else if (from === 'SpaceBooking' || from === 'SpaceUseNow') {
         const params: SpaceScheduleParams = {
           storeSpaceId: 58,
@@ -216,16 +215,15 @@ export const Intent = () => {
           endSchedule,
           customUtilizationContents,
         };
-        await (apiFunction as (params: SpaceScheduleParams) => Promise<any>)(
-          params,
-        );
+        await (
+          apiFunction as (params: SpaceScheduleParams) => Promise<ApiResponse>
+        )(params);
       } else {
         throw new Error('Invalid "from" type');
       }
 
-      navigate(PATH.storeDetail);
+      navigate(PATH.storeDetail); // TODO: 해당 스토어디테일 페이지 이동
     } catch (error) {
-      console.error('Failed to make the request:', error);
       return null;
     }
   };
