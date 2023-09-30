@@ -101,7 +101,9 @@ export const SearchBar: VFC = () => {
         </SearchInputWrapper>
       </SearchBarWrapper>
       <InfiniteScroll loadMore={handleLoadMore} hasMore={hasNextPage}>
-        {query.length === 0 ? null : isError ? (
+        {query.length === 0 ? (
+          <div />
+        ) : isError ? (
           <ResponseMessage>
             요청 중 오류가 발생했습니다. 다시 시도해주세요.
           </ResponseMessage>
