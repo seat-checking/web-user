@@ -115,6 +115,8 @@ export const SeatUseNow: React.FC<SeatUseNowProps> = ({
     });
   };
 
+  console.log();
+
   return (
     <div>
       <TimesWrapper>
