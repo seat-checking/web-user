@@ -110,8 +110,6 @@ export const SpaceBooking: React.FC<BookingProps> = ({
     navigate('/intent', { state: { from: 'SpaceBooking' } });
   };
 
-  console.log(selectedInternalTime);
-
   const isTimeSlotReserved = (time: string) => {
     return reservations.some((reservation) => {
       const reservedStart = new Date(reservation.startSchedule).getTime();

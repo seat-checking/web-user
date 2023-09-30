@@ -47,7 +47,7 @@ export const SeatReservationTab: VFC<ReservationTabProps> = ({
         const response = await getSeatReservations(58, params);
         setReservations(response.result.allReservationsForSeatAndDate);
       } catch (error) {
-        console.error(error);
+        return null;
       }
     };
     getReservationTime();
