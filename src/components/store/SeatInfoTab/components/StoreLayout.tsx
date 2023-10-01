@@ -8,8 +8,10 @@ import {
 } from 'components/store/SeatInfoTab/components/StoreLayout.styled';
 import layoutData from 'components/store/SeatInfoTab/mock/getSpaceSeats.json';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
+import type { GetShopLayoutResponse } from 'api/store/common';
 
 interface StoreLayoutProps {
+  layout: GetShopLayoutResponse | undefined;
   isClickActive?: boolean;
   isSpaceClick?: boolean;
   setSelectedChair: any;
@@ -19,6 +21,7 @@ interface StoreLayoutProps {
  * 좌석 배치 영역
  */
 export const StoreLayout: React.FC<StoreLayoutProps> = ({
+  layout,
   isClickActive,
   isSpaceClick,
   setSelectedChair,
@@ -28,31 +31,29 @@ export const StoreLayout: React.FC<StoreLayoutProps> = ({
     setSelectedChair(id);
   };
 
+  if (!layout) {
+    return null;
+  }
+
   return (
     <Wrap isSpaceClick={isSpaceClick}>
       <Boundary>
         <TransformWrapper>
           <TransformComponent>
             <GridWrap>
-              {layoutData.tableList.map((table) => (
+              {layout.tableList.map((table) => (
                 <GridTable
-                  key={table.storeTableId}
-                  width={table.width}
-                  height={table.height}
-                  x={table.tableX}
-                  y={table.tableY}
-                >
-                  {table.storeTableId}
-                </GridTable>
+                  key={table.i}
+                  width={table.w}
+                  height={table.h}
+                  x={table.x}
+                  y={table.y}
+                />
               ))}
 
-              {layoutData.chairList.map((chair) => (
-                <ChairBorder
-                  key={chair.storeChairId}
-                  x={chair.chairX}
-                  y={chair.chairY}
-                >
-                  <Chair />
+              {layout.chairList.map((chair) => (
+                <ChairBorder key={chair.i} x={chair.x} y={chair.y}>
+                  <Chair>{chair.manageId}</Chair>
                 </ChairBorder>
               ))}
             </GridWrap>

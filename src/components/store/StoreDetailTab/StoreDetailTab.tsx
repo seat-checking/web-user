@@ -31,7 +31,7 @@ export const StoreDetailTab: VFC<StoreDetailTabProps> = ({ storeInfo }) => {
       ) : (
         <>
           <TabPanel value={value} index={0}>
-            <SeatInfoTab storeInfo={storeInfo} />
+            <SeatInfoTab storeInfo={storeInfo} storeId={storeInfo.id} />
           </TabPanel>
           <TabPanel value={value} index={1}>
             <StoreInfoTab storeInfo={storeInfo} />

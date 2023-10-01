@@ -5,7 +5,7 @@ import {
 import type { SpaceType } from 'api/store/common';
 
 interface SpaceListProps {
-  spaceList: SpaceType[];
+  spaceList: SpaceType[] | undefined;
   currentSpaceId: number | null;
   onClickSpace: (spaceId: number) => void;
 }
@@ -20,7 +20,7 @@ export const SpaceList: React.FC<SpaceListProps> = ({
 }) => {
   return (
     <Wrap>
-      {spaceList.map((space) => (
+      {spaceList?.map((space) => (
         <SpaceBtn
           key={space.storeSpaceId}
           isActive={currentSpaceId === space.storeSpaceId}

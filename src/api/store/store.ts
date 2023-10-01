@@ -2,7 +2,13 @@ import { axiosWithAuth, getApiUrl } from 'api/common';
 
 import axios from 'axios';
 import type { SuccessOkResponse } from 'api/common';
-import type { StoreDetaillResponse, StoreListResponse } from 'api/store/common';
+import type {
+  GetCurrentlyInUseResponse,
+  GetShopLayoutResponse,
+  SpaceType,
+  StoreDetaillResponse,
+  StoreListResponse,
+} from 'api/store/common';
 
 interface StoreListParams {
   category?: '음식점' | '카페' | '모임';
@@ -62,4 +68,28 @@ export const getStoreDetaill = async (
     params,
   });
   return response.data;
+};
+
+// 가게의 모든 스페이스 기본 정보 조회
+export const getSpaceList = async (storeId: number): Promise<SpaceType[]> => {
+  const response = await axiosWithAuth.get(`/stores/admins/spaces/${storeId}`);
+  return response.data.result;
+};
+
+// 스페이스별 가게 형태 조회
+export const getSpaceLayout = async (
+  spaceId: number | null,
+): Promise<GetShopLayoutResponse> => {
+  const response = await axiosWithAuth.get(`/stores/spaces/seats/${spaceId}`);
+  return response.data.result;
+};
+
+// 현재 이용 중인 좌석 조회
+export const getCurrentlyInUse = async (
+  spaceId: number,
+): Promise<GetCurrentlyInUseResponse> => {
+  const response = await axiosWithAuth.get(
+    `/utilization/seat/current-in-use/${spaceId}`,
+  );
+  return response.data.result;
 };
