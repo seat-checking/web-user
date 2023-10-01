@@ -56,9 +56,8 @@ export const getGridCellSizeRem = () => {
 const GRID_CELL_SIZE_REM = getGridCellSizeRem();
 const GRID_CHAIR_SIZE_REM = GRID_CELL_SIZE_REM - 0.28;
 
-console.log('크기', GRID_CELL_SIZE_REM, GRID_CHAIR_SIZE_REM);
 export const GridWrap = styled.div`
-  background-color: aqua;
+  background-color: white;
   width: 1024px;
   /* width: 100%; */
   height: 700px;
@@ -107,6 +106,7 @@ export const Chair = styled.div<{
   isClickable?: boolean;
   isSelected?: boolean;
 }>`
+  ${flexSet()};
   background-color: ${(props): string => props.theme.palette.grey[100]};
 
   width: ${GRID_CHAIR_SIZE_REM}rem;
@@ -117,6 +117,10 @@ export const Chair = styled.div<{
   border-radius: 50%;
   transition: all 0.1s ease;
   cursor: pointer;
+
+  font-size: ${GRID_CHAIR_SIZE_REM - 1}rem;
+  font-weight: 400;
+  color: ${({ theme }) => theme.palette.grey[400]};
 
   ${({ isClickable }) =>
     isClickable &&
