@@ -10,7 +10,7 @@ import {
   ReservationButton,
   Wrap as GrayBorderBox,
 } from 'components/store/SeatInfoTab/components/StoreLayout.styled';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 import type {
   GetShopLayoutResponse,
@@ -42,14 +42,18 @@ export const StoreLayout: React.FC<StoreLayoutProps> = ({
     useState<ReservationUnitType>(initialReservationUnit);
 
   const handleSelectChair = (event: React.MouseEvent, id: number) => {
+    event.stopPropagation();
     setSelectedChair(id);
   };
 
-  const handleSelectSpace = () => {
+  const handleToggleSpace = () => {
     if (currentReservationUnit !== 'SPACE') {
+      if (selectedChair != null) {
+        setSelectedChair(null);
+      }
       return;
     }
-    setIsSpaceSelected(true);
+    setIsSpaceSelected((prev) => !prev);
   };
 
   const handleChangeReservationUnit = (event: React.MouseEvent) => {
@@ -95,13 +99,13 @@ export const StoreLayout: React.FC<StoreLayoutProps> = ({
     <>
       <GrayBorderBox>
         <LayoutBoundary
-          onClick={handleSelectSpace}
+          onClick={handleToggleSpace}
           isClickable={
             currentReservationUnit === 'SPACE' && isSpaceSelected === false
           }
           isSelected={isSpaceSelected}
         >
-          <TransformWrapper maxScale={3}>
+          <TransformWrapper maxScale={3} doubleClick={{ disabled: true }}>
             {({ resetTransform }) => {
               resetTransform();
               return (
@@ -120,12 +124,12 @@ export const StoreLayout: React.FC<StoreLayoutProps> = ({
                     {layout.chairList.map((chair) => (
                       <ChairBorder key={chair.i} x={chair.x} y={chair.y}>
                         <Chair
-                          onClick={(e) => handleSelectChair(e, chair.i)}
+                          onClick={(e) => handleSelectChair(e, chair.manageId)}
                           isClickable={
                             currentReservationUnit === 'CHAIR' &&
                             selectedChair == null
                           }
-                          isSelected={selectedChair === chair.i}
+                          isSelected={selectedChair === chair.manageId}
                         >
                           {chair.manageId}
                         </Chair>
