@@ -79,7 +79,7 @@ export const getSpaceList = async (storeId: number): Promise<SpaceType[]> => {
 
 // 스페이스별 가게 형태 조회
 export const getSpaceLayout = async (
-  spaceId: number | null,
+  spaceId: number | undefined,
 ): Promise<GetShopLayoutResponse> => {
   const response = await axiosWithAuth.get(`/stores/spaces/seats/${spaceId}`);
   return response.data.result;

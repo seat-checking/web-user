@@ -1,6 +1,6 @@
 import { Button } from 'components/form/atoms/Button';
 import {
-  Boundary,
+  Boundary as LayoutBoundary,
   BtnsBackground,
   BtnsWrap,
   Chair,
@@ -8,62 +8,98 @@ import {
   GridTable,
   GridWrap,
   ReservationButton,
-  Wrap,
+  Wrap as GrayBorderBox,
 } from 'components/store/SeatInfoTab/components/StoreLayout.styled';
-import layoutData from 'components/store/SeatInfoTab/mock/getSpaceSeats.json';
 import { useEffect, useState } from 'react';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
-import type { GetShopLayoutResponse, ReservationUnit } from 'api/store/common';
+import type {
+  GetShopLayoutResponse,
+  ReservationUnit,
+  SpaceType,
+} from 'api/store/common';
 
 type ReservationUnitType = 'CHAIR' | 'SPACE';
 
 interface StoreLayoutProps {
   layout: GetShopLayoutResponse;
-  isClickActive?: boolean;
-  isSpaceClick?: boolean;
-  setSelectedChair: any;
-  selectedChair: any;
   reservationUnit: ReservationUnit;
+  currentSpace: SpaceType;
 }
 /**
  * 좌석 배치 영역
  */
 export const StoreLayout: React.FC<StoreLayoutProps> = ({
   layout,
-  isClickActive,
-  isSpaceClick,
-  setSelectedChair,
-  selectedChair,
   reservationUnit,
+  currentSpace,
 }) => {
-  const handleClickChair = (id: string) => {
-    setSelectedChair(id);
-  };
+  const [selectedChair, setSelectedChair] = useState<number | null>(null);
+  const [isSpaceSelected, setIsSpaceSelected] = useState(false);
 
   const initialReservationUnit = reservationUnit.chair ? 'CHAIR' : 'SPACE';
-  console.log('initialReservationUnit :>> ', initialReservationUnit);
 
   const [currentReservationUnit, setCurrentReservationUnit] =
     useState<ReservationUnitType>(initialReservationUnit);
+
+  const handleSelectChair = (event: React.MouseEvent, id: number) => {
+    setSelectedChair(id);
+  };
+
+  const handleSelectSpace = () => {
+    if (currentReservationUnit !== 'SPACE') {
+      return;
+    }
+    setIsSpaceSelected(true);
+  };
 
   const handleChangeReservationUnit = (event: React.MouseEvent) => {
     if (!(event.target instanceof HTMLButtonElement)) {
       return;
     }
     const selectedUnit = event.target.dataset.type;
-    if (selectedUnit === 'CHAIR' || selectedUnit === 'SPACE') {
+    if (selectedUnit === 'CHAIR') {
       setCurrentReservationUnit(selectedUnit);
+      setIsSpaceSelected(false);
+    }
+    if (selectedUnit === 'SPACE') {
+      setCurrentReservationUnit(selectedUnit);
+      setSelectedChair(null);
     }
   };
 
+  const handleUse = () => {
+    console.log('use');
+  };
+
+  const getButtonText = () => {
+    if (currentReservationUnit === 'CHAIR') {
+      if (selectedChair == null) {
+        return '좌석 사용하기';
+      }
+      return selectedChair + '번 좌석 사용하기';
+    }
+    if (!isSpaceSelected) {
+      return '스페이스 사용하기';
+    }
+    return `${currentSpace.name} 사용하기`;
+  };
+
   useEffect(() => {
+    // 초기화
+    setSelectedChair(null);
     setCurrentReservationUnit(initialReservationUnit);
   }, [setCurrentReservationUnit, reservationUnit, initialReservationUnit]);
 
   return (
     <>
-      <Wrap isSpaceClick={isSpaceClick}>
-        <Boundary>
+      <GrayBorderBox>
+        <LayoutBoundary
+          onClick={handleSelectSpace}
+          isClickable={
+            currentReservationUnit === 'SPACE' && isSpaceSelected === false
+          }
+          isSelected={isSpaceSelected}
+        >
           <TransformWrapper>
             <TransformComponent>
               <GridWrap>
@@ -79,14 +115,23 @@ export const StoreLayout: React.FC<StoreLayoutProps> = ({
 
                 {layout.chairList.map((chair) => (
                   <ChairBorder key={chair.i} x={chair.x} y={chair.y}>
-                    <Chair>{chair.manageId}</Chair>
+                    <Chair
+                      onClick={(e) => handleSelectChair(e, chair.i)}
+                      isClickable={
+                        currentReservationUnit === 'CHAIR' &&
+                        selectedChair == null
+                      }
+                      isSelected={selectedChair === chair.i}
+                    >
+                      {chair.manageId}
+                    </Chair>
                   </ChairBorder>
                 ))}
               </GridWrap>
             </TransformComponent>
           </TransformWrapper>
-        </Boundary>
-      </Wrap>
+        </LayoutBoundary>
+      </GrayBorderBox>
       <BtnsBackground>
         <BtnsWrap onClick={handleChangeReservationUnit}>
           {reservationUnit.chair && (
@@ -109,7 +154,12 @@ export const StoreLayout: React.FC<StoreLayoutProps> = ({
           )}
         </BtnsWrap>
       </BtnsBackground>
-      <Button>좌석 사용하기</Button>
+      <Button
+        onClick={handleUse}
+        disabled={selectedChair == null && isSpaceSelected === false}
+      >
+        {getButtonText()}
+      </Button>
     </>
   );
 };

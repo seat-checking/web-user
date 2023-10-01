@@ -15,11 +15,11 @@ export const useGetSpaceList = (storeId: number) => {
   });
 };
 
-export const useGetSpaceLayout = (spaceId: number | null) => {
+export const useGetSpaceLayout = (spaceId: number | undefined) => {
   return useQuery({
     queryKey: [queryKeys.GET_SPACE_LAYOUT, spaceId],
     queryFn: () => getSpaceLayout(spaceId),
-    enabled: spaceId !== null,
+    enabled: spaceId !== undefined,
     refetchOnWindowFocus: false,
   });
 };

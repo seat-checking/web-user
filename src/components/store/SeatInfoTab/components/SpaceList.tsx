@@ -6,8 +6,8 @@ import type { SpaceType } from 'api/store/common';
 
 interface SpaceListProps {
   spaceList: SpaceType[] | undefined;
-  currentSpaceId: number | null;
-  onClickSpace: (spaceId: number) => void;
+  currentSpaceId: number;
+  onClickSpace: (space: SpaceType) => void;
 }
 
 /**
@@ -24,7 +24,7 @@ export const SpaceList: React.FC<SpaceListProps> = ({
         <SpaceBtn
           key={space.storeSpaceId}
           isActive={currentSpaceId === space.storeSpaceId}
-          onClick={() => onClickSpace(space.storeSpaceId)}
+          onClick={() => onClickSpace(space)}
         >
           {space.name}
         </SpaceBtn>

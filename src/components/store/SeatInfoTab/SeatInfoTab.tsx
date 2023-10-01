@@ -15,7 +15,7 @@ import { SpaceList } from 'components/store/SeatInfoTab/components/SpaceList';
 import { StoreLayout } from 'components/store/SeatInfoTab/components/StoreLayout';
 
 import { useEffect, useState } from 'react';
-import type { StoreDetaillResponse } from 'api/store/common';
+import type { SpaceType, StoreDetaillResponse } from 'api/store/common';
 
 import type { VFC } from 'common/utils/types';
 
@@ -29,24 +29,23 @@ interface SeatInfoTabProps {
  */
 export const SeatInfoTab: VFC<SeatInfoTabProps> = ({ storeId }) => {
   const { data: spaceList, isLoading } = useGetSpaceList(storeId);
-  const [currentSpaceId, setCurrentSpaceId] = useState<number | null>(null);
+  const [currentSpace, setCurrentSpace] = useState<SpaceType | null>(null);
 
   const { data: seatStatistics } = useGetSeatStatistics(storeId);
 
-  const { data: layout, isLoading: isLayoutLoading } =
-    useGetSpaceLayout(currentSpaceId);
+  const { data: layout, isLoading: isLayoutLoading } = useGetSpaceLayout(
+    currentSpace?.storeSpaceId,
+  );
 
-  const [selectedChair, setSelectedChair] = useState<string | null>(null);
-
-  const handleChangeSpace = (spaceId: number) => {
-    setCurrentSpaceId(spaceId);
+  const handleChangeSpace = (space: SpaceType) => {
+    setCurrentSpace(space);
   };
 
   useEffect(() => {
     if (!spaceList || spaceList.length === 0) {
       return;
     }
-    setCurrentSpaceId(spaceList[0].storeSpaceId);
+    setCurrentSpace(spaceList[0]);
   }, [spaceList]);
 
   return (
@@ -63,7 +62,7 @@ export const SeatInfoTab: VFC<SeatInfoTabProps> = ({ storeId }) => {
           좌석 평균 이용시간: {seatStatistics?.averageSeatUsageMinute}분
         </AverageText>
       </UpperWrap>
-      {isLoading ? (
+      {isLoading || currentSpace == null ? (
         <LoadingSpinner />
       ) : spaceList?.length === 0 ? (
         '좌석이 설정되지 않았습니다.'
@@ -71,19 +70,16 @@ export const SeatInfoTab: VFC<SeatInfoTabProps> = ({ storeId }) => {
         <>
           <SpaceList
             spaceList={spaceList}
-            currentSpaceId={currentSpaceId}
+            currentSpaceId={currentSpace.storeSpaceId}
             onClickSpace={handleChangeSpace}
           />
-          {isLayoutLoading || layout === undefined ? (
+          {isLayoutLoading || layout === undefined || currentSpace == null ? (
             <LoadingSpinner />
           ) : (
             <StoreLayout
               reservationUnit={layout.reservationUnit}
               layout={layout}
-              // isClickActive={isSeatClick}
-              // isSpaceClick={isSpaceClick}
-              setSelectedChair={setSelectedChair}
-              selectedChair={selectedChair}
+              currentSpace={currentSpace}
             />
           )}
         </>

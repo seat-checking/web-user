@@ -2,34 +2,21 @@ import checkIcon from 'assets/icons/check.svg';
 import styled, { css } from 'styled-components';
 import { flexSet } from 'styles/mixin';
 
-export const Wrap = styled.div<{ isSpaceClick?: boolean }>`
+export const Wrap = styled.div`
   padding: 1.6rem;
   width: 100%;
 
   border-top: 1px solid ${({ theme }) => theme.palette.grey[300]};
   background-color: ${({ theme }) => theme.palette.grey[100]};
-
-  ${({ isSpaceClick }) =>
-    isSpaceClick &&
-    css`
-      outline: 5px solid red;
-      &::after {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.3);
-      }
-    `}
 `;
 
-export const Boundary = styled.div`
+export const Boundary = styled.div<{
+  isClickable?: boolean;
+  isSelected?: boolean;
+}>`
   width: 100%;
   height: 19.7rem;
-  border: 1px solid ${({ theme }) => theme.palette.grey[200]};
+  outline: 1px solid ${({ theme }) => theme.palette.grey[200]};
   overflow: hidden;
 
   border-radius: 0.4rem;
@@ -43,6 +30,19 @@ export const Boundary = styled.div`
   @media (min-width: 612px) {
     height: 36rem;
   }
+
+  ${({ isClickable }) =>
+    isClickable &&
+    css`
+      cursor: pointer;
+      outline: 2px solid rgba(147, 63, 255, 0.3);
+    `};
+  ${({ isSelected }) =>
+    isSelected &&
+    css`
+      outline: 2px solid #933fff;
+      box-shadow: 0px 0px 24px 0px rgba(147, 63, 255, 0.3);
+    `};
 `;
 
 export const getGridCellSizeRem = () => {
@@ -56,6 +56,7 @@ export const getGridCellSizeRem = () => {
 const GRID_CELL_SIZE_REM = getGridCellSizeRem();
 const GRID_CHAIR_SIZE_REM = GRID_CELL_SIZE_REM - 0.28;
 
+console.log('크기', GRID_CELL_SIZE_REM, GRID_CHAIR_SIZE_REM);
 export const GridWrap = styled.div`
   background-color: aqua;
   width: 1024px;
@@ -115,11 +116,11 @@ export const Chair = styled.div<{
 
   border-radius: 50%;
   transition: all 0.1s ease;
+  cursor: pointer;
 
   ${({ isClickable }) =>
     isClickable &&
     css`
-      cursor: pointer;
       border: 0.1rem solid rgba(147, 63, 255, 0.5); // clickable
     `};
   ${({ isSelected }) =>
@@ -135,6 +136,7 @@ export const BtnsBackground = styled.div`
   justify-content: center;
 
   padding-bottom: 1.6rem;
+  margin-bottom: 1.6rem;
 
   background-color: ${({ theme }) => theme.palette.grey[100]};
 `;
