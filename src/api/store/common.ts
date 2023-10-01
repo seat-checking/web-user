@@ -79,3 +79,9 @@ export interface GetCurrentlyInUseResponse {
     id: number;
   }[];
 }
+
+export interface GetSeatStatisticsResponse {
+  totalNumberOfSeats: number;
+  numberOfRemainingSeats: number;
+  averageSeatUsageMinute: number;
+}

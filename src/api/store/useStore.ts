@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import {
   getCurrentlyInUse,
+  getSeatStatistics,
   getSpaceLayout,
   getSpaceList,
 } from 'api/store/store';
@@ -19,6 +20,14 @@ export const useGetSpaceLayout = (spaceId: number | null) => {
     queryKey: [queryKeys.GET_SPACE_LAYOUT, spaceId],
     queryFn: () => getSpaceLayout(spaceId),
     enabled: spaceId !== null,
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useGetSeatStatistics = (storeId: number) => {
+  return useQuery({
+    queryKey: [queryKeys.GET_SEAT_STATISTICS, storeId],
+    queryFn: () => getSeatStatistics(storeId),
     refetchOnWindowFocus: false,
   });
 };

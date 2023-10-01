@@ -4,6 +4,7 @@ import axios from 'axios';
 import type { SuccessOkResponse } from 'api/common';
 import type {
   GetCurrentlyInUseResponse,
+  GetSeatStatisticsResponse,
   GetShopLayoutResponse,
   SpaceType,
   StoreDetaillResponse,
@@ -85,6 +86,16 @@ export const getSpaceLayout = async (
 };
 
 // 현재 이용 중인 좌석 조회
+export const getSeatStatistics = async (
+  storeId: number,
+): Promise<GetSeatStatisticsResponse> => {
+  const response = await axiosWithAuth.get(
+    `/stores/seats/statistics_information/${storeId}`,
+  );
+  return response.data.result;
+};
+
+// 가게 좌석 통계 정보 조회
 export const getCurrentlyInUse = async (
   spaceId: number,
 ): Promise<GetCurrentlyInUseResponse> => {
