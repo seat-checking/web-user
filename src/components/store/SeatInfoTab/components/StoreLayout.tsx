@@ -10,7 +10,7 @@ import {
   ReservationButton,
   Wrap as GrayBorderBox,
 } from 'components/store/SeatInfoTab/components/StoreLayout.styled';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 import type {
   GetShopLayoutResponse,
@@ -72,7 +72,7 @@ export const StoreLayout: React.FC<StoreLayoutProps> = ({
   };
 
   const handleUse = () => {
-    console.log('use');
+    // TODO api 에러 해결 후 연결 예정
   };
 
   const getButtonText = () => {

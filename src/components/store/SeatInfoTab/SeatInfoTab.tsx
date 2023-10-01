@@ -62,9 +62,9 @@ export const SeatInfoTab: VFC<SeatInfoTabProps> = ({ storeId }) => {
           좌석 평균 이용시간: {seatStatistics?.averageSeatUsageMinute}분
         </AverageText>
       </UpperWrap>
-      {isLoading || currentSpace == null ? (
+      {isLoading ? (
         <LoadingSpinner />
-      ) : spaceList?.length === 0 ? (
+      ) : spaceList?.length === 0 || currentSpace == null ? (
         '좌석이 설정되지 않았습니다.'
       ) : (
         <>
