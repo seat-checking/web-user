@@ -3,14 +3,10 @@ import {
   useGetSpaceLayout,
   useGetSpaceList,
 } from 'api/store/useStore';
-import { Button } from 'components/form/atoms/Button';
 import { LoadingSpinner } from 'components/layout/Spinner/Spinner.styled';
 import {
   AverageText,
-  BtnsBackground,
-  BtnsWrap,
   Label,
-  ReservationButton,
   SeatCount,
   SeatCountWrap,
   UpperWrap,
@@ -22,8 +18,6 @@ import { useEffect, useState } from 'react';
 import type { StoreDetaillResponse } from 'api/store/common';
 
 import type { VFC } from 'common/utils/types';
-
-type ReservationUnitType = 'CHAIR' | 'SPACE';
 
 interface SeatInfoTabProps {
   storeInfo: StoreDetaillResponse;
@@ -42,20 +36,7 @@ export const SeatInfoTab: VFC<SeatInfoTabProps> = ({ storeId }) => {
   const { data: layout, isLoading: isLayoutLoading } =
     useGetSpaceLayout(currentSpaceId);
 
-  const [reservationUnit, setReservationUnit] =
-    useState<ReservationUnitType>('CHAIR');
-
   const [selectedChair, setSelectedChair] = useState<string | null>(null);
-
-  const handleChangeReservationUnit = (event: React.MouseEvent) => {
-    if (!(event.target instanceof HTMLButtonElement)) {
-      return;
-    }
-    const selectedUnit = event.target.dataset.type;
-    if (selectedUnit === 'CHAIR' || selectedUnit === 'SPACE') {
-      setReservationUnit(selectedUnit);
-    }
-  };
 
   const handleChangeSpace = (spaceId: number) => {
     setCurrentSpaceId(spaceId);
@@ -67,16 +48,6 @@ export const SeatInfoTab: VFC<SeatInfoTabProps> = ({ storeId }) => {
     }
     setCurrentSpaceId(spaceList[0].storeSpaceId);
   }, [spaceList]);
-
-  useEffect(() => {
-    if (!layout) {
-      return;
-    }
-    const initialReservationUnit = layout.reservationUnit.chair
-      ? 'CHAIR'
-      : 'SPACE';
-    setReservationUnit(initialReservationUnit);
-  }, [layout]);
 
   return (
     <div>
@@ -103,10 +74,11 @@ export const SeatInfoTab: VFC<SeatInfoTabProps> = ({ storeId }) => {
             currentSpaceId={currentSpaceId}
             onClickSpace={handleChangeSpace}
           />
-          {isLayoutLoading ? (
+          {isLayoutLoading || layout === undefined ? (
             <LoadingSpinner />
           ) : (
             <StoreLayout
+              reservationUnit={layout.reservationUnit}
               layout={layout}
               // isClickActive={isSeatClick}
               // isSpaceClick={isSpaceClick}
@@ -114,29 +86,6 @@ export const SeatInfoTab: VFC<SeatInfoTabProps> = ({ storeId }) => {
               selectedChair={selectedChair}
             />
           )}
-          <BtnsBackground>
-            <BtnsWrap onClick={handleChangeReservationUnit}>
-              {layout?.reservationUnit.chair && (
-                <ReservationButton
-                  data-type='CHAIR'
-                  type='button'
-                  isActive={reservationUnit === 'CHAIR'}
-                >
-                  좌석 사용
-                </ReservationButton>
-              )}
-              {layout?.reservationUnit.space && (
-                <ReservationButton
-                  data-type='SPACE'
-                  type='button'
-                  isActive={reservationUnit === 'SPACE'}
-                >
-                  스페이스 사용 {selectedChair ? selectedChair + '번' : ''}
-                </ReservationButton>
-              )}
-            </BtnsWrap>
-          </BtnsBackground>
-          <Button>좌석 사용하기</Button>
         </>
       )}
     </div>

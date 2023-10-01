@@ -1,3 +1,4 @@
+import checkIcon from 'assets/icons/check.svg';
 import styled, { css } from 'styled-components';
 import { flexSet } from 'styles/mixin';
 
@@ -127,4 +128,55 @@ export const Chair = styled.div<{
       border: 0.1rem solid #933fff; // clicked
       box-shadow: 0px 0px 0.3rem 0.15rem rgba(147, 63, 255, 0.5); //clicked
     `};
+`;
+
+export const BtnsBackground = styled.div`
+  display: flex;
+  justify-content: center;
+
+  padding-bottom: 1.6rem;
+
+  background-color: ${({ theme }) => theme.palette.grey[100]};
+`;
+
+export const BtnsWrap = styled.div`
+  display: flex;
+
+  width: fit-content;
+
+  background-color: white;
+  border: 0.1rem solid ${({ theme }) => theme.palette.grey[200]};
+  border-radius: 2.7rem;
+`;
+
+export const ReservationButton = styled.button<{ isActive: boolean }>`
+  padding: 0.4rem 2rem;
+  border-radius: 4.8rem;
+
+  background-color: ${({ theme }) => theme.palette.grey[400]};
+  color: white;
+  display: inline-flex;
+  align-items: center;
+
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      ::before {
+        content: '';
+        width: 1.6rem;
+        height: 1.6rem;
+        background-image: url(${checkIcon});
+        margin-right: 0.4rem;
+      }
+    `}
+  ${({ isActive }) =>
+    !isActive &&
+    css`
+      background-color: white;
+      color: ${({ theme }) => theme.palette.grey[300]};
+    `}
+
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 2.4rem;
 `;
