@@ -87,6 +87,7 @@ export const StoreLayout: React.FC<StoreLayoutProps> = ({
   useEffect(() => {
     // 초기화
     setSelectedChair(null);
+    setIsSpaceSelected(false);
     setCurrentReservationUnit(initialReservationUnit);
   }, [setCurrentReservationUnit, reservationUnit, initialReservationUnit]);
 
@@ -100,35 +101,40 @@ export const StoreLayout: React.FC<StoreLayoutProps> = ({
           }
           isSelected={isSpaceSelected}
         >
-          <TransformWrapper>
-            <TransformComponent>
-              <GridWrap>
-                {layout.tableList.map((table) => (
-                  <GridTable
-                    key={table.i}
-                    width={table.w}
-                    height={table.h}
-                    x={table.x}
-                    y={table.y}
-                  />
-                ))}
+          <TransformWrapper maxScale={3}>
+            {({ resetTransform }) => {
+              resetTransform();
+              return (
+                <TransformComponent>
+                  <GridWrap>
+                    {layout.tableList.map((table) => (
+                      <GridTable
+                        key={table.i}
+                        width={table.w}
+                        height={table.h}
+                        x={table.x}
+                        y={table.y}
+                      />
+                    ))}
 
-                {layout.chairList.map((chair) => (
-                  <ChairBorder key={chair.i} x={chair.x} y={chair.y}>
-                    <Chair
-                      onClick={(e) => handleSelectChair(e, chair.i)}
-                      isClickable={
-                        currentReservationUnit === 'CHAIR' &&
-                        selectedChair == null
-                      }
-                      isSelected={selectedChair === chair.i}
-                    >
-                      {chair.manageId}
-                    </Chair>
-                  </ChairBorder>
-                ))}
-              </GridWrap>
-            </TransformComponent>
+                    {layout.chairList.map((chair) => (
+                      <ChairBorder key={chair.i} x={chair.x} y={chair.y}>
+                        <Chair
+                          onClick={(e) => handleSelectChair(e, chair.i)}
+                          isClickable={
+                            currentReservationUnit === 'CHAIR' &&
+                            selectedChair == null
+                          }
+                          isSelected={selectedChair === chair.i}
+                        >
+                          {chair.manageId}
+                        </Chair>
+                      </ChairBorder>
+                    ))}
+                  </GridWrap>
+                </TransformComponent>
+              );
+            }}
           </TransformWrapper>
         </LayoutBoundary>
       </GrayBorderBox>
