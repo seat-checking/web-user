@@ -1,7 +1,4 @@
-import {
-  getSpaceReservations,
-  type ReservationParams,
-} from 'api/reservation/reservation';
+import { getSpaceReservations } from 'api/reservation/reservation';
 import { Tab } from 'components/common/tab/Tab';
 import { TabPanel } from 'components/common/tab/TabPanel';
 import { Tabs } from 'components/common/tab/Tabs';
@@ -9,6 +6,7 @@ import { Tabs } from 'components/common/tab/Tabs';
 import { SpaceBooking } from 'components/store/reservation/spaceReservation/Booking';
 import { SpaceUseNow } from 'components/store/reservation/spaceReservation/SpaceUseNow';
 import { useEffect, useState } from 'react';
+import type { ReservationParams } from 'api/reservation/common';
 import type { VFC } from 'common/utils/types';
 
 interface ReservationTabProps {

@@ -7,7 +7,7 @@ import { SeatBooking } from 'components/store/reservation/seatReservation/SeatBo
 
 import { SeatUseNow } from 'components/store/reservation/seatReservation/SeatUseNow';
 import { useEffect, useState } from 'react';
-import type { ReservationParams } from 'api/reservation/reservation';
+import type { ReservationParams } from 'api/reservation/common';
 
 import type { VFC } from 'common/utils/types';
 
