@@ -24,11 +24,29 @@ export interface UseReservationListResponse {
 }
 
 export interface UseReservationUser {
-  id: 0;
+  id: number;
   storeName: string;
   storeSpaceName: string;
   walkInUnitWalkedInByUser: string;
   walkedInPlace: string;
+  startSchedule: string;
+  endSchedule: string;
+  createdAt: string;
+  storeMainImage: string;
+  userNickname: string;
+}
+
+export interface SpaceReservationListResponse {
+  content: SpaceReservationList[];
+  page: number;
+  size: number;
+  hasNext: boolean;
+}
+
+export interface SpaceReservationList {
+  id: 0;
+  storeName: string;
+  storeSpaceName: string;
   startSchedule: string;
   endSchedule: string;
   createdAt: string;
