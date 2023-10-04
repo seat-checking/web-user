@@ -1,5 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { reservationCancel } from 'api/reservation/reservation';
+
+import { useReservationCancel } from 'api/reservation/reservation';
 import { PATH } from 'common/utils/constants';
 import { Button } from 'components/form/atoms/Button';
 import { DetailItem } from 'components/reservationStatus/DetailItem';
@@ -36,7 +37,7 @@ export const WaitingTabDetail = () => {
 
   const handleCancel = async () => {
     try {
-      await reservationCancel(reservationIdAsNumber);
+      await useReservationCancel(reservationIdAsNumber);
       queryClient.invalidateQueries(WAITINGLIST_QUERY_KEY);
       navigate(`/${PATH.reservationStatus}`);
     } catch (error) {
