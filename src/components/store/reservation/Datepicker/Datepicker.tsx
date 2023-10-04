@@ -77,7 +77,6 @@ export const Datepicker: VFC<DatepickerProps> = ({
     setStartDate(date);
     const newFormattedDate = format(date, 'MMMM d일, eeee', { locale: ko });
     setFormattedDate(newFormattedDate);
-    console.log('클릭한 날짜:', newFormattedDate);
     if (onDateChange) {
       onDateChange(date);
     }

@@ -29,7 +29,7 @@ export const LoginForm: VFC = () => {
     handleSubmit,
     watch,
     resetField,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<LoginFormProps>({ mode: 'onSubmit' });
 
   const [errorMsg, setErrorMsg] = useState('');

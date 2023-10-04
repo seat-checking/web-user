@@ -5,7 +5,6 @@ import {
   ReservationPageHeader,
   ReservationPageTitle,
 } from 'pages/SeatUsePage/SeatUsePage.styled';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const ReservationIntentPage = () => {
