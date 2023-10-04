@@ -71,3 +71,7 @@ const Header: React.FC<HeaderProps> = ({ children, onClose }) => {
 };
 
 Modal.Header = Header;
+
+Header.defaultProps = {
+  onClose: () => {},
+};

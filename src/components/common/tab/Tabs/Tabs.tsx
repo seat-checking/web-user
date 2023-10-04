@@ -29,3 +29,6 @@ export const Tabs = ({
     </Wrapper>
   );
 };
+Tabs.defaultProps = {
+  withOutBorderTop: false,
+};

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Text, TextWrapper, Wrapper } from './Tab.styled';
 
 interface TabProps {
@@ -15,4 +14,8 @@ export const Tab = ({ label, active, onClick }: TabProps) => {
       </TextWrapper>
     </Wrapper>
   );
+};
+Tab.defaultProps = {
+  active: false,
+  onClick: () => {},
 };
