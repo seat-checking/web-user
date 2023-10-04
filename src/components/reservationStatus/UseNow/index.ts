@@ -1,1 +1,1 @@
-export * from './UseNowTab';
+export * from './UseNow';
