@@ -50,12 +50,13 @@ export const SignUpForm: VFC = () => {
 
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<SignUpFormInputs> = (data: any) => {
-    // data에서 confirmPassword 제거
-    delete data.confirmPassword;
+  const onSubmit: SubmitHandler<SignUpFormInputs> = (
+    data: SignUpFormInputs,
+  ) => {
+    const { confirmPassword, ...submitData } = data;
 
     // 사용자가 입력한 데이터를 setFormState 저장
-    setFormState(data);
+    setFormState(submitData);
 
     // 회원가입 두번째 페이지로 routing을 한다
     navigate(`/${PATH.memberInfo}`);
