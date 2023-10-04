@@ -3,7 +3,7 @@ import { TabPanel } from 'components/layout/tab/TabPanel';
 import { Tabs } from 'components/layout/tab/Tabs';
 import { HistoryTab } from 'components/reservationStatus/HistoryTab';
 import { Wrapper } from 'components/reservationStatus/UseListTab/UsageListTab';
-import { UseNowTab } from 'components/reservationStatus/UseNow';
+import { UseNow } from 'components/reservationStatus/UseNow';
 
 import { useListTabStore } from 'store/StoreListStore';
 import type { VFC } from 'common/utils/types';
@@ -28,7 +28,7 @@ export const UseListTab: VFC = () => {
         <HistoryTab />
       </TabPanel>
       <TabPanel value={tab} index={1}>
-        <UseNowTab />
+        <UseNow />
       </TabPanel>
     </Wrapper>
   );
