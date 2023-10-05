@@ -35,7 +35,7 @@ export const StoreList: VFC<StoreListProps> = ({ category, queryKey }) => {
         }
         return undefined;
       },
-      staleTime: 60000,
+      staleTime: 300000,
     });
 
   const handleLoadMore = (): void => {
