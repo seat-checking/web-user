@@ -216,7 +216,6 @@ export const MemberInfoForm: VFC = () => {
             />
           </InputRadioGroup>
         </InputRadiowrapper>
-        <InfoText>입력한 정보를 바탕으로 가게를 추천해 드려요.</InfoText>
         <ButtonWrapper>
           {isFormValid ? (
             <Button backgroundColor='#FF8D4E' color='#FFFFFF'>
