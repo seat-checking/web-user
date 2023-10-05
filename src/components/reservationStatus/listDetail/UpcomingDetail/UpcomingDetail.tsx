@@ -1,35 +1,34 @@
 import { useQueryClient } from '@tanstack/react-query';
-
-import { useReservationCancel } from 'api/reservation/reservation';
+import { SpaceReservationCancel } from 'api/reservation/reservation';
 import { PATH } from 'common/utils/constants';
 import { Button } from 'components/form/atoms/Button';
 import { DetailItem } from 'components/reservationStatus/DetailItem';
 import { ButtonWrapper } from 'components/reservationStatus/DetailItem/DetailItem.styled';
+import { UPCOMING_LIST_QUERY_KEY } from 'components/reservationStatus/Upcoming';
 import {
-  APPROVED_LIST_QUERY_KEY,
   getFormattedMonthAndDay,
   getFormattedTime,
 } from 'components/reservationStatus/reservationList/ApprovedList';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTheme } from 'styled-components';
-import type { ReservationListResponse } from 'api/reservation/common';
+import type { SpaceReservationListResponse } from 'api/reservation/common';
 
-export const ApprovedListDetail = () => {
+export const UpcomingDetail = () => {
   const queryClient = useQueryClient();
   const { reservationId } = useParams<{ reservationId: string }>();
   const navigate = useNavigate();
   const theme = useTheme();
 
   const cachedData = queryClient.getQueryData<{
-    pages: ReservationListResponse[];
-  }>(APPROVED_LIST_QUERY_KEY);
+    pages: SpaceReservationListResponse[];
+  }>(UPCOMING_LIST_QUERY_KEY);
 
   // 숫자로 변환
   const reservationIdAsNumber = Number(reservationId);
 
   const reservationDetail = cachedData?.pages
     .flatMap((page) => page.content)
-    .find((res) => res.reservationId === reservationIdAsNumber);
+    .find((res) => res.id === reservationIdAsNumber);
 
   if (!reservationDetail) {
     return null;
@@ -37,9 +36,9 @@ export const ApprovedListDetail = () => {
 
   const handleCancel = async () => {
     try {
-      await useReservationCancel(reservationIdAsNumber);
-      queryClient.invalidateQueries(APPROVED_LIST_QUERY_KEY);
-      navigate(`/${PATH.reservationStatus}`);
+      await SpaceReservationCancel(reservationIdAsNumber);
+      queryClient.invalidateQueries(UPCOMING_LIST_QUERY_KEY);
+      navigate(`/${PATH.reservationStatus}?tab=spaceParticipation`);
     } catch (error) {
       return null;
     }
@@ -59,7 +58,7 @@ export const ApprovedListDetail = () => {
       <DetailItem
         storeName={reservationDetail.storeName}
         name={reservationDetail.userNickname}
-        seatNumber={reservationDetail.reservationUnitReservedByUser}
+        seatNumber='스페이스 예약'
         storePlace={reservationDetail.storeSpaceName}
         reservationDate={getFormattedMonthAndDay(
           reservationDetail.startSchedule,
@@ -68,10 +67,10 @@ export const ApprovedListDetail = () => {
           reservationDetail.startSchedule,
         )}-${getFormattedTime(reservationDetail.endSchedule)}`}
         isActive
-        statusText='예약 완료'
-        backgroundColor='#FF8D4E26'
-        statusTextColor={theme.palette.primary.orange}
-        borderColor={theme.palette.primary.orange}
+        statusText='참여 대기중'
+        backgroundColor={theme.palette.grey[300]}
+        statusTextColor={theme.palette.grey[500]}
+        borderColor={theme.palette.grey[100]}
       />
       <ButtonWrapper>
         {isPastReservation ? (
@@ -88,7 +87,7 @@ export const ApprovedListDetail = () => {
             color={theme.palette.white.main}
             onClick={handleCancel}
           >
-            예약 취소
+            참여 취소
           </Button>
         )}
       </ButtonWrapper>

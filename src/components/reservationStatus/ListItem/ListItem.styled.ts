@@ -35,6 +35,10 @@ export const ReservationItemName = styled.div`
   display: flex;
   gap: 0.4rem;
   color: ${(props): string => props.theme.palette.black.main};
+
+  @media (max-width: 394px) {
+    font-size: 1.3rem; // 화면 넓이가 394px 이하일 때의 폰트 크기
+  }
 `;
 
 export const ReservationIteminfo = styled.div`

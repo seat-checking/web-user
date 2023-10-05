@@ -15,6 +15,9 @@ export const PATH = {
   cancelled: 'cancelled',
   rejected: 'rejected',
   waitingtab: 'waitingtab',
+  useStatus: 'useStatus',
+  spaceUpcoming: 'spaceupcoming',
+  spaceParticipated: 'spaceparticipated',
 } as const;
 
 export const queryKeys = {

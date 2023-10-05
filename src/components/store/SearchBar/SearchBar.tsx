@@ -46,6 +46,7 @@ export const SearchBar: VFC = () => {
         }
         return undefined;
       },
+      staleTime: 60000,
       enabled: query.length > 0,
     });
 
@@ -119,7 +120,7 @@ export const SearchBar: VFC = () => {
                 src={store.mainImage}
                 storeName={store.name}
                 introduction={store.introduction}
-                open={store.open}
+                open={store.isOpen}
               />
             </Link>
           ))

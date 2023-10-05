@@ -35,7 +35,7 @@ export const StoreList: VFC<StoreListProps> = ({ category, queryKey }) => {
         }
         return undefined;
       },
-      staleTime: 60000,
+      staleTime: 300000,
     });
 
   const handleLoadMore = (): void => {
@@ -65,7 +65,7 @@ export const StoreList: VFC<StoreListProps> = ({ category, queryKey }) => {
             src={store.mainImage}
             storeName={store.name}
             introduction={store.introduction}
-            open={store.open}
+            open={store.isOpen}
           />
         </Link>
       ))}

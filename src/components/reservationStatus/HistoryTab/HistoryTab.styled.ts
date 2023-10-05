@@ -31,6 +31,6 @@ export const TabItem = styled.div<TabItemProps>`
   color: ${(props) => (props.active ? '#FFF' : props.theme.palette.grey[500])};
 
   &:first-child {
-    margin-left: 1.6rem;
+    margin-left: 0.5rem;
   }
 `;
