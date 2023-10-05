@@ -259,10 +259,21 @@ export const Intent = () => {
             <ModalSeatNumberText>
               {storeChairId}번 좌석을 예약할까요?
             </ModalSeatNumberText>
-            <ModalHelperText>
-              사용 승인 후, <ModalColorText>10분 안에</ModalColorText> 착석하지
-              않으면, 예약이 취소될 수 있습니다
-            </ModalHelperText>
+            {from === 'SeatBooking' || from === 'SeatUseNow' ? (
+              <ModalHelperText>
+                사용 승인 후, <ModalColorText>10분 안에</ModalColorText>{' '}
+                착석하지 않으면,
+                <br />
+                예약이 취소될 수 있습니다
+              </ModalHelperText>
+            ) : (
+              <ModalHelperText>
+                사용 승인 후, <ModalColorText>30분 안에</ModalColorText>{' '}
+                착석하지 않으면,
+                <br />
+                예약이 취소될 수 있습니다
+              </ModalHelperText>
+            )}
           </ModalContent>
           <ModalButtonWrapper>
             <ModalCancel onClick={closeModal}>취소</ModalCancel>
