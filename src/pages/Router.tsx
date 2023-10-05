@@ -3,6 +3,7 @@ import { ApprovedListDetail } from 'components/reservationStatus/listDetail/Appr
 import { CancelledDetail } from 'components/reservationStatus/listDetail/CancelledDetail';
 import { RejectedDetail } from 'components/reservationStatus/listDetail/RejectedDetail';
 import { WaitingTabDetail } from 'components/reservationStatus/listDetail/WaitingTabDetail';
+import { JoinSpacePage } from 'pages/JoinSpacePage';
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
   {
     path: `/${PATH.intent}`,
     element: <ReservationIntentPage />,
+  },
+  {
+    path: `/${PATH.joinSpace}`,
+    element: <JoinSpacePage />,
   },
   {
     path: `/${PATH.myPage}`,

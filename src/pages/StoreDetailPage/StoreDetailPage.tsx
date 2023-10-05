@@ -2,6 +2,7 @@
 
 import { getStoreDetaill } from 'api/store/store';
 import { ReactComponent as ArrowLeft } from 'assets/svgs/arrowLeft.svg';
+import { PATH } from 'common/utils/constants';
 import { Carousel } from 'components/store/Carousel';
 import { StoreDetailTab } from 'components/store/StoreDetailTab';
 
@@ -41,8 +42,13 @@ export const StoreDetailPage: VFC = () => {
   }, [storeId]);
 
   const navigate = useNavigate();
+
   const handleBack = (): void => {
     navigate(-1);
+  };
+
+  const handleJoinSpace = () => {
+    navigate(`/${PATH.joinSpace}`);
   };
 
   const defaultImage =
@@ -60,7 +66,7 @@ export const StoreDetailPage: VFC = () => {
           <Name>{storeInfo?.storeName}</Name>
           <Introduction>{storeInfo?.introduction}</Introduction>
         </div>
-        <JoinBtn>스페이스 참여</JoinBtn>
+        <JoinBtn onClick={handleJoinSpace}>스페이스 참여</JoinBtn>
       </HeaderWrap>
       <StoreDetailTab storeInfo={storeInfo} />
     </Container>
