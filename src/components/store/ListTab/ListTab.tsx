@@ -28,13 +28,13 @@ export const ListTab: VFC = () => {
         <StoreList queryKey='AllList' />
       </TabPanel>
       <TabPanel value={tab} index={1}>
-        <StoreList category='음식점' queryKey='AllList' />
+        <StoreList category='음식점' queryKey='FoodList' />
       </TabPanel>
       <TabPanel value={tab} index={2}>
         <StoreList category='카페' queryKey='CafeList' />
       </TabPanel>
       <TabPanel value={tab} index={3}>
-        <StoreList category='모임' queryKey='AllList' />
+        <StoreList category='모임' queryKey='WaitingList' />
       </TabPanel>
     </Wrapper>
   );

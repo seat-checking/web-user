@@ -16,3 +16,10 @@ export const PATH = {
   rejected: 'rejected',
   waitingtab: 'waitingtab',
 } as const;
+
+export const queryKeys = {
+  GET_SPACE_LIST: 'spaceList',
+  GET_SPACE_LAYOUT: 'spaceLayout',
+  GET_CURRENTLY_IN_USE: 'currentlyInUse',
+  GET_SEAT_STATISTICS: 'spaceStatistics',
+} as const;

@@ -39,12 +39,59 @@ export interface StoreDetaillResponse {
   sunCloseTime: string;
   dayOff: string[];
 }
+
+export interface SpaceType {
+  storeSpaceId: number;
+  name: string;
+}
+
+interface Chair {
+  i: number;
+  manageId: number;
+  x: number;
+  y: number;
+}
+
+interface Table {
+  i: number;
+  w: number;
+  h: number;
+  x: number;
+  y: number;
+}
+
+export interface ReservationUnit {
+  chair: boolean;
+  space: boolean;
+}
+export interface GetShopLayoutResponse {
+  storeSpaceId: number;
+  storeSpaceName: string;
+  reservationUnit: ReservationUnit;
+  height: number;
+  tableList: Table[];
+  chairList: Chair[];
+}
+
+export interface GetCurrentlyInUseResponse {
+  isThisSpaceCurrentlyInUse: boolean;
+  allChairsCurrentlyInUse: {
+    id: number;
+  }[];
+}
+
+export interface GetSeatStatisticsResponse {
+  totalNumberOfSeats: number;
+  numberOfRemainingSeats: number;
+  averageSeatUsageMinute: number;
+}
 export interface StoreListParams {
   category?: '음식점' | '카페' | '모임';
   page?: number;
   size?: number;
   sort?: string;
 }
+
 export interface StoreSearchParams {
   name: string;
   page?: number;

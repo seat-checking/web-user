@@ -7,6 +7,10 @@ import type {
   StoreDetaillResponse,
   StoreListParams,
   StoreListResponse,
+  GetCurrentlyInUseResponse,
+  GetSeatStatisticsResponse,
+  GetShopLayoutResponse,
+  SpaceType,
   StoreSearchParams,
 } from 'api/store/common';
 
@@ -51,4 +55,38 @@ export const getStoreDetaill = async (
     params,
   });
   return response.data;
+};
+
+// 가게의 모든 스페이스 기본 정보 조회
+export const getSpaceList = async (storeId: number): Promise<SpaceType[]> => {
+  const response = await axiosWithAuth.get(`/stores/admins/spaces/${storeId}`);
+  return response.data.result;
+};
+
+// 스페이스별 가게 형태 조회
+export const getSpaceLayout = async (
+  spaceId: number | undefined,
+): Promise<GetShopLayoutResponse> => {
+  const response = await axiosWithAuth.get(`/stores/spaces/seats/${spaceId}`);
+  return response.data.result;
+};
+
+// 현재 이용 중인 좌석 조회
+export const getSeatStatistics = async (
+  storeId: number,
+): Promise<GetSeatStatisticsResponse> => {
+  const response = await axiosWithAuth.get(
+    `/stores/seats/statistics_information/${storeId}`,
+  );
+  return response.data.result;
+};
+
+// 가게 좌석 통계 정보 조회
+export const getCurrentlyInUse = async (
+  spaceId: number,
+): Promise<GetCurrentlyInUseResponse> => {
+  const response = await axiosWithAuth.get(
+    `/utilization/seat/current-in-use/${spaceId}`,
+  );
+  return response.data.result;
 };
