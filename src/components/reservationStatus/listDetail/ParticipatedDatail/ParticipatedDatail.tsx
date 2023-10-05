@@ -13,7 +13,7 @@ import type { SpaceReservationListResponse } from 'api/reservation/common';
 
 export const ParticipatedDatail = () => {
   const queryClient = useQueryClient();
-  const { participationId } = useParams<{ participationId: string }>();
+  const { reservationId } = useParams<{ reservationId: string }>();
   const theme = useTheme();
 
   const cachedData = queryClient.getQueryData<{
@@ -21,11 +21,11 @@ export const ParticipatedDatail = () => {
   }>(PARTICIPATED_LIST_QUERY_KEY);
 
   // 숫자로 변환
-  const participationIddAsNumber = Number(participationId);
+  const reservationIddAsNumber = Number(reservationId);
 
   const reservationDetail = cachedData?.pages
     .flatMap((page) => page.content)
-    .find((res) => res.id === participationIddAsNumber);
+    .find((res) => res.id === reservationIddAsNumber);
 
   if (!reservationDetail) {
     return null;
@@ -35,7 +35,7 @@ export const ParticipatedDatail = () => {
       <DetailItem
         storeName={reservationDetail.storeName}
         name={reservationDetail.userNickname}
-        seatNumber={reservationDetail.storeSpaceName}
+        seatNumber='스페이스 예약'
         storePlace={reservationDetail.storeSpaceName}
         reservationDate={getFormattedMonthAndDay(
           reservationDetail.startSchedule,

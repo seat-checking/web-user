@@ -15,7 +15,7 @@ import type { SpaceReservationListResponse } from 'api/reservation/common';
 
 export const UpcomingDetail = () => {
   const queryClient = useQueryClient();
-  const { participationId } = useParams<{ participationId: string }>();
+  const { reservationId } = useParams<{ reservationId: string }>();
   const navigate = useNavigate();
   const theme = useTheme();
 
@@ -24,11 +24,11 @@ export const UpcomingDetail = () => {
   }>(UPCOMING_LIST_QUERY_KEY);
 
   // 숫자로 변환
-  const participationIdAsNumber = Number(participationId);
+  const reservationIdAsNumber = Number(reservationId);
 
   const reservationDetail = cachedData?.pages
     .flatMap((page) => page.content)
-    .find((res) => res.id === participationIdAsNumber);
+    .find((res) => res.id === reservationIdAsNumber);
 
   if (!reservationDetail) {
     return null;
@@ -36,9 +36,9 @@ export const UpcomingDetail = () => {
 
   const handleCancel = async () => {
     try {
-      await SpaceReservationCancel(participationIdAsNumber);
+      await SpaceReservationCancel(reservationIdAsNumber);
       queryClient.invalidateQueries(UPCOMING_LIST_QUERY_KEY);
-      navigate(`/${PATH.reservationStatus}`);
+      navigate(`/${PATH.reservationStatus}?tab=spaceParticipation`);
     } catch (error) {
       return null;
     }
@@ -58,7 +58,7 @@ export const UpcomingDetail = () => {
       <DetailItem
         storeName={reservationDetail.storeName}
         name={reservationDetail.userNickname}
-        seatNumber={reservationDetail.storeSpaceName}
+        seatNumber='스페이스 예약'
         storePlace={reservationDetail.storeSpaceName}
         reservationDate={getFormattedMonthAndDay(
           reservationDetail.startSchedule,
