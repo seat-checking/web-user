@@ -11,7 +11,6 @@ export const ListTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   position: relative;
 `;
 
@@ -53,6 +52,7 @@ export const TitleText = styled.div`
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  cursor: pointer;
 `;
 
 export const ArrowIcon = styled.div`
