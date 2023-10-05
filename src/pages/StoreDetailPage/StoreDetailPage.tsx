@@ -36,7 +36,6 @@ export const StoreDetailPage: VFC = () => {
         console.error(error);
       }
     };
-
     getStoreInfo();
   }, [storeId]);
 

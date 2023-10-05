@@ -34,6 +34,7 @@ export interface ErrorResponse {
 }
 
 export const axiosWithAuth = axios.create({
+  baseURL: DOMAIN,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',

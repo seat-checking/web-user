@@ -1,9 +1,11 @@
-import styled from 'styled-components';
+import checkIcon from 'assets/icons/check.svg';
+import styled, { css } from 'styled-components';
 import { flexSet } from 'styles/mixin';
 
 export const UpperWrap = styled.div`
   padding: 2.4rem 1.6rem;
   /* background-color: yellow; */
+  /* touch-action: pan-y; */
 `;
 
 export const Label = styled.p`

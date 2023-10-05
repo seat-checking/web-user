@@ -7,6 +7,7 @@ import { SeatBooking } from 'components/store/reservation/seatReservation/SeatBo
 
 import { SeatUseNow } from 'components/store/reservation/seatReservation/SeatUseNow';
 import { useEffect, useState } from 'react';
+import { useReservationStore } from 'store/reservationStore';
 import type { ReservationParams } from 'api/reservation/common';
 
 import type { VFC } from 'common/utils/types';
@@ -26,6 +27,7 @@ export const SeatReservationTab: VFC<ReservationTabProps> = ({
   onChange,
   selectedDate,
 }) => {
+  const storeChairId = useReservationStore((state) => state.storeChairId);
   const [reservations, setReservations] = useState<ReservationProps[]>([]);
   const handleValueChange = (newValue: number) => {
     onChange(newValue);
@@ -44,14 +46,14 @@ export const SeatReservationTab: VFC<ReservationTabProps> = ({
         const params: ReservationParams = {
           'reservation-date-and-time': kstIsoString,
         };
-        const response = await getSeatReservations(58, params);
+        const response = await getSeatReservations(storeChairId, params);
         setReservations(response.result.allReservationsForSeatAndDate);
       } catch (error) {
         return null;
       }
     };
     getReservationTime();
-  }, [selectedDate]);
+  }, [selectedDate, storeChairId]);
   return (
     <>
       <Tabs value={value} onChange={handleValueChange}>
