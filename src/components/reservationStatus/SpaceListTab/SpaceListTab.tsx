@@ -1,20 +1,14 @@
 import { Tab } from 'components/common/tab/Tab';
 import { TabPanel } from 'components/common/tab/TabPanel';
 import { Tabs } from 'components/common/tab/Tabs';
-
-import { HistoryTab } from 'components/reservationStatus/HistoryTab';
-
-import {
-  ListTitle,
-  Wrapper,
-} from 'components/reservationStatus/ListTab/ListTab.styled';
-import { WaitingTab } from 'components/reservationStatus/WaitingTab';
-import { useTabStore } from 'store/reservationStatusStore';
-
+import { Participated } from 'components/reservationStatus/Participated';
+import { Upcoming } from 'components/reservationStatus/Upcoming';
+import { Wrapper } from 'components/reservationStatus/UseListTab/UsageListTab';
+import { useListTabStore } from 'store/StoreListStore';
 import type { VFC } from 'common/utils/types';
 
-export const ListTab: VFC = () => {
-  const { tab, setTab } = useTabStore((state) => ({
+export const SpaceListTab: VFC = () => {
+  const { tab, setTab } = useListTabStore((state) => ({
     tab: state.tab,
     setTab: state.setTab,
   }));
@@ -25,16 +19,15 @@ export const ListTab: VFC = () => {
 
   return (
     <Wrapper>
-      <ListTitle>예약 현황</ListTitle>
       <Tabs value={tab} onChange={handleValueChange}>
-        <Tab label='예약 대기 중' />
-        <Tab label='예약 내역' />
+        <Tab label='참여 예정' />
+        <Tab label='참여 완료' />
       </Tabs>
       <TabPanel value={tab} index={0}>
-        <WaitingTab />
+        <Upcoming />
       </TabPanel>
       <TabPanel value={tab} index={1}>
-        <HistoryTab />
+        <Participated />
       </TabPanel>
     </Wrapper>
   );

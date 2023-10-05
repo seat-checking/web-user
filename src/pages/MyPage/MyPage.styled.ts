@@ -21,7 +21,6 @@ export const MyPageTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 3rem;
 `;
 
 export const BackButton = styled.div`

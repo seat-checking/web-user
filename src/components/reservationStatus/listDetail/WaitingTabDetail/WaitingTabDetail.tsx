@@ -1,14 +1,15 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { reservationCancel } from 'api/reservation/reservation';
+
+import { useReservationCancel } from 'api/reservation/reservation';
 import { PATH } from 'common/utils/constants';
 import { Button } from 'components/form/atoms/Button';
 import { DetailItem } from 'components/reservationStatus/DetailItem';
 import { ButtonWrapper } from 'components/reservationStatus/DetailItem/DetailItem.styled';
-import { WAITINGTAB_LIST_QUERY_KEY } from 'components/reservationStatus/WaitingTab';
 import {
   getFormattedMonthAndDay,
   getFormattedTime,
 } from 'components/reservationStatus/reservationList/ApprovedList';
+import { WAITINGLIST_QUERY_KEY } from 'components/reservationStatus/reservationList/WaitingList';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import type { ReservationListResponse } from 'api/reservation/common';
@@ -21,7 +22,7 @@ export const WaitingTabDetail = () => {
 
   const cachedData = queryClient.getQueryData<{
     pages: ReservationListResponse[];
-  }>(WAITINGTAB_LIST_QUERY_KEY);
+  }>(WAITINGLIST_QUERY_KEY);
 
   // 숫자로 변환
   const reservationIdAsNumber = Number(reservationId);
@@ -36,8 +37,8 @@ export const WaitingTabDetail = () => {
 
   const handleCancel = async () => {
     try {
-      await reservationCancel(reservationIdAsNumber);
-      queryClient.invalidateQueries(WAITINGTAB_LIST_QUERY_KEY);
+      await useReservationCancel(reservationIdAsNumber);
+      queryClient.invalidateQueries(WAITINGLIST_QUERY_KEY);
       navigate(`/${PATH.reservationStatus}`);
     } catch (error) {
       return null;
@@ -46,8 +47,6 @@ export const WaitingTabDetail = () => {
 
   const now = new Date();
 
-  // reservationEndDateAndTime은 문자열 형태라고 가정하고 Date 객체로 변환합니다.
-  // 이 부분은 실제 데이터의 형태에 따라 조정이 필요할 수 있습니다.
   const reservationEndTime = new Date(reservationDetail.endSchedule);
 
   // 예약 종료 시간이 현재 시간보다 앞선 경우 예약 취소 비활성화
