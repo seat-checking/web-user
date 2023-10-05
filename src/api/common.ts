@@ -63,7 +63,6 @@ axiosWithAuth.interceptors.request.use(
 axiosWithAuth.interceptors.response.use(
   (response) => {
     if (response.headers.authorization) {
-      console.log('토큰 만료!!!!!!!!!');
       setAuth({ accessToken: response.headers.authorization });
     }
     return response;

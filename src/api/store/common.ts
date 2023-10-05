@@ -85,3 +85,20 @@ export interface GetSeatStatisticsResponse {
   numberOfRemainingSeats: number;
   averageSeatUsageMinute: number;
 }
+export interface StoreListParams {
+  category?: '음식점' | '카페' | '모임';
+  page?: number;
+  size?: number;
+  sort?: string;
+}
+
+export interface StoreSearchParams {
+  name: string;
+  page?: number;
+  size?: number;
+  sort?: string;
+}
+
+export interface StoreDetaillParams {
+  id: number;
+}

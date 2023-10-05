@@ -1,11 +1,7 @@
-import { Tab } from 'components/layout/tab/Tab';
-import { TabPanel } from 'components/layout/tab/TabPanel';
-import { Tabs } from 'components/layout/tab/Tabs';
-import { AllList } from 'components/store/storeList/AllList';
-import { CafeList } from 'components/store/storeList/CafeList';
-import { FoodList } from 'components/store/storeList/FoodList';
-import { MeetingList } from 'components/store/storeList/MeetingList';
-
+import { Tab } from 'components/common/tab/Tab';
+import { TabPanel } from 'components/common/tab/TabPanel';
+import { Tabs } from 'components/common/tab/Tabs';
+import { StoreList } from 'components/store/StoreList';
 import { useListTabStore } from 'store/StoreListStore';
 import { StoreListTitle, Wrapper } from './ListTab.styled';
 import type { VFC } from 'common/utils/types';
@@ -29,16 +25,16 @@ export const ListTab: VFC = () => {
         <Tab label='모임' />
       </Tabs>
       <TabPanel value={tab} index={0}>
-        <AllList />
+        <StoreList queryKey='AllList' />
       </TabPanel>
       <TabPanel value={tab} index={1}>
-        <FoodList />
+        <StoreList category='음식점' queryKey='FoodList' />
       </TabPanel>
       <TabPanel value={tab} index={2}>
-        <CafeList />
+        <StoreList category='카페' queryKey='CafeList' />
       </TabPanel>
       <TabPanel value={tab} index={3}>
-        <MeetingList />
+        <StoreList category='모임' queryKey='WaitingList' />
       </TabPanel>
     </Wrapper>
   );

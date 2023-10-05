@@ -4,7 +4,7 @@ interface SignUpFormInputs {
   email: string;
   LoginIdUnique: string;
   password: string;
-  confirmPassword: string;
+  confirmPassword?: string;
   consentToTermsOfUser: boolean;
   consentToMarketing: boolean;
 }

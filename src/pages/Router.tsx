@@ -7,11 +7,14 @@ import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
 import { ProtectedRoute } from 'pages/ProtectedRoute';
-import { ReservationPage } from 'pages/ReservationPage';
+import { ReservationIntentPage } from 'pages/ReservationIntentPage';
+
 import { ReservationWaitingPage } from 'pages/ReservationStatusPage';
 import { RootPage } from 'pages/RootPage';
 import { SearchPage } from 'pages/SearchPage';
+import { SeatUsePage } from 'pages/SeatUsePage';
 import { SignUpPage } from 'pages/SignUpPage';
+import { SpaceUsePage } from 'pages/SpaceUsePage/SpaceUsePage';
 import { StoreDetailPage } from 'pages/StoreDetailPage';
 import { StoreListPage } from 'pages/StoreListPage';
 import { createBrowserRouter } from 'react-router-dom';
@@ -44,8 +47,16 @@ export const router = createBrowserRouter([
     children: [{ index: true, element: <StoreDetailPage /> }],
   },
   {
-    path: `/${PATH.reservation}`,
-    element: <ReservationPage />,
+    path: `/${PATH.seatReservation}`,
+    element: <SeatUsePage />,
+  },
+  {
+    path: `/${PATH.spaceReservation}`,
+    element: <SpaceUsePage />,
+  },
+  {
+    path: `/${PATH.intent}`,
+    element: <ReservationIntentPage />,
   },
   {
     path: `/${PATH.myPage}`,

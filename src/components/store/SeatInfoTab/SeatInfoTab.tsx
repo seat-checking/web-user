@@ -3,7 +3,7 @@ import {
   useGetSpaceLayout,
   useGetSpaceList,
 } from 'api/store/useStore';
-import { LoadingSpinner } from 'components/layout/Spinner/Spinner.styled';
+import { Spinner } from 'components/common/Spinner';
 import {
   AverageText,
   Label,
@@ -63,7 +63,7 @@ export const SeatInfoTab: VFC<SeatInfoTabProps> = ({ storeId }) => {
         </AverageText>
       </UpperWrap>
       {isLoading ? (
-        <LoadingSpinner />
+        <Spinner />
       ) : spaceList?.length === 0 || currentSpace == null ? (
         '좌석이 설정되지 않았습니다.'
       ) : (
@@ -74,7 +74,7 @@ export const SeatInfoTab: VFC<SeatInfoTabProps> = ({ storeId }) => {
             onClickSpace={handleChangeSpace}
           />
           {isLayoutLoading || layout === undefined || currentSpace == null ? (
-            <LoadingSpinner />
+            <Spinner />
           ) : (
             <StoreLayout
               reservationUnit={layout.reservationUnit}
