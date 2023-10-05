@@ -7,7 +7,7 @@ import {
   getFormattedMonthAndDay,
   getFormattedTime,
 } from 'components/reservationStatus/reservationList/ApprovedList';
-import { ErrorMessage } from 'components/store/storeList/AllList/AllList.styled';
+import { ErrorMessage } from 'components/store/StoreList/StoreList.styled';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Link } from 'react-router-dom';
 import type {

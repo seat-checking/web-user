@@ -3,7 +3,8 @@ import { getReservationList } from 'api/reservation/reservation';
 import { PATH } from 'common/utils/constants';
 import { Spinner } from 'components/common/Spinner';
 import { ListItem } from 'components/reservationStatus/ListItem';
-import { ErrorMessage } from 'components/store/storeList/AllList/AllList.styled';
+
+import { ErrorMessage } from 'components/store/StoreList/StoreList.styled';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Link } from 'react-router-dom';
 import type {
