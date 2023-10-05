@@ -101,3 +101,18 @@ export interface SpaceScheduleParams {
 export interface ReservationParams {
   'reservation-date-and-time': string;
 }
+
+export interface ParticipationListResponse {
+  content: ParticipantList[];
+  page: number;
+  size: number;
+  hasNext: boolean;
+}
+export interface ParticipantList {
+  id: number;
+  utilizationUnit: string;
+  storeSpaceName: string;
+  startSchedule: string;
+  endSchedule: string;
+  userNickname: string;
+}

@@ -14,6 +14,7 @@ import type {
   SeatScheduleParams,
   SpaceScheduleParams,
   StoreCustomReservationResponse,
+  ParticipationListResponse,
 } from 'api/reservation/common';
 
 interface UseReservationListParams {
@@ -136,6 +137,15 @@ export const getSpaceReservations = async (
   const url = getApiUrl(
     `/reservations/users/reserved-list/space/date/${spaceIdToReservation}`,
   );
+  const response = await axiosWithAuth.get(url, { params });
+  return response.data;
+};
+
+export const getParticipationList = async (
+  storeId: number,
+  params: UseReservationListParams,
+): Promise<SuccessOkResponse<ParticipationListResponse>> => {
+  const url = getApiUrl(`/participation/${storeId}/space-participation-list`);
   const response = await axiosWithAuth.get(url, { params });
   return response.data;
 };
