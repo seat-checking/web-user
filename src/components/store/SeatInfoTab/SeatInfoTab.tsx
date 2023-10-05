@@ -15,6 +15,7 @@ import { SpaceList } from 'components/store/SeatInfoTab/components/SpaceList';
 import { StoreLayout } from 'components/store/SeatInfoTab/components/StoreLayout';
 
 import { useEffect, useState } from 'react';
+import { useReservationStore } from 'store/reservationStore';
 import type { SpaceType, StoreDetaillResponse } from 'api/store/common';
 
 import type { VFC } from 'common/utils/types';
@@ -28,6 +29,9 @@ interface SeatInfoTabProps {
  * 좌석정보 탭을 클릭했을 때 하단에 보여줄 컴포넌트
  */
 export const SeatInfoTab: VFC<SeatInfoTabProps> = ({ storeId }) => {
+  const setStoreId = useReservationStore((state) => state.setStoreId);
+  setStoreId(storeId);
+
   const { data: spaceList, isLoading } = useGetSpaceList(storeId);
   const [currentSpace, setCurrentSpace] = useState<SpaceType | null>(null);
 
