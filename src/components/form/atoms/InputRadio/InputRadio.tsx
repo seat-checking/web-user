@@ -43,5 +43,5 @@ export const InputRadio = forwardRef(
 );
 InputRadio.defaultProps = {
   size: 'medium',
-  checked: true,
+  checked: false,
 };
