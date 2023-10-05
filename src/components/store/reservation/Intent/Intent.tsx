@@ -72,9 +72,11 @@ export const Intent = () => {
   const setCustomContent = useReservationStore(
     (state) => state.setCustomContent,
   );
+  const storeId = useReservationStore((state) => state.storeId);
   const startSchedule = useReservationStore((state) => state.startSchedule);
   const endSchedule = useReservationStore((state) => state.endSchedule);
   const storeChairId = useReservationStore((state) => state.storeChairId);
+  const storeSpaceId = useReservationStore((state) => state.storeSpaceId);
   const customUtilizationContents = useReservationStore(
     (state) => state.customUtilizationContents,
   );
@@ -145,7 +147,7 @@ export const Intent = () => {
     const getRequestData = async () => {
       try {
         const params: GetRequestInformationParams = {
-          storeId: '55',
+          storeId: String(storeId),
         };
         const data = await getRequestInformation(params);
         if (!data.result) {
@@ -193,7 +195,7 @@ export const Intent = () => {
 
       if (from === 'SeatBooking' || from === 'SeatUseNow') {
         const params: SeatScheduleParams = {
-          storeChairId: 58,
+          storeChairId,
           startSchedule,
           endSchedule,
           customUtilizationContents,
@@ -203,7 +205,7 @@ export const Intent = () => {
         )(params);
       } else if (from === 'SpaceBooking' || from === 'SpaceUseNow') {
         const params: SpaceScheduleParams = {
-          storeSpaceId: 58,
+          storeSpaceId,
           startSchedule,
           endSchedule,
           customUtilizationContents,
@@ -215,7 +217,7 @@ export const Intent = () => {
         throw new Error('Invalid "from" type');
       }
 
-      navigate(PATH.storeDetail); // TODO: 해당 스토어디테일 페이지 이동
+      navigate(`/${PATH.storeDetail}/${storeId}`, { replace: true });
     } catch (error) {
       return null;
     }

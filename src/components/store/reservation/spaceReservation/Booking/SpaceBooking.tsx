@@ -1,3 +1,4 @@
+import { PATH } from 'common/utils/constants';
 import { Button } from 'components/form/atoms/Button';
 import { TimeSlot } from 'components/store/reservation/TimeSlot';
 import {
@@ -107,7 +108,10 @@ export const SpaceBooking: React.FC<BookingProps> = ({
     const startISOTime = getKSTFormattedTime(startTimeStr);
     const endISOTime = getKSTFormattedTime(endTimeStr);
     setSchedule(startISOTime, endISOTime);
-    navigate('/intent', { state: { from: 'SpaceBooking' } });
+    navigate(`/${PATH.intent}`, {
+      state: { from: 'SpaceBooking' },
+      replace: true,
+    });
   };
 
   const isTimeSlotReserved = (time: string) => {

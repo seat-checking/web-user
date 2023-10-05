@@ -6,6 +6,7 @@ import { Tabs } from 'components/common/tab/Tabs';
 import { SpaceBooking } from 'components/store/reservation/spaceReservation/Booking';
 import { SpaceUseNow } from 'components/store/reservation/spaceReservation/SpaceUseNow';
 import { useEffect, useState } from 'react';
+import { useReservationStore } from 'store/reservationStore';
 import type { ReservationParams } from 'api/reservation/common';
 import type { VFC } from 'common/utils/types';
 
@@ -23,6 +24,7 @@ export const SpaceReservationTab: VFC<ReservationTabProps> = ({
   onChange,
   selectedDate,
 }) => {
+  const storeSpaceId = useReservationStore((state) => state.storeSpaceId);
   const [reservations, setReservations] = useState<ReservationProps[]>([]);
   const handleValueChange = (newValue: number) => {
     onChange(newValue);
@@ -41,14 +43,14 @@ export const SpaceReservationTab: VFC<ReservationTabProps> = ({
         const params: ReservationParams = {
           'reservation-date-and-time': kstIsoString,
         };
-        const response = await getSpaceReservations(58, params);
+        const response = await getSpaceReservations(storeSpaceId, params);
         setReservations(response.result.allReservationsForSeatAndDate);
       } catch (error) {
         return null;
       }
     };
     getReservationTime();
-  }, [selectedDate]);
+  }, [selectedDate, storeSpaceId]);
   return (
     <>
       <Tabs value={value} onChange={handleValueChange}>

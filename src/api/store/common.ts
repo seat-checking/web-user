@@ -91,7 +91,6 @@ export interface StoreListParams {
   size?: number;
   sort?: string;
 }
-
 export interface StoreSearchParams {
   name: string;
   page?: number;
