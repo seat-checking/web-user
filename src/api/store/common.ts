@@ -39,3 +39,19 @@ export interface StoreDetaillResponse {
   sunCloseTime: string;
   dayOff: string[];
 }
+export interface StoreListParams {
+  category?: '음식점' | '카페' | '모임';
+  page?: number;
+  size?: number;
+  sort?: string;
+}
+export interface StoreSearchParams {
+  name: string;
+  page?: number;
+  size?: number;
+  sort?: string;
+}
+
+export interface StoreDetaillParams {
+  id: number;
+}

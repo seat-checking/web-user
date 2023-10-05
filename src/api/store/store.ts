@@ -2,24 +2,13 @@ import { axiosWithAuth, getApiUrl } from 'api/common';
 
 import axios from 'axios';
 import type { SuccessOkResponse } from 'api/common';
-import type { StoreDetaillResponse, StoreListResponse } from 'api/store/common';
-
-interface StoreListParams {
-  category?: '음식점' | '카페' | '모임';
-  page?: number;
-  size?: number;
-  sort?: string;
-}
-interface StoreSearchParams {
-  name: string;
-  page?: number;
-  size?: number;
-  sort?: string;
-}
-
-interface StoreDetaillParams {
-  id: number;
-}
+import type {
+  StoreDetaillParams,
+  StoreDetaillResponse,
+  StoreListParams,
+  StoreListResponse,
+  StoreSearchParams,
+} from 'api/store/common';
 
 export class StoreUserApi {
   static async getList(

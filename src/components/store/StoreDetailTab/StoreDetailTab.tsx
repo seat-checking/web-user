@@ -1,7 +1,7 @@
-import { Spinner } from 'components/layout/Spinner';
-import { Tab } from 'components/layout/tab/Tab';
-import { TabPanel } from 'components/layout/tab/TabPanel';
-import { Tabs } from 'components/layout/tab/Tabs';
+import { Spinner } from 'components/common/Spinner';
+import { Tab } from 'components/common/tab/Tab';
+import { TabPanel } from 'components/common/tab/TabPanel';
+import { Tabs } from 'components/common/tab/Tabs';
 import { Wrapper } from 'components/store/ListTab/ListTab.styled';
 import { SeatLayoutTab } from 'components/store/SeatLayoutTab/SeatLayoutTab';
 import { StoreInfoTab } from 'components/store/StoreInfoTab/StoreInfoTab';

@@ -1,17 +1,20 @@
 import { axiosWithAuth, getApiUrl } from 'api/common';
-import type { SuccessOkResponse } from 'api/common';
 import type {
-  ReservationListResponse,
+  SuccessOkResponse,
+  SuccessOkWithoutResultResponse,
+} from 'api/common';
+import type {
   SpaceReservationListResponse,
   UseReservationListResponse,
+  GetRequestInformationParams,
+  ReservationListParams,
+  ReservationListResponse,
+  ReservationParams,
+  ReservationResponse,
+  SeatScheduleParams,
+  SpaceScheduleParams,
+  StoreCustomReservationResponse,
 } from 'api/reservation/common';
-
-interface ReservationListParams {
-  reservationStatus?: '대기' | '취소' | '승인' | '거절';
-  page?: number;
-  size?: number;
-  sort?: string;
-}
 
 interface UseReservationListParams {
   page?: number;
@@ -72,5 +75,67 @@ export const getParticipatedList = async (
   const response = await axiosWithAuth.get(url, {
     params,
   });
+  return response.data;
+};
+export const getRequestInformation = async (
+  Params: GetRequestInformationParams,
+): Promise<SuccessOkResponse<StoreCustomReservationResponse>> => {
+  const url = getApiUrl(
+    `/stores/admins/custom-utilization-field/${Params.storeId}`,
+  );
+  const response = await axiosWithAuth.get(url);
+
+  return response.data;
+};
+
+export const chairNowUse = async (
+  params: SeatScheduleParams,
+): Promise<SuccessOkWithoutResultResponse> => {
+  const url = getApiUrl('/walk-in/users/chair');
+  const response = await axiosWithAuth.post(url, params);
+  return response.data;
+};
+export const chairReservation = async (
+  params: SeatScheduleParams,
+): Promise<SuccessOkWithoutResultResponse> => {
+  const url = getApiUrl('/reservations/users/chair');
+  const response = await axiosWithAuth.post(url, params);
+  return response.data;
+};
+
+export const getSeatReservations = async (
+  chairIdToReservation: number,
+  params: ReservationParams,
+): Promise<SuccessOkResponse<ReservationResponse>> => {
+  const url = getApiUrl(
+    `/reservations/users/reserved-list/chair/date/${chairIdToReservation}`,
+  );
+  const response = await axiosWithAuth.get(url, { params });
+  return response.data;
+};
+
+export const SpaceNowUse = async (
+  params: SpaceScheduleParams,
+): Promise<SuccessOkWithoutResultResponse> => {
+  const url = getApiUrl('/walk-in/users/space');
+  const response = await axiosWithAuth.post(url, params);
+  return response.data;
+};
+export const SpaceReservation = async (
+  params: SpaceScheduleParams,
+): Promise<SuccessOkWithoutResultResponse> => {
+  const url = getApiUrl('/reservations/users/space');
+  const response = await axiosWithAuth.post(url, params);
+  return response.data;
+};
+
+export const getSpaceReservations = async (
+  spaceIdToReservation: number,
+  params: ReservationParams,
+): Promise<SuccessOkResponse<ReservationResponse>> => {
+  const url = getApiUrl(
+    `/reservations/users/reserved-list/space/date/${spaceIdToReservation}`,
+  );
+  const response = await axiosWithAuth.get(url, { params });
   return response.data;
 };
