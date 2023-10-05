@@ -2,7 +2,9 @@ import { PATH } from 'common/utils/constants';
 import { ApprovedListDetail } from 'components/reservationStatus/listDetail/ApprovedDetail';
 import { CancelledDetail } from 'components/reservationStatus/listDetail/CancelledDetail';
 import { NowUseDetail } from 'components/reservationStatus/listDetail/NowUseDetail';
+import { ParticipatedDatail } from 'components/reservationStatus/listDetail/ParticipatedDatail';
 import { RejectedDetail } from 'components/reservationStatus/listDetail/RejectedDetail';
+import { UpcomingDetail } from 'components/reservationStatus/listDetail/UpcomingDetail';
 import { WaitingTabDetail } from 'components/reservationStatus/listDetail/WaitingTabDetail';
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
@@ -91,8 +93,16 @@ export const router = createBrowserRouter([
         element: <RejectedDetail />,
       },
       {
-        path: `${PATH.nowUse}/:reservationId`,
+        path: `${PATH.useStatus}/:reservationId`,
         element: <NowUseDetail />,
+      },
+      {
+        path: `${PATH.spaceUpcoming}/:reservationId`,
+        element: <UpcomingDetail />,
+      },
+      {
+        path: `${PATH.spaceParticipated}/:reservationId`,
+        element: <ParticipatedDatail />,
       },
     ],
   },
