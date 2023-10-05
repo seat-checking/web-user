@@ -48,7 +48,7 @@ export const StoreDetailPage: VFC = () => {
   };
 
   const handleJoinSpace = () => {
-    navigate(`/${PATH.joinSpace}`);
+    navigate(`/${PATH.joinSpace}`, { state: { storeInfo } });
   };
 
   const defaultImage =
