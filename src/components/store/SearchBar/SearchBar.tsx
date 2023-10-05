@@ -46,6 +46,7 @@ export const SearchBar: VFC = () => {
         }
         return undefined;
       },
+      staleTime: 60000,
       enabled: query.length > 0,
     });
 
