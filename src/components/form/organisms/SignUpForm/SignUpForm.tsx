@@ -50,12 +50,13 @@ export const SignUpForm: VFC = () => {
 
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<SignUpFormInputs> = (data: any) => {
-    // data에서 confirmPassword 제거
-    delete data.confirmPassword;
+  const onSubmit: SubmitHandler<SignUpFormInputs> = (
+    data: SignUpFormInputs,
+  ) => {
+    const { confirmPassword, ...submitData } = data;
 
     // 사용자가 입력한 데이터를 setFormState 저장
-    setFormState(data);
+    setFormState(submitData);
 
     // 회원가입 두번째 페이지로 routing을 한다
     navigate(`/${PATH.memberInfo}`);
@@ -203,32 +204,32 @@ export const SignUpForm: VFC = () => {
         >
           비밀번호 확인
         </Inputs>
+        <InputCheckBoxBorderWrapper>
+          <InputCheckBox
+            checked={isCheckedAll}
+            onChange={handleAllCheckBoxChange}
+          />
+          <InputAllCheckBoxLabel>
+            SeatSence 가입 약관 전체동의
+          </InputAllCheckBoxLabel>
+        </InputCheckBoxBorderWrapper>
+        <InputSubCheckBoxWrapper>
+          <InputCheckBox
+            {...register('consentToTermsOfUser', {
+              required: '체크박스는 기본 입력사항입니다.',
+            })}
+          />
+          <InputSubCheckBoxLabel>
+            (필수) <u>서비스 이용약관</u> 및 <u>개인정보 취급 방침</u> 동의
+          </InputSubCheckBoxLabel>
+        </InputSubCheckBoxWrapper>
+        <InputSubCheckBoxWrapper>
+          <InputCheckBox {...register('consentToMarketing')} />
+          <InputSubCheckBoxLabel>
+            (선택) <u>마케팅 정보 수신</u> 동의
+          </InputSubCheckBoxLabel>
+        </InputSubCheckBoxWrapper>
         <ButtonWrapper>
-          <InputCheckBoxBorderWrapper>
-            <InputCheckBox
-              checked={isCheckedAll}
-              onChange={handleAllCheckBoxChange}
-            />
-            <InputAllCheckBoxLabel>
-              SeatSence 가입 약관 전체동의
-            </InputAllCheckBoxLabel>
-          </InputCheckBoxBorderWrapper>
-          <InputSubCheckBoxWrapper>
-            <InputCheckBox
-              {...register('consentToTermsOfUser', {
-                required: '체크박스는 기본 입력사항입니다.',
-              })}
-            />
-            <InputSubCheckBoxLabel>
-              (필수) <u>서비스 이용약관</u> 및 <u>개인정보 취급 방침</u> 동의
-            </InputSubCheckBoxLabel>
-          </InputSubCheckBoxWrapper>
-          <InputSubCheckBoxWrapper>
-            <InputCheckBox {...register('consentToMarketing')} />
-            <InputSubCheckBoxLabel>
-              (선택) <u>마케팅 정보 수신</u> 동의
-            </InputSubCheckBoxLabel>
-          </InputSubCheckBoxWrapper>
           {isFormValid ? (
             <Button backgroundColor='#FF8D4E' color=' #FFFFFF'>
               다음

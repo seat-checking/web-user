@@ -204,12 +204,14 @@ export const MemberInfoForm: VFC = () => {
               id='1'
               value='여성'
               label='여성'
+              checked={sexValue === '여성'}
               {...register('sex', { required: '성별을 선택해주세요' })}
             />
             <InputRadio
               id='2'
               value='남성'
               label='남성'
+              checked={sexValue === '남성'}
               {...register('sex', { required: '성별을 선택해주세요' })}
             />
           </InputRadioGroup>

@@ -4,7 +4,7 @@ export const InputsWrapper = styled.div`
   max-width: 67.5rem;
   width: 100%;
   height: 9.6rem;
-  margin-bottom: 6.9rem;
+  margin-bottom: 4rem;
 `;
 
 export const InputLabelWrapper = styled.div`
