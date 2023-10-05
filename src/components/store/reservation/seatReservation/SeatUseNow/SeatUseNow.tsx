@@ -25,21 +25,12 @@ export const generateTimeSlotsFromNow = () => {
   const currentMinute = currentDate.getMinutes();
   const timeSlots = [];
 
-  // 현재 시간보다 큰 가장 가까운 10분 단위로 시작 시간을 설정합니다.
-  let startHour = currentHour;
-  let startMinute = Math.ceil(currentMinute / 10) * 10;
-
-  if (startMinute === 60) {
-    startHour++;
-    startMinute = 0;
-  }
-
-  for (let i = startHour; i < 24; i++) {
-    for (let j = i === startHour ? startMinute : 0; j < 60; j += 10) {
+  for (let i = currentHour; i < 24; i++) {
+    for (let j = i === currentHour ? currentMinute : 0; j < 60; j += 30) {
       const formattedHour = ('0' + i).slice(-2);
       const formattedMinute = ('0' + j).slice(-2);
 
-      if (i === 23 && j === 50) {
+      if (i === 23 && j === 30) {
         timeSlots.push('24:00');
       } else {
         timeSlots.push(`${formattedHour}:${formattedMinute}`);
