@@ -41,7 +41,7 @@ export const generateAllTimeSlotsStartingFromNow = () => {
   const currentMinute = currentDate.getMinutes();
   const timeSlots = [];
 
-  let startHour = currentHour;
+  let startHour = currentHour + 3;
   let startMinute = 0;
 
   if (currentMinute >= 30) {
