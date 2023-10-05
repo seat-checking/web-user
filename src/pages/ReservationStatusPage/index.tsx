@@ -1,3 +1,4 @@
+import { PATH } from 'common/utils/constants';
 import { Navigation } from 'components/Navigation';
 
 import { SpaceListTab } from 'components/reservationStatus/SpaceListTab';
@@ -11,16 +12,17 @@ import {
 } from 'pages/ReservationStatusPage/ReservationWaitingPage.styled';
 import { useState } from 'react';
 
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import type { VFC } from 'common/utils/types';
 
-const UsageStatus = () => (
+export const UsageStatus = () => (
   <>
     <UseListTab />
-    <Navigation />;
+    <Navigation />
   </>
 );
 
-const SpaceParticipation = () => (
+export const SpaceParticipation = () => (
   <>
     <SpaceListTab />
     <Navigation />
@@ -28,10 +30,18 @@ const SpaceParticipation = () => (
 );
 
 export const ReservationWaitingPage: VFC = () => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const initialTab = searchParams.get('tab') as
+    | 'usageStatus'
+    | 'spaceParticipation'
+    | null;
+
   const [showDropdown, setShowDropdown] = useState(false);
   const [currentComponent, setCurrentComponent] = useState<
     'usageStatus' | 'spaceParticipation' | null
-  >('usageStatus');
+  >(initialTab || 'usageStatus');
+
   const handleListTitleClick = () => {
     setShowDropdown(!showDropdown);
   };
@@ -39,6 +49,8 @@ export const ReservationWaitingPage: VFC = () => {
   const handleItemClick = (item: 'usageStatus' | 'spaceParticipation') => {
     setCurrentComponent(item);
     setShowDropdown(false);
+
+    navigate(`/${PATH.reservationStatus}?tab=${item}`);
   };
 
   return (
