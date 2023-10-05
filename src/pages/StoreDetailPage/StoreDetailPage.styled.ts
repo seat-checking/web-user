@@ -11,6 +11,28 @@ export const BackBtn = styled.button`
 `;
 export const HeaderWrap = styled.div`
   padding: 2.4rem 1.6rem;
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const LeftWrap = styled.div``;
+
+export const JoinBtn = styled.button`
+  height: fit-content;
+  padding: 0.6rem 1.2rem;
+
+  border: 1px solid ${({ theme }) => theme.palette.grey[300]};
+  background-color: ${({ theme }) => theme.palette.grey[50]};
+  border-radius: 12.8rem;
+
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 2.4rem;
+  color: ${({ theme }) => theme.palette.grey[500]};
+
+  &:hover {
+    filter: brightness(90%);
+  }
 `;
 
 export const Name = styled.h1`

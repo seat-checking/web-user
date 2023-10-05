@@ -12,6 +12,7 @@ import {
   Container,
   HeaderWrap,
   Introduction,
+  JoinBtn,
   Name,
 } from './StoreDetailPage.styled';
 import type { StoreDetaillResponse } from 'api/store/common';
@@ -55,8 +56,11 @@ export const StoreDetailPage: VFC = () => {
         <ArrowLeft />
       </BackBtn>
       <HeaderWrap>
-        <Name>{storeInfo?.storeName}</Name>
-        <Introduction>{storeInfo?.introduction}</Introduction>
+        <div>
+          <Name>{storeInfo?.storeName}</Name>
+          <Introduction>{storeInfo?.introduction}</Introduction>
+        </div>
+        <JoinBtn>스페이스 참여</JoinBtn>
       </HeaderWrap>
       <StoreDetailTab storeInfo={storeInfo} />
     </Container>
