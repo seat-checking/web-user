@@ -10,7 +10,7 @@ import {
   ListTitle,
   TitleText,
 } from 'pages/ReservationStatusPage/ReservationWaitingPage.styled';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import type { VFC } from 'common/utils/types';
@@ -42,7 +42,8 @@ export const ReservationWaitingPage: VFC = () => {
     'usageStatus' | 'spaceParticipation' | null
   >(initialTab || 'usageStatus');
 
-  const handleListTitleClick = () => {
+  const handleListTitleClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
     setShowDropdown(!showDropdown);
   };
 
@@ -53,20 +54,41 @@ export const ReservationWaitingPage: VFC = () => {
     navigate(`/${PATH.reservationStatus}?tab=${item}`);
   };
 
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        showDropdown &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    // 클릭 이벤트 리스너를 추가
+    document.addEventListener('click', handleClickOutside);
+
+    // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [showDropdown]);
   return (
     <>
       <ListTitle>
         <TitleText onClick={handleListTitleClick}>
           {currentComponent === 'usageStatus'
-            ? '이용현황'
+            ? '이용 현황'
             : currentComponent === 'spaceParticipation'
             ? '스페이스 참여'
-            : '이용현황'}
+            : '이용 현황'}
           <ArrowIcon />
         </TitleText>
       </ListTitle>
       {showDropdown && (
-        <DropdownMenu>
+        <DropdownMenu ref={dropdownRef}>
           <DropdownItem onClick={() => handleItemClick('usageStatus')}>
             이용 현황
           </DropdownItem>
