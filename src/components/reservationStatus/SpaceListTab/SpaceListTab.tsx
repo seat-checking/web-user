@@ -1,6 +1,6 @@
-import { Tab } from 'components/layout/tab/Tab';
-import { TabPanel } from 'components/layout/tab/TabPanel';
-import { Tabs } from 'components/layout/tab/Tabs';
+import { Tab } from 'components/common/tab/Tab';
+import { TabPanel } from 'components/common/tab/TabPanel';
+import { Tabs } from 'components/common/tab/Tabs';
 import { Participated } from 'components/reservationStatus/Participated';
 import { Upcoming } from 'components/reservationStatus/Upcoming';
 import { Wrapper } from 'components/reservationStatus/UseListTab/UsageListTab';
