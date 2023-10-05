@@ -63,7 +63,7 @@ export const Upcoming = () => {
       {reservations.map((reservation) => (
         <Link
           key={reservation.id}
-          to={`/${PATH.reservationStatus}/${PATH.nowUse}/${reservation.id}`}
+          to={`/${PATH.reservationStatus}/${PATH.spaceUpcoming}/${reservation.id}`}
         >
           <ListItem
             src={reservation.storeMainImage}

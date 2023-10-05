@@ -63,7 +63,7 @@ export const Participated = () => {
       {reservations.map((reservation) => (
         <Link
           key={reservation.id}
-          to={`/${PATH.reservationStatus}/${PATH.nowUse}/${reservation.id}`}
+          to={`/${PATH.reservationStatus}/${PATH.spaceParticipated}/${reservation.id}`}
         >
           <ListItem
             src={reservation.storeMainImage}
