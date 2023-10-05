@@ -210,7 +210,7 @@ export const SignUpForm: VFC = () => {
             onChange={handleAllCheckBoxChange}
           />
           <InputAllCheckBoxLabel>
-            SeatSence 가입 약관 전체동의
+            SeatSense 가입 약관 전체동의
           </InputAllCheckBoxLabel>
         </InputCheckBoxBorderWrapper>
         <InputSubCheckBoxWrapper>
