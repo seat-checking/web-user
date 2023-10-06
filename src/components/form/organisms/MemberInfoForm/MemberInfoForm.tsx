@@ -139,14 +139,14 @@ export const MemberInfoForm: VFC = () => {
           {...register('nickname', {
             required: '닉네임은 필수로 입력해주세요',
             pattern: {
-              value: /^[A-Za-z0-9ㄱ-ㅎ가-힣]{2,12}$/,
+              value: /^[A-Za-z0-9ㄱ-ㅎ가-힣]{2,10}$/,
               message:
-                '2~12자의 한글, 영문(대소문자 포함), 숫자만 입력가능합니다.',
+                '2~10자의 한글, 영문(대소문자 포함), 숫자만 입력가능합니다.',
             },
           })}
           valueLength={nicknameValue.length}
-          maximum={12}
-          maxLength={12}
+          maximum={10}
+          maxLength={10}
           error={touchedFields.nickname && nicknameError}
           success={
             touchedFields.nickname && !nicknameError
