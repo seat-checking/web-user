@@ -159,3 +159,10 @@ export const NotificationBoxIcon = styled.img`
   width: 1.4rem;
   height: 1.4rem;
 `;
+export const ModalNotificationrText = styled.div`
+  color: ${({ theme }) => theme.palette.grey[500]};
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-top: 0.5rem;
+`;
