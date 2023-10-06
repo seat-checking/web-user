@@ -16,7 +16,6 @@ import { useNavigate } from 'react-router-dom';
 import { useFromStore } from 'store/formStore';
 import {
   ButtonWrapper,
-  InfoText,
   InputRadioGroup,
   InputRadiowrapper,
 } from './MemberInfoForm.styled';
