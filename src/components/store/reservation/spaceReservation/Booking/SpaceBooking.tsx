@@ -4,9 +4,9 @@ import { TimeSlot } from 'components/store/reservation/TimeSlot';
 import {
   generateAllTimeSlots,
   generateAllTimeSlotsStartingFromNow,
+  isTimeSlotDisabled,
   subtract30Minutes,
 } from 'components/store/reservation/seatReservation/SeatBooking';
-import { HelperMessage } from 'components/store/reservation/seatReservation/SeatBooking/SeatBookingstyled';
 import {
   AvailableColor,
   ButtonWrapper,
@@ -132,19 +132,19 @@ export const SpaceBooking: React.FC<BookingProps> = ({
   return (
     <div>
       <TimesWrapper>
-        {timeSlots.length === 0 ? (
-          <HelperMessage>해당 날짜는 예약이 불가능합니다😢</HelperMessage>
-        ) : (
-          timeSlots.map((time, index) => (
-            <TimeSlot
-              key={time}
-              time={time}
-              isSelected={isSelected(time)}
-              isActivated={!(index === 0) && !isTimeSlotReserved(time)}
-              onClick={handleTimeClick}
-            />
-          ))
-        )}
+        {timeSlots.map((time, index) => (
+          <TimeSlot
+            key={time}
+            time={time}
+            isSelected={isSelected(time)}
+            isActivated={
+              !isTimeSlotDisabled(time) &&
+              !(index === 0) &&
+              !isTimeSlotReserved(time)
+            }
+            onClick={handleTimeClick}
+          />
+        ))}
       </TimesWrapper>
       <HelperText>최소 1시간 ~ 최대 xx시간</HelperText>
       <UseColorWrapper>

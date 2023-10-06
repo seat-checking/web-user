@@ -1,6 +1,5 @@
 import { Button } from 'components/form/atoms/Button';
 import { TimeSlot } from 'components/store/reservation/TimeSlot';
-import { HelperMessage } from 'components/store/reservation/seatReservation/SeatBooking/SeatBookingstyled';
 import {
   AvailableColor,
   ButtonWrapper,
@@ -38,28 +37,28 @@ export const generateAllTimeSlots = () => {
 
 export const generateAllTimeSlotsStartingFromNow = () => {
   const currentDate = new Date();
+  const timeSlots = generateAllTimeSlots();
+
+  // 현재 시간의 타임슬롯 인덱스 찾기
   const currentHour = currentDate.getHours();
   const currentMinute = currentDate.getMinutes();
-  const timeSlots = [];
+  const currentIndex = timeSlots.indexOf(
+    `${('0' + currentHour).slice(-2)}:${currentMinute >= 30 ? '30' : '00'}`,
+  );
 
-  let startHour = currentHour + 3;
-  let startMinute = 0;
+  // 현재 시간의 타임슬롯부터 반환
+  return timeSlots.slice(currentIndex);
+};
 
-  if (currentMinute >= 30) {
-    startHour++;
-  } else {
-    startMinute = 30;
-  }
+export const isTimeSlotDisabled = (time: string) => {
+  const currentDate = new Date();
+  const currentHour = currentDate.getHours();
+  const currentMinute = currentDate.getMinutes();
+  const timeLimit = currentHour + (currentMinute >= 30 ? 4 : 3);
 
-  for (let i = startHour; i <= 24; i++) {
-    for (let j = i === startHour ? startMinute : 0; j < 60; j += 30) {
-      if (i === 24 && j > 0) break;
-      const formattedHour = ('0' + i).slice(-2);
-      const formattedMinutes = ('0' + j).slice(-2);
-      timeSlots.push(`${formattedHour}:${formattedMinutes}`);
-    }
-  }
-  return timeSlots;
+  const [hour] = time.split(':').map(Number);
+
+  return hour < timeLimit;
 };
 
 export const subtract30Minutes = (timeStr: string) => {
@@ -180,19 +179,19 @@ export const SeatBooking: React.FC<BookingProps> = ({
   return (
     <div>
       <TimesWrapper>
-        {timeSlots.length === 0 ? (
-          <HelperMessage>해당 날짜는 예약이 불가능합니다😢</HelperMessage>
-        ) : (
-          timeSlots.map((time, index) => (
-            <TimeSlot
-              key={time}
-              time={time}
-              isSelected={isSelected(time)}
-              isActivated={!(index === 0) && !isTimeSlotReserved(time)}
-              onClick={handleTimeClick}
-            />
-          ))
-        )}
+        {timeSlots.map((time, index) => (
+          <TimeSlot
+            key={time}
+            time={time}
+            isSelected={isSelected(time)}
+            isActivated={
+              !isTimeSlotDisabled(time) &&
+              !(index === 0) &&
+              !isTimeSlotReserved(time)
+            }
+            onClick={handleTimeClick}
+          />
+        ))}
       </TimesWrapper>
       <HelperText>최소 1시간 ~ 최대 xx시간</HelperText>
       <UseColorWrapper>
