@@ -1,4 +1,3 @@
-import BellIcon from 'assets/icons/bell.svg';
 import infoIcon from 'assets/icons/infoIcon.svg';
 import logOutIcon from 'assets/icons/log-out.svg';
 import userCheckIcon from 'assets/icons/userCheckIcon.svg';
