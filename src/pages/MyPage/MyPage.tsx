@@ -6,12 +6,12 @@ import UserImg from 'assets/images/avatar.png';
 import { Navigation } from 'components/Navigation';
 import { Modal } from 'components/common/Modal';
 import {
-  ModaMainText,
   ModaSubText,
   ModalButton,
   ModalButtonWrapper,
   ModalCancel,
   ModalContent,
+  ModalMainText,
 } from 'components/store/reservation/Intent/Intent.styled';
 import {
   CheckOutButton,
@@ -83,7 +83,7 @@ export const MyPage: VFC = () => {
       {modalOpen && (
         <Modal>
           <ModalContent>
-            <ModaMainText>사용신청</ModaMainText>
+            <ModalMainText>로그아웃</ModalMainText>
             <ModaSubText>로그아웃 하시겠습니까?</ModaSubText>
             <ModalNotificationrText>
               로그아웃하면 알림을 확인할 수 없어요.
