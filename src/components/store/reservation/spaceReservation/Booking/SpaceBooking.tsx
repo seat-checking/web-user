@@ -4,7 +4,6 @@ import { TimeSlot } from 'components/store/reservation/TimeSlot';
 import {
   generateAllTimeSlots,
   generateAllTimeSlotsStartingFromNow,
-  isTimeSlotDisabled,
   subtract30Minutes,
 } from 'components/store/reservation/seatReservation/SeatBooking';
 import {
@@ -114,6 +113,20 @@ export const SpaceBooking: React.FC<BookingProps> = ({
       replace: true,
     });
   };
+  const isTimeSlotDisabled = (time: string) => {
+    if (!isSameDay(new Date(), selectedDate)) {
+      return false; // 선택한 날짜가 오늘이 아니면 비활성화 로직을 무시합니다.
+    }
+
+    const currentDate = new Date();
+    const currentHour = currentDate.getHours();
+    const currentMinute = currentDate.getMinutes();
+    const timeLimit = currentHour + (currentMinute >= 30 ? 4 : 3); // 3시간 후의 타임슬롯을 계산
+
+    const [hour] = time.split(':').map(Number);
+
+    return hour < timeLimit;
+  };
 
   const isTimeSlotReserved = (time: string) => {
     return reservations.some((reservation) => {
@@ -129,6 +142,7 @@ export const SpaceBooking: React.FC<BookingProps> = ({
       return checkTime >= reservedStart && checkTime <= reservedEnd;
     });
   };
+
   return (
     <div>
       <TimesWrapper>
