@@ -12,7 +12,6 @@ import { Fields } from 'components/store/reservation/Fields';
 import {
   ButtonWrapper,
   IntentWrapper,
-  ModaMainText,
   ModaSubText,
   ModalButton,
   ModalButtonWrapper,
@@ -20,6 +19,7 @@ import {
   ModalColorText,
   ModalContent,
   ModalHelperText,
+  ModalMainText,
   ModalSeatNumberText,
 } from 'components/store/reservation/Intent/Intent.styled';
 import { useEffect, useState } from 'react';
@@ -256,7 +256,7 @@ export const Intent = () => {
       {modalOpen && (
         <Modal>
           <ModalContent>
-            <ModaMainText>사용신청</ModaMainText>
+            <ModalMainText>사용신청</ModalMainText>
             <ModaSubText>{`${dateDisplay} ${startScheduleFormatted} - ${endScheduleFormatted}`}</ModaSubText>
             <ModalSeatNumberText>
               {storeChairId}번 좌석을 예약할까요?
