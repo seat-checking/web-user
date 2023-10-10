@@ -1,5 +1,9 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { getParticipationList } from 'api/reservation/reservation';
+import {
+  getParticipationList,
+  storeSpaceJoin,
+} from 'api/reservation/reservation';
+import { PATH } from 'common/utils/constants';
 import { Modal } from 'components/common/Modal';
 import { Spinner } from 'components/common/Spinner';
 import {
@@ -29,7 +33,7 @@ import {
 } from 'components/store/reservation/Intent/Intent.styled';
 import { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import type {
   ParticipantList,
   ParticipationListResponse,
@@ -38,6 +42,7 @@ import type {
 export const JoinSpace = () => {
   const location = useLocation();
   const storeInfoFromState = location.state?.storeInfo;
+  const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [selectedReservation, setSelectedReservation] =
     useState<ParticipantList | null>(null);
@@ -54,7 +59,7 @@ export const JoinSpace = () => {
   };
   const { isLoading, isError, data, fetchNextPage, hasNextPage } =
     useInfiniteQuery<ParticipationListResponse>({
-      queryKey: ['ㄴㅇㅇㄴ'],
+      queryKey: ['JoinSpace'],
       queryFn: getParticipationData,
       getNextPageParam: (lastPage) => {
         if (lastPage.hasNext) {
@@ -90,12 +95,30 @@ export const JoinSpace = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
+
+  const handleJoin = async () => {
+    if (selectedReservation) {
+      try {
+        await storeSpaceJoin({
+          id: selectedReservation.id,
+          utilizationUnit: selectedReservation.utilizationUnit,
+        });
+        navigate(`/${PATH.storeDetail}/${storeInfoFromState.id}`, {
+          state: { alertMessage: '스페이스 참여 신청을 완료했어요.' },
+        });
+        closeModal();
+      } catch (error) {
+        // 에러 메시지 표시나 다른 에러 처리 추가 가능
+        console.log(error);
+      }
+    }
+  };
   return (
     <>
       <InfiniteScroll loadMore={handleLoadMore} hasMore={hasNextPage}>
         {reservations.map((reservation) => (
           <ListWrapper
-            key={reservation.id}
+            key={`${reservation.id}-${reservation.utilizationUnit}`}
             onClick={() => openModal(reservation)}
           >
             <ListContent>
@@ -120,7 +143,7 @@ export const JoinSpace = () => {
           <ModalContent>
             <ModaMainText>참여 신청</ModaMainText>
             <ModaSubText>
-              {getFormattedMonthAndDay(selectedReservation.startSchedule)}
+              {`${getFormattedMonthAndDay(selectedReservation.startSchedule)} `}
               {`${getFormattedTime(
                 selectedReservation.startSchedule,
               )}-${getFormattedTime(selectedReservation.endSchedule)}`}
@@ -137,7 +160,7 @@ export const JoinSpace = () => {
           </ModalContent>
           <ModalButtonWrapper>
             <ModalCancel onClick={closeModal}>취소</ModalCancel>
-            <ModalButton>참여 신청</ModalButton>
+            <ModalButton onClick={handleJoin}>참여 신청</ModalButton>
           </ModalButtonWrapper>
         </Modal>
       )}
