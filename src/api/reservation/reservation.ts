@@ -15,6 +15,7 @@ import type {
   SpaceScheduleParams,
   StoreCustomReservationResponse,
   ParticipationListResponse,
+  StoreSpaceJoinParams,
 } from 'api/reservation/common';
 
 interface UseReservationListParams {
@@ -147,5 +148,13 @@ export const getParticipationList = async (
 ): Promise<SuccessOkResponse<ParticipationListResponse>> => {
   const url = getApiUrl(`/participation/${storeId}/space-participation-list`);
   const response = await axiosWithAuth.get(url, { params });
+  return response.data;
+};
+
+export const storeSpaceJoin = async (
+  params: StoreSpaceJoinParams,
+): Promise<SuccessOkWithoutResultResponse> => {
+  const url = getApiUrl('/participation/space-participation');
+  const response = await axiosWithAuth.post(url, params);
   return response.data;
 };

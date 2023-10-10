@@ -116,3 +116,8 @@ export interface ParticipantList {
   endSchedule: string;
   userNickname: string;
 }
+
+export interface StoreSpaceJoinParams {
+  id: number;
+  utilizationUnit: string;
+}
