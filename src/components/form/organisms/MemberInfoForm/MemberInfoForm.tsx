@@ -174,7 +174,6 @@ export const MemberInfoForm: VFC = () => {
             },
           })}
           valueLength={nameValue.length}
-          maximum={50}
         >
           이름
         </Inputs>
@@ -191,7 +190,6 @@ export const MemberInfoForm: VFC = () => {
             },
           })}
           valueLength={ageValue.toString().length}
-          maximum={2}
           maxLength={10}
         >
           생년월일
