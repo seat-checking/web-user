@@ -99,11 +99,11 @@ export const Intent = () => {
       ? SpaceNowUse
       : null;
 
-  const openModal = () => {
+  const handleOpenModal = () => {
     setModalOpen(true);
   };
 
-  const closeModal = () => {
+  const handleCloseModal = () => {
     setModalOpen(false);
   };
 
@@ -161,7 +161,7 @@ export const Intent = () => {
     };
 
     getRequestData();
-  }, []);
+  }, [storeId]);
 
   useEffect(() => {
     if (!requestData || !requestData.storeCustomUtilizationFieldList) {
@@ -239,7 +239,7 @@ export const Intent = () => {
           <Button
             backgroundColor={theme.palette.primary.orange}
             color={theme.palette.white.main}
-            onClick={openModal}
+            onClick={handleOpenModal}
           >
             사용신청
           </Button>
@@ -278,7 +278,7 @@ export const Intent = () => {
             )}
           </ModalContent>
           <ModalButtonWrapper>
-            <ModalCancel onClick={closeModal}>취소</ModalCancel>
+            <ModalCancel onClick={handleCloseModal}>취소</ModalCancel>
             <ModalButton onClick={handleReservationSubmit}>
               예약신청
             </ModalButton>

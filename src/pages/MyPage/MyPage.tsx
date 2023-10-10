@@ -38,11 +38,11 @@ import type { VFC } from 'common/utils/types';
 export const MyPage: VFC = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  const openModal = () => {
+  const handleOpenModal = () => {
     setModalOpen(true);
   };
 
-  const closeModal = () => {
+  const handleCloseModal = () => {
     setModalOpen(false);
   };
 
@@ -74,7 +74,7 @@ export const MyPage: VFC = () => {
           <UserInfoIcon src={userCheckIcon} />
           <MyPageMenuList>개인정보 처리 방침</MyPageMenuList>
         </MyPageMenuListWrapper>
-        <MyPageMenuListWrapper onClick={openModal}>
+        <MyPageMenuListWrapper onClick={handleOpenModal}>
           <UserInfoIcon src={logOutIcon} />
           <MyPageMenuList>로그아웃</MyPageMenuList>
         </MyPageMenuListWrapper>
@@ -90,7 +90,7 @@ export const MyPage: VFC = () => {
             </ModalNotificationrText>
           </ModalContent>
           <ModalButtonWrapper>
-            <ModalCancel onClick={closeModal}>취소</ModalCancel>
+            <ModalCancel onClick={handleCloseModal}>취소</ModalCancel>
             <ModalButton onClick={handleLogOut}>로그아웃</ModalButton>
           </ModalButtonWrapper>
         </Modal>
