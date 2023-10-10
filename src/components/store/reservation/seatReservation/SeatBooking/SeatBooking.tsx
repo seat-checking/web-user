@@ -151,6 +151,7 @@ export const SeatBooking: React.FC<BookingProps> = ({
   };
 
   const isTimeSlotReserved = (time: string) => {
+    if (!reservations) return false;
     return reservations.some((reservation) => {
       const reservedStart = new Date(reservation.startSchedule).getTime();
       const reservedEnd = new Date(reservation.endSchedule).getTime();
@@ -167,13 +168,13 @@ export const SeatBooking: React.FC<BookingProps> = ({
 
   const isTimeSlotDisabled = (time: string) => {
     if (!isSameDay(new Date(), selectedDate)) {
-      return false; // 선택한 날짜가 오늘이 아니면 비활성화 로직을 무시합니다.
+      return false;
     }
 
     const currentDate = new Date();
     const currentHour = currentDate.getHours();
     const currentMinute = currentDate.getMinutes();
-    const timeLimit = currentHour + (currentMinute >= 30 ? 4 : 3); // 3시간 후의 타임슬롯을 계산
+    const timeLimit = currentHour + (currentMinute >= 30 ? 4 : 3);
 
     const [hour] = time.split(':').map(Number);
 

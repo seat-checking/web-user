@@ -92,6 +92,7 @@ export const SeatUseNow: React.FC<SeatUseNowProps> = ({
   };
 
   const isTimeSlotReserved = (time: string) => {
+    if (!reservations) return false;
     return reservations.some((reservation) => {
       const reservedStart = new Date(reservation.startSchedule).getTime();
       const reservedEnd = new Date(reservation.endSchedule).getTime();
