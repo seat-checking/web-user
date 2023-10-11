@@ -2,6 +2,7 @@
 
 import { getStoreDetaill } from 'api/store/store';
 import { ReactComponent as ArrowLeft } from 'assets/svgs/arrowLeft.svg';
+import { PATH } from 'common/utils/constants';
 import { Carousel } from 'components/store/Carousel';
 import { StoreDetailTab } from 'components/store/StoreDetailTab';
 
@@ -41,7 +42,7 @@ export const StoreDetailPage: VFC = () => {
 
   const navigate = useNavigate();
   const handleBack = (): void => {
-    navigate(-1);
+    navigate(`/${PATH.storeList}`);
   };
 
   const defaultImage =

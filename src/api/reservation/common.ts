@@ -101,3 +101,6 @@ export interface SpaceScheduleParams {
 export interface ReservationParams {
   'reservation-date-and-time': string;
 }
+export interface SpaceReservationParams {
+  schedule: string;
+}

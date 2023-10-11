@@ -12,7 +12,6 @@ import { Fields } from 'components/store/reservation/Fields';
 import {
   ButtonWrapper,
   IntentWrapper,
-  ModaMainText,
   ModaSubText,
   ModalButton,
   ModalButtonWrapper,
@@ -20,6 +19,7 @@ import {
   ModalColorText,
   ModalContent,
   ModalHelperText,
+  ModalMainText,
   ModalSeatNumberText,
 } from 'components/store/reservation/Intent/Intent.styled';
 import { useEffect, useState } from 'react';
@@ -99,11 +99,11 @@ export const Intent = () => {
       ? SpaceNowUse
       : null;
 
-  const openModal = () => {
+  const handleOpenModal = () => {
     setModalOpen(true);
   };
 
-  const closeModal = () => {
+  const handleCloseModal = () => {
     setModalOpen(false);
   };
 
@@ -161,7 +161,7 @@ export const Intent = () => {
     };
 
     getRequestData();
-  }, []);
+  }, [storeId]);
 
   useEffect(() => {
     if (!requestData || !requestData.storeCustomUtilizationFieldList) {
@@ -239,7 +239,7 @@ export const Intent = () => {
           <Button
             backgroundColor={theme.palette.primary.orange}
             color={theme.palette.white.main}
-            onClick={openModal}
+            onClick={handleOpenModal}
           >
             사용신청
           </Button>
@@ -256,7 +256,7 @@ export const Intent = () => {
       {modalOpen && (
         <Modal>
           <ModalContent>
-            <ModaMainText>사용신청</ModaMainText>
+            <ModalMainText>사용신청</ModalMainText>
             <ModaSubText>{`${dateDisplay} ${startScheduleFormatted} - ${endScheduleFormatted}`}</ModaSubText>
             <ModalSeatNumberText>
               {storeChairId}번 좌석을 예약할까요?
@@ -278,7 +278,7 @@ export const Intent = () => {
             )}
           </ModalContent>
           <ModalButtonWrapper>
-            <ModalCancel onClick={closeModal}>취소</ModalCancel>
+            <ModalCancel onClick={handleCloseModal}>취소</ModalCancel>
             <ModalButton onClick={handleReservationSubmit}>
               예약신청
             </ModalButton>
