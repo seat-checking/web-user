@@ -11,6 +11,7 @@ import {
   getFormattedTime,
 } from 'components/reservationStatus/reservationList/ApprovedList';
 import {
+  ErrorMessage,
   LeftContent,
   ListContent,
   ListDate,
@@ -19,7 +20,7 @@ import {
   RightContent,
   StoreSpace,
 } from 'components/store/JoinSpace/JoinSpace.styled';
-import { ErrorMessage } from 'components/store/StoreList/StoreList.styled';
+
 import {
   ModalMainText,
   ModaSubText,
@@ -34,6 +35,7 @@ import {
 import { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useLocation, useNavigate } from 'react-router-dom';
+import type { ErrorResponse } from 'api/common';
 import type {
   ParticipantList,
   ParticipationListResponse,
@@ -44,6 +46,8 @@ export const JoinSpace = () => {
   const storeInfoFromState = location.state?.storeInfo;
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<boolean>(false);
+  const [errorText, setErrorText] = useState<string>('');
   const [selectedReservation, setSelectedReservation] =
     useState<ParticipantList | null>(null);
 
@@ -94,6 +98,7 @@ export const JoinSpace = () => {
 
   const closeModal = () => {
     setModalOpen(false);
+    setErrorMessage(false);
   };
 
   const handleJoin = async () => {
@@ -107,9 +112,24 @@ export const JoinSpace = () => {
           state: { alertMessage: '스페이스 참여 신청을 완료했어요.' },
         });
         closeModal();
-      } catch (error) {
-        // 에러 메시지 표시나 다른 에러 처리 추가 가능
-        console.log(error);
+      } catch (error: any) {
+        if (error.response) {
+          const errorResponse: ErrorResponse = error.response.data;
+
+          if (errorResponse.code === 'PARTICIPATION_400_002') {
+            setErrorText(
+              '이미 참여을 신청했거나\n참여 할 수 없는 스페이스입니다.',
+            );
+          } else if (errorResponse.code === 'PARTICIPATION_400_001') {
+            setErrorText('본인이 신청한 내역입니다.');
+          } else {
+            setErrorText('알 수 없는 에러가 발생했습니다.');
+          }
+
+          setErrorMessage(true);
+        } else {
+          console.error(error);
+        }
       }
     }
   };
@@ -157,6 +177,7 @@ export const JoinSpace = () => {
               <br />
               확인할 수 있어요.
             </ModalHelperText>
+            {errorMessage ? <ErrorMessage>{errorText}</ErrorMessage> : null}
           </ModalContent>
           <ModalButtonWrapper>
             <ModalCancel onClick={closeModal}>취소</ModalCancel>

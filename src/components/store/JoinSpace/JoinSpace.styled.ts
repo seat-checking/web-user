@@ -49,3 +49,15 @@ export const ListDate = styled.div`
   font-weight: 400;
   line-height: 1.2rem;
 `;
+
+export const ErrorMessage = styled.div`
+  width: 90%;
+  height: 2rem;
+  margin: 0 auto;
+  padding-top: 1rem;
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: ${(porps): string => porps.theme.palette.error.main};
+  text-align: center;
+  white-space: pre-line;
+`;
