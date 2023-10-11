@@ -21,7 +21,7 @@ import {
 } from 'components/store/JoinSpace/JoinSpace.styled';
 import { ErrorMessage } from 'components/store/StoreList/StoreList.styled';
 import {
-  ModaMainText,
+  ModalMainText,
   ModaSubText,
   ModalButton,
   ModalButtonWrapper,
@@ -141,7 +141,7 @@ export const JoinSpace = () => {
       {modalOpen && selectedReservation && (
         <Modal>
           <ModalContent>
-            <ModaMainText>참여 신청</ModaMainText>
+            <ModalMainText>참여 신청</ModalMainText>
             <ModaSubText>
               {`${getFormattedMonthAndDay(selectedReservation.startSchedule)} `}
               {`${getFormattedTime(
