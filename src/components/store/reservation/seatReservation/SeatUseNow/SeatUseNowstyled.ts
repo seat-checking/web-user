@@ -22,25 +22,28 @@ export const TimesWrapper = styled.div`
   flex-wrap: nowrap; /* Prevent wrapping to the next row */
   overflow-x: auto;
   padding-top: 4rem;
+  padding-bottom: 1rem;
 
-  /* Hide the scrollbar while keeping the scroll functionality */
+  /* Set the width of the scrollbar */
   ::-webkit-scrollbar {
-    width: 6px; /* Set the width of the scrollbar */
+    width: 6px;
+    height: 6px; /* For vertical scrollbar */
   }
 
-  /* Track */
+  /* Track (background of scrollbar) */
   ::-webkit-scrollbar-track {
-    background: transparent; /* You can set a background color if needed */
+    background: #f1f1f1; /* Light gray background color */
   }
 
-  /* Handle */
+  /* Handle (scrollbar itself) */
   ::-webkit-scrollbar-thumb {
-    background: transparent; /* Set the scrollbar handle color */
+    background: #888; /* Dark gray color */
+    border-radius: 3px; // 둥근 모서리를 적용
   }
 
-  /* Handle on hover */
+  /* Handle color on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: transparent; /* Set the scrollbar handle color on hover */
+    background: #555; /* Slightly darker gray on hover */
   }
 `;
 
