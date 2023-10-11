@@ -44,7 +44,7 @@ export const SpaceReservationTab: VFC<ReservationTabProps> = ({
           schedule: kstIsoString,
         };
         const response = await getSpaceReservations(storeSpaceId, params);
-        setReservations(response.result.allReservationsForSeatAndDate);
+        setReservations(response.result.allUtilizationsForSeatAndDate);
       } catch (error) {
         return null;
       }
