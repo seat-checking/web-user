@@ -47,7 +47,8 @@ export const SeatReservationTab: VFC<ReservationTabProps> = ({
           'reservation-date-and-time': kstIsoString,
         };
         const response = await getSeatReservations(storeChairId, params);
-        setReservations(response.result.allReservationsForSeatAndDate);
+        setReservations(response.result.allUtilizationsForSeatAndDate);
+        console.log(response.result.allUtilizationsForSeatAndDate);
       } catch (error) {
         return null;
       }
