@@ -128,7 +128,7 @@ export const MemberInfoForm: VFC = () => {
   const nicknameError =
     errors.nickname?.message || errors.UniqueButtonClicked?.message;
 
-  const patternValue = new RegExp(
+  const nicknamePattern = new RegExp(
     `^[A-Za-z0-9ㄱ-ㅎ가-힣]{2,${NICKNAME_MAX_LENGTH}}$`,
   );
 
@@ -144,7 +144,7 @@ export const MemberInfoForm: VFC = () => {
           {...register('nickname', {
             required: '닉네임은 필수로 입력해주세요',
             pattern: {
-              value: patternValue,
+              value: nicknamePattern,
               message: `2~${NICKNAME_MAX_LENGTH}자의 한글, 영문(대소문자 포함), 숫자만 입력가능합니다.`,
             },
           })}
