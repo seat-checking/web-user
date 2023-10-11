@@ -57,6 +57,8 @@ export const MemberInfoForm: VFC = () => {
 
   const firstData = formState;
 
+  const NICKNAME_MAX_LENGTH = 10;
+
   useEffect(() => {
     if (!firstData) {
       navigate(`/${PATH.signUp}`);
@@ -126,6 +128,10 @@ export const MemberInfoForm: VFC = () => {
   const nicknameError =
     errors.nickname?.message || errors.UniqueButtonClicked?.message;
 
+  const patternValue = new RegExp(
+    `^[A-Za-z0-9ㄱ-ㅎ가-힣]{2,${NICKNAME_MAX_LENGTH}}$`,
+  );
+
   return (
     <div>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -134,18 +140,17 @@ export const MemberInfoForm: VFC = () => {
           typingrequired
           labelRequired
           placeholder='사용할 닉네임을 입력해주세요.'
-          helperText='* 2~12자의 영문(대소문자 포함)이나 숫자.'
+          helperText={`* 2~${NICKNAME_MAX_LENGTH}자의 영문(대소문자 포함)이나 숫자.`}
           {...register('nickname', {
             required: '닉네임은 필수로 입력해주세요',
             pattern: {
-              value: /^[A-Za-z0-9ㄱ-ㅎ가-힣]{2,10}$/,
-              message:
-                '2~10자의 한글, 영문(대소문자 포함), 숫자만 입력가능합니다.',
+              value: patternValue,
+              message: `2~${NICKNAME_MAX_LENGTH}자의 한글, 영문(대소문자 포함), 숫자만 입력가능합니다.`,
             },
           })}
           valueLength={nicknameValue.length}
-          maximum={10}
-          maxLength={10}
+          maximum={NICKNAME_MAX_LENGTH}
+          maxLength={NICKNAME_MAX_LENGTH}
           error={touchedFields.nickname && nicknameError}
           success={
             touchedFields.nickname && !nicknameError
