@@ -44,7 +44,7 @@ export const SeatReservationTab: VFC<ReservationTabProps> = ({
         kstIsoString = kstIsoString.replace(/\.\d+Z$/, '');
 
         const params: ReservationParams = {
-          'reservation-date-and-time': kstIsoString,
+          standardSchedule: kstIsoString,
         };
         const response = await getSeatReservations(storeChairId, params);
         setReservations(response.result.allUtilizationsForSeatAndDate);

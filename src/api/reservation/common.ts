@@ -99,7 +99,7 @@ export interface SpaceScheduleParams {
 }
 
 export interface ReservationParams {
-  'reservation-date-and-time': string;
+  standardSchedule: string;
 }
 
 export interface ParticipationListResponse {

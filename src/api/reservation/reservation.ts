@@ -111,7 +111,7 @@ export const getSeatReservations = async (
   params: ReservationParams,
 ): Promise<SuccessOkResponse<ReservationResponse>> => {
   const url = getApiUrl(
-    `/reservations/users/reserved-list/chair/date/${chairIdToReservation}`,
+    `/utilization/valid-list/chair/date/${chairIdToReservation}`,
   );
   const response = await axiosWithAuth.get(url, { params });
   return response.data;
