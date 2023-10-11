@@ -155,7 +155,7 @@ export const StoreLayout: React.FC<StoreLayoutProps> = ({
                             currentReservationUnit === 'CHAIR' &&
                             selectedChairManageId == null
                           }
-                          isSelected={selectedChairManageId === chair.manageId}
+                          isSelected={selectedChairId.current === chair.i}
                         >
                           {chair.manageId}
                         </Chair>

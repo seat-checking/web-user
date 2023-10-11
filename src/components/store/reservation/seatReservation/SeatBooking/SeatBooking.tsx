@@ -37,28 +37,17 @@ export const generateAllTimeSlots = () => {
 
 export const generateAllTimeSlotsStartingFromNow = () => {
   const currentDate = new Date();
+  const timeSlots = generateAllTimeSlots();
+
+  // 현재 시간의 타임슬롯 인덱스 찾기
   const currentHour = currentDate.getHours();
   const currentMinute = currentDate.getMinutes();
-  const timeSlots = [];
+  const currentIndex = timeSlots.indexOf(
+    `${('0' + currentHour).slice(-2)}:${currentMinute >= 30 ? '30' : '00'}`,
+  );
 
-  let startHour = currentHour + 3;
-  let startMinute = 0;
-
-  if (currentMinute >= 30) {
-    startHour++;
-  } else {
-    startMinute = 30;
-  }
-
-  for (let i = startHour; i <= 24; i++) {
-    for (let j = i === startHour ? startMinute : 0; j < 60; j += 30) {
-      if (i === 24 && j > 0) break;
-      const formattedHour = ('0' + i).slice(-2);
-      const formattedMinutes = ('0' + j).slice(-2);
-      timeSlots.push(`${formattedHour}:${formattedMinutes}`);
-    }
-  }
-  return timeSlots;
+  // 현재 시간의 타임슬롯부터 반환
+  return timeSlots.slice(currentIndex);
 };
 
 export const subtract30Minutes = (timeStr: string) => {
@@ -162,6 +151,7 @@ export const SeatBooking: React.FC<BookingProps> = ({
   };
 
   const isTimeSlotReserved = (time: string) => {
+    if (!reservations) return false;
     return reservations.some((reservation) => {
       const reservedStart = new Date(reservation.startSchedule).getTime();
       const reservedEnd = new Date(reservation.endSchedule).getTime();
@@ -175,6 +165,22 @@ export const SeatBooking: React.FC<BookingProps> = ({
       return checkTime >= reservedStart && checkTime <= reservedEnd;
     });
   };
+
+  const isTimeSlotDisabled = (time: string) => {
+    if (!isSameDay(new Date(), selectedDate)) {
+      return false;
+    }
+
+    const currentDate = new Date();
+    const currentHour = currentDate.getHours();
+    const currentMinute = currentDate.getMinutes();
+    const timeLimit = currentHour + (currentMinute >= 30 ? 4 : 3);
+
+    const [hour] = time.split(':').map(Number);
+
+    return hour < timeLimit;
+  };
+
   return (
     <div>
       <TimesWrapper>
@@ -183,7 +189,11 @@ export const SeatBooking: React.FC<BookingProps> = ({
             key={time}
             time={time}
             isSelected={isSelected(time)}
-            isActivated={!(index === 0) && !isTimeSlotReserved(time)}
+            isActivated={
+              !isTimeSlotDisabled(time) &&
+              !(index === 0) &&
+              !isTimeSlotReserved(time)
+            }
             onClick={handleTimeClick}
           />
         ))}

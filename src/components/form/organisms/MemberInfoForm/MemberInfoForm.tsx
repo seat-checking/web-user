@@ -16,7 +16,6 @@ import { useNavigate } from 'react-router-dom';
 import { useFromStore } from 'store/formStore';
 import {
   ButtonWrapper,
-  InfoText,
   InputRadioGroup,
   InputRadiowrapper,
 } from './MemberInfoForm.styled';
@@ -57,6 +56,8 @@ export const MemberInfoForm: VFC = () => {
   const navigate = useNavigate();
 
   const firstData = formState;
+
+  const NICKNAME_MAX_LENGTH = 10;
 
   useEffect(() => {
     if (!firstData) {
@@ -127,6 +128,10 @@ export const MemberInfoForm: VFC = () => {
   const nicknameError =
     errors.nickname?.message || errors.UniqueButtonClicked?.message;
 
+  const nicknamePattern = new RegExp(
+    `^[A-Za-z0-9ㄱ-ㅎ가-힣]{2,${NICKNAME_MAX_LENGTH}}$`,
+  );
+
   return (
     <div>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -135,18 +140,17 @@ export const MemberInfoForm: VFC = () => {
           typingrequired
           labelRequired
           placeholder='사용할 닉네임을 입력해주세요.'
-          helperText='* 2~12자의 영문(대소문자 포함)이나 숫자.'
+          helperText={`* 2~${NICKNAME_MAX_LENGTH}자의 영문(대소문자 포함)이나 숫자.`}
           {...register('nickname', {
             required: '닉네임은 필수로 입력해주세요',
             pattern: {
-              value: /^[A-Za-z0-9ㄱ-ㅎ가-힣]{2,12}$/,
-              message:
-                '2~12자의 한글, 영문(대소문자 포함), 숫자만 입력가능합니다.',
+              value: nicknamePattern,
+              message: `2~${NICKNAME_MAX_LENGTH}자의 한글, 영문(대소문자 포함), 숫자만 입력가능합니다.`,
             },
           })}
           valueLength={nicknameValue.length}
-          maximum={12}
-          maxLength={12}
+          maximum={NICKNAME_MAX_LENGTH}
+          maxLength={NICKNAME_MAX_LENGTH}
           error={touchedFields.nickname && nicknameError}
           success={
             touchedFields.nickname && !nicknameError
@@ -175,7 +179,6 @@ export const MemberInfoForm: VFC = () => {
             },
           })}
           valueLength={nameValue.length}
-          maximum={50}
         >
           이름
         </Inputs>
@@ -192,7 +195,6 @@ export const MemberInfoForm: VFC = () => {
             },
           })}
           valueLength={ageValue.toString().length}
-          maximum={2}
           maxLength={10}
         >
           생년월일
@@ -216,7 +218,6 @@ export const MemberInfoForm: VFC = () => {
             />
           </InputRadioGroup>
         </InputRadiowrapper>
-        <InfoText>입력한 정보를 바탕으로 가게를 추천해 드려요.</InfoText>
         <ButtonWrapper>
           {isFormValid ? (
             <Button backgroundColor='#FF8D4E' color='#FFFFFF'>

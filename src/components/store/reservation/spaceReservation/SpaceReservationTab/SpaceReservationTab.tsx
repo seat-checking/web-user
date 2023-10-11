@@ -7,7 +7,7 @@ import { SpaceBooking } from 'components/store/reservation/spaceReservation/Book
 import { SpaceUseNow } from 'components/store/reservation/spaceReservation/SpaceUseNow';
 import { useEffect, useState } from 'react';
 import { useReservationStore } from 'store/reservationStore';
-import type { ReservationParams } from 'api/reservation/common';
+import type { SpaceReservationParams } from 'api/reservation/common';
 import type { VFC } from 'common/utils/types';
 
 interface ReservationTabProps {
@@ -40,8 +40,8 @@ export const SpaceReservationTab: VFC<ReservationTabProps> = ({
 
         kstIsoString = kstIsoString.replace(/\.\d+Z$/, '');
 
-        const params: ReservationParams = {
-          'reservation-date-and-time': kstIsoString,
+        const params: SpaceReservationParams = {
+          schedule: kstIsoString,
         };
         const response = await getSpaceReservations(storeSpaceId, params);
         setReservations(response.result.allReservationsForSeatAndDate);

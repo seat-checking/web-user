@@ -58,7 +58,7 @@ export const StoreDetailPage: VFC = () => {
   const navigate = useNavigate();
 
   const handleBack = (): void => {
-    navigate(-1);
+    navigate(`/${PATH.storeList}`);
   };
 
   const handleJoinSpace = () => {

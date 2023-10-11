@@ -121,3 +121,6 @@ export interface StoreSpaceJoinParams {
   id: number;
   utilizationUnit: string;
 }
+export interface SpaceReservationParams {
+  schedule: string;
+}

@@ -16,6 +16,7 @@ import type {
   StoreCustomReservationResponse,
   ParticipationListResponse,
   StoreSpaceJoinParams,
+  SpaceReservationParams,
 } from 'api/reservation/common';
 
 interface UseReservationListParams {
@@ -133,10 +134,10 @@ export const SpaceReservation = async (
 
 export const getSpaceReservations = async (
   spaceIdToReservation: number,
-  params: ReservationParams,
+  params: SpaceReservationParams,
 ): Promise<SuccessOkResponse<ReservationResponse>> => {
   const url = getApiUrl(
-    `/reservations/users/reserved-list/space/date/${spaceIdToReservation}`,
+    `/utilization/valid-list/space/date/${spaceIdToReservation}`,
   );
   const response = await axiosWithAuth.get(url, { params });
   return response.data;

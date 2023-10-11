@@ -97,7 +97,7 @@ export const SignUpForm: VFC = () => {
   const emailRegister = register('email', {
     required: '이메일은 필수로 입력해주세요',
     pattern: {
-      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      value: /^[a-zA-Z0-9._%+-]+@(?!.*\.\.)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       message: '이메일 포맷에 맞게 입력해야 합니다',
     },
   });
@@ -210,7 +210,7 @@ export const SignUpForm: VFC = () => {
             onChange={handleAllCheckBoxChange}
           />
           <InputAllCheckBoxLabel>
-            SeatSence 가입 약관 전체동의
+            SeatSense 가입 약관 전체동의
           </InputAllCheckBoxLabel>
         </InputCheckBoxBorderWrapper>
         <InputSubCheckBoxWrapper>

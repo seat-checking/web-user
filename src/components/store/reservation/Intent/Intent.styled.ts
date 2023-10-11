@@ -19,7 +19,7 @@ export const ModalHeader = styled.div`
   align-items: center;
   padding-left: 1.6rem;
 `;
-export const ModaMainText = styled.div`
+export const ModalMainText = styled.div`
   color: black;
   text-align: center;
   font-size: 1.8rem;

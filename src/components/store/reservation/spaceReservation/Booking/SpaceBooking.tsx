@@ -113,8 +113,23 @@ export const SpaceBooking: React.FC<BookingProps> = ({
       replace: true,
     });
   };
+  const isTimeSlotDisabled = (time: string) => {
+    if (!isSameDay(new Date(), selectedDate)) {
+      return false; // 선택한 날짜가 오늘이 아니면 비활성화 로직을 무시합니다.
+    }
+
+    const currentDate = new Date();
+    const currentHour = currentDate.getHours();
+    const currentMinute = currentDate.getMinutes();
+    const timeLimit = currentHour + (currentMinute >= 30 ? 4 : 3); // 3시간 후의 타임슬롯을 계산
+
+    const [hour] = time.split(':').map(Number);
+
+    return hour < timeLimit;
+  };
 
   const isTimeSlotReserved = (time: string) => {
+    if (!reservations) return false;
     return reservations.some((reservation) => {
       const reservedStart = new Date(reservation.startSchedule).getTime();
       const reservedEnd = new Date(reservation.endSchedule).getTime();
@@ -128,6 +143,7 @@ export const SpaceBooking: React.FC<BookingProps> = ({
       return checkTime >= reservedStart && checkTime <= reservedEnd;
     });
   };
+
   return (
     <div>
       <TimesWrapper>
@@ -136,7 +152,11 @@ export const SpaceBooking: React.FC<BookingProps> = ({
             key={time}
             time={time}
             isSelected={isSelected(time)}
-            isActivated={!(index === 0) && !isTimeSlotReserved(time)}
+            isActivated={
+              !isTimeSlotDisabled(time) &&
+              !(index === 0) &&
+              !isTimeSlotReserved(time)
+            }
             onClick={handleTimeClick}
           />
         ))}
