@@ -121,7 +121,7 @@ export const SpaceBooking: React.FC<BookingProps> = ({
     const currentDate = new Date();
     const currentHour = currentDate.getHours();
     const currentMinute = currentDate.getMinutes();
-    const timeLimit = currentHour + (currentMinute >= 30 ? 4 : 3); // 3시간 후의 타임슬롯을 계산
+    const timeLimit = currentHour + (currentMinute >= 30 ? 4 : 3);
 
     const [hour] = time.split(':').map(Number);
 
