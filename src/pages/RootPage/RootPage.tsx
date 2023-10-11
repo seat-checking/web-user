@@ -1,15 +1,19 @@
 import { PATH } from 'common/utils/constants';
 import { Button } from 'components/form/atoms/Button';
-import { LogoBox } from 'pages/LoginPage/LoginPage.styled';
 import { NavLink } from 'react-router-dom';
-import { ButtonWrapper, LogoWrapper, RootPageWrapper } from './RootPage.styled';
+import {
+  ButtonWrapper,
+  Logo,
+  LogoWrapper,
+  RootPageWrapper,
+} from './RootPage.styled';
 import type { VFC } from 'common/utils/types';
 
 export const RootPage: VFC = () => {
   return (
     <RootPageWrapper>
       <LogoWrapper>
-        <LogoBox>썸네일</LogoBox>
+        <Logo />
       </LogoWrapper>
       <ButtonWrapper>
         <NavLink to={`/${PATH.login}`}>
