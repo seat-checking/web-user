@@ -63,7 +63,7 @@ export interface StoreCustomReservationField {
   contentGuide: string;
 }
 export interface ReservationResponse {
-  allReservationsForSeatAndDate: {
+  allUtilizationsForSeatAndDate: {
     startSchedule: string;
     endSchedule: string;
   }[];
