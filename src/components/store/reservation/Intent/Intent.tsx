@@ -8,6 +8,7 @@ import {
 import { PATH } from 'common/utils/constants';
 import { Modal } from 'components/common/Modal';
 import { Button } from 'components/form/atoms/Button';
+import { ErrorMessage } from 'components/store/JoinSpace/JoinSpace.styled';
 import { Fields } from 'components/store/reservation/Fields';
 import {
   ButtonWrapper,
@@ -26,6 +27,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useReservationStore } from 'store/reservationStore';
 import { useTheme } from 'styled-components';
+import type { ErrorResponse } from 'api/common';
 import type {
   GetRequestInformationParams,
   SeatScheduleParams,
@@ -63,6 +65,8 @@ export const Intent = () => {
   const [requestData, setRequestData] =
     useState<StoreCustomReservationResponse | null>(null);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<boolean>(false);
+  const [errorText, setErrorText] = useState<string>('');
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
   const [fieldValues, setFieldValues] = useState<
     Record<string, string | string[]>
@@ -105,6 +109,7 @@ export const Intent = () => {
 
   const handleCloseModal = () => {
     setModalOpen(false);
+    setErrorMessage(false);
   };
 
   const handleRadioClick = (name: string, fieldId: number) => {
@@ -218,8 +223,19 @@ export const Intent = () => {
       }
 
       navigate(`/${PATH.storeDetail}/${storeId}`, { replace: true });
-    } catch (error) {
-      return null;
+    } catch (error: any) {
+      if (error.response) {
+        const errorResponse: ErrorResponse = error.response.data;
+
+        if (errorResponse.code === 'UTILIZATION_400_001') {
+          setErrorText(
+            '예약한 이용 시간이 유효하지 않습니다. 예약을 다시 진행해 주시길 바랍니다.',
+          );
+        } else {
+          setErrorText('알 수 없는 에러가 발생했습니다.');
+        }
+        setErrorMessage(true);
+      }
     }
   };
 
@@ -276,6 +292,7 @@ export const Intent = () => {
                 예약이 취소될 수 있습니다
               </ModalHelperText>
             )}
+            {errorMessage ? <ErrorMessage>{errorText}</ErrorMessage> : null}
           </ModalContent>
           <ModalButtonWrapper>
             <ModalCancel onClick={handleCloseModal}>취소</ModalCancel>
