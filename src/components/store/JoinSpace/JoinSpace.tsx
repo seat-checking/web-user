@@ -91,12 +91,12 @@ export const JoinSpace = () => {
     reservations = [...reservations, ...page.content];
   }
 
-  const openModal = (reservation: ParticipantList) => {
+  const handleOpenModal = (reservation: ParticipantList) => {
     setSelectedReservation(reservation);
     setModalOpen(true);
   };
 
-  const closeModal = () => {
+  const handleCloseModal = () => {
     setModalOpen(false);
     setErrorMessage(false);
   };
@@ -111,7 +111,7 @@ export const JoinSpace = () => {
         navigate(`/${PATH.storeDetail}/${storeInfoFromState.id}`, {
           state: { alertMessage: '스페이스 참여 신청을 완료했어요.' },
         });
-        closeModal();
+        handleCloseModal();
       } catch (error: any) {
         if (error.response) {
           const errorResponse: ErrorResponse = error.response.data;
@@ -139,7 +139,7 @@ export const JoinSpace = () => {
         {reservations.map((reservation) => (
           <ListWrapper
             key={`${reservation.id}-${reservation.utilizationUnit}`}
-            onClick={() => openModal(reservation)}
+            onClick={() => handleOpenModal(reservation)}
           >
             <ListContent>
               <LeftContent>
@@ -180,7 +180,7 @@ export const JoinSpace = () => {
             {errorMessage ? <ErrorMessage>{errorText}</ErrorMessage> : null}
           </ModalContent>
           <ModalButtonWrapper>
-            <ModalCancel onClick={closeModal}>취소</ModalCancel>
+            <ModalCancel onClick={handleCloseModal}>취소</ModalCancel>
             <ModalButton onClick={handleJoin}>참여 신청</ModalButton>
           </ModalButtonWrapper>
         </Modal>
