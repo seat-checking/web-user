@@ -159,17 +159,28 @@ export const SeatBooking: React.FC<BookingProps> = ({
 
   const isTimeSlotReserved = (time: string) => {
     if (!reservations) return false;
-    return reservations.some((reservation) => {
-      const reservedStart = new Date(reservation.startSchedule).getTime();
-      const reservedEnd = new Date(reservation.endSchedule).getTime();
 
-      const formattedSelectedDate = selectedDate.toISOString().split('T')[0];
-      const actualTime = new Date(`${formattedSelectedDate}T${time}:00`);
-      actualTime.setMinutes(actualTime.getMinutes() - 30);
+    const startTimes = reservations.map((reservation) => {
+      const formattedStartTime = reservation.startSchedule
+        .split('T')[1]
+        .substring(0, 5);
+      return formattedStartTime;
+    });
 
-      const checkTime = actualTime.getTime();
+    const endTimes = reservations.map((reservation) => {
+      const formattedEndTime = reservation.endSchedule
+        .split('T')[1]
+        .substring(0, 5);
+      return formattedEndTime;
+    });
 
-      return checkTime >= reservedStart && checkTime <= reservedEnd;
+    const formattedSelectedTime = time.substring(0, 5);
+
+    return startTimes.some((startTime, index) => {
+      const endTime = endTimes[index];
+      return (
+        formattedSelectedTime >= startTime && formattedSelectedTime <= endTime
+      );
     });
   };
 
