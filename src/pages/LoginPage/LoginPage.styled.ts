@@ -29,3 +29,12 @@ export const LogoBox = styled.div`
   margin-bottom: 9rem;
   background-color: ${(porps) => porps.theme.palette.grey[200]};
 `;
+
+export const LogoWrapper = styled.div`
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 10rem;
+  margin-bottom: 8.9rem;
+`;

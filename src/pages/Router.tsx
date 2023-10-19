@@ -6,6 +6,7 @@ import { ParticipatedDatail } from 'components/reservationStatus/listDetail/Part
 import { RejectedDetail } from 'components/reservationStatus/listDetail/RejectedDetail';
 import { UpcomingDetail } from 'components/reservationStatus/listDetail/UpcomingDetail';
 import { WaitingTabDetail } from 'components/reservationStatus/listDetail/WaitingTabDetail';
+import { JoinSpacePage } from 'pages/JoinSpacePage';
 import { LoginPage } from 'pages/LoginPage';
 import { MemberInfoPage } from 'pages/MemberInfoPage';
 import { MyPage } from 'pages/MyPage';
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
   {
     path: `/${PATH.intent}`,
     element: <ReservationIntentPage />,
+  },
+  {
+    path: `/${PATH.joinSpace}`,
+    element: <JoinSpacePage />,
   },
   {
     path: `/${PATH.myPage}`,

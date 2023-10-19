@@ -7,12 +7,14 @@ import { Carousel } from 'components/store/Carousel';
 import { StoreDetailTab } from 'components/store/StoreDetailTab';
 
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
   BackBtn,
   Container,
   HeaderWrap,
   Introduction,
+  JoinBtn,
+  MessageBox,
   Name,
 } from './StoreDetailPage.styled';
 import type { StoreDetaillResponse } from 'api/store/common';
@@ -25,6 +27,19 @@ import type { VFC } from 'common/utils/types';
 export const StoreDetailPage: VFC = () => {
   const { storeId } = useParams<{ storeId: string }>();
   const [storeInfo, setStoreInfo] = useState<StoreDetaillResponse | null>(null);
+  const location = useLocation();
+  const alertMessage = location.state?.alertMessage;
+  const [isVisible, setIsVisible] = useState<boolean>(!!alertMessage);
+
+  useEffect(() => {
+    if (alertMessage) {
+      const timer = setTimeout(() => {
+        setIsVisible(false);
+      }, 4000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [alertMessage]);
 
   useEffect(() => {
     const getStoreInfo = async () => {
@@ -41,8 +56,13 @@ export const StoreDetailPage: VFC = () => {
   }, [storeId]);
 
   const navigate = useNavigate();
+
   const handleBack = (): void => {
     navigate(`/${PATH.storeList}`);
+  };
+
+  const handleJoinSpace = () => {
+    navigate(`/${PATH.joinSpace}`, { state: { storeInfo } });
   };
 
   const defaultImage =
@@ -56,10 +76,16 @@ export const StoreDetailPage: VFC = () => {
         <ArrowLeft />
       </BackBtn>
       <HeaderWrap>
-        <Name>{storeInfo?.storeName}</Name>
-        <Introduction>{storeInfo?.introduction}</Introduction>
+        <div>
+          <Name>{storeInfo?.storeName}</Name>
+          <Introduction>{storeInfo?.introduction}</Introduction>
+        </div>
+        <JoinBtn onClick={handleJoinSpace}>스페이스 참여</JoinBtn>
       </HeaderWrap>
       <StoreDetailTab storeInfo={storeInfo} />
+      {alertMessage && (
+        <MessageBox isVisible={isVisible}>{alertMessage}</MessageBox>
+      )}
     </Container>
   );
 };

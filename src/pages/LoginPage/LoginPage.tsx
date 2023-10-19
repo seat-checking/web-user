@@ -1,10 +1,11 @@
 import { LoginForm } from 'components/form/organisms/LoginForm';
+import { Logo } from 'pages/RootPage/RootPage.styled';
 import { useNavigate } from 'react-router-dom';
 import {
   BackButtonIcon,
   LoginPageHeader,
   LoginPageWrapper,
-  LogoBox,
+  LogoWrapper,
 } from './LoginPage.styled';
 import type { VFC } from 'common/utils/types';
 
@@ -20,7 +21,9 @@ export const LoginPage: VFC = () => {
       <LoginPageHeader>
         <BackButtonIcon onClick={handleback} />
       </LoginPageHeader>
-      <LogoBox>로고 썸네일 등 </LogoBox>
+      <LogoWrapper>
+        <Logo />
+      </LogoWrapper>
       <LoginForm />
     </LoginPageWrapper>
   );

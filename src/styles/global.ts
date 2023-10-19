@@ -12,12 +12,18 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 62.5%; // 1rem = 10px 로 변경
   }
 
-
   body {
-    max-width: 67.5rem;
-    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;  -webkit-font-smoothing: antialiased;
-    margin:0 auto;
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+      'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    // 스크롤바 유무에 의해 레이아웃이 흐트러지는 걸 막기 위함
+  max-width:67.5rem;
+  margin:0 auto;
+    
   }
+
   
   input {
     border: none;

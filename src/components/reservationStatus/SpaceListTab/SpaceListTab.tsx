@@ -4,14 +4,11 @@ import { Tabs } from 'components/common/tab/Tabs';
 import { Participated } from 'components/reservationStatus/Participated';
 import { Upcoming } from 'components/reservationStatus/Upcoming';
 import { Wrapper } from 'components/reservationStatus/UseListTab/UsageListTab';
-import { useListTabStore } from 'store/StoreListStore';
+import { useState } from 'react';
 import type { VFC } from 'common/utils/types';
 
 export const SpaceListTab: VFC = () => {
-  const { tab, setTab } = useListTabStore((state) => ({
-    tab: state.tab,
-    setTab: state.setTab,
-  }));
+  const [tab, setTab] = useState<number>(0);
 
   const handleValueChange = (newValue: number) => {
     setTab(newValue);

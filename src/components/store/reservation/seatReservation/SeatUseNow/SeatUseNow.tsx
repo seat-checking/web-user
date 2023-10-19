@@ -1,4 +1,5 @@
 import { Button } from 'components/form/atoms/Button';
+import { ErrorMessage } from 'components/store/JoinSpace/JoinSpace.styled';
 import { TimeSlot } from 'components/store/reservation/TimeSlot';
 import {
   AvailableColor,
@@ -41,14 +42,10 @@ export const generateTimeSlotsFromNow = () => {
   return timeSlots;
 };
 
-export const SeatUseNow: React.FC<SeatUseNowProps> = ({
-  selectedDate,
-  reservations,
-}) => {
+export const SeatUseNow: React.FC<SeatUseNowProps> = ({ reservations }) => {
   const timeSlotsInitial = generateTimeSlotsFromNow();
   const defaultSelectedTime = timeSlotsInitial[0];
   const [selectedTimes, setSelectedTimes] = useState<string[]>([]);
-
   const setSchedule = useReservationStore((state) => state.setSchedule);
   const navigate = useNavigate();
 
@@ -59,8 +56,11 @@ export const SeatUseNow: React.FC<SeatUseNowProps> = ({
   };
 
   const isSelected = (time: string) => {
-    const [startTime, endTime] = selectedTimes;
-    return time >= startTime && time <= endTime;
+    if (selectedTimes.length === 2) {
+      const [startTime, endTime] = selectedTimes;
+      return time >= startTime && time <= endTime;
+    }
+    return false;
   };
 
   const isTimeSelected = selectedTimes.length >= 2;
@@ -90,32 +90,36 @@ export const SeatUseNow: React.FC<SeatUseNowProps> = ({
     setSchedule(startISOTime, endISOTime);
     navigate('/intent', { state: { from: 'SeatUseNow' } });
   };
-
-  const isTimeSlotReserved = (time: string) => {
+  const isTimeSlotReserved = () => {
     if (!reservations) return false;
+
+    const currentDate = new Date();
+
     return reservations.some((reservation) => {
-      const reservedStart = new Date(reservation.startSchedule).getTime();
-      const reservedEnd = new Date(reservation.endSchedule).getTime();
+      const startTime = new Date(reservation.startSchedule);
+      const endTime = new Date(reservation.endSchedule);
 
-      const formattedSelectedDate = selectedDate.toISOString().split('T')[0];
-      const actualTime = new Date(`${formattedSelectedDate}T${time}:00`);
-      actualTime.setMinutes(actualTime.getMinutes() - 30);
+      // 예약된 시간이 현재 시간 이후인 경우에만 반환합니다.
+      if (startTime <= currentDate && endTime >= currentDate) {
+        return true;
+      }
 
-      const checkTime = actualTime.getTime();
-
-      return checkTime >= reservedStart && checkTime <= reservedEnd;
+      return false;
     });
   };
 
   return (
     <div>
+      {isTimeSlotReserved() ? (
+        <ErrorMessage>현재 사용중인 좌석입니다.</ErrorMessage>
+      ) : null}
       <TimesWrapper>
         {timeSlotsInitial.map((time, index) => (
           <TimeSlot
             key={time}
             time={time}
             isSelected={isSelected(time)}
-            isActivated={!(index === 0) && !isTimeSlotReserved(time)}
+            isActivated={!(index === 0) && !isTimeSlotReserved()}
             onClick={() => handleTimeClick(time)}
           />
         ))}

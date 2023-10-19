@@ -1,3 +1,4 @@
+import mainImg from 'assets/icons/storeImg.svg';
 import styled from 'styled-components';
 
 export const StoreItemDiv = styled.div`
@@ -16,6 +17,11 @@ export const StoreItemImg = styled.img`
   width: 7.2rem;
   height: 7.2rem;
   border-radius: 0.6rem;
+`;
+export const StoreItemDefaultImg = styled.img`
+  width: 7.2rem;
+  height: 7.2rem;
+  border-radius: 0.7rem;
 `;
 export const StoreItemDescription = styled.div`
   padding-left: 0.6rem;

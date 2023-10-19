@@ -6,14 +6,11 @@ import { HistoryTab } from 'components/reservationStatus/HistoryTab';
 import { Wrapper } from 'components/reservationStatus/UseListTab/UsageListTab';
 import { UseNow } from 'components/reservationStatus/UseNow';
 
-import { useListTabStore } from 'store/StoreListStore';
+import { useState } from 'react';
 import type { VFC } from 'common/utils/types';
 
 export const UseListTab: VFC = () => {
-  const { tab, setTab } = useListTabStore((state) => ({
-    tab: state.tab,
-    setTab: state.setTab,
-  }));
+  const [tab, setTab] = useState<number>(0);
 
   const handleValueChange = (newValue: number) => {
     setTab(newValue);
