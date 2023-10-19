@@ -1,6 +1,8 @@
+import mainImg from 'assets/icons/storeImg.svg';
 import {
   Ready,
   Start,
+  StoreItemDefaultImg,
   StoreItemDescription,
   StoreItemDiv,
   StoreItemImg,
@@ -25,7 +27,7 @@ export const StoreItem: VFC<StoreItemProps> = ({
 }) => {
   const renderImage = () => {
     if (!src || src.includes('image-error')) {
-      return <StoreItemImg style={{ backgroundColor: '#AABDFF' }} />;
+      return <StoreItemDefaultImg src={mainImg} />;
     }
     return <StoreItemImg src={src} />;
   };
