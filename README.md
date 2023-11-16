@@ -1,30 +1,32 @@
-# PerPet
 
-<div align="center">
-<img width="329" alt="image" src="https://user-images.githubusercontent.com/117795271/228409021-d39db6a9-7b40-4630-b779-5739818d0102.svg">
+![Frame 1000005285](https://github.com/seat-checking/web-user/assets/117795271/243d5a5a-b838-4df9-87ec-e3c10dff8fd5)
 
-</div>
 
 # Seat Sense v1.0
 
 
-> **잇몸만개조** <br/> **개발기간: 202.03.06 ~ 2022.04.03**
+>  **개발기간:  (2023.06 ~  진행중)**
 
 ## 배포 주소
 
-> **프론트 서버** : [https://perpet.vercel.app/](https://perpet.vercel.app/)<br> **백엔드 서버** : [https://port-0-perpetserver-p8xrq2mlfc5j4rt.sel3.cloudtype.app/](https://port-0-perpetserver-p8xrq2mlfc5j4rt.sel3.cloudtype.app/products/)<br>
+> **유저 서버** : https://myuser.seat-sense.site<br> **관리자 서버** : https://admin.seat-sense.site<br>
+
 
 ## 개발팀 소개
 
-|                                                               최우영                                                               |                                                               김민규                                                               |                                                              박천주                                                               |                                                              이윤재                                                               |
-| :--------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: |
-| <img width="160px" src="https://user-images.githubusercontent.com/117795271/228415574-eef39d30-f076-4218-abe9-fe801d224e1a.jpg" /> | <img width="160px" src="https://user-images.githubusercontent.com/117795271/228415637-bca17c0c-81c8-48c5-b97c-e691a47d76c6.jpg" /> | <img width="160px" src="https://user-images.githubusercontent.com/117795271/228415794-5d11dd8d-b068-4af8-a527-662ef4226bf1.jpg"/> | <img width="160px" src="https://user-images.githubusercontent.com/117795271/228415846-b1e87f83-8e85-490f-b672-cfecee4943b6.jpg"/> |
-|                                          [@wooyoung6685](https://github.com/wooyoung6685)                                          |                                                 [@m9](https://github.com/Min9yuuu)                                                 |                                           [@parkcheonju](https://github.com/parkcheonju)                                           |                                        [@davidcool0117](https://github.com/davidcool0117)                                         |
-|                                                       wooyoung6685@gmail.com                                                       |                                                         9yu6820@gmail.com                                                          |                                                         cjswne@gmail.com                                                          |                                                      davidcool0117@gmail.com                                                      |
+| 이름   | GitHub                                      | 이메일                   |
+| ------ | ------------------------------------------------- | ------------------------ |
+| [FE]손수민 | [손수민](https://github.com/sonmansu)             | sonmansu@gmail.com      |
+| [FE]최우영 | [최우영](https://github.com/wooyoung6685)         | wooyoung6685@gmail.com  |
+| [BE]조유진 | [조유진](https://github.com/benjaminuj)           | benjaminuj@gmail.com    |
+| [BE]김영빈 | [김영빈](https://github.com/0binn)                | 0binn@gmail.com         |
+| [BE]현예림 | [현예림](https://github.com/EllieHyun)            | EllieHyun@gmail.com     |
 
+                                              
 ## 프로젝트 소개
 
-반려동물의 건강과 행복을 위해 필요한 다양한 용품을 판매하는 것이 목적입니다. 반려동물에 대한 정보를 제공하여, 반려인들이 반려동물을 키우는데 도움을 줄 수 있습니다. perpet은 신뢰를 바탕으로 상품 선정을 하여 최상의 상품을 제공합니다.
+다양한 상업 공간의 관리자가 실시간으로 자신의 공간을 등록하고 관리할 수 있으며
+일반 유저들은 좌석이나 공간을 예약할수 있는 서비스
 
 ## 시작 가이드
 
@@ -34,13 +36,25 @@ For building and running the application you need:
 
 ### Installation
 
-[![React Version][react-v-image]][react-url] [![Node Version][node-v-image]][node-url] ![Express][express-v-image] ![Sequlize][sequelize-v-image] ![Swiper][swiper-v-image] ![Antd Version][antd-v-image] [![Npm version][npm-v-image]][npm-url] ![Sqlite][sqlite3]
+[![React](https://img.shields.io/badge/React-^18.2.0-blue?logo=react)][react-url] [![Node.js](https://img.shields.io/badge/Node.js-^16.18.24-green?logo=node.js)][node-url] [![React Query](https://img.shields.io/badge/React_Query-^4.29.12-blue?logo=react)][react-query-url] [![Axios](https://img.shields.io/badge/Axios-^1.4.0-blue?logo=axios)][axios-url] [![Styled Components](https://img.shields.io/badge/Styled_Components-5.3.10-pink?logo=styled-components)][styled-components-url] [![Swiper](https://img.shields.io/badge/Swiper-^9.3.2-blue?logo=swiper)][swiper-url] [![React Router Dom](https://img.shields.io/badge/React_Router_Dom-^6.11.2-blue?logo=react-router)][react-router-dom-url] [![TypeScript](https://img.shields.io/badge/TypeScript-^4.9.5-blue?logo=typescript)][typescript-url] [![React Hook Form](https://img.shields.io/badge/React_Hook_Form-^7.43.9-blue?logo=react-hook-form)][react-hook-form-url] [![Testing Library](https://img.shields.io/badge/Testing_Library-^5.16.5-red?logo=testing-library)][testing-library-url] [![Storybook](https://img.shields.io/badge/Storybook-^6.5.15-ff69b4?logo=storybook)][storybook-url]
+
+[react-url]: https://reactjs.org/
+[node-url]: https://nodejs.org/
+[react-query-url]: https://tanstack.com/query/v4
+[axios-url]: https://axios-http.com/
+[styled-components-url]: https://styled-components.com/
+[swiper-url]: https://swiperjs.com/
+[react-router-dom-url]: https://reactrouter.com/
+[typescript-url]: https://www.typescriptlang.org/
+[react-hook-form-url]: https://react-hook-form.com/
+[testing-library-url]: https://testing-library.com/
+[storybook-url]: https://storybook.js.org/
+
 
 #### Frontend
 
 ```bash
 $ git clone https://github.com/seat-checking/web-user.git
-$ cd perpet
 ```
 
 ```bash
@@ -56,21 +70,21 @@ $ yarn start
 
 ### Environment
 
-![Visual Studio Code][vscode-image] ![Git][git-image]
+[![Visual Studio Code](https://img.shields.io/badge/Visual_Studio_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)](https://code.visualstudio.com/) [![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/)
 
 ### Config
 
-![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
+[![Yarn](https://img.shields.io/badge/Yarn-2C8EBB?style=for-the-badge&logo=yarn&logoColor=white)](https://yarnpkg.com/)
 
 ### Development
 
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![Javascript][javascript-image] ![Nodejs][node-image] ![Express][express-image] ![PWA][pwa-image] ![Sequelize][sequelize-image]
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![Nodejs](https://img.shields.io/badge/Nodejs-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/) [![Styled Components](https://img.shields.io/badge/Styled_Components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)](https://styled-components.com/) [![Zustand](https://img.shields.io/badge/Zustand-EF2D5E?style=for-the-badge&logo=zustand&logoColor=white)](https://github.com/pmndrs/zustand)
 
 ### Communication
 
-![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=Slack&logoColor=white) ![Github][github-image] ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white)
+[![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/) [![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white)](https://www.notion.so/) [![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white)](https://www.figma.com/)
 
----
+
 
 ## 화면 구성 📺
 
