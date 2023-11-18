@@ -68,33 +68,37 @@ $ yarn start
 
 ## Stacks 🐈
 
-### Environment
-
-[![Visual Studio Code](https://img.shields.io/badge/Visual_Studio_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)](https://code.visualstudio.com/) [![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/)
-
-### Config
-
-[![Yarn](https://img.shields.io/badge/Yarn-2C8EBB?style=for-the-badge&logo=yarn&logoColor=white)](https://yarnpkg.com/)
 
 ### Development
 
-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![Nodejs](https://img.shields.io/badge/Nodejs-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/) [![Styled Components](https://img.shields.io/badge/Styled_Components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)](https://styled-components.com/) [![Zustand](https://img.shields.io/badge/Zustand-EF2D5E?style=for-the-badge&logo=zustand&logoColor=white)](https://github.com/pmndrs/zustand)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![Styled Components](https://img.shields.io/badge/Styled_Components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)](https://styled-components.com/) [![Zustand](https://img.shields.io/badge/Zustand-EF2D5E?style=for-the-badge&logo=zustand&logoColor=white)](https://github.com/pmndrs/zustand) [![React Query](https://img.shields.io/badge/React_Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white)](https://react-query.tanstack.com/) [![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)](https://eslint.org/) [![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white)](https://prettier.io/) [![Husky](https://img.shields.io/badge/Husky-00B4D8?style=for-the-badge&logo=husky&logoColor=white)](https://typicode.github.io/husky/#/)
+
+ 
+ 
+
 
 ### Communication
 
 [![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/) [![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white)](https://www.notion.so/) [![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=Figma&logoColor=white)](https://www.figma.com/)
 
-
-
 ## 화면 구성 📺
 
-|                                                           메인 페이지                                                           |                                                         상품구성 페이지                                                         |
-| :-----------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------: |
-| <img width="329" src="https://user-images.githubusercontent.com/117795271/228436266-adaf0e52-fe26-475b-9dfa-d46957b16833.PNG"/> | <img width="329" src="https://user-images.githubusercontent.com/117795271/228436574-5ee5bda8-001b-40ec-9fb0-1393ee56d847.PNG"/> |
-|                                                         상품등록 페이지                                                         |                                                         상세상품 페이지                                                         |
-| <img width="329" src="https://user-images.githubusercontent.com/117795271/228436930-d98ff56a-99ed-4557-b69e-74ec1bac6a27.PNG"/> | <img width="329" src="https://user-images.githubusercontent.com/117795271/228437115-7bbce6c4-d613-48d4-9883-6931251b3e0f.PNG"/> |
+| 회원가입 로그인 페이지 | 
+| :---: |
+| <img width="200" src="https://github.com/seat-checking/web-user/assets/117795271/99b2c0cc-3b31-4967-87a6-01bb4f28eadc"/> <img width="200" src="https://github.com/seat-checking/web-user/assets/117795271/c5a1fe68-e786-4592-82e8-7fce46f08a6f"/> <img width="200" src="https://github.com/seat-checking/web-user/assets/117795271/f9eddb95-4e9f-43e7-9343-55c8e3ddbd47"/> |
 
----
+| 플레이스 목록 페이지 | 플레이스 검색 페이지 |
+| :---: | :---: |
+| <img width="200" src="https://github.com/seat-checking/web-user/assets/117795271/cf68beca-5681-4d3a-8c01-038b8b4a5965"/> | <img width="200" src="https://github.com/seat-checking/web-user/assets/117795271/8594d7b5-388e-484b-ba3b-256cba86bc30"/> |
+
+| 플레이스 상세 페이지 | 예약 페이지 |
+| :---: | :---: |
+| <img width="200" src="https://github.com/seat-checking/web-user/assets/117795271/107c25bf-7c55-4537-b7b9-d43828d05337"/> | <img width="200" src="https://github.com/seat-checking/web-user/assets/117795271/3162c7e5-32fd-48ce-ba21-e55549428ed5"/> <img width="200" src="https://github.com/seat-checking/web-user/assets/117795271/53ae836d-cf52-4ef8-9007-1fcc7ddbc765"/> <img width="200" src="https://github.com/seat-checking/web-user/assets/117795271/23edb0ac-609a-487c-a517-0f3fbff88104"/> |
+
+| 예약현황 페이지 |
+| :---: |
+| <img width="200" src="https://github.com/seat-checking/web-user/assets/117795271/7b8ee03a-16ad-4852-83f4-e4bc6e34a04e"/> <img width="200" src="https://github.com/seat-checking/web-user/assets/117795271/da5cb38f-fe86-4931-b40d-6d4f1c5316d9"/> |
+
 
 ## 주요 기능 📦
 
@@ -147,25 +151,3 @@ $ yarn start
 
 
 
-
-# 프로젝트 실행 방법
-
-```
-nvm install
-nvm use
-yarn install
-yarn start
-```
-
-# 현재 세팅
-
-1. create react app + TS
-2. eslint + prettier setting
-3. nvmrc
-4. pre-commit, husky (eslint, prettier, TS)
-
-# 기술 스택
-
-- 언어: TypeScript
-- 라이브러리: React
-- 스타일: Styled-Component
