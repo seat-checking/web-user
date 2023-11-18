@@ -93,7 +93,7 @@ $ yarn start
 
 | 플레이스 상세 페이지 | 예약 페이지 |
 | :---: | :---: |
-| <img width="200" src="https://github.com/seat-checking/web-user/assets/117795271/107c25bf-7c55-4537-b7b9-d43828d05337"/> | <img width="200" src="https://github.com/seat-checking/web-user/assets/117795271/3162c7e5-32fd-48ce-ba21-e55549428ed5"/> <img width="200" src="https://github.com/seat-checking/web-user/assets/117795271/53ae836d-cf52-4ef8-9007-1fcc7ddbc765"/> <img width="200" src="https://github.com/seat-checking/web-user/assets/117795271/23edb0ac-609a-487c-a517-0f3fbff88104"/> |
+| <img width="150" src="https://github.com/seat-checking/web-user/assets/117795271/107c25bf-7c55-4537-b7b9-d43828d05337"/> | <img width="150" src="https://github.com/seat-checking/web-user/assets/117795271/3162c7e5-32fd-48ce-ba21-e55549428ed5"/> <img width="150" src="https://github.com/seat-checking/web-user/assets/117795271/53ae836d-cf52-4ef8-9007-1fcc7ddbc765"/> <img width="150" src="https://github.com/seat-checking/web-user/assets/117795271/23edb0ac-609a-487c-a517-0f3fbff88104"/> |
 
 | 예약현황 페이지 |
 | :---: |
