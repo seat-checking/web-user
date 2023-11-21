@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { getAuth, removeAuth, setAuth } from 'utils/auth';
 
-// TODO: extract tp .env
-
 const DOMAIN = process.env.REACT_APP_API_URL;
 
 /**
