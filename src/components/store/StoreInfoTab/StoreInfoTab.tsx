@@ -25,7 +25,7 @@ export const StoreInfoTab: VFC<StoreInfoTabProps> = ({ storeInfo }) => {
       </TextRow>
       <TextRow>
         <div className='label'>전화번호</div>
-        {storeInfo.detailAddress}
+        {storeInfo.telNum}
       </TextRow>
       <TextRow>
         <div className='label'>휴무일</div>

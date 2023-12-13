@@ -23,6 +23,7 @@ export interface StoreDetaillResponse {
   introduction: string;
   category: string;
   mainImage: string;
+  telNum: string;
   monOpenTime: string;
   monCloseTime: string;
   tueOpenTime: string;
