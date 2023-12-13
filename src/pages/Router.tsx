@@ -52,19 +52,23 @@ export const router = createBrowserRouter([
   },
   {
     path: `/${PATH.seatReservation}`,
-    element: <SeatUsePage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <SeatUsePage /> }],
   },
   {
     path: `/${PATH.spaceReservation}`,
-    element: <SpaceUsePage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <SpaceUsePage /> }],
   },
   {
     path: `/${PATH.intent}`,
-    element: <ReservationIntentPage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <ReservationIntentPage /> }],
   },
   {
     path: `/${PATH.joinSpace}`,
-    element: <JoinSpacePage />,
+    element: <ProtectedRoute />,
+    children: [{ index: true, element: <JoinSpacePage /> }],
   },
   {
     path: `/${PATH.myPage}`,
