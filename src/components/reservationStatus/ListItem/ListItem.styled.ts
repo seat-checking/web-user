@@ -76,6 +76,10 @@ export const ReservationItemDate = styled.div`
 export const ReservationItemTime = styled.div`
   font-size: 1.4rem;
   color: ${(props): string => props.theme.palette.grey[300]};
+
+  @media (max-width: 442px) {
+    font-size: 1rem; /* 원하는 폰트 크기로 변경하세요 */
+  }
 `;
 
 export const Circle = styled.div<CircleProps>`

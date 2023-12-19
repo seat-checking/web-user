@@ -14,7 +14,7 @@ export const TabBox = styled.div`
 `;
 
 export const TabItem = styled.div<TabItemProps>`
-  width: 8.5rem;
+  width: 9.8rem;
   height: 3.6rem;
   border-radius: 0.6rem;
   border: 0.1rem solid ${(props): string => props.theme.palette.grey[200]};
