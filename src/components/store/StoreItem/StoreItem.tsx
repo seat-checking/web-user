@@ -32,15 +32,20 @@ export const StoreItem: VFC<StoreItemProps> = ({
     return <StoreItemImg src={src} />;
   };
 
+  const truncatedIntroduction =
+    introduction.length > 48 ? introduction.slice(0, 48) + '...' : introduction;
+
+  const truncatedStoreName =
+    storeName.length > 16 ? storeName.slice(0, 16) + '...' : storeName;
   return (
     <StoreItemDiv>
       <StoreItemImgDiv>{renderImage()}</StoreItemImgDiv>
       <StoreItemDescription>
         <StoreItemName>
-          {storeName}
+          {truncatedStoreName}
           {open ? <Start>영업중</Start> : <Ready>영업준비중</Ready>}
         </StoreItemName>
-        <StoreItemIntroduction>{introduction}</StoreItemIntroduction>
+        <StoreItemIntroduction>{truncatedIntroduction}</StoreItemIntroduction>
       </StoreItemDescription>
     </StoreItemDiv>
   );
