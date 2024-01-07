@@ -83,3 +83,6 @@ export const MessageBox = styled.div<{ isVisible: boolean }>`
   left: 50%;
   transform: translateX(-50%);
 `;
+export const HeaderContent = styled.div`
+  width: 70%;
+`;

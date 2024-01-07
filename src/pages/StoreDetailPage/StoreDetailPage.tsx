@@ -11,6 +11,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import {
   BackBtn,
   Container,
+  HeaderContent,
   HeaderWrap,
   Introduction,
   JoinBtn,
@@ -76,10 +77,10 @@ export const StoreDetailPage: VFC = () => {
         <ArrowLeft />
       </BackBtn>
       <HeaderWrap>
-        <div>
+        <HeaderContent>
           <Name>{storeInfo?.storeName}</Name>
           <Introduction>{storeInfo?.introduction}</Introduction>
-        </div>
+        </HeaderContent>
         <JoinBtn onClick={handleJoinSpace}>스페이스 참여</JoinBtn>
       </HeaderWrap>
       <StoreDetailTab storeInfo={storeInfo} />
